@@ -1,8 +1,8 @@
 <template>
   <div class="app-down">
     <header>
-      <div class="header-logo-wrapper">
-        <img src="/static/img/logo/logo_text.png">
+      <div class="header-title-wrapper fs-14">
+        {{ $t("title") }}
       </div>
       <div class="header-language-wrapper">
         <img src="/static/img/icon/language_icon.png">
@@ -138,13 +138,9 @@ export default {
 </script>
 
 <style scoped>
-.header-logo-wrapper {
+.header-title-wrapper {
   display:table-cell;
   vertical-align:middle;
-}
-
-.header-logo-wrapper img {
-  height:25px;
 }
 
 .header-language-wrapper {

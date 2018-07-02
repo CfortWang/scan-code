@@ -1,5 +1,6 @@
 {
   "en": {
+    "title": "Bean Pop",
     "mainText": {
       "text1": "Download",
       "text2": "喜豆APP",
@@ -15,6 +16,7 @@
     }
   },
   "ko": {
+    "title": "Bean Pop",
     "mainText": {
       "text1": "喜豆APP",
       "text2": "다운받고",
@@ -30,6 +32,7 @@
     }
   },
   "zh": {
+    "title": "喜豆一下",
     "mainText": {
       "text1": "请下载",
       "text2": "喜豆APP,",
@@ -45,6 +48,7 @@
     }
   },
   "ja": {
+    "title": "Bean Pop",
     "mainText": {
       "text1": "喜豆APP",
       "text2": "다운받고",
