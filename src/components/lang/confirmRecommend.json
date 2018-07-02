@@ -1,0 +1,54 @@
+{
+  "en": {
+    "title": "Recommender regist",
+    "recommend1": "your recommender?",
+    "recommend2": "Do you register",
+    "button": "Confirm",
+    "message": {
+      "insertPW": "Please insert password.",
+      "wrongCode": "Recommender Code is wrong.",
+      "areadyRegist": "You already recommended someone.",
+      "wrongPhone": "Wrong phone number.",
+      "wrongPW": "Wrong password."
+    }
+  },
+  "ko": {
+    "title": "추천인 등록",
+    "recommend1": "을",
+    "recommend2": "추천인으로 등록하시겠습니까?",
+    "button": "확인",
+    "message": {
+      "insertPW": "비밀번호를 입력해주세요.",
+      "wrongCode": "잘못된 추천인 코드입니다.",
+      "areadyRegist": "이미 다른 아이디를 추천했습니다.",
+      "wrongPhone": "잘못된 핸드폰번호 입니다.",
+      "wrongPW": "비밀번호가 잘못되었습니다."
+    }
+  },
+  "zh": {
+    "title": "登记推荐人",
+    "recommend1": "您要登记",
+    "recommend2": "为推荐人吗？",
+    "button": "确定",
+    "message": {
+      "insertPW": "请输入密码",
+      "wrongCode": "错误的推荐人代码",
+      "areadyRegist": "已经推荐别的ID",
+      "wrongPhone": "电话号码不正确",
+      "wrongPW": "密码不正确"
+    }
+  },
+  "ja": {
+    "title": "추천인 등록",
+    "recommend1": "을",
+    "recommend2": "추천인으로 등록하시겠습니까?",
+    "button": "추천인 등록",
+    "message": {
+      "insertPW": "비밀번호를 입력해주세요.",
+      "wrongCode": "잘못된 추천인 코드입니다.",
+      "areadyRegist": "이미 다른 아이디를 추천했습니다.",
+      "wrongPhone": "잘못된 핸드폰번호 입니다.",
+      "wrongPW": "비밀번호가 잘못되었습니다."
+    }
+  }
+}

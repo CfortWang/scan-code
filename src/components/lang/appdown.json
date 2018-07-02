@@ -1,0 +1,62 @@
+{
+  "en": {
+    "mainText": {
+      "text1": "Download",
+      "text2": "喜豆APP",
+      "text3": "Check your entries!"
+    },
+    "subText": {
+      "text1": "You can check more information",
+      "text2": "through mobile App."
+    },
+    "error": {
+      "expireCode": "The code usage is over.",
+      "invalidCode": "This code is can not be used."
+    }
+  },
+  "ko": {
+    "mainText": {
+      "text1": "喜豆APP",
+      "text2": "다운받고",
+      "text3": "응모현황을 확인하세요!"
+    },
+    "subText": {
+      "text1": "모바일 앱을 통해 응모현황과 당첨현황 등",
+      "text2": "다양한 정보를 확인할 수 있습니다."
+    },
+    "error": {
+      "expireCode": "사용횟수가 초과된 코드입니다.",
+      "invalidCode": "사용할수 없는 코드입니다."
+    }
+  },
+  "zh": {
+    "mainText": {
+      "text1": "请下载",
+      "text2": "喜豆APP,",
+      "text3": "查看中奖信息！"
+    },
+    "subText": {
+      "text1": "可通过手机APP确认",
+      "text2": "兑奖情况等详细信息"
+    },
+    "error": {
+      "expireCode": "超过使用次数",
+      "invalidCode": "代码无法使用"
+    }
+  },
+  "ja": {
+    "mainText": {
+      "text1": "喜豆APP",
+      "text2": "다운받고",
+      "text3": "응모현황을 확인하세요!"
+    },
+    "subText": {
+      "text1": "모바일 앱을 통해 응모현황과 당첨현황 등",
+      "text2": "다양한 정보를 확인할 수 있습니다."
+    },
+    "error": {
+      "expireCode": "사용횟수가 초과된 코드입니다.",
+      "invalidCode": "사용할수 없는 코드입니다."
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "en": {
+    "title": "Entry",
+    "selectedNum": "Selected",
+    "guidMsg1": "Select ",
+    "guidMsg2": " yellow balls and ",
+    "guidMsg3": " green ball",
+    "desc": "응모방법",
+    "autoSelect": "Auto Select",
+    "confirm" : "Confirm",
+    "finishYellowBall": "You can choose yellow ball only 6. (yellow: 6, green:1)",
+    "finishGreenBall": "You can choose green ball only one. (yellow: 6, green:1)",
+    "notEnoughBall": "You must selected ball. (yellow: 6, green:1)",
+    "adMessage": "It will be applied after finishing AD."
+  },
+  "ko": {
+    "title": "응모",
+    "selectedNum": "응모번호",
+    "guidMsg1": "빨간공 ",
+    "guidMsg2": "개와 파란공",
+    "guidMsg3": " 개를 선택해주세요",
+    "desc": "응모방법",
+    "autoSelect": "자동선택",
+    "confirm" : "응모하기",
+    "finishYellowBall": "이미 6개의 번호를 모두 선택하였습니다. (노란색: 6개, 초록색:1개)",
+    "finishGreenBall": "이미 1개의 번호를 모두 선택하였습니다. (노란색: 6개, 초록색:1개)",
+    "notEnoughBall": "번호를 모두 선택하고 다시 시도해 주세요. (노란색: 6개, 초록색:1개)",
+    "adMessage": "광고 시청 후에 응모가 완료됩니다."
+  },
+  "zh": {
+    "title": "喜豆一下",
+    "selectedNum": "已选号码",
+    "guidMsg1": "请选择",
+    "guidMsg2": "个红色球和",
+    "guidMsg3": "个蓝色球",
+    "desc": "教你来玩",
+    "autoSelect": "智能选号",
+    "confirm" : "提交",
+    "finishYellowBall": "已经选择了6个号码（黄色：6个，绿色：1个）",
+    "finishGreenBall": "已经选择了1个号码（黄色：6个，绿色：1个）",
+    "notEnoughBall": "请重新选号并提交（黄色：6个，绿色：1个）",
+    "adMessage": "广告之后，完成提交"
+  },
+  "ja": {
+    "title": "喜豆一下",
+    "selectedNum": "已选号码",
+    "guidMsg1": "请选择",
+    "guidMsg2": "个红色球和",
+    "guidMsg3": "个蓝色球",
+    "desc": "教你来玩",
+    "autoSelect": "机选号码",
+    "confirm": "提交",
+    "finishYellowBall": "已经选择了6个号码（黄色：6个，绿色：1个）",
+    "finishGreenBall": "已经选择了1个号码（黄色：6个，绿色：1个）",
+    "notEnoughBall": "请重新选号并提交（黄色：6个，绿色：1个）",
+    "adMessage": "广告之后，完成提交"
+
+  }
+}
