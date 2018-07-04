@@ -80,8 +80,10 @@
           {{ $t("guidMsg1") }}<span class="event-text-yellow">6</span>{{ $t("guidMsg2") }}<span class="event-text-green">1</span>{{ $t("guidMsg3") }}
           </div>
           <div class="desc-text float-r fs-09 dsp-table" v-on:click="openModal">
+            <!-- <img src="/static/img/event/question.jpg"> -->
             {{ $t("desc") }}
           </div>
+          <div class="ques"><img src="/static/img/event/question.jpg"></div>
         </div>
       </div>
       <div class="event-balls-wrapper float-wrapper">
@@ -647,11 +649,23 @@ export default {
   position:fixed;
   overflow-y:scroll;
 }
+.ques{
+  height: 20px;
+  float: right;
+}
+.ques img{
+  height: 15px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
 .desc-text {
   height:20px;
+  line-height: 20px;
   color:#A7AC00;
+  float: right;
 }
 .desc-text img {
-  height: 14px;
+  height: 15px;
 }
+
 </style>

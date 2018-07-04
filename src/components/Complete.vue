@@ -25,6 +25,9 @@
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
       <div class="complete-event-contents-wrapper">
+        <div class="main-game-img-wrapper">
+          <img src="/static/img/ad/seedo_main_event_new.png">
+        </div>
         <div class="complete-ball-wrapper float-wrapper">
           <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[0]]"></div>
           <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[1]]"></div>
@@ -34,7 +37,7 @@
           <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[5]]"></div>
           <div class="ball-wrapper complete-size float-l" v-bind:class="[greenItems[0]]"></div>
         </div>
-        <div class="complete-ball-wrapper-title">
+        <!-- <div class="complete-ball-wrapper-title">
           <div class="ball-title float-wrapper fs-09">
             <div class="ball-title-date float-l dsp-table">
               <div class="dsp-table-cell">
@@ -51,21 +54,21 @@
             </div>
           </div>
         </div>
-        <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button>
+        <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button> -->
       </div>
       <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null">
       </div>
       <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
-        <div class="company-event-wrapper">
+        <!-- <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
           <div class="event-img-wrapper">
             <img v-bind:src="shopADUrl">
           </div>
-        </div>
+        </div> -->
       </div>
-      <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
+      <!-- <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
@@ -74,33 +77,42 @@
             <img v-bind:src="shopEventUrl">
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="complete-event-contents-wrapper" v-if="marketUrl !== null">
         <div class="company-event-wrapper">
-          <div class="event-title fs-09">
-            {{ $t("event.title2") }}
-          </div>
-          <div class="event-img-wrapper">
-            <img v-bind:src="marketUrl">
+          <div class="login-wrapper">
+            <div class="complete-info-wrapper">
+              <div class="info-title float-wrapper fs-11">
+                {{ $t("info.title") }}
+              </div>
+            </div>
+            <div class="login-box">
+              <div class="login-input-wrapper float-wrapper">
+                <select class="w-25 float-l" v-on:change="countryChangeItem($event)">
+                  <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
+                </select>
+                <input type="number" class="phone-number-input w-72 float-r" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
+              </div>
+              <div class="login-btn-wrapper">
+                <button type="button" class="btn btn-green fs-11" v-on:click="entryButton">{{ $t("phone.button")}}</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="section-divider">
-      </div>
+      <!-- <div class="section-divider">
+      </div> -->
       <div class="complete-event-contents-wrapper">
-        <div class="event-title fs-09">
+        <!-- <div class="event-title fs-09">
           {{ $t("event.title3") }}
-        </div>
-        <div class="main-game-img-wrapper">
-          <img src="/static/img/ad/seedo_main_event_new.png">
-        </div>
+        </div> -->
         <div class="ad-wrapper">
           <img src="/static/img/ad/end_ad.jpg">
         </div>
       </div>
-      <div class="section-divider">
-      </div>
-      <div class="login-wrapper">
+      <!-- <div class="section-divider">
+      </div> -->
+      <!-- <div class="login-wrapper">
         <div class="complete-info-wrapper">
           <div class="info-title float-wrapper fs-11">
             {{ $t("info.title") }}
@@ -117,7 +129,7 @@
             <button type="button" class="btn btn-green fs-11" v-on:click="entryButton">{{ $t("phone.button")}}</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
