@@ -16,6 +16,11 @@
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
       </div>
+      <div class="header-title-wrapper fs-14">
+        <vue-countdown :time="endTime" :interval="1000">
+          <template slot-scope="props">{{ props.totalHours }}:{{ props.minutes }}:{{ props.seconds }}</template>
+        </vue-countdown>
+      </div>
     </header>
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
@@ -87,7 +92,7 @@
           {{ $t("event.title3") }}
         </div>
         <div class="main-game-img-wrapper">
-          <img src="/static/img/ad/seedo_main_event.png">
+          <img src="/static/img/ad/seedo_main_event_new.png">
         </div>
         <div class="ad-wrapper">
           <img src="/static/img/ad/end_ad.jpg">
@@ -356,8 +361,8 @@ export default {
 
 <style scoped>
 .header-title-wrapper {
-  display:table-cell;
-  vertical-align:middle;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .contents-wrapper {
