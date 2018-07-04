@@ -4,10 +4,10 @@
       <div class="modal-wrapper">
           <div v-if="openModal">
               <div class="modal-img">
-                  <img src="/static/img/event/lottogame_alert.png">
+                  <img src="/static/img/event/lottogame_alert_new.png">
               </div>
               <div class="modal-close" v-on:click="hide">
-                  <img src="/static/img/event/delete_new.png">
+                  <img src="/static/img/event/delete.png">
               </div>
           </div>
       </div>
