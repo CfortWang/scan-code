@@ -4,10 +4,10 @@
       <div class="modal-wrapper">
           <div v-if="openModal">
               <div class="modal-img">
-                  <img src="/static/img/complete/notice.png">
+                  <img src="/static/img/complete/notice_new.png">
               </div>
               <div class="modal-close" v-on:click="hide">
-                  <img src="/static/img/complete/delete.png">
+                  <img src="/static/img/complete/delete_new.png">
               </div>
           </div>
       </div>
