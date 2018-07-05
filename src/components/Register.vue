@@ -31,8 +31,8 @@
             </div>
             <div class="w-70 float-l">
               <div class="input-wrapper float-wrapper">
-                <input type="text" v-model="countryCode" class="p-l-10 w-23 float-l" disabled>
-                <input type="text" v-model="phoneNumber" class="p-l-10 w-70 float-r" disabled>
+                <!-- <input type="text" v-model="countryCode" class="p-l-10 w-23 float-l" disabled> -->
+                <input type="text" v-model="phoneNumber" class="p-l-10 w-100 float-r" disabled>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@
       <div class="input-box-wrapper">
         <div class="register-input-wrapper">
           <div class="confirm-button-wrapper">
-            <button type="button" class="btn btn-yellow fs-12" v-on:click="doRegister">{{ $t("register") }}</button>
+            <button type="button" class="btn btn-green fs-12" v-on:click="doRegister">{{ $t("register") }}</button>
           </div>
         </div>
       </div>

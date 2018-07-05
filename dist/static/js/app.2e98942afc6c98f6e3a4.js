@@ -151,7 +151,7 @@ webpackJsonp([1], {
           text1: "使用条款",
           text2: "阅读并同意"
         },
-        title: "你做了全宇宙最正确的选择",
+        title: "加入喜豆大军",
         mustInsert: "为必填项",
         phone: "手机号",
         password1: "密码",
@@ -2219,7 +2219,7 @@ webpackJsonp([1], {
           }, [s("div", {
             staticClass: "confirm-button-wrapper"
           }, [s("button", {
-            staticClass: "btn btn-yellow fs-12",
+            staticClass: "btn btn-green fs-12",
             attrs: {
               type: "button"
             },
