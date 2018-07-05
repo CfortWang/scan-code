@@ -324,9 +324,9 @@ webpackJsonp([1], {
       ko: {
         title: "응모",
         selectedNum: "응모번호",
-        guidMsg1: "빨간공 ",
-        guidMsg2: "개와 파란공",
-        guidMsg3: " 개를 선택해주세요",
+        guidMsg1: "노랑콩",
+        guidMsg2: "개와녹두",
+        guidMsg3: "개를선택해주세요",
         desc: "응모방법",
         autoSelect: "자동선택",
         confirm: "응모하기",

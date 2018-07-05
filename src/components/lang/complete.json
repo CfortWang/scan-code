@@ -11,7 +11,9 @@
       "date": "Entry Date",
       "winningDate": "Winning date",
       "drawing": "Drawing",
-      "remainTime": "Count down"
+      "remainTime": "Count down",
+      "balltext": "Number:",
+      "period": "2018.07.15(No.18003)"
     },
     "phone": {
       "title": "Check Register",
@@ -39,7 +41,9 @@
       "date": "응모일",
       "winningDate": "당첨일",
       "drawing": "회차",
-      "remainTime": "남은시간"
+      "remainTime": "남은시간",
+      "balltext": "퀴즈번호:",
+      "period": "2018.07.15(번호 18003)"
     },
     "phone": {
       "title": "가입여부 확인",
@@ -67,7 +71,9 @@
       "date": "申请日期",
       "winningDate": "开奖时间",
       "drawing": "届次",
-      "remainTime": "倒计时"
+      "remainTime": "倒计时",
+      "balltext": "竞猜号码:",
+      "period": "2018.07.15(第18003期)"
     },
     "phone": {
       "title": "确认注册与否",

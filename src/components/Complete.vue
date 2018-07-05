@@ -28,7 +28,10 @@
         <div class="main-game-img-wrapper">
           <img src="/static/img/ad/seedo_main_event_new.png">
         </div>
+        <div class="period">{{ $t("info.period") }}</div>
         <div class="complete-ball-wrapper float-wrapper">
+          <!-- 竞猜号码 -->
+          <div class="ball-wrapper float-l ball-text">{{ $t("info.balltext") }}</div>
           <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[0]]"></div>
           <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[1]]"></div>
           <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[2]]"></div>
@@ -58,16 +61,16 @@
       </div>
       <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null">
       </div>
-      <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
-        <!-- <div class="company-event-wrapper">
+      <!-- <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
+        <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
           <div class="event-img-wrapper">
             <img v-bind:src="shopADUrl">
           </div>
-        </div> -->
-      </div>
+        </div>
+      </div> -->
       <!-- <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
@@ -404,13 +407,29 @@ export default {
   height:30px;
 }
 
+.ad-wrapper{
+  margin-top: 30px;
+}
+
 .ad-wrapper img {
   width:100%;
 }
 
+.period{
+  text-align: left;
+  color: #666;
+}
+
+.ball-text{
+  font-size: calc((100vw - 110px)/15);
+  vertical-align: middle;
+  margin-top: 0.45rem;
+  color: #666;
+}
+
 .complete-size {
-  height:calc((100vw - 110px)/7);
-  width:calc((100vw - 110px)/7);
+  height:calc((100vw - 110px)/10);
+  width:calc((100vw - 110px)/10);
   margin:5px;
 }
 
