@@ -32,7 +32,7 @@
             <div class="w-70 float-l">
               <div class="input-wrapper float-wrapper">
                 <!-- <input type="text" v-model="countryCode" class="p-l-10 w-23 float-l" disabled> -->
-                <input type="text" v-model="phoneNumber" class="p-l-10 w-100 float-r" disabled>
+                <input type="text" v-model="phoneNumber" class="p-l-10 w-100 float-r">
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div class="inline-input-wrapper float-wrapper">
+          <!-- <div class="inline-input-wrapper float-wrapper">
             <div class="input-label w-30 float-l dsp-table">
               <div class="dsp-table-cell">
                 {{ $t("password1") }} :
@@ -72,7 +72,7 @@
                 {{ $t("passwordRemark") }}
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="inline-input-wrapper float-wrapper" v-if="!isEvent">
             <div class="input-label must-insert w-30 float-l dsp-table">
               <div class="dsp-table-cell">

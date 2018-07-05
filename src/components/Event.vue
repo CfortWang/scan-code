@@ -543,8 +543,9 @@ export default {
 
 .ball-size-item {
   width:100%;
-  margin-top:20%;
-  font-size: calc((100vw - 110px)/20);
+  margin-top:1vw;
+  font-size: 4vw;
+  /* font-size: calc((100vw - 110px)/20); */
 }
 
 .modal-wrapper {
