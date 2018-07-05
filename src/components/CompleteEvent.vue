@@ -80,7 +80,7 @@
           <img src="/static/img/ad/seedo_main_event.jpg">
         </div>
         <div class="ad-wrapper">
-          <img src="/static/img/ad/end_ad.jpg">
+          <img src="/static/img/guanggao/end_gg.jpg">
         </div>
       </div>
       <div class="section-divider">

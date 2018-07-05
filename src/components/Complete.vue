@@ -26,7 +26,7 @@
     <div class="contents-wrapper">
       <div class="complete-event-contents-wrapper">
         <div class="main-game-img-wrapper">
-          <img src="/static/img/ad/seedo_main_event_new.png">
+          <img src="/static/img/guanggao/seedo_main_event_new.png">
         </div>
         <div class="period">{{ $t("info.period") }}</div>
         <div class="complete-ball-wrapper float-wrapper">
@@ -110,7 +110,7 @@
           {{ $t("event.title3") }}
         </div> -->
         <div class="ad-wrapper">
-          <img src="/static/img/ad/end_ad.jpg">
+          <img src="/static/img/guanggao/end_gg.jpg">
         </div>
       </div>
       <!-- <div class="section-divider">
