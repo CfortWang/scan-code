@@ -207,7 +207,7 @@ export default {
       // var responseMessage = response.data.message
       var responseData = response.data.data
       // console.log(responseMessage)
-      console.log(responseData)
+      // console.log(responseData)
       var marketResult = responseData.marketing_event_result
       var shopADResult = responseData.shop.ad
       var shopEventResult = responseData.shop.event_result
