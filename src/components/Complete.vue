@@ -61,7 +61,7 @@
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
             <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[4]}}</div>
           </div>
-          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+          <div class="ball-wrapper ball-size green complete-size float-l" >
             <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[5]}}</div>
           </div>
         </div>
@@ -103,8 +103,8 @@
             <img v-bind:src="marketUrl">
           </div>
           <div class="main-game-img-wrapper">
-          <img src="/static/img/guanggao/seedo_main_event.png">
-        </div>
+            <img src="/static/img/guanggao/seedo_main_event.png">
+          </div>
         </div>
       </div>
       <!-- <div class="section-divider">
