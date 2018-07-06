@@ -26,7 +26,7 @@
       "noUser": "This phone number is not registeyellow in 喜豆. Do you want join the 喜豆?",
       "noUser2": "没有注册的用户，是否前往注册？没有注册的用户"
     },
-    "moreInfo": "Prize Info >>",
+    "moreInfo": "Prize Info",
     "appDownMessage": "You can check more information through mobile App."
   },
   "ko": {
@@ -56,7 +56,7 @@
       "noUser": "가입되지 않은 사용자 입니다. 회원 가입을 진행하시겠습니까?",
       "noUser2": "没有注册的用户，是否前往注册？没有注册的用户"
     },
-    "moreInfo": "당첨금 정보 >>",
+    "moreInfo": "당첨금 정보",
     "appDownMessage": "앱에서 응모현황, 당첨현황 등을 확인할 수 있습니다."
   },
   "zh": {
@@ -114,7 +114,7 @@
       "noUser": "가입되지 않은 사용자 입니다. 회원 가입을 진행하시겠습니까?",
       "noUser2": "没有注册的用户，是否前往注册？没有注册的用户"
     },
-    "moreInfo": "당첨금 정보 >>",
+    "moreInfo": "당첨금 정보",
     "appDownMessage": "앱에서 응모현황, 당첨현황 등을 확인할 수 있습니다."
   }
 }

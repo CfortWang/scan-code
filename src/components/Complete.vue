@@ -4,10 +4,10 @@
       <div class="modal-wrapper">
           <div v-if="openModal">
               <div class="modal-img">
-                  <img src="/static/img/complete/notice.png">
+                  <img src="/static/img/complete/notice_new.png">
               </div>
               <div class="modal-close" v-on:click="hide">
-                  <img src="/static/img/complete/delete.png">
+                  <img src="/static/img/complete/delete_new.png">
               </div>
           </div>
       </div>
@@ -207,7 +207,7 @@ export default {
       // var responseMessage = response.data.message
       var responseData = response.data.data
       // console.log(responseMessage)
-      // console.log(responseData)
+      console.log(responseData)
       var marketResult = responseData.marketing_event_result
       var shopADResult = responseData.shop.ad
       var shopEventResult = responseData.shop.event_result

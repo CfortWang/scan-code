@@ -77,7 +77,7 @@
         </div>
         <div class="event-intro-desc-wrapper float-wrapper">
           <div class="float-l fs-auto">
-          {{ $t("guidMsg1") }}<span class="event-text-red">6</span>{{ $t("guidMsg2") }}<span class="event-text-blue">1</span>{{ $t("guidMsg3") }}
+          {{ $t("guidMsg1") }}<span class="event-text-red">6{{ $t("guidMsg2") }}</span>和<span class="event-text-blue">1{{ $t("guidMsg3") }}</span>
           </div>
           <div class="desc-text float-r fs-09 dsp-table" v-on:click="openModal">
             <!-- <img src="/static/img/event/question.jpg"> -->
@@ -201,7 +201,7 @@ export default {
           // var responseMessage = response.data.message
           var responseData = response.data.data
           // console.log(responseMessage)
-          // console.log(responseData)
+          console.log(responseData)
           var downloadingImage = new Image()
           downloadingImage.src = responseData.game_ad
           this.skipAD = responseData.game_ad

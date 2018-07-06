@@ -13,7 +13,7 @@
       "drawing": "Drawing",
       "remainTime": "Count down"
     },
-    "moreInfo": "Prize Info >>",
+    "moreInfo": "Prize Info",
     "appDownMessage": "You can check more information through mobile App."
   },
   "ko": {
@@ -30,7 +30,7 @@
       "drawing": "회차",
       "remainTime": "남은시간"
     },
-    "moreInfo": "당첨금 정보 >>",
+    "moreInfo": "당첨금 정보",
     "appDownMessage": "앱에서 응모현황, 당첨현황 등을 확인할 수 있습니다."
   },
   "zh": {

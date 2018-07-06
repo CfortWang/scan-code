@@ -337,28 +337,28 @@ webpackJsonp([1], {
         title: "喜豆一下",
         selectedNum: "已选号码",
         guidMsg1: "请选择",
-        guidMsg2: "个黄豆和",
-        guidMsg3: "个绿豆",
+        guidMsg2: "个红豆",
+        guidMsg3: "个蓝豆",
         desc: " 教你来玩",
         autoSelect: "智能选号",
         confirm: "提交",
-        finishYellowBall: "已经选择了6个号码（黄色：6个，绿色：1个）",
-        finishGreenBall: "已经选择了1个号码（黄色：6个，绿色：1个）",
-        notEnoughBall: "请重新选号并提交（黄色：6个，绿色：1个）",
+        finishYellowBall: "已经选择了6个号码（红色：6个，蓝色：1个）",
+        finishGreenBall: "已经选择了1个号码（红色：6个，蓝色：1个）",
+        notEnoughBall: "请重新选号并提交（红色：6个，蓝色：1个）",
         adMessage: "广告之后，完成提交"
       },
       ja: {
         title: "喜豆一下",
         selectedNum: "已选号码",
         guidMsg1: "请选择",
-        guidMsg2: "个黄豆和",
-        guidMsg3: "个绿豆",
+        guidMsg2: "个红豆",
+        guidMsg3: "个蓝豆",
         desc: " 教你来玩",
         autoSelect: "机选号码",
         confirm: "提交",
-        finishYellowBall: "已经选择了6个号码（黄色：6个，绿色：1个）",
-        finishGreenBall: "已经选择了1个号码（黄色：6个，绿色：1个）",
-        notEnoughBall: "请重新选号并提交（黄色：6个，绿色：1个）",
+        finishYellowBall: "已经选择了6个号码（红色：6个，蓝色：1个）",
+        finishGreenBall: "已经选择了1个号码（红色：6个，蓝色：1个）",
+        notEnoughBall: "请重新选号并提交（红色：6个，蓝色：1个）",
         adMessage: "广告之后，完成提交"
       }
     }
@@ -2513,7 +2513,7 @@ webpackJsonp([1], {
           drawing: "Drawing",
           remainTime: "Count down"
         },
-        moreInfo: "Prize Info >>",
+        moreInfo: "Prize Info",
         appDownMessage: "You can check more information through mobile App."
       },
       ko: {
@@ -2530,7 +2530,7 @@ webpackJsonp([1], {
           drawing: "회차",
           remainTime: "남은시간"
         },
-        moreInfo: "당첨금 정보 >>",
+        moreInfo: "당첨금 정보",
         appDownMessage: "앱에서 응모현황, 당첨현황 등을 확인할 수 있습니다."
       },
       zh: {
@@ -2598,7 +2598,7 @@ webpackJsonp([1], {
           noUser: "This phone number is not registeyellow in 喜豆. Do you want join the 喜豆?",
           noUser2: "没有注册的用户，是否前往注册？没有注册的用户"
         },
-        moreInfo: "Prize Info >>",
+        moreInfo: "Prize Info",
         appDownMessage: "You can check more information through mobile App."
       },
       ko: {
@@ -2628,7 +2628,7 @@ webpackJsonp([1], {
           noUser: "가입되지 않은 사용자 입니다. 회원 가입을 진행하시겠습니까?",
           noUser2: "没有注册的用户，是否前往注册？没有注册的用户"
         },
-        moreInfo: "당첨금 정보 >>",
+        moreInfo: "당첨금 정보",
         appDownMessage: "앱에서 응모현황, 당첨현황 등을 확인할 수 있습니다."
       },
       zh: {
@@ -2686,7 +2686,7 @@ webpackJsonp([1], {
           noUser: "가입되지 않은 사용자 입니다. 회원 가입을 진행하시겠습니까?",
           noUser2: "没有注册的用户，是否前往注册？没有注册的用户"
         },
-        moreInfo: "당첨금 정보 >>",
+        moreInfo: "당첨금 정보",
         appDownMessage: "앱에서 응모현황, 당첨현황 등을 확인할 수 있습니다."
       }
     }
