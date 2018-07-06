@@ -234,7 +234,7 @@ export default {
         // var responseData = response.data.data
         // console.log(responseMessage)
         // console.log(responseData)
-        alert(this.$i18n.t('message.sendSuccess'))
+        // alert(this.$i18n.t('message.sendSuccess'))
         var now = new Date()
         var setNow = new Date(now.getTime() + 180000)
         this.countDown = setNow - now
