@@ -47,22 +47,22 @@
           <div class="ball-wrapper complete-size float-l" v-bind:class="[greenItems[0]]"></div> -->
 
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[0]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[0]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[1]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[1]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[2]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[2]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[3]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[3]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[4]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[4]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[5]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[5]}}</div>
           </div>
         </div>
 
@@ -77,6 +77,7 @@
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
+          <div class="section-divider1"></div>
           <div class="event-img-wrapper">
             <img v-bind:src="shopADUrl">
           </div>
@@ -97,6 +98,7 @@
           <div class="event-title fs-09">
             {{ $t("event.title2") }}
           </div>
+          <div class="section-divider1"></div>
           <div class="event-img-wrapper">
             <img v-bind:src="marketUrl">
           </div>
@@ -412,8 +414,9 @@ export default {
 
 .event-title {
   text-align:left;
-  padding-bottom:10px;
-  /* border-left: 10px solid #A7AC00; */
+  /* padding-bottom:10px; */
+  border-left: 0.31rem solid #FFCB00;
+  padding-left: 10px;
 }
 
 .event-img-wrapper img {
@@ -448,6 +451,10 @@ export default {
 
 .section-divider {
   background-color:#F0F1F3;
+  height:10px;
+}
+
+.section-divider1 {
   height:10px;
 }
 
@@ -627,5 +634,12 @@ export default {
 .login-btn-wrapper .btn {
   width:100%;
   border-radius:8px;
+}
+
+.ball-size-item1 {
+  width:100%;
+  margin-top:calc((90vw - 100px)/25);
+  font-size: 5vw;
+  /* font-size: calc((100vw - 110px)/20); */
 }
 </style>

@@ -543,8 +543,9 @@ export default {
 
 .ball-size-item {
   width:100%;
-  margin-top:calc((90vw - 100px)/25);
-  font-size: 5vw;
+  margin-top:4px;
+  /* margin-top:calc((90vw - 100px)/25); */
+  font-size: 4vw;
   /* font-size: calc((100vw - 110px)/20); */
 }
 
