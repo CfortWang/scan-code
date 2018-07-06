@@ -58,7 +58,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="inline-input-wrapper float-wrapper">
+          <div class="inline-input-wrapper float-wrapper">
             <div class="input-label w-30 float-l dsp-table">
               <div class="dsp-table-cell">
                 {{ $t("password1") }} :
@@ -72,7 +72,7 @@
                 {{ $t("passwordRemark") }}
               </div>
             </div>
-          </div> -->
+          </div>
           <div class="inline-input-wrapper float-wrapper" v-if="!isEvent">
             <div class="input-label must-insert w-30 float-l dsp-table">
               <div class="dsp-table-cell">
