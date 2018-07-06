@@ -58,7 +58,8 @@
               </div>
             </div>
           </div>
-          <div class="inline-input-wrapper float-wrapper">
+          <!-- 取消密码输入框 -->
+          <!-- <div class="inline-input-wrapper float-wrapper">
             <div class="input-label w-30 float-l dsp-table">
               <div class="dsp-table-cell">
                 {{ $t("password1") }} :
@@ -72,7 +73,7 @@
                 {{ $t("passwordRemark") }}
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="inline-input-wrapper float-wrapper" v-if="!isEvent">
             <div class="input-label must-insert w-30 float-l dsp-table">
               <div class="dsp-table-cell">
@@ -151,7 +152,7 @@ export default {
       recommendCode: '',
       authCode: '',
       isEvent: true,
-      termsChecked: false,
+      termsChecked: true,
       termsOpen: false,
       countDown: setNow - now,
       currentLanguage: 'zh'
@@ -263,18 +264,19 @@ export default {
         alert(this.$i18n.t('message.wrongAuthCodeSize'))
         return false
       }
-      if (this.password1 === '') {
-        alert(this.$i18n.t('message.insertPW'))
-        return false
-      }
-      if (this.password1.length < 8 || this.password1.length > 20) {
-        alert(this.$i18n.t('message.wrongPWSize'))
-        return false
-      }
-      if (this.recommendCode !== '' && this.recommendCode.length !== 6) {
-        alert(this.$i18n.t('message.wrongRecommendCodeSize'))
-        return false
-      }
+      // 取消密码输入及验证功能
+      // if (this.password1 === '') {
+      //   alert(this.$i18n.t('message.insertPW'))
+      //   return false
+      // }
+      // if (this.password1.length < 8 || this.password1.length > 20) {
+      //   alert(this.$i18n.t('message.wrongPWSize'))
+      //   return false
+      // }
+      // if (this.recommendCode !== '' && this.recommendCode.length !== 6) {
+      //   alert(this.$i18n.t('message.wrongRecommendCodeSize'))
+      //   return false
+      // }
       axios({ // sign up
         method: 'POST',
         url: process.env.api_url + '/api/register/phone-num',

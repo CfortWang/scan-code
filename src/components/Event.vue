@@ -17,7 +17,7 @@
         {{ $t("title") }}
       </div>
       <div class="header-language-wrapper">
-        <img src="/static/img/icon/language_icon.png">
+        <img src="/static/img/icon/language_icon_black.png">
         <div class="header-language-text float-wrapper">
           <select v-on:change="changeItem($event)" class="float-l">
             <option v-for="item in items" v-bind:key="item.index" v-bind:value="item.value" :selected="currentLanguage === item.value">{{item.title}}</option>
@@ -33,7 +33,7 @@
       <div class="event-intro-wrapper">
         <div class="event-intro-top-wrapper float-wrapper">
           <div class="event-intro-top-title float-l dsp-table">
-            <div class="dsp-table-cell">{{ $t("selectedNum") }}</div>
+            <div class="dsp-table-cell fs-auto1">{{ $t("selectedNum") }}</div>
           </div>
           <div class="event-intro-top-ball float-r dsp-table">
             <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
@@ -76,14 +76,14 @@
           </div>
         </div>
         <div class="event-intro-desc-wrapper float-wrapper">
-          <div class="float-l fs-09">
-          {{ $t("guidMsg1") }}<span class="event-text-yellow">6</span>{{ $t("guidMsg2") }}<span class="event-text-green">1</span>{{ $t("guidMsg3") }}
+          <div class="float-l fs-auto">
+          {{ $t("guidMsg1") }}<span class="event-text-red">6</span>{{ $t("guidMsg2") }}<span class="event-text-blue">1</span>{{ $t("guidMsg3") }}
           </div>
           <div class="desc-text float-r fs-09 dsp-table" v-on:click="openModal">
             <!-- <img src="/static/img/event/question.jpg"> -->
-            {{ $t("desc") }}
+            <!-- {{ $t("desc") }} -->
           </div>
-          <div class="ques"><img src="/static/img/event/question.jpg"></div>
+          <div class="ques" v-on:click="openModal"><img src="/static/img/event/nav_question.png"></div>
         </div>
       </div>
       <div class="event-balls-wrapper float-wrapper">
@@ -482,14 +482,14 @@ export default {
 
 .header-language-wrapper img {
   height:15px;
-  margin-top:22px;
+  margin-top:24px;
   margin-right:5px;
 }
 
 .header-language-text select {
   height:40px;
   background-color:#FFCB00;
-  color:#FFFFFF;
+  color:#000000;
   border:0px;
   padding-left:5px;
   margin-right:10px;
@@ -543,8 +543,8 @@ export default {
 
 .ball-size-item {
   width:100%;
-  margin-top:1vw;
-  font-size: 4vw;
+  margin-top:calc((90vw - 100px)/25);
+  font-size: 5vw;
   /* font-size: calc((100vw - 110px)/20); */
 }
 
@@ -605,6 +605,16 @@ export default {
   font-weight:bold;
 }
 
+.event-text-red {
+  color:#EE6807;
+  font-weight:bold;
+}
+
+.event-text-blue {
+  color:#6985C6;
+  font-weight:bold;
+}
+
 .event-balls-wrapper {
   padding:1vw;
   padding-bottom:20px;
@@ -620,8 +630,10 @@ export default {
 }
 
 .btn-auto-select {
-  background-color:#FFCB00;
-  border:1px solid #FFCB00;
+  /* background-color:#FFCB00;
+  border:1px solid #FFCB00; */
+  background-color:#6985C6;
+  border:1px solid #6985C6;
   color:#FFFFFF;
 }
 
@@ -630,8 +642,10 @@ export default {
 }
 
 .btn-confirm {
-  background-color:#A7AC00;
-  border:1px solid #A7AC00;
+  /* background-color:#A7AC00;
+  border:1px solid #A7AC00; */
+  background-color:#EE6807;
+  border:1px solid #EE6807;
   color:#FFFFFF;
 }
 
@@ -651,12 +665,19 @@ export default {
   position:fixed;
   overflow-y:scroll;
 }
+.fs-auto{
+  font-size: calc((100vw - 110px)/15);
+}
+.fs-auto1{
+  font-size: calc((100vw - 140px)/15);
+}
 .ques{
   height: 20px;
   float: right;
+  margin-top: calc((30vw - 110px)/24);
 }
 .ques img{
-  height: 15px;
+  height: calc((100vw - 110px)/15);
   border-radius: 50%;
   vertical-align: middle;
 }
@@ -664,6 +685,7 @@ export default {
   height:20px;
   line-height: 20px;
   color:#A7AC00;
+  /* color: #6985C6; */
   float: right;
 }
 .desc-text img {

@@ -40,7 +40,7 @@ body {
 }
 
 #app {
-  font-family: 'NanumBarunGothic', 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'PingFangSC', 'NanumBarunGothic', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -51,7 +51,7 @@ header {
   text-align:center;
   width:100%;
   height:60px;
-  color:#FFFFFF;
+  color:#000000;
 }
 
 .float-wrapper:after {
@@ -121,8 +121,8 @@ header {
 }
 
 .ball-wrapper.yellow {
-  background-color:#FFCB00;
-  border:1px solid #FFCB00;
+  background-color:#EE6807;
+  border:1px solid #EE6807;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -130,12 +130,12 @@ header {
 
 .ball-wrapper.yellow.ballOff {
   background-color:#FFFFFF;
-  color:#FFCB00;
+  color:#EE6807;
 }
 
 .ball-wrapper.green {
-  background-color:#A7AC00;
-  border:1px solid #A7AC00;
+  background-color:#6985C6;
+  border:1px solid #6985C6;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -143,7 +143,7 @@ header {
 
 .ball-wrapper.green.ballOff {
   background-color:#FFFFFF;
-  color:#A7AC00;
+  color:#6985C6;
 }
 
 .ball-wrapper.yellow-1 {
@@ -364,8 +364,8 @@ header {
 }
 
 .btn-green {
-  background-color:#A7AC00;
-  border:1px solid #A7AC00;
+  background-color:#6985C6;
+  border:1px solid #6985C6;
   color:#FFFFFF;
 }
 

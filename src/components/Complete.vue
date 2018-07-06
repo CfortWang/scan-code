@@ -4,10 +4,10 @@
       <div class="modal-wrapper">
           <div v-if="openModal">
               <div class="modal-img">
-                  <img src="/static/img/complete/notice_new.png">
+                  <img src="/static/img/complete/notice.png">
               </div>
               <div class="modal-close" v-on:click="hide">
-                  <img src="/static/img/complete/delete_new.png">
+                  <img src="/static/img/complete/delete.png">
               </div>
           </div>
       </div>
@@ -16,31 +16,11 @@
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
       </div>
-      <div class="header-title-wrapper fs-14">
-        <vue-countdown :time="endTime" :interval="1000">
-          <template slot-scope="props">{{ props.totalHours }}:{{ props.minutes }}:{{ props.seconds }}</template>
-        </vue-countdown>
-      </div>
     </header>
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
       <div class="complete-event-contents-wrapper">
-        <div class="main-game-img-wrapper">
-          <img src="/static/img/guanggao/seedo_main_event_new.png">
-        </div>
-        <div class="period">{{ $t("info.period") }}</div>
-        <div class="complete-ball-wrapper float-wrapper">
-          <!-- 竞猜号码 -->
-          <div class="ball-wrapper float-l ball-text">{{ $t("info.balltext") }}</div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[0]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[1]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[2]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[3]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[4]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[5]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[greenItems[0]]"></div>
-        </div>
-        <!-- <div class="complete-ball-wrapper-title">
+        <div class="complete-ball-wrapper-title">
           <div class="ball-title float-wrapper fs-09">
             <div class="ball-title-date float-l dsp-table">
               <div class="dsp-table-cell">
@@ -57,12 +37,43 @@
             </div>
           </div>
         </div>
-        <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button> -->
+        <div class="complete-ball-wrapper float-wrapper">
+          <!-- <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[0]]"></div>
+          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[1]]"></div>
+          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[2]]"></div>
+          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[3]]"></div>
+          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[4]]"></div>
+          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[5]]"></div>
+          <div class="ball-wrapper complete-size float-l" v-bind:class="[greenItems[0]]"></div> -->
+
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[0]}}</div>
+          </div>
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[1]}}</div>
+          </div>
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[2]}}</div>
+          </div>
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[3]}}</div>
+          </div>
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[4]}}</div>
+          </div>
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item">{{yellowItems[5]}}</div>
+          </div>
+        </div>
+
+        <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button>
       </div>
       <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null">
       </div>
-      <!-- <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
+      <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
         <div class="company-event-wrapper">
+          <!-- <span class="bbbb">&nbsp;
+          </span> -->
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
@@ -70,8 +81,8 @@
             <img v-bind:src="shopADUrl">
           </div>
         </div>
-      </div> -->
-      <!-- <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
+      </div>
+      <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
@@ -80,27 +91,18 @@
             <img v-bind:src="shopEventUrl">
           </div>
         </div>
-      </div> -->
+      </div>
       <div class="complete-event-contents-wrapper" v-if="marketUrl !== null">
         <div class="company-event-wrapper">
-          <div class="login-wrapper">
-            <div class="complete-info-wrapper">
-              <div class="info-title float-wrapper fs-11">
-                {{ $t("info.title") }}
-              </div>
-            </div>
-            <div class="login-box">
-              <div class="login-input-wrapper float-wrapper">
-                <select class="w-25 float-l" v-on:change="countryChangeItem($event)">
-                  <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
-                </select>
-                <input type="number" class="phone-number-input w-72 float-r" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
-              </div>
-              <div class="login-btn-wrapper">
-                <button type="button" class="btn btn-green fs-11" v-on:click="entryButton">{{ $t("phone.button")}}</button>
-              </div>
-            </div>
+          <div class="event-title fs-09">
+            {{ $t("event.title2") }}
           </div>
+          <div class="event-img-wrapper">
+            <img v-bind:src="marketUrl">
+          </div>
+          <div class="main-game-img-wrapper">
+          <img src="/static/img/guanggao/seedo_main_event.png">
+        </div>
         </div>
       </div>
       <!-- <div class="section-divider">
@@ -113,9 +115,9 @@
           <img src="/static/img/guanggao/end_gg.jpg">
         </div>
       </div>
-      <!-- <div class="section-divider">
-      </div> -->
-      <!-- <div class="login-wrapper">
+      <div class="section-divider">
+      </div>
+      <div class="login-wrapper">
         <div class="complete-info-wrapper">
           <div class="info-title float-wrapper fs-11">
             {{ $t("info.title") }}
@@ -132,7 +134,7 @@
             <button type="button" class="btn btn-green fs-11" v-on:click="entryButton">{{ $t("phone.button")}}</button>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -188,8 +190,10 @@ export default {
     }
 
     var getParams = this.$route.params
-    this.yellowItems = ['yellow-' + getParams.yellowBall[0], 'yellow-' + getParams.yellowBall[1], 'yellow-' + getParams.yellowBall[2], 'yellow-' + getParams.yellowBall[3], 'yellow-' + getParams.yellowBall[4], 'yellow-' + getParams.yellowBall[5]]
-    this.greenItems = ['green-' + getParams.greenBall[0]]
+    // this.yellowItems = ['yellow-' + getParams.yellowBall[0], 'yellow-' + getParams.yellowBall[1], 'yellow-' + getParams.yellowBall[2], 'yellow-' + getParams.yellowBall[3], 'yellow-' + getParams.yellowBall[4], 'yellow-' + getParams.yellowBall[5]]
+    // this.greenItems = ['green-' + getParams.greenBall[0]]
+    this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
+    this.greenItems = [getParams.greenBall[0]]
 
     axios({ // WAS event result
       method: 'POST',
@@ -298,27 +302,43 @@ export default {
         // var responseData = response.data.data
         // console.log(responseMessage)
         // console.log(responseData)
-        if (!confirm(this.$i18n.t('message.noUser'))) {
-          return false
-        } else {
-          if (!confirm(this.$i18n.t('message.noUser2'))) {
-            return false
-          } else {
-            var getParams = this.$route.params
-            this.$router.push({
-              name: 'Register',
-              params: {
-                yellowBall: getParams.yellowBall,
-                greenBall: getParams.greenBall,
-                type: 'event',
-                qrCode: getParams.qrCode,
-                phoneNumber: this.phoneNumber,
-                countryCode: this.selectedCountry,
-                tempUser: this.tmpUser
-              }
-            })
+
+        var getParams = this.$route.params
+        this.$router.push({
+          name: 'Register',
+          params: {
+            yellowBall: getParams.yellowBall,
+            greenBall: getParams.greenBall,
+            type: 'event',
+            qrCode: getParams.qrCode,
+            phoneNumber: this.phoneNumber,
+            countryCode: this.selectedCountry,
+            tempUser: this.tmpUser
           }
-        }
+        })
+
+        // 取消跳转注册弹窗
+        // if (!confirm(this.$i18n.t('message.noUser'))) {
+        //   return false
+        // } else {
+        //   if (!confirm(this.$i18n.t('message.noUser2'))) {
+        //     return false
+        //   } else {
+        //     var getParams = this.$route.params
+        //     this.$router.push({
+        //       name: 'Register',
+        //       params: {
+        //         yellowBall: getParams.yellowBall,
+        //         greenBall: getParams.greenBall,
+        //         type: 'event',
+        //         qrCode: getParams.qrCode,
+        //         phoneNumber: this.phoneNumber,
+        //         countryCode: this.selectedCountry,
+        //         tempUser: this.tmpUser
+        //       }
+        //     })
+        //   }
+        // }
       }).catch((ex) => {
         console.log(ex)
         var errorResponseData = ex.response.data
@@ -376,8 +396,8 @@ export default {
 
 <style scoped>
 .header-title-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+  display:table-cell;
+  vertical-align:middle;
 }
 
 .contents-wrapper {
@@ -393,6 +413,7 @@ export default {
 .event-title {
   text-align:left;
   padding-bottom:10px;
+  /* border-left: 10px solid #A7AC00; */
 }
 
 .event-img-wrapper img {
@@ -407,41 +428,26 @@ export default {
   height:30px;
 }
 
-.ad-wrapper{
-  margin-top: 30px;
-}
-
 .ad-wrapper img {
   width:100%;
 }
 
-.period{
-  text-align: left;
-  color: #666;
-}
-
-.ball-text{
-  font-size: calc((100vw - 110px)/15);
-  vertical-align: middle;
-  margin-top: 0.45rem;
-  color: #666;
-}
-
 .complete-size {
-  height:calc((100vw - 110px)/10);
-  width:calc((100vw - 110px)/10);
-  margin:5px;
+  height:calc((100vw - 110px)/7);
+  width:calc((100vw - 110px)/7);
+  margin:2vw;
 }
 
 .main-game-img-wrapper {
-  margin-bottom:20px;
+  /* margin-bottom:20px; */
+  margin-top: 20px;
 }
 .main-game-img-wrapper img {
   width:100%;
 }
 
 .section-divider {
-  background-color:#CCCCCC;
+  background-color:#F0F1F3;
   height:10px;
 }
 
@@ -502,11 +508,11 @@ export default {
 }
 
 .more-info-btn {
-  background-color:#FFFFFF;
-  border:1px solid #A7AC00;
+  background-color:#FFAC00;
+  border:1px solid #FFAC00;
   border-radius:5px;
   padding:8px 15px;
-  color:#A7AC00;
+  color:white;
 }
 
 .complete-ball-wrapper {

@@ -5,7 +5,7 @@
         {{ $t("title") }}
       </div>
       <div class="header-language-wrapper">
-        <img src="/static/img/icon/language_icon.png">
+        <img src="/static/img/icon/language_icon_black.png">
         <div class="header-language-text float-wrapper">
           <select v-on:change="changeItem($event)" class="float-l">
             <option v-for="item in items" v-bind:key="item.index" v-bind:value="item.value" :selected="currentLanguage === item.value">{{item.title}}</option>
