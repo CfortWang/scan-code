@@ -77,7 +77,7 @@
         </div>
         <div class="event-intro-desc-wrapper float-wrapper">
           <div class="float-l fs-auto">
-          {{ $t("guidMsg1") }}<span class="event-text-red">6{{ $t("guidMsg2") }}</span>和<span class="event-text-blue">1{{ $t("guidMsg3") }}</span>
+          {{ $t("guidMsg1") }}<span class="event-text-red">6{{ $t("guidMsg2") }}</span>{{ $t("guidMsg4") }}<span class="event-text-blue">1{{ $t("guidMsg3") }}</span>
           </div>
           <div class="desc-text float-r fs-09 dsp-table" v-on:click="openModal">
             <!-- <img src="/static/img/event/question.jpg"> -->
