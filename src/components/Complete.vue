@@ -61,8 +61,11 @@
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
             <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[4]}}</div>
           </div>
-          <div class="ball-wrapper ball-size green complete-size float-l" >
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
             <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[5]}}</div>
+          </div>
+          <div class="ball-wrapper ball-size green complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item1">{{greenItems[0]}}</div>
           </div>
         </div>
 
@@ -438,7 +441,7 @@ export default {
 .complete-size {
   height:calc((100vw - 110px)/7);
   width:calc((100vw - 110px)/7);
-  margin:2vw;
+  margin:1%;
 }
 
 .main-game-img-wrapper {

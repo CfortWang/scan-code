@@ -363,7 +363,6 @@ export default {
 
       yellowSelectArray = yellowSelectArray.slice(0, 6)
       greenSelectArray = greenSelectArray.slice(0, 1)
-
       this.yellowItems.forEach(function (value, key) {
         var found = yellowSelectArray.find(function (element) {
           if (element === value.number) {
@@ -409,7 +408,7 @@ export default {
 
       this.selected7 = ''
       selectedArray = []
-      this.yellowItems.forEach(function (value, key) {
+      this.greenItems.forEach(function (value, key) {
         if (value.active === true) {
           if (value.number < 10) {
             selectedArray.push('0' + value.number)
