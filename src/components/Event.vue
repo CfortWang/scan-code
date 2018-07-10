@@ -165,21 +165,36 @@ export default {
         {title: '한국어', value: 'ko'},
         {title: '中国', value: 'zh'}
       ],
-      currentLanguage: 'zh',
+      currentLanguage: 'en',
       skipAD: null
     }
   },
   created: function () {
     var qrCode = this.$route.query.code
+    var getIP = axios.get('http://ip-api.com/json').then(function (response) {
+      var ipAddress = response.data.countryCode
+      console.log(ipAddress)
+    }).catch(function (error) {
+      console.log(error)
+    })
+    console.log(getIP)
+    // console.log("getIP === 'CN'")
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
-    } else {
+    } else if (getIP === 'CN') {
       this.$i18n.locale = 'zh'
       this.currentLanguage = 'zh'
       vueCookie.set('qr_language', 'zh', 1)
+    } else if (getIP === 'KR') {
+      this.$i18n.locale = 'ko'
+      this.currentLanguage = 'ko'
+      vueCookie.set('qr_language', 'ko', 1)
+    } else {
+      this.$i18n.locale = 'en'
+      this.currentLanguage = 'en'
+      vueCookie.set('qr_language', 'en', 1)
     }
-
     if (!this.$route.query.code) {
       this.$router.push({name: 'AppDown', params: {code: 'default'}})
     } else {
@@ -315,7 +330,6 @@ export default {
           count++
         }
       })
-
       if (count === 0) {
         if (!isActive) {
           this.greenItems[currentNumber].active = true
