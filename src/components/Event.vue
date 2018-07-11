@@ -125,6 +125,8 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import axios from 'axios'
 import vueCookie from 'vue-cookie'
+import _global from '../App.vue'
+import $ from 'jquery'
 
 const langData = require('./lang/event.json')
 
@@ -171,22 +173,37 @@ export default {
   },
   created: function () {
     var qrCode = this.$route.query.code
-    var getIP = axios.get('http://ip-api.com/json').then(function (response) {
-      var ipAddress = response.data.countryCode
-      console.log(ipAddress)
-    }).catch(function (error) {
-      console.log(error)
+    Vue.prototype.GLOBAL = _global
+    $.ajax({
+      url: 'http://ip-api.com/json',
+      dataType: 'json',
+      async: false,
+      type: 'GET',
+      success: function (req) {
+        _global.ipAddress = req.countryCode
+      }
     })
-    console.log(getIP)
-    // console.log("getIP === 'CN'")
+    // $.get('http://ip-api.com/json', function (result) {
+    //   _global.ipAddress = result.countryCode
+    // })
+    var getIP = this.GLOBAL.ipAddress
+    console.log(this.GLOBAL.ipAddress)
+    // axios.get('http://ip-api.com/json').then(function (response) {
+    //   _global.ipAddress = response.data.countryCode
+    // })
+    // var getIP = this.GLOBAL.ipAddress
+    // setTimeout(function () {
+    //   console.log(_global.ipAddress)
+    // }, 2000)
+    // console.log(getIP == 'CN')
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
-    } else if (getIP === 'CN') {
+    } else if (getIP == 'CN') {
       this.$i18n.locale = 'zh'
       this.currentLanguage = 'zh'
       vueCookie.set('qr_language', 'zh', 1)
-    } else if (getIP === 'KR') {
+    } else if (getIP == 'KR') {
       this.$i18n.locale = 'ko'
       this.currentLanguage = 'ko'
       vueCookie.set('qr_language', 'ko', 1)
