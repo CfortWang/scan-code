@@ -47,22 +47,25 @@
           <div class="ball-wrapper complete-size float-l" v-bind:class="[greenItems[0]]"></div> -->
 
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[0]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{selectedRed[0]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[1]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{selectedRed[1]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[2]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{selectedRed[2]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[3]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{selectedRed[3]}}</div>
           </div>
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[4]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{selectedRed[4]}}</div>
+          </div>
+          <div class="ball-wrapper ball-size yellow complete-size float-l" >
+            <div data-v-18718bba="" class="ball-size-item1">{{selectedRed[5]}}</div>
           </div>
           <div class="ball-wrapper ball-size green complete-size float-l" >
-            <div data-v-18718bba="" class="ball-size-item1">{{yellowItems[5]}}</div>
+            <div data-v-18718bba="" class="ball-size-item1">{{selectedBlue[0]}}</div>
           </div>
         </div>
 
@@ -196,6 +199,24 @@ export default {
     // this.greenItems = ['green-' + getParams.greenBall[0]]
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
     this.greenItems = [getParams.greenBall[0]]
+
+    // 为小于10的球号加0
+    this.selectedBlue = []
+    this.selectedRed = []
+    for (var i = 0; i < this.greenItems.length; i++) {
+      if (this.greenItems[i] < 10) {
+        this.selectedBlue.push('0' + this.greenItems[i])
+      } else {
+        this.selectedBlue.push(this.greenItems[i])
+      }
+    }
+    for (i = 0; i < this.yellowItems.length; i++) {
+      if (this.yellowItems[i] < 10) {
+        this.selectedRed.push('0' + this.yellowItems[i])
+      } else {
+        this.selectedRed.push(this.yellowItems[i])
+      }
+    }
 
     axios({ // WAS event result
       method: 'POST',
@@ -438,7 +459,7 @@ export default {
 .complete-size {
   height:calc((100vw - 110px)/7);
   width:calc((100vw - 110px)/7);
-  margin:2vw;
+  margin:1%;
 }
 
 .main-game-img-wrapper {

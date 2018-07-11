@@ -77,7 +77,7 @@
         </div>
         <div class="event-intro-desc-wrapper float-wrapper">
           <div class="float-l fs-auto">
-          {{ $t("guidMsg1") }}<span class="event-text-red">6{{ $t("guidMsg2") }}</span>和<span class="event-text-blue">1{{ $t("guidMsg3") }}</span>
+          {{ $t("guidMsg1") }}<span class="event-text-red">6{{ $t("guidMsg2") }}</span>{{ $t("guidMsg4") }}<span class="event-text-blue">1{{ $t("guidMsg3") }}</span>
           </div>
           <div class="desc-text float-r fs-09 dsp-table" v-on:click="openModal">
             <!-- <img src="/static/img/event/question.jpg"> -->
@@ -125,6 +125,8 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import axios from 'axios'
 import vueCookie from 'vue-cookie'
+import _global from '../App.vue'
+import $ from 'jquery'
 
 const langData = require('./lang/event.json')
 
@@ -165,21 +167,51 @@ export default {
         {title: '한국어', value: 'ko'},
         {title: '中国', value: 'zh'}
       ],
-      currentLanguage: 'zh',
+      currentLanguage: 'en',
       skipAD: null
     }
   },
   created: function () {
     var qrCode = this.$route.query.code
+    Vue.prototype.GLOBAL = _global
+    $.ajax({
+      url: 'http://ip-api.com/json',
+      dataType: 'json',
+      async: false,
+      type: 'GET',
+      success: function (req) {
+        _global.ipAddress = req.countryCode
+      }
+    })
+    // $.get('http://ip-api.com/json', function (result) {
+    //   _global.ipAddress = result.countryCode
+    // })
+    var getIP = this.GLOBAL.ipAddress
+    console.log(this.GLOBAL.ipAddress)
+    // axios.get('http://ip-api.com/json').then(function (response) {
+    //   _global.ipAddress = response.data.countryCode
+    // })
+    // var getIP = this.GLOBAL.ipAddress
+    // setTimeout(function () {
+    //   console.log(_global.ipAddress)
+    // }, 2000)
+    // console.log(getIP == 'CN')
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
-    } else {
+    } else if (getIP == 'CN') {
       this.$i18n.locale = 'zh'
       this.currentLanguage = 'zh'
       vueCookie.set('qr_language', 'zh', 1)
+    } else if (getIP == 'KR') {
+      this.$i18n.locale = 'ko'
+      this.currentLanguage = 'ko'
+      vueCookie.set('qr_language', 'ko', 1)
+    } else {
+      this.$i18n.locale = 'en'
+      this.currentLanguage = 'en'
+      vueCookie.set('qr_language', 'en', 1)
     }
-
     if (!this.$route.query.code) {
       this.$router.push({name: 'AppDown', params: {code: 'default'}})
     } else {
@@ -315,7 +347,6 @@ export default {
           count++
         }
       })
-
       if (count === 0) {
         if (!isActive) {
           this.greenItems[currentNumber].active = true
@@ -363,7 +394,6 @@ export default {
 
       yellowSelectArray = yellowSelectArray.slice(0, 6)
       greenSelectArray = greenSelectArray.slice(0, 1)
-
       this.yellowItems.forEach(function (value, key) {
         var found = yellowSelectArray.find(function (element) {
           if (element === value.number) {
@@ -409,7 +439,7 @@ export default {
 
       this.selected7 = ''
       selectedArray = []
-      this.yellowItems.forEach(function (value, key) {
+      this.greenItems.forEach(function (value, key) {
         if (value.active === true) {
           if (value.number < 10) {
             selectedArray.push('0' + value.number)
