@@ -115,7 +115,7 @@
       <div class="complete-event-contents-wrapper"  v-if="bannerUrl !== null">
         <div class="company-event-wrapper">
           <div class="main-game-img-wrapper">
-            <img v-bind:src="bottomAdUrl">
+            <img v-bind:src="bannerUrl">
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
       <!-- bottom ad -->
       <div class="complete-event-contents-wrapper">
         <div class="ad-wrapper">
-          <img v-bind:src="bannerUrl">
+          <img v-bind:src="bottomAdUrl">
         </div>
       </div>
       <div class="section-divider">
@@ -343,8 +343,6 @@ export default {
     },
     entryButton: function () {
       this.phoneNumber = this.phoneNumber.replace(/ /gi, '')
-      // console.log(this.phoneNumber)
-      // console.log(this.selectedCountry)
       if (this.phoneNumber === '') {
         alert(this.$i18n.t('message.insertPhone'))
         return false
@@ -497,7 +495,7 @@ export default {
 
 .main-game-img-wrapper {
   /* margin-bottom:20px; */
-  margin-top: 20px;
+  /* margin-top: 20px; */
   border: 1px solid #000;
   border-radius: 5px
 }

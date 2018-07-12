@@ -97,10 +97,10 @@
             <div class="terms-text float-l dsp-table">
               <div class="dsp-table-cell">
                 <div v-if="currentLanguage === 'ko'">
-                  <span class="text-red" v-on:click="termsOn">《{{ $t("terms.text1") }}》</span>{{ $t("terms.text2") }}
+                  <span class="text-red" v-on:click="termsOn">{{ $t("terms.text1") }}</span>{{ $t("terms.text2") }}
                 </div>
                 <div v-else>
-                  {{ $t("terms.text2") }}<span class="text-red" v-on:click="termsOn">《{{ $t("terms.text1") }}》</span>
+                  {{ $t("terms.text2") }}<span class="text-red" v-on:click="termsOn">{{ $t("terms.text1") }}</span>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ export default {
       this.countryCode = 64
     }
 
-    this.phoneNumber = '+' + this.countryCode + '  ' + getParams.phoneNumber
+    this.phoneNumber = '+' + this.countryCode + ' ' + getParams.phoneNumber
 
     if (getParams.type === 'recommend') {
       this.isEvent = false
