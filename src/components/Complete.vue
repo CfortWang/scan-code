@@ -71,6 +71,8 @@
 
         <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button>
       </div>
+
+      <!-- 商家活动 -->
       <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null">
       </div>
       <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
@@ -95,6 +97,8 @@
           </div>
         </div>
       </div> -->
+
+      <!-- 喜豆活动 -->
       <div class="complete-event-contents-wrapper" v-if="marketUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
@@ -104,19 +108,22 @@
           <div class="event-img-wrapper">
             <img v-bind:src="marketUrl">
           </div>
+        </div>
+      </div>
+
+      <!-- banner -->
+      <div class="complete-event-contents-wrapper"  v-if="bannerUrl !== null">
+        <div class="company-event-wrapper">
           <div class="main-game-img-wrapper">
-            <img src="/static/img/guanggao/seedo_main_event.png">
+            <img v-bind:src="bottomAdUrl">
           </div>
         </div>
       </div>
-      <!-- <div class="section-divider">
-      </div> -->
+
+      <!-- bottom ad -->
       <div class="complete-event-contents-wrapper">
-        <!-- <div class="event-title fs-09">
-          {{ $t("event.title3") }}
-        </div> -->
         <div class="ad-wrapper">
-          <img src="/static/img/guanggao/end_gg.jpg">
+          <img v-bind:src="bannerUrl">
         </div>
       </div>
       <div class="section-divider">
@@ -181,7 +188,9 @@ export default {
       shopADUrl: null,
       shopEventUrl: null,
       marketUrl: null,
-      tmpUser: null
+      tmpUser: null,
+      bannerUrl: null,
+      bottomAdUrl: null
     }
   },
   created: function () {
@@ -227,11 +236,11 @@ export default {
       // var responseMessage = response.data.message
       var responseData = response.data.data
       // console.log(responseMessage)
-      console.log(responseData)
+      // console.log(responseData)
       var marketResult = responseData.marketing_event_result
       var shopADResult = responseData.shop.ad
       var shopEventResult = responseData.shop.event_result
-
+      // console.log(marketResult)
       if (shopADResult.length !== 0) {
         this.shopADUrl = shopADResult[0].shop_ad_image_file_url
       }
@@ -250,6 +259,29 @@ export default {
           this.tmpUser = shopEventResult[0].temp_user
           this.marketUrl = marketResult[0].img
         }
+      }
+    }).catch((ex) => {
+      console.log(ex)
+      // var errorResponseData = ex.response.data
+      // console.log(errorResponseData)
+    })
+
+    axios({ // get banner&bottom ad
+      method: 'GET',
+      url: process.env.api_url + '/api/ad/game',
+      params: { lang: this.currentLanguage }
+    }).then((response) => {
+      // console.log(response.data.data)
+      var responseData = response.data.data.complete_banner
+      // console.log(responseData)
+      var banner = responseData.bottom
+      var bottomAd = responseData.product
+
+      if (banner.length !== 0) {
+        this.bannerUrl = banner.image_url
+      }
+      if (bottomAd.length !== 0) {
+        this.bottomAdUrl = bottomAd.image_url
       }
     }).catch((ex) => {
       console.log(ex)
@@ -311,6 +343,8 @@ export default {
     },
     entryButton: function () {
       this.phoneNumber = this.phoneNumber.replace(/ /gi, '')
+      // console.log(this.phoneNumber)
+      // console.log(this.selectedCountry)
       if (this.phoneNumber === '') {
         alert(this.$i18n.t('message.insertPhone'))
         return false
@@ -333,8 +367,8 @@ export default {
             greenBall: getParams.greenBall,
             type: 'event',
             qrCode: getParams.qrCode,
-            phoneNumber: this.phoneNumber,
             countryCode: this.selectedCountry,
+            phoneNumber: this.phoneNumber,
             tempUser: this.tmpUser
           }
         })

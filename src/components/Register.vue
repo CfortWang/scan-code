@@ -178,7 +178,30 @@ export default {
       }
     }
 
-    this.phoneNumber = getParams.phoneNumber
+    // 注册页面添加区号
+    if (getParams.countryCode === 1) {
+      this.countryCode = 86
+    } else if (getParams.countryCode === 2) {
+      this.countryCode = 61
+    } else if (getParams.countryCode === 3) {
+      this.countryCode = 82
+    } else if (getParams.countryCode === 4) {
+      this.countryCode = 81
+    } else if (getParams.countryCode === 5) {
+      this.countryCode = 60
+    } else if (getParams.countryCode === 6) {
+      this.countryCode = 62
+    } else if (getParams.countryCode === 7) {
+      this.countryCode = 852
+    } else if (getParams.countryCode === 8) {
+      this.countryCode = 886
+    } else if (getParams.countryCode === 9) {
+      this.countryCode = 1
+    } else if (getParams.countryCode === 10) {
+      this.countryCode = 64
+    }
+
+    this.phoneNumber = '+' + this.countryCode + '  ' + getParams.phoneNumber
 
     if (getParams.type === 'recommend') {
       this.isEvent = false
