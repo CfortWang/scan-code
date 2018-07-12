@@ -75,8 +75,6 @@
       </div>
       <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
         <div class="company-event-wrapper">
-          <!-- <span class="bbbb">&nbsp;
-          </span> -->
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
@@ -86,16 +84,17 @@
           </div>
         </div>
       </div>
-      <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
+      <!-- <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
+          <div class="section-divider1"></div>
           <div class="event-img-wrapper">
             <img v-bind:src="shopEventUrl">
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="complete-event-contents-wrapper" v-if="marketUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
@@ -228,7 +227,7 @@ export default {
       // var responseMessage = response.data.message
       var responseData = response.data.data
       // console.log(responseMessage)
-      // console.log(responseData)
+      console.log(responseData)
       var marketResult = responseData.marketing_event_result
       var shopADResult = responseData.shop.ad
       var shopEventResult = responseData.shop.event_result
@@ -465,6 +464,8 @@ export default {
 .main-game-img-wrapper {
   /* margin-bottom:20px; */
   margin-top: 20px;
+  border: 1px solid #000;
+  border-radius: 5px
 }
 .main-game-img-wrapper img {
   width:100%;

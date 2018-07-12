@@ -183,19 +183,7 @@ export default {
         _global.ipAddress = req.countryCode
       }
     })
-    // $.get('http://ip-api.com/json', function (result) {
-    //   _global.ipAddress = result.countryCode
-    // })
     var getIP = this.GLOBAL.ipAddress
-    console.log(this.GLOBAL.ipAddress)
-    // axios.get('http://ip-api.com/json').then(function (response) {
-    //   _global.ipAddress = response.data.countryCode
-    // })
-    // var getIP = this.GLOBAL.ipAddress
-    // setTimeout(function () {
-    //   console.log(_global.ipAddress)
-    // }, 2000)
-    // console.log(getIP == 'CN')
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
