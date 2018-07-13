@@ -85,7 +85,7 @@
       <!-- 商家活动 -->
       <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null">
       </div>
-      <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
+      <!-- <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
@@ -95,8 +95,8 @@
             <img v-bind:src="shopADUrl">
           </div>
         </div>
-      </div>
-      <!-- <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
+      </div> -->
+      <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
@@ -106,7 +106,7 @@
             <img v-bind:src="shopEventUrl">
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!-- 喜豆活动 -->
       <div class="complete-event-contents-wrapper" v-if="marketUrl !== null">

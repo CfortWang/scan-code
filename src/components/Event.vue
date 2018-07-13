@@ -479,7 +479,7 @@ export default {
       }
       var qrCode = this.$route.query.code
       this.$router.push({
-        name: 'AD',
+        name: 'APP',
         params: {
           yellowBall: activeYellow,
           greenBall: activeGreen,
