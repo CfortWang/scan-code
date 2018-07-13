@@ -2,6 +2,7 @@
   <div>
     <transition>
       <div class="modal-wrapper">
+            <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
           <div v-if="openModal">
               <div class="modal-img">
                   <!-- <img v-bind:src="rulePicUrl"> -->
@@ -620,10 +621,40 @@ export default {
   width: 80%;
   height: 40%;
   margin-top: 30%;
-  margin-left: 10%;
+  margin-left: 6%;
   border-radius: 10px;
+  padding: 5% 4%;
+  text-align: left;
 }
-
+.logo{
+  float: right;
+  margin-right: 6%;
+  margin-top: 10%;
+  width: 30%;
+}
+.rule-title{
+  font-family: 'PingFangSC';
+  color: #6985C6;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #CCCCCC;
+}
+.rule-rules{
+  margin-top: 20px;
+  color: #6985C6;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 30px;
+}
+.rule-prize{
+  font-size: 0.8rem;
+  line-height: 25px;
+}
+.rule-example{
+  font-size: 0.8rem;
+  padding-left: 3rem;
+}
 /* .modal-img img {
   width: 80%;
   height: 40%;
@@ -631,9 +662,9 @@ export default {
 } */
 
 .modal-close img {
-  width: 50px;
-  height: 50px;
-  margin-top: 7%;
+  width: 8%;
+  height: 8%;
+  margin-top: 10%;
 }
 
 .mask{

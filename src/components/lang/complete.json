@@ -10,7 +10,7 @@
       "fourthPrize": "Fourth prize: 3 red beans + 1 blue bean match or 4 red beans match",
       "fifthPrize": "Fifth prize: match the number of blue beans",
       "sixthPrize": "Sixth Prize: Matching the numbers before and after the blue bean",
-      "example": "（For example, if the blue bean is 4, then the 3 or 5 won）"
+      "example": "(For example, if the blue bean is 4, then the 3 or 5 won)"
     },
     "event": {
       "title1": "Shop AD/Event",
@@ -45,13 +45,13 @@
     "rule": {
       "title": "승리 규칙",
       "rules": "퀴즈 번호로 6 개의 팥과 1 개의 파란색 콩 선택",
-      "firstPrize": "1 등상: 6 개의 팥이 완벽하게 일치합니다.",
-      "secondPrize": "2 등상: 팥 5 개 + 푸른 콩 1 개",
-      "thirdPrize": "3 등상: 팥 4 개 + 푸른 콩 1 개 또는 팥 5 개 일치",
-      "fourthPrize": "4 등상: 팥 3 개 + 푸른 콩 1 개 또는 팥 4 개 일치",
-      "fifthPrize": "5 등: 푸른 콩 수와 일치",
-      "sixthPrize": "6 등: 푸른 콩 전후의 숫자 매치",
-      "example": "（예를 들어, 파란색 콩이 4이면 3 또는 5 원입니다）"
+      "firstPrize": "1 등상 : 6 개의 팥이 완벽하게 일치합니다.",
+      "secondPrize": "2 등상 : 팥 5 개 + 푸른 콩 1 개",
+      "thirdPrize": "3 등상 : 팥 4 개 + 푸른 콩 1 개 또는 팥 5 개 일치",
+      "fourthPrize": "4 등상 : 팥 3 개 + 푸른 콩 1 개 또는 팥 4 개 일치",
+      "fifthPrize": "5 등상 : 푸른 콩 수와 일치",
+      "sixthPrize": "6 등상 : 푸른 콩 전후의 숫자 매치",
+      "example": "(예를 들어, 파란색 콩이 4이면 3 또는 5 원입니다)"
     },
     "event": {
       "title1": "Shop AD/Event",
@@ -92,7 +92,7 @@
       "fourthPrize": "四等奖：3颗红豆+1颗蓝豆匹配或者4颗红豆匹配",
       "fifthPrize": "五等奖：与蓝豆的数字相匹配",
       "sixthPrize": "六等奖：与蓝豆前后的数字相匹配",
-      "example": "（比如蓝豆是4，则选3号或5号中奖）"
+      "example": "(比如蓝豆是4，则选3号或5号中奖)"
     },
     "event": {
       "title1": "商家活动",
