@@ -2,14 +2,24 @@
   <div class="ticket-event">
     <transition>
       <div class="modal-wrapper">
-          <div v-if="openModal">
-              <div class="modal-img">
-                  <img src="/static/img/event/lottogame_alert_new.png">
-              </div>
-              <div class="modal-close" v-on:click="hide">
-                  <img src="/static/img/event/delete_new.png">
-              </div>
+        <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
+        <div v-if="openModal">
+          <div class="modal-img">
+            <!-- <img v-bind:src="rulePicUrl"> -->
+            <div class="rule-title">{{ $t("rule.title") }}</div>
+            <div class="rule-rules">{{ $t("rule.rules") }}</div>
+            <div class="rule-prize">{{ $t("rule.firstPrize") }}</div>
+            <div class="rule-prize">{{ $t("rule.secondPrize") }}</div>
+            <div class="rule-prize">{{ $t("rule.thirdPrize") }}</div>
+            <div class="rule-prize">{{ $t("rule.fourthPrize") }}</div>
+            <div class="rule-prize">{{ $t("rule.fifthPrize") }}</div>
+            <div class="rule-prize">{{ $t("rule.sixthPrize") }}</div>
+            <div class="rule-example">{{ $t("rule.example") }}</div>
           </div>
+          <div class="modal-close" v-on:click="hide">
+              <img src="/static/img/complete/delete_new.png">
+          </div>
+        </div>
       </div>
     </transition>
     <header>
@@ -183,19 +193,7 @@ export default {
         _global.ipAddress = req.countryCode
       }
     })
-    // $.get('http://ip-api.com/json', function (result) {
-    //   _global.ipAddress = result.countryCode
-    // })
     var getIP = this.GLOBAL.ipAddress
-    console.log(this.GLOBAL.ipAddress)
-    // axios.get('http://ip-api.com/json').then(function (response) {
-    //   _global.ipAddress = response.data.countryCode
-    // })
-    // var getIP = this.GLOBAL.ipAddress
-    // setTimeout(function () {
-    //   console.log(_global.ipAddress)
-    // }, 2000)
-    // console.log(getIP == 'CN')
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
@@ -481,7 +479,7 @@ export default {
       }
       var qrCode = this.$route.query.code
       this.$router.push({
-        name: 'AD',
+        name: 'APP',
         params: {
           yellowBall: activeYellow,
           greenBall: activeGreen,
@@ -581,6 +579,7 @@ export default {
 
 .modal-wrapper {
   height: calc(100% - 60px);
+  width: 100%;
   top:0px;
   text-align: center;
   position: absolute;
@@ -589,18 +588,57 @@ export default {
   z-Index: 9999;
 }
 
-.modal-img img {
+.modal-img {
+  background-color: white;
+  color: #000;
   width: 80%;
   height: 40%;
   margin-top: 30%;
+  margin-left: 6%;
+  border-radius: 10px;
+  padding: 5% 4%;
+  text-align: left;
 }
+.logo{
+  float: right;
+  margin-right: 6%;
+  margin-top: 10%;
+  width: 30%;
+}
+.rule-title{
+  font-family: 'PingFangSC';
+  color: #6985C6;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #CCCCCC;
+}
+.rule-rules{
+  margin-top: 20px;
+  color: #6985C6;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 30px;
+}
+.rule-prize{
+  font-size: 0.8rem;
+  line-height: 25px;
+}
+.rule-example{
+  font-size: 0.8rem;
+  padding-left: 3rem;
+}
+/* .modal-img img {
+  width: 80%;
+  height: 40%;
+  margin-top: 30%;
+} */
 
 .modal-close img {
-  width: 50px;
-  height: 50px;
-  margin-top: 7%;
+  width: 8%;
+  height: 8%;
+  margin-top: 10%;
 }
-
 .mask{
   width: 100%;
   height: 100%;

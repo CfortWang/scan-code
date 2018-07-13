@@ -2,9 +2,19 @@
   <div>
     <transition>
       <div class="modal-wrapper">
+            <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
           <div v-if="openModal">
               <div class="modal-img">
-                  <img src="/static/img/complete/notice_new.png">
+                  <!-- <img v-bind:src="rulePicUrl"> -->
+                  <div class="rule-title">{{ $t("rule.title") }}</div>
+                  <div class="rule-rules">{{ $t("rule.rules") }}</div>
+                  <div class="rule-prize">{{ $t("rule.firstPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.secondPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.thirdPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.fourthPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.fifthPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.sixthPrize") }}</div>
+                  <div class="rule-example">{{ $t("rule.example") }}</div>
               </div>
               <div class="modal-close" v-on:click="hide">
                   <img src="/static/img/complete/delete_new.png">
@@ -71,12 +81,12 @@
 
         <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button>
       </div>
+
+      <!-- 商家活动 -->
       <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null">
       </div>
-      <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
+      <!-- <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
         <div class="company-event-wrapper">
-          <!-- <span class="bbbb">&nbsp;
-          </span> -->
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
@@ -85,17 +95,20 @@
             <img v-bind:src="shopADUrl">
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
           </div>
+          <div class="section-divider1"></div>
           <div class="event-img-wrapper">
             <img v-bind:src="shopEventUrl">
           </div>
         </div>
       </div>
+
+      <!-- 喜豆活动 -->
       <div class="complete-event-contents-wrapper" v-if="marketUrl !== null">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
@@ -105,19 +118,22 @@
           <div class="event-img-wrapper">
             <img v-bind:src="marketUrl">
           </div>
+        </div>
+      </div>
+
+      <!-- banner -->
+      <div class="complete-event-contents-wrapper"  v-if="bannerUrl !== null">
+        <div class="company-event-wrapper">
           <div class="main-game-img-wrapper">
-            <img src="/static/img/guanggao/seedo_main_event.png">
+            <img v-bind:src="bannerUrl">
           </div>
         </div>
       </div>
-      <!-- <div class="section-divider">
-      </div> -->
+
+      <!-- bottom ad -->
       <div class="complete-event-contents-wrapper">
-        <!-- <div class="event-title fs-09">
-          {{ $t("event.title3") }}
-        </div> -->
         <div class="ad-wrapper">
-          <img src="/static/img/guanggao/end_gg.jpg">
+          <img v-bind:src="bottomAdUrl">
         </div>
       </div>
       <div class="section-divider">
@@ -182,7 +198,10 @@ export default {
       shopADUrl: null,
       shopEventUrl: null,
       marketUrl: null,
-      tmpUser: null
+      tmpUser: null,
+      bannerUrl: null,
+      bottomAdUrl: null,
+      rulePicUrl: ''
     }
   },
   created: function () {
@@ -192,6 +211,17 @@ export default {
     } else {
       this.$i18n.locale = 'zh'
       this.currentLanguage = 'zh'
+    }
+
+    if (this.currentLanguage === 'zh') {
+      this.rulePicUrl = '/static/img/complete/notice_new.png'
+      console.log(this.rulePicUrl)
+    } else if (this.currentLanguage === 'ko') {
+      this.rulePicUrl = '/static/img/complete/notice_new.png'
+      console.log(this.rulePicUrl)
+    } else {
+      this.rulePicUrl = '/static/img/complete/notice.png'
+      console.log(this.rulePicUrl)
     }
 
     var getParams = this.$route.params
@@ -232,7 +262,7 @@ export default {
       var marketResult = responseData.marketing_event_result
       var shopADResult = responseData.shop.ad
       var shopEventResult = responseData.shop.event_result
-
+      // console.log(marketResult)
       if (shopADResult.length !== 0) {
         this.shopADUrl = shopADResult[0].shop_ad_image_file_url
       }
@@ -251,6 +281,31 @@ export default {
           this.tmpUser = shopEventResult[0].temp_user
           this.marketUrl = marketResult[0].img
         }
+      }
+    }).catch((ex) => {
+      console.log(ex)
+      // var errorResponseData = ex.response.data
+      // console.log(errorResponseData)
+    })
+
+    axios({ // get banner&bottom ad
+      method: 'GET',
+      url: process.env.api_url + '/api/ad/game',
+      params: { lang: this.currentLanguage }
+    }).then((response) => {
+      // console.log(response.data.data)
+      var responseData = response.data.data.complete_banner
+      // console.log(responseData)
+      var banner = responseData.product
+      var bottomAd = responseData.bottom
+      console.log(banner)
+      console.log(bottomAd)
+
+      if (banner.length !== 0) {
+        this.bannerUrl = banner.image_url
+      }
+      if (bottomAd.length !== 0) {
+        this.bottomAdUrl = bottomAd.image_url
       }
     }).catch((ex) => {
       console.log(ex)
@@ -334,8 +389,8 @@ export default {
             greenBall: getParams.greenBall,
             type: 'event',
             qrCode: getParams.qrCode,
-            phoneNumber: this.phoneNumber,
             countryCode: this.selectedCountry,
+            phoneNumber: this.phoneNumber,
             tempUser: this.tmpUser
           }
         })
@@ -436,7 +491,7 @@ export default {
 .event-title {
   text-align:left;
   /* padding-bottom:10px; */
-  border-left: 0.31rem solid #FFCB00;
+  border-left: 0.4rem solid #FFCB00;
   padding-left: 10px;
 }
 
@@ -464,7 +519,9 @@ export default {
 
 .main-game-img-wrapper {
   /* margin-bottom:20px; */
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  border: 1px solid #000;
+  border-radius: 5px
 }
 .main-game-img-wrapper img {
   width:100%;
@@ -549,6 +606,7 @@ export default {
 
 .modal-wrapper {
   height: calc(100% - 60px);
+  width: 100%;
   top:0px;
   text-align: center;
   position: absolute;
@@ -557,16 +615,56 @@ export default {
   z-Index: 9999;
 }
 
-.modal-img img {
+.modal-img {
+  background-color: white;
+  color: #000;
   width: 80%;
   height: 40%;
   margin-top: 30%;
+  margin-left: 6%;
+  border-radius: 10px;
+  padding: 5% 4%;
+  text-align: left;
 }
+.logo{
+  float: right;
+  margin-right: 6%;
+  margin-top: 10%;
+  width: 30%;
+}
+.rule-title{
+  font-family: 'PingFangSC';
+  color: #6985C6;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #CCCCCC;
+}
+.rule-rules{
+  margin-top: 20px;
+  color: #6985C6;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 30px;
+}
+.rule-prize{
+  font-size: 0.8rem;
+  line-height: 25px;
+}
+.rule-example{
+  font-size: 0.8rem;
+  padding-left: 3rem;
+}
+/* .modal-img img {
+  width: 80%;
+  height: 40%;
+  margin-top: 30%;
+} */
 
 .modal-close img {
-  width: 50px;
-  height: 50px;
-  margin-top: 7%;
+  width: 8%;
+  height: 8%;
+  margin-top: 10%;
 }
 
 .mask{

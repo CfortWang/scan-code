@@ -1,21 +1,43 @@
 {
   "en": {
     "title": "Entry",
+    "rule": {
+      "title": "Winning rules",
+      "rules": "Pick 6 red beans and 1 blue bean as your quiz number",
+      "firstPrize": "First prize：6 red beans match perfectly",
+      "secondPrize": "Second prize: 5 red beans + 1 blue bean match",
+      "thirdPrize": "Third prize: 4 red beans + 1 blue bean match or 5 red beans match",
+      "fourthPrize": "Fourth prize: 3 red beans + 1 blue bean match or 4 red beans match",
+      "fifthPrize": "Fifth prize: match the number of blue beans",
+      "sixthPrize": "Sixth Prize: Matching the numbers before and after the blue bean",
+      "example": "(For example, if the blue bean is 4, then the 3 or 5 won)"
+    },
     "selectedNum": "Selected",
     "guidMsg1": "Select ",
-    "guidMsg2": " soybean ",
-    "guidMsg3": " green beans",
+    "guidMsg2": " red beans ",
+    "guidMsg3": " blue beans",
     "guidMsg4": "and ",
     "desc": "how to play",
     "autoSelect": "Auto Select",
     "confirm" : "Confirm",
-    "finishYellowBall": "You can choose soybean only 6. (yellow: 6, green:1)",
-    "finishGreenBall": "You can choose green beans only one. (yellow: 6, green:1)",
-    "notEnoughBall": "You must selected ball. (yellow: 6, green:1)",
+    "finishYellowBall": "You can choose red bean only six.",
+    "finishGreenBall": "You can choose blue bean only one.",
+    "notEnoughBall": "You must selected ball. (red: 6, blue:1)",
     "adMessage": "It will be applied after finishing AD."
   },
   "ko": {
     "title": "응모",
+    "rule": {
+      "title": "승리 규칙",
+      "rules": "퀴즈 번호로 6 개의 팥과 1 개의 파란색 콩 선택",
+      "firstPrize": "1 등상 : 6 개의 팥이 완벽하게 일치합니다.",
+      "secondPrize": "2 등상 : 팥 5 개 + 푸른 콩 1 개",
+      "thirdPrize": "3 등상 : 팥 4 개 + 푸른 콩 1 개 또는 팥 5 개 일치",
+      "fourthPrize": "4 등상 : 팥 3 개 + 푸른 콩 1 개 또는 팥 4 개 일치",
+      "fifthPrize": "5 등상 : 푸른 콩 수와 일치",
+      "sixthPrize": "6 등상 : 푸른 콩 전후의 숫자 매치",
+      "example": "(예를 들어, 파란색 콩이 4이면 3 또는 5 원입니다)"
+    },
     "selectedNum": "응모번호",
     "guidMsg1": "노랑콩",
     "guidMsg2": "개녹두",
@@ -31,6 +53,17 @@
   },
   "zh": {
     "title": "喜豆一下",
+    "rule": {
+      "title": "中奖规则",
+      "rules": "挑选6颗红豆与一颗蓝豆作为你的竞猜号码",
+      "firstPrize": "一等奖：6颗红豆完全匹配",
+      "secondPrize": "二等奖：5颗红豆+1颗蓝豆匹配",
+      "thirdPrize": "三等奖：4颗红豆+1颗蓝豆匹配或者5颗红豆匹配",
+      "fourthPrize": "四等奖：3颗红豆+1颗蓝豆匹配或者4颗红豆匹配",
+      "fifthPrize": "五等奖：与蓝豆的数字相匹配",
+      "sixthPrize": "六等奖：与蓝豆前后的数字相匹配",
+      "example": "(比如蓝豆是4，则选3号或5号中奖)"
+    },
     "selectedNum": "已选号码",
     "guidMsg1": "请选择",
     "guidMsg2": "个红豆",
@@ -39,8 +72,8 @@
     "desc": " 教你来玩",
     "autoSelect": "智能选号",
     "confirm" : "提交",
-    "finishYellowBall": "已经选择了6个号码（红色：6个，蓝色：1个）",
-    "finishGreenBall": "已经选择了1个号码（红色：6个，蓝色：1个）",
+    "finishYellowBall": "已经选择了6个红豆",
+    "finishGreenBall": "已经选择了1个蓝豆",
     "notEnoughBall": "请重新选号并提交（红色：6个，蓝色：1个）",
     "adMessage": "广告之后，完成提交"
   },
