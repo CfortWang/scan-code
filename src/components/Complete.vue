@@ -4,7 +4,16 @@
       <div class="modal-wrapper">
           <div v-if="openModal">
               <div class="modal-img">
-                  <img src="/static/img/complete/notice_new.png">
+                  <!-- <img v-bind:src="rulePicUrl"> -->
+                  <div class="rule-title">{{ $t("rule.title") }}</div>
+                  <div class="rule-rules">{{ $t("rule.rules") }}</div>
+                  <div class="rule-prize">{{ $t("rule.firstPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.secondPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.thirdPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.fourthPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.fifthPrize") }}</div>
+                  <div class="rule-prize">{{ $t("rule.sixthPrize") }}</div>
+                  <div class="rule-example">{{ $t("rule.example") }}</div>
               </div>
               <div class="modal-close" v-on:click="hide">
                   <img src="/static/img/complete/delete_new.png">
@@ -190,7 +199,8 @@ export default {
       marketUrl: null,
       tmpUser: null,
       bannerUrl: null,
-      bottomAdUrl: null
+      bottomAdUrl: null,
+      rulePicUrl: ''
     }
   },
   created: function () {
@@ -200,6 +210,17 @@ export default {
     } else {
       this.$i18n.locale = 'zh'
       this.currentLanguage = 'zh'
+    }
+
+    if (this.currentLanguage === 'zh') {
+      this.rulePicUrl = '/static/img/complete/notice_new.png'
+      console.log(this.rulePicUrl)
+    } else if (this.currentLanguage === 'ko') {
+      this.rulePicUrl = '/static/img/complete/notice_new.png'
+      console.log(this.rulePicUrl)
+    } else {
+      this.rulePicUrl = '/static/img/complete/notice.png'
+      console.log(this.rulePicUrl)
     }
 
     var getParams = this.$route.params
@@ -274,8 +295,10 @@ export default {
       // console.log(response.data.data)
       var responseData = response.data.data.complete_banner
       // console.log(responseData)
-      var banner = responseData.bottom
-      var bottomAd = responseData.product
+      var banner = responseData.product
+      var bottomAd = responseData.bottom
+      console.log(banner)
+      console.log(bottomAd)
 
       if (banner.length !== 0) {
         this.bannerUrl = banner.image_url
@@ -467,7 +490,7 @@ export default {
 .event-title {
   text-align:left;
   /* padding-bottom:10px; */
-  border-left: 0.31rem solid #FFCB00;
+  border-left: 0.4rem solid #FFCB00;
   padding-left: 10px;
 }
 
@@ -582,6 +605,7 @@ export default {
 
 .modal-wrapper {
   height: calc(100% - 60px);
+  width: 100%;
   top:0px;
   text-align: center;
   position: absolute;
@@ -590,11 +614,21 @@ export default {
   z-Index: 9999;
 }
 
-.modal-img img {
+.modal-img {
+  background-color: white;
+  color: #000;
   width: 80%;
   height: 40%;
   margin-top: 30%;
+  margin-left: 10%;
+  border-radius: 10px;
 }
+
+/* .modal-img img {
+  width: 80%;
+  height: 40%;
+  margin-top: 30%;
+} */
 
 .modal-close img {
   width: 50px;
