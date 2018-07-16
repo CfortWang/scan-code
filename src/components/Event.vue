@@ -185,7 +185,7 @@ export default {
     var qrCode = this.$route.query.code
     Vue.prototype.GLOBAL = _global
     $.ajax({
-      url: 'http://ip-api.com/json',
+      url: 'https://ipapi.co/json',
       dataType: 'json',
       async: false,
       type: 'GET',
