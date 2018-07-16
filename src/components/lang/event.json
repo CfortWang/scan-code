@@ -1,6 +1,13 @@
 {
   "en": {
     "title": "Entry",
+    "ready": {
+      "title": "Prompt",
+      "body1": "Coming soon to enter the bean bean prize contest",
+      "body2": "Are you ready?",
+      "btn-left": "Cancel",
+      "btn-right": "OK"
+    },
     "rule": {
       "title": "Winning rules",
       "rules": "Pick 6 red beans and 1 blue bean as your quiz number",
@@ -27,6 +34,13 @@
   },
   "ko": {
     "title": "응모",
+    "ready": {
+      "title": "프롬프트",
+      "body1": "콩 콩 콩쿨에 곧 참가할 예정입니다",
+      "body2": "준비 됐니?",
+      "btn-left": "취소",
+      "btn-right": "결정"
+    },
     "rule": {
       "title": "승리 규칙",
       "rules": "퀴즈 번호로 6 개의 팥과 1 개의 파란색 콩 선택",
@@ -53,6 +67,13 @@
   },
   "zh": {
     "title": "喜豆一下",
+    "ready": {
+      "title": "提示",
+      "body1": "即将进入喜豆beanpop有奖竞猜活动",
+      "body2": "准备好了吗？",
+      "btn-left": "取消",
+      "btn-right": "确定"
+    },
     "rule": {
       "title": "中奖规则",
       "rules": "挑选6颗红豆与一颗蓝豆作为你的竞猜号码",

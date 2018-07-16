@@ -22,6 +22,21 @@
         </div>
       </div>
     </transition>
+    <!-- <div class="ready-box">
+        <img class="ready-logo" src="/static/img/complete/rule-logo.png">
+        <div class="ready-border">
+          <div class="ready">
+            <div class="ready-title">{{ $t("ready.title") }}</div>
+            <div class="ready-body">
+              <p>{{ $t("ready.body1") }}</p >
+              <p>{{ $t("ready.body2") }}</p >
+            </div>
+          <div class="ready-button">
+            <button class="btn-left" v-on:click="closeReady">{{ $t("ready.btn-left") }}</button><button class="btn-right" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
     <header>
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
@@ -190,12 +205,11 @@ export default {
       async: false,
       type: 'GET',
       success: function (req) {
-        console.log(req.country_code)
-        _global.ipAddress = req.country
+        _global.ipAddress = req.country_code
       }
     })
     var getIP = this.GLOBAL.ipAddress
-    // console.log(getIP)
+    console.log(getIP)
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
@@ -287,6 +301,30 @@ export default {
     hide: function () {
       document.getElementsByClassName('modal-wrapper')[0].style.display = 'none'
       document.getElementsByClassName('mask')[0].style.display = 'none'
+    },
+    goEvent: function () {
+      document.getElementsByClassName('ready-box')[0].style.display = 'none'
+      document.getElementsByClassName('contents-wrapper')[0].style.display = 'block'
+    },
+    closeReady: function () {
+      // if (navigator.userAgent.indexOf('MSIE') > 0) { // close IE
+      //   if (navigator.userAgent.indexOf('MSIE 6.0') > 0) {
+      //     window.opener = null
+      //     window.close()
+      //   } else {
+      //     window.open('', '_top')
+      //     window.top.close()
+      //   }
+      // } else if (navigator.userAgent.indexOf('Firefox') > 0) { // close firefox
+      //   window.location.href = 'about:blank '
+      // } else { // close chrome;It is effective when it is only one.
+      //   console.log(navigator.userAgent.indexOf('Chrome'))
+      //   window.opener = null
+      //   window.open('', '_self')
+      //   window.close()
+      // }
+      window.location.href = 'about:blank'
+      // window.close()
     },
     yellowBallClicked: function (event) {
       var currentNumber = parseInt(event) - 1
@@ -577,6 +615,82 @@ export default {
   /* margin-top:calc((90vw - 100px)/25); */
   font-size: 4vw;
   /* font-size: calc((100vw - 110px)/20); */
+}
+
+.contents-wrapper{
+  /* display: none; */
+}
+.ready-box{
+  width: 100%;;
+  text-align: center;
+  /* height: calc(100% - 150px); */
+  top:0px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 999;
+}
+.ready{
+  color: #000;
+  width: 90%;
+  height: 30%;
+  margin-top: 50%;
+  margin-left: 5%;
+  border-radius: 5px;
+  border: 1px solid #ccc
+  /* padding: 5% 4%; */
+
+}
+.ready-title{
+  width: 90%;
+  margin-left: 5%;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-weight: 600;
+  font-size: 2rem;
+  color: #6985C6;
+  text-align: left;
+  border-bottom: 1px solid #CCCCCC;
+}
+.ready-body{
+  font-size: 1.1rem;
+}
+.ready-body p{
+  margin-bottom: 10px;
+}
+.ready img{
+  width: 100px;
+  height: 100px;
+}
+.ready-logo{
+  float: right;
+  margin-right: 6%;
+  margin-top: 30%;
+  width: 30%;
+}
+.ready-button{
+
+  margin-top: 20px;
+  font-size: 1.6rem;
+}
+.btn-left{
+  background-color: #fff;
+  border: none;
+  border-top: 1px solid #ccc;
+  color: #ccc;
+  /* float: left; */
+  width: 49.5%;
+  height: 50px;
+  font-size: inherit;
+}
+.btn-right{
+  background-color: #fff;
+  border: none;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  /* float: left; */
+  width: 49.5%;
+  height: 50px;
+  font-size: inherit;
 }
 
 .modal-wrapper {

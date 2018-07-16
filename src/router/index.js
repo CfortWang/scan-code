@@ -8,7 +8,6 @@ import AD from '@/components/AD'
 import Complete from '@/components/Complete'
 import Register from '@/components/Register'
 import CompleteEvent from '@/components/CompleteEvent'
-// import Pop from '@/components/Pop'
 
 Vue.use(Router)
 
@@ -48,11 +47,6 @@ export default new Router({
       name: 'Event',
       component: Event
     },
-    // {
-    //   path: '/pop',
-    //   name: 'Pop',
-    //   component: Pop
-    // },
     {
       path: '/ad',
       name: 'AD',
