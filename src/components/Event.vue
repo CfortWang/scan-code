@@ -190,10 +190,12 @@ export default {
       async: false,
       type: 'GET',
       success: function (req) {
-        _global.ipAddress = req.countryCode
+        // console.log(req.country)
+        _global.ipAddress = req.country
       }
     })
     var getIP = this.GLOBAL.ipAddress
+    // console.log(getIP)
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
