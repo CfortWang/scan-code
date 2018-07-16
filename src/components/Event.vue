@@ -193,7 +193,9 @@ export default {
         {title: '中国', value: 'zh'}
       ],
       currentLanguage: 'en',
-      skipAD: null
+      skipAD: null,
+      banner: null,
+      bottomAd: null
     }
   },
   created: function () {
@@ -248,9 +250,19 @@ export default {
           var responseData = response.data.data
           // console.log(responseMessage)
           // console.log(responseData)
+          // var banner = responseData.complete_banner.product.image_url
+          // var bottomAd = responseData.complete_banner.bottom.image_url
+          // console.log(banner)
+          // console.log(bottomAd)
           var downloadingImage = new Image()
           downloadingImage.src = responseData.game_ad
           this.skipAD = responseData.game_ad
+          var downloadingBanner = new Image()
+          downloadingBanner.src = responseData.complete_banner.product.image_url
+          this.banner = responseData.complete_banner.product.image_url
+          var downloadingBottomAd = new Image()
+          downloadingBottomAd.src = responseData.complete_banner.bottom.image_url
+          this.bottomAd = responseData.complete_banner.bottom.image_url
         }).catch((ex) => {
           console.log(ex)
           // var errorResponseData = ex.response.data
@@ -525,7 +537,9 @@ export default {
           greenBall: activeGreen,
           type: 'code',
           qrCode: qrCode,
-          skipAD: this.skipAD
+          skipAD: this.skipAD,
+          banner: this.banner,
+          bottomAd: this.bottomAd
         }
       })
     }

@@ -215,16 +215,21 @@ export default {
 
     if (this.currentLanguage === 'zh') {
       this.rulePicUrl = '/static/img/complete/notice_new.png'
-      console.log(this.rulePicUrl)
+      // console.log(this.rulePicUrl)
     } else if (this.currentLanguage === 'ko') {
       this.rulePicUrl = '/static/img/complete/notice_new.png'
-      console.log(this.rulePicUrl)
+      // console.log(this.rulePicUrl)
     } else {
       this.rulePicUrl = '/static/img/complete/notice.png'
-      console.log(this.rulePicUrl)
+      // console.log(this.rulePicUrl)
     }
 
     var getParams = this.$route.params
+
+    this.shopEventUrl = getParams.shopEvent
+    this.marketUrl = getParams.market
+    this.bannerUrl = getParams.banner
+    this.bottomAdUrl = getParams.bottomAd
     // this.yellowItems = ['yellow-' + getParams.yellowBall[0], 'yellow-' + getParams.yellowBall[1], 'yellow-' + getParams.yellowBall[2], 'yellow-' + getParams.yellowBall[3], 'yellow-' + getParams.yellowBall[4], 'yellow-' + getParams.yellowBall[5]]
     // this.greenItems = ['green-' + getParams.greenBall[0]]
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
@@ -247,71 +252,6 @@ export default {
         this.selectedRed.push(this.yellowItems[i])
       }
     }
-
-    axios({ // WAS event result
-      method: 'POST',
-      url: process.env.api_url + '/api/entries/event',
-      params: {
-        code: getParams.qrCode
-      }
-    }).then((response) => {
-      // var responseMessage = response.data.message
-      var responseData = response.data.data
-      // console.log(responseMessage)
-      // console.log(responseData)
-      var marketResult = responseData.marketing_event_result
-      var shopADResult = responseData.shop.ad
-      var shopEventResult = responseData.shop.event_result
-      // console.log(marketResult)
-      if (shopADResult.length !== 0) {
-        this.shopADUrl = shopADResult[0].shop_ad_image_file_url
-      }
-      if (shopEventResult.length !== 0) {
-        if (shopEventResult[0].result === 'win') {
-          this.tmpUser = shopEventResult[0].temp_user
-          this.shopEventUrl = shopEventResult[0].gift.shop_gift_image_file.url
-        }
-      }
-
-      if (marketResult.length !== 0) {
-        if (marketResult[0].result === 'win') {
-          this.tmpUser = marketResult[0].temp_user
-          this.marketUrl = marketResult[0].img
-        } else {
-          this.tmpUser = shopEventResult[0].temp_user
-          this.marketUrl = marketResult[0].img
-        }
-      }
-    }).catch((ex) => {
-      console.log(ex)
-      // var errorResponseData = ex.response.data
-      // console.log(errorResponseData)
-    })
-
-    axios({ // get banner&bottom ad
-      method: 'GET',
-      url: process.env.api_url + '/api/ad/game',
-      params: { lang: this.currentLanguage }
-    }).then((response) => {
-      // console.log(response.data.data)
-      var responseData = response.data.data.complete_banner
-      // console.log(responseData)
-      var banner = responseData.product
-      var bottomAd = responseData.bottom
-      console.log(banner)
-      console.log(bottomAd)
-
-      if (banner.length !== 0) {
-        this.bannerUrl = banner.image_url
-      }
-      if (bottomAd.length !== 0) {
-        this.bottomAdUrl = bottomAd.image_url
-      }
-    }).catch((ex) => {
-      console.log(ex)
-      // var errorResponseData = ex.response.data
-      // console.log(errorResponseData)
-    })
 
     axios({ // Current Drawings Info
       url: process.env.api_url + '/api/drawings/progress'

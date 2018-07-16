@@ -18,6 +18,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
+import axios from 'axios'
 
 const langData = require('./lang/ad.json')
 
@@ -34,7 +35,11 @@ export default {
     return {
       countdownText: 3,
       endCountDown: false,
-      adURL: ''
+      adURL: '',
+      bannerUrl: '',
+      bottomAdUrl: '',
+      market: '',
+      shopEvent: ''
     }
   },
   created: function () {
@@ -50,8 +55,56 @@ export default {
         this.$i18n.locale = 'en'
       }
     }
+
     var getParams = this.$route.params
     this.adURL = getParams.skipAD
+    this.bannerUrl = getParams.banner
+    this.bottomAdUrl = getParams.bottomAd
+
+    axios({ // WAS event result
+      method: 'POST',
+      url: process.env.api_url + '/api/entries/event',
+      params: {
+        code: getParams.qrCode
+      }
+    }).then((response) => {
+      // var responseMessage = response.data.message
+      var responseData = response.data.data
+      // console.log(responseMessage)
+      // console.log(responseData)
+      // var shopADResult = responseData.shop.ad
+
+      var marketResult = responseData.marketing_event_result
+      var shopEventResult = responseData.shop.event_result
+
+      var downloadingMarket = new Image()
+      downloadingMarket.src = responseData.marketing_event_result[0].img
+
+      var downloadingShop = new Image()
+      downloadingShop.src = responseData.shop.event_result[0].gift.shop_gift_image_file.url
+      // if (shopADResult.length !== 0) {
+      //   this.shopADUrl = shopADResult[0].shop_ad_image_file_url
+      // }
+      if (shopEventResult.length !== 0) {
+        if (shopEventResult[0].result === 'win') {
+          this.tmpUser = shopEventResult[0].temp_user
+          this.shopEvent = shopEventResult[0].gift.shop_gift_image_file.url
+        }
+      }
+      if (marketResult.length !== 0) {
+        if (marketResult[0].result === 'win') {
+          this.tmpUser = marketResult[0].temp_user
+          this.market = marketResult[0].img
+        } else {
+          this.tmpUser = shopEventResult[0].temp_user
+          this.market = marketResult[0].img
+        }
+      }
+    }).catch((ex) => {
+      console.log(ex)
+      // var errorResponseData = ex.response.data
+      // console.log(errorResponseData)
+    })
     var setTimer = 3
     var countDown = setInterval(() => {
       this.countdownText = setTimer
@@ -66,7 +119,11 @@ export default {
             yellowBall: getParams.yellowBall,
             greenBall: getParams.greenBall,
             type: getParams.type,
-            qrCode: getParams.qrCode
+            qrCode: getParams.qrCode,
+            banner: this.bannerUrl,
+            bottomAd: this.bottomAdUrl,
+            market: this.market,
+            shopEvent: this.shopEvent
           }
         })
       }
