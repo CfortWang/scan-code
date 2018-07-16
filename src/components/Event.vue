@@ -185,12 +185,12 @@ export default {
     var qrCode = this.$route.query.code
     Vue.prototype.GLOBAL = _global
     $.ajax({
-      url: 'https://ipapi.co/json',
+      url: 'https://geoip-db.com/json/',
       dataType: 'json',
       async: false,
       type: 'GET',
       success: function (req) {
-        // console.log(req.country)
+        console.log(req.country_code)
         _global.ipAddress = req.country
       }
     })
