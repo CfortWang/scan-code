@@ -201,7 +201,7 @@ export default {
       this.countryCode = 64
     }
 
-    this.phoneNumber = '+' + this.countryCode + ' ' + getParams.phoneNumber
+    this.phoneNumber = getParams.phoneNumber
 
     if (getParams.type === 'recommend') {
       this.isEvent = false
