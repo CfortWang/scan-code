@@ -22,7 +22,7 @@
         </div>
       </div>
     </transition>
-    <!-- <div class="ready-box">
+    <div class="ready-box">
         <img class="ready-logo" src="/static/img/complete/rule-logo.png">
         <div class="ready-border">
           <div class="ready">
@@ -32,11 +32,11 @@
               <p>{{ $t("ready.body2") }}</p >
             </div>
           <div class="ready-button">
-            <button class="btn-left" v-on:click="closeReady">{{ $t("ready.btn-left") }}</button><button class="btn-right" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
+            <button class="btn-right" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <header>
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
@@ -632,12 +632,11 @@ export default {
 }
 
 .contents-wrapper{
-  /* display: none; */
+  display: none;
 }
 .ready-box{
   width: 100%;;
   text-align: center;
-  /* height: calc(100% - 150px); */
   top:0px;
   position: absolute;
   cursor: pointer;
@@ -650,9 +649,7 @@ export default {
   margin-top: 50%;
   margin-left: 5%;
   border-radius: 5px;
-  border: 1px solid #ccc
-  /* padding: 5% 4%; */
-
+  border: 1px solid #ccc;
 }
 .ready-title{
   width: 90%;
@@ -660,7 +657,7 @@ export default {
   padding-top: 10px;
   padding-bottom: 20px;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.4rem;
   color: #6985C6;
   text-align: left;
   border-bottom: 1px solid #CCCCCC;
@@ -684,7 +681,7 @@ export default {
 .ready-button{
 
   margin-top: 20px;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
 }
 .btn-left{
   background-color: #fff;
@@ -700,9 +697,9 @@ export default {
   background-color: #fff;
   border: none;
   border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
+  /* border-left: 1px solid #ccc; */
   /* float: left; */
-  width: 49.5%;
+  width: 100%;
   height: 50px;
   font-size: inherit;
 }

@@ -178,7 +178,7 @@ export default {
       }
     }
 
-    // 注册页面添加区号
+    // register page add the countryCode
     if (getParams.countryCode === 1) {
       this.countryCode = 86
     } else if (getParams.countryCode === 2) {

@@ -82,10 +82,9 @@
         <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button>
       </div>
 
-      <!-- 商家活动 -->
-      <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null">
-      </div>
-      <!-- <div class="complete-event-contents-wrapper" v-if="shopADUrl !== null">
+      <!-- shop AD -->
+      <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null"></div>
+      <div class="complete-event-contents-wrapper" v-if="shopADUrl !== ''">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
@@ -95,8 +94,9 @@
             <img v-bind:src="shopADUrl">
           </div>
         </div>
-      </div> -->
-      <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== null">
+      </div>
+      <!-- shop event -->
+      <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== ''">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title1") }}
@@ -108,8 +108,8 @@
         </div>
       </div>
 
-      <!-- 喜豆活动 -->
-      <div class="complete-event-contents-wrapper" v-if="marketUrl !== null">
+      <!-- seedo event -->
+      <div class="complete-event-contents-wrapper" v-if="marketUrl !== ''">
         <div class="company-event-wrapper">
           <div class="event-title fs-09">
             {{ $t("event.title2") }}
@@ -122,7 +122,7 @@
       </div>
 
       <!-- banner -->
-      <div class="complete-event-contents-wrapper"  v-if="bannerUrl !== null">
+      <div class="complete-event-contents-wrapper"  v-if="bannerUrl !== ''">
         <div class="company-event-wrapper">
           <div class="main-game-img-wrapper">
             <img v-bind:src="bannerUrl">
@@ -226,7 +226,10 @@ export default {
 
     var getParams = this.$route.params
 
+    this.shopADUrl = getParams.shopAD
+    console.log(getParams.shopAD === '')
     this.shopEventUrl = getParams.shopEvent
+    console.log(getParams.shopEvent === '')
     this.marketUrl = getParams.market
     this.bannerUrl = getParams.banner
     this.bottomAdUrl = getParams.bottomAd

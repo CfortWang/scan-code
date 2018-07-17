@@ -39,7 +39,8 @@ export default {
       bannerUrl: '',
       bottomAdUrl: '',
       market: '',
-      shopEvent: ''
+      shopEvent: '',
+      shopAD: ''
     }
   },
   created: function () {
@@ -71,28 +72,29 @@ export default {
       // var responseMessage = response.data.message
       var responseData = response.data.data
       // console.log(responseMessage)
-      // console.log(responseData)
-      // var shopADResult = responseData.shop.ad
+      console.log(responseData)
 
+      var shopADResult = responseData.shop.ad
       var marketResult = responseData.marketing_event_result
       var shopEventResult = responseData.shop.event_result
 
-      var downloadingMarket = new Image()
-      downloadingMarket.src = responseData.marketing_event_result[0].img
-
-      var downloadingShop = new Image()
-      downloadingShop.src = responseData.shop.event_result[0].gift.shop_gift_image_file.url
-      // if (shopADResult.length !== 0) {
-      //   this.shopADUrl = shopADResult[0].shop_ad_image_file_url
-      // }
+      if (shopADResult.length !== 0) {
+        var downloadingShopAd = new Image()
+        downloadingShopAd.src = responseData.shop.ad[0].shop_ad_image_file_url
+        this.shopAD = shopADResult[0].shop_ad_image_file_url
+      }
       if (shopEventResult.length !== 0) {
         if (shopEventResult[0].result === 'win') {
+          var downloadingShopEvent = new Image()
+          downloadingShopEvent.src = responseData.shop.event_result[0].gift.shop_gift_image_file.url
           this.tmpUser = shopEventResult[0].temp_user
           this.shopEvent = shopEventResult[0].gift.shop_gift_image_file.url
         }
       }
       if (marketResult.length !== 0) {
         if (marketResult[0].result === 'win') {
+          var downloadingMarket = new Image()
+          downloadingMarket.src = responseData.marketing_event_result[0].img
           this.tmpUser = marketResult[0].temp_user
           this.market = marketResult[0].img
         } else {
@@ -123,7 +125,8 @@ export default {
             banner: this.bannerUrl,
             bottomAd: this.bottomAdUrl,
             market: this.market,
-            shopEvent: this.shopEvent
+            shopEvent: this.shopEvent,
+            shopAD: this.shopAD
           }
         })
       }
