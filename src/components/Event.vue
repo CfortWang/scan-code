@@ -317,6 +317,7 @@ export default {
     goEvent: function () {
       document.getElementsByClassName('ready-box')[0].style.display = 'none'
       document.getElementsByClassName('contents-wrapper')[0].style.display = 'block'
+      document.getElementsByClassName('mask')[0].style.display = 'none'
     },
     closeReady: function () {
       // if (navigator.userAgent.indexOf('MSIE') > 0) { // close IE
@@ -607,12 +608,12 @@ export default {
   text-align:center;
   width:calc(75% - 20px);
   height:10vw;
-  margin:0px 10px;
+  margin-left:10px;
 }
 
 .event-intro-ball-wrapper .ball-size {
-  width:10%;
-  margin:0px calc((30% - 28px)/14);
+  width:12%;
+  margin-left:calc((30% - 28px)/13);
   overflow:hidden;
   font-size:0.6em;
 }
@@ -632,7 +633,7 @@ export default {
 }
 
 .contents-wrapper{
-  display: none;
+  /* display: none; */
 }
 .ready-box{
   width: 100%;;
@@ -649,6 +650,7 @@ export default {
   margin-top: 50%;
   margin-left: 5%;
   border-radius: 5px;
+  background-color: #fff;
   border: 1px solid #ccc;
 }
 .ready-title{
@@ -663,7 +665,7 @@ export default {
   border-bottom: 1px solid #CCCCCC;
 }
 .ready-body{
-  font-size: 1.1rem;
+  font-size: 0.8rem;
 }
 .ready-body p{
   margin-bottom: 10px;
@@ -679,26 +681,15 @@ export default {
   width: 30%;
 }
 .ready-button{
-
   margin-top: 20px;
   font-size: 1.3rem;
+  border-radius: 5px;
 }
-.btn-left{
-  background-color: #fff;
-  border: none;
-  border-top: 1px solid #ccc;
-  color: #ccc;
-  /* float: left; */
-  width: 49.5%;
-  height: 50px;
-  font-size: inherit;
-}
+
 .btn-right{
   background-color: #fff;
   border: none;
   border-top: 1px solid #ccc;
-  /* border-left: 1px solid #ccc; */
-  /* float: left; */
   width: 100%;
   height: 50px;
   font-size: inherit;
@@ -776,8 +767,8 @@ export default {
   position: absolute;
   left: 0px;
   top: 0px;
-  display: none;
-  z-index: 1000;
+  display: block;
+  z-index: 888;
 }
 
 .ball-wrapper.gray {
