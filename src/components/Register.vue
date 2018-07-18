@@ -308,11 +308,11 @@ export default {
       // }
       axios({ // sign up
         method: 'POST',
-        url: process.env.api_url + '/api/register/phone-num',
+        url: process.env.api_url + '/api/register/code',
         params: {
           country: this.countrySeq,
           phone_num: this.phoneNumber,
-          password: this.password1,
+          // password: this.password1,
           code: this.authCode,
           recommendee_user_code: this.recommendCode
         }
