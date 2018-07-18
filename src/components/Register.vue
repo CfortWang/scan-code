@@ -204,7 +204,6 @@ export default {
 
     this.phoneNumber = getParams.phoneNumber
     this.phoneAndCountry = '+' + this.countryCode + ' ' + this.phoneNumber
-    this.phoneNumber = this.phoneAndCountry.split(' ')[1]
     // console.log(this.phoneAndCountry)
 
     if (getParams.type === 'recommend') {
@@ -252,6 +251,7 @@ export default {
     },
     getAuthCode: function () {
       var getParams = this.$route.params
+      this.phoneNumber = this.phoneAndCountry.split(' ')[1]
       axios({ // get auth code
         method: 'POST',
         url: process.env.api_url + '/api/certifications/phone-num/sign-up',
@@ -279,6 +279,7 @@ export default {
       this.password1 = this.password1.replace(/ /gi, '')
       this.recommendCode = this.recommendCode.replace(/ /gi, '')
       this.authCode = this.authCode.replace(/ /gi, '')
+      this.phoneNumber = this.phoneAndCountry.split(' ')[1]
       if (!this.termsChecked) {
         alert(this.$i18n.t('message.termsCheck'))
         return false
@@ -315,6 +316,7 @@ export default {
           recommendee_user_code: this.recommendCode
         }
       }).then((response) => {
+        console.log(this.phoneNumber + 'b')
         // var responseMessage = response.data.message
         // var responseData = response.data.data
         // console.log(responseMessage)
@@ -353,6 +355,7 @@ export default {
             // var responseData = response.data.data
             // console.log(responseMessage)
             // console.log(responseData)
+            console.log(this.phoneNumber + 'c')
             this.$router.push({name: 'AppDown', params: {code: 'default'}})
           }).catch((ex) => {
             console.log(ex)
