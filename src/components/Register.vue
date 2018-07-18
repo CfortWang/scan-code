@@ -252,6 +252,7 @@ export default {
     getAuthCode: function () {
       var getParams = this.$route.params
       this.phoneNumber = this.phoneAndCountry.split(' ')[1]
+      // console.log(getParams.countryCode)
       axios({ // get auth code
         method: 'POST',
         url: process.env.api_url + '/api/certifications/phone-num/sign-up',

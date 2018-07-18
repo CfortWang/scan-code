@@ -3,8 +3,8 @@
     "title": "Entry",
     "ready": {
       "title": "Prompt",
-      "body1": "Coming soon to enter the bean bean prize contest",
-      "body2": "Are you ready?",
+      "body1": "Hey, friend, have prepared some gifts for you.",
+      "body2": "Come and guess it!",
       "btn-left": "Cancel",
       "btn-right": "OK"
     },
@@ -36,8 +36,8 @@
     "title": "응모",
     "ready": {
       "title": "프롬프트",
-      "body1": "콩 콩 콩쿨에 곧 참가할 예정입니다",
-      "body2": "준비 됐니?",
+      "body1": "안녕, 친구, 너에게 선물을 준비 했어.",
+      "body2": "와서 그것을 맞춰보세요!",
       "btn-left": "취소",
       "btn-right": "결정"
     },
@@ -69,8 +69,8 @@
     "title": "喜豆一下",
     "ready": {
       "title": "提示",
-      "body1": "即将进入喜豆beanpop有奖竞猜活动",
-      "body2": "准备好了吗？",
+      "body1": "嘿朋友，给你备了些好礼",
+      "body2": "快来竞猜领取吧！",
       "btn-left": "取消",
       "btn-right": "确定"
     },
