@@ -461,7 +461,7 @@ export default {
 .main-game-img-wrapper {
   /* margin-bottom:20px; */
   /* margin-top: 20px; */
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   border-radius: 5px
 }
 .main-game-img-wrapper img {
