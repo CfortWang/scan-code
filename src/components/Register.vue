@@ -204,6 +204,7 @@ export default {
 
     this.phoneNumber = getParams.phoneNumber
     this.phoneAndCountry = '+' + this.countryCode + ' ' + this.phoneNumber
+    this.phoneNumber = this.phoneAndCountry.split(' ')[1]
     // console.log(this.phoneAndCountry)
 
     if (getParams.type === 'recommend') {
