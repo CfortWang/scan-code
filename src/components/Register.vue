@@ -32,7 +32,7 @@
             <div class="w-70 float-l">
               <div class="input-wrapper float-wrapper">
                 <!-- <input type="text" v-model="countryCode" class="p-l-10 w-23 float-l" disabled> -->
-                <input type="text" v-model="phoneNumber" class="p-l-10 w-100 float-r">
+                <input type="text" v-model="phoneAndCountry" class="p-l-10 w-100 float-r">
               </div>
             </div>
           </div>
@@ -147,6 +147,7 @@ export default {
       countryCode: '',
       countrySeq: '',
       phoneNumber: '',
+      phoneAndCountry: '',
       password1: '',
       password2: '',
       recommendCode: '',
@@ -202,6 +203,8 @@ export default {
     }
 
     this.phoneNumber = getParams.phoneNumber
+    this.phoneAndCountry = '+' + this.countryCode + ' ' + this.phoneNumber
+    // console.log(this.phoneAndCountry)
 
     if (getParams.type === 'recommend') {
       this.isEvent = false

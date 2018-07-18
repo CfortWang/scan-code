@@ -227,9 +227,7 @@ export default {
     var getParams = this.$route.params
 
     this.shopADUrl = getParams.shopAD
-    console.log(getParams.shopAD === '')
     this.shopEventUrl = getParams.shopEvent
-    console.log(getParams.shopEvent === '')
     this.marketUrl = getParams.market
     this.bannerUrl = getParams.banner
     this.bottomAdUrl = getParams.bottomAd
