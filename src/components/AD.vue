@@ -96,32 +96,31 @@ export default {
         downloadingMarket.src = responseData.marketing_event_result[0].img
         this.tmpUser = marketResult[0].temp_user
         this.market = marketResult[0].img
-        // after the market image loading finish, go to the complete page
-        var setTimer = 3
-        var countDown = setInterval(() => {
-          this.countdownText = setTimer
-          setTimer = setTimer - 1
-          if (setTimer === -1) {
-            this.endCountDown = true
-            clearInterval(countDown)
-            var getParams = this.$route.params
-            this.$router.push({
-              name: 'Complete',
-              params: {
-                yellowBall: getParams.yellowBall,
-                greenBall: getParams.greenBall,
-                type: getParams.type,
-                qrCode: getParams.qrCode,
-                banner: this.bannerUrl,
-                bottomAd: this.bottomAdUrl,
-                market: this.market,
-                shopEvent: this.shopEvent,
-                shopAD: this.shopAD
-              }
-            })
-          }
-        }, 1000)
       }
+      var setTimer = 3
+      var countDown = setInterval(() => {
+        this.countdownText = setTimer
+        setTimer = setTimer - 1
+        if (setTimer === -1) {
+          this.endCountDown = true
+          clearInterval(countDown)
+          var getParams = this.$route.params
+          this.$router.push({
+            name: 'Complete',
+            params: {
+              yellowBall: getParams.yellowBall,
+              greenBall: getParams.greenBall,
+              type: getParams.type,
+              qrCode: getParams.qrCode,
+              banner: this.bannerUrl,
+              bottomAd: this.bottomAdUrl,
+              market: this.market,
+              shopEvent: this.shopEvent,
+              shopAD: this.shopAD
+            }
+          })
+        }
+      }, 1000)
     }).catch((ex) => {
       console.log(ex)
       // var errorResponseData = ex.response.data
