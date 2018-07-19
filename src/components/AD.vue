@@ -92,15 +92,10 @@ export default {
         }
       }
       if (marketResult.length !== 0) {
-        if (marketResult[0].result === 'win') {
-          var downloadingMarket = new Image()
-          downloadingMarket.src = responseData.marketing_event_result[0].img
-          this.tmpUser = marketResult[0].temp_user
-          this.market = marketResult[0].img
-        } else {
-          this.tmpUser = shopEventResult[0].temp_user
-          this.market = marketResult[0].img
-        }
+        var downloadingMarket = new Image()
+        downloadingMarket.src = responseData.marketing_event_result[0].img
+        this.tmpUser = marketResult[0].temp_user
+        this.market = marketResult[0].img
         // after the market image loading finish, go to the complete page
         var setTimer = 3
         var countDown = setInterval(() => {
