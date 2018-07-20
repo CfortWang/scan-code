@@ -131,7 +131,7 @@ export default {
       window.location.href = process.env.appdown_url
     },
     commingSoon: function () {
-      alert('Comming soon.')
+      alert(this.$i18n.t('info.click'))
     }
   }
 }
@@ -183,9 +183,9 @@ export default {
   height:100vh;
   background-color:#FFCB00;
   background-repeat: no-repeat;
-  background-size:200%;
+  background-size:145%;
   background-position:center 230px;
-  background-image: url('/static/img/app_down/app_info.png');
+  background-image: url('/static/img/app_down/app_info_new.png');
 }
 
 .app-text-wrapper {

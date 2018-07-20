@@ -8,7 +8,7 @@
       "secondPrize": "Second prize: 5 red beans + 1 blue bean match",
       "thirdPrize": "Third prize: 4 red beans + 1 blue bean match or 5 red beans match",
       "fourthPrize": "Fourth prize: 3 red beans + 1 blue bean match or 4 red beans match",
-      "fifthPrize": "Fifth prize: match the number of blue beans",
+      "fifthPrize": "Fifth prize: match the number of blue bean",
       "sixthPrize": "Sixth Prize: Matching the numbers before and after the blue bean",
       "example": "(For example, if the blue bean is 4, then the 3 or 5 won)"
     },
@@ -24,7 +24,8 @@
       "drawing": "Drawing",
       "remainTime": "Count down",
       "balltext": "Number:",
-      "period": "2018.07.15(No.18003)"
+      "period": "2018.07.15(No.18003)",
+      "click": "Comming soon."
     },
     "phone": {
       "title": "Check Register",
@@ -65,7 +66,8 @@
       "drawing": "회차",
       "remainTime": "남은시간",
       "balltext": "퀴즈번호:",
-      "period": "2018.07.15(번호 18003)"
+      "period": "2018.07.15(번호 18003)",
+      "click": "곧 온다."
     },
     "phone": {
       "title": "가입여부 확인",
@@ -106,7 +108,8 @@
       "drawing": "届次",
       "remainTime": "倒计时",
       "balltext": "竞猜号码:",
-      "period": "2018.07.15(第18003期)"
+      "period": "2018.07.15(第18003期)",
+      "click": "即将到来"
     },
     "phone": {
       "title": "确认注册与否",

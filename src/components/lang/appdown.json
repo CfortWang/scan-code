@@ -6,6 +6,9 @@
       "text2": "喜豆APP",
       "text3": "Check your entries!"
     },
+    "info": {
+      "click": "Comming soon."
+    },
     "subText": {
       "text1": "You can check more information",
       "text2": "through mobile App."
@@ -22,6 +25,9 @@
       "text2": "다운받고",
       "text3": "응모현황을 확인하세요!"
     },
+    "info": {
+      "click": "곧 온다."
+    },
     "subText": {
       "text1": "모바일 앱을 통해 응모현황과 당첨현황 등",
       "text2": "다양한 정보를 확인할 수 있습니다."
@@ -37,6 +43,9 @@
       "text1": "请下载",
       "text2": "喜豆APP,",
       "text3": "查看中奖信息！"
+    },
+    "info": {
+      "click": "即将到来"
     },
     "subText": {
       "text1": "可通过手机APP确认",

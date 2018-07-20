@@ -28,8 +28,7 @@
           <div class="ready">
             <div class="ready-title">{{ $t("ready.title") }}</div>
             <div class="ready-body">
-              <p>{{ $t("ready.body1") }}</p >
-              <p>{{ $t("ready.body2") }}</p >
+              <img v-bind:src="readyImgUrl">
             </div>
           <div class="ready-button">
             <button class="btn-right" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
@@ -195,7 +194,9 @@ export default {
       currentLanguage: 'en',
       skipAD: null,
       banner: null,
-      bottomAd: null
+      bottomAd: null,
+      readyImgArr: [],
+      readyImgUrl: ''
     }
   },
   created: function () {
@@ -203,10 +204,12 @@ export default {
     Vue.prototype.GLOBAL = _global
     $.ajax({
       url: 'https://geoip-db.com/json/',
+      // url: 'https://geoip.nekudo.com/api/',
       dataType: 'json',
       async: false,
       type: 'GET',
       success: function (req) {
+        // _global.ipAddress = req.country.code
         _global.ipAddress = req.country_code
       }
     })
@@ -228,6 +231,33 @@ export default {
       this.currentLanguage = 'en'
       vueCookie.set('qr_language', 'en', 1)
     }
+
+    if (this.currentLanguage === 'zh') {
+      this.readyImgArr = [
+        '/static/img/event/H5_alert_1.jpg',
+        '/static/img/event/H5_alert_2.jpg',
+        '/static/img/event/H5_alert_3.jpg',
+        '/static/img/event/H5_alert_4.jpg',
+        '/static/img/event/H5_alert_5.jpg',
+        '/static/img/event/H5_alert_6.jpg',
+        '/static/img/event/H5_alert_7.jpg',
+        '/static/img/event/H5_alert_8.jpg',
+        '/static/img/event/H5_alert_9.jpg',
+        '/static/img/event/H5_alert_10.jpg',
+        '/static/img/event/H5_alert_11.jpg',
+        '/static/img/event/H5_alert_12.jpg'
+      ]
+    } else if (this.currentLanguage === 'ko') {
+      this.readyImgArr = ['/static/img/event/delete_new.png']
+      // console.log(this.rulePicUrl)
+    } else {
+      this.readyImgArr = ['/static/img/event/delete.png']
+      // console.log(this.rulePicUrl)
+    }
+    shuffle(this.readyImgArr)
+    this.readyImgUrl = this.readyImgArr.slice(0, 1)
+    console.log(this.readyImgUrl)
+
     if (!this.$route.query.code) {
       this.$router.push({name: 'AppDown', params: {code: 'default'}})
     } else {
@@ -318,26 +348,6 @@ export default {
       document.getElementsByClassName('ready-box')[0].style.display = 'none'
       document.getElementsByClassName('contents-wrapper')[0].style.display = 'block'
       document.getElementsByClassName('mask')[0].style.display = 'none'
-    },
-    closeReady: function () {
-      // if (navigator.userAgent.indexOf('MSIE') > 0) { // close IE
-      //   if (navigator.userAgent.indexOf('MSIE 6.0') > 0) {
-      //     window.opener = null
-      //     window.close()
-      //   } else {
-      //     window.open('', '_top')
-      //     window.top.close()
-      //   }
-      // } else if (navigator.userAgent.indexOf('Firefox') > 0) { // close firefox
-      //   window.location.href = 'about:blank '
-      // } else { // close chrome;It is effective when it is only one.
-      //   console.log(navigator.userAgent.indexOf('Chrome'))
-      //   window.opener = null
-      //   window.open('', '_self')
-      //   window.close()
-      // }
-      window.location.href = 'about:blank'
-      // window.close()
     },
     yellowBallClicked: function (event) {
       var currentNumber = parseInt(event) - 1
@@ -632,9 +642,9 @@ export default {
   /* font-size: calc((100vw - 110px)/20); */
 }
 
-.contents-wrapper{
-  /* display: none; */
-}
+/* .contents-wrapper{
+  display: none;
+} */
 .ready-box{
   width: 100%;;
   text-align: center;
@@ -670,18 +680,22 @@ export default {
 .ready-body p{
   margin-bottom: 10px;
 }
-.ready img{
+.ready-body img{
+  width: 100%;
+  display: inherit;
+}
+/* .ready img{
   width: 100px;
   height: 100px;
-}
+} */
 .ready-logo{
   float: right;
   margin-right: 6%;
-  margin-top: 30%;
+  margin-top: 29%;
   width: 30%;
 }
 .ready-button{
-  margin-top: 20px;
+  /* margin-top: 20px; */
   font-size: 1.3rem;
   border-radius: 5px;
 }

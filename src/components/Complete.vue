@@ -213,17 +213,6 @@ export default {
       this.currentLanguage = 'zh'
     }
 
-    if (this.currentLanguage === 'zh') {
-      this.rulePicUrl = '/static/img/complete/notice_new.png'
-      // console.log(this.rulePicUrl)
-    } else if (this.currentLanguage === 'ko') {
-      this.rulePicUrl = '/static/img/complete/notice_new.png'
-      // console.log(this.rulePicUrl)
-    } else {
-      this.rulePicUrl = '/static/img/complete/notice.png'
-      // console.log(this.rulePicUrl)
-    }
-
     var getParams = this.$route.params
 
     this.shopADUrl = getParams.shopAD
@@ -407,7 +396,7 @@ export default {
       })
     },
     noPage: function () {
-      alert('Comming soon')
+      alert(this.$i18n.t('info.click'))
     }
   }
 }

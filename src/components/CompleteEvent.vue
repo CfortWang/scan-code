@@ -208,7 +208,7 @@ export default {
   },
   methods: {
     noPage: function () {
-      alert('comming soon.')
+      alert(this.$i18n.t('info.click'))
     },
     openModal: function () {
       document.getElementsByClassName('modal-wrapper')[0].style.display = 'block'
