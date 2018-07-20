@@ -23,6 +23,13 @@
       </div>
     </transition>
     <div class="ready-box">
+        <img src="static/img/event/ready-top.png" class="ready-top">
+      <div class="ready-middle">
+        <img v-bind:src="readyImgUrl">
+        <button class="ready-btn" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
+      </div>
+    </div>
+    <!-- <div class="ready-box">
         <img class="ready-logo" src="/static/img/complete/rule-logo.png">
         <div class="ready-border">
           <div class="ready">
@@ -35,7 +42,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <header>
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
@@ -248,11 +255,9 @@ export default {
         '/static/img/event/H5_alert_12.jpg'
       ]
     } else if (this.currentLanguage === 'ko') {
-      this.readyImgArr = ['/static/img/event/delete_new.png']
-      // console.log(this.rulePicUrl)
+      this.readyImgArr = ['/static/img/event/H5_alert_kr.jpg']
     } else {
-      this.readyImgArr = ['/static/img/event/delete.png']
-      // console.log(this.rulePicUrl)
+      this.readyImgArr = ['/static/img/event/H5_alert_eng.jpg']
     }
     shuffle(this.readyImgArr)
     this.readyImgUrl = this.readyImgArr.slice(0, 1)
@@ -645,6 +650,36 @@ export default {
 /* .contents-wrapper{
   display: none;
 } */
+.ready-top{
+  /* float: right; */
+  /* margin-right: 6%; */
+  margin-top: 29%;
+  width: 80%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.ready-middle{
+  width: 80%;
+  margin-top: -5px;
+  margin-left: 10%;
+  padding: 10px 0px;
+  background-color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.ready-middle img{
+  width: 100%;
+  display: inherit;
+}
+.ready-btn{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding: 8px 24px;
+  border: none;
+  background-color:#FFCB00;
+  font-size: 1.3rem;
+  border-radius: 20px;
+}
 .ready-box{
   width: 100%;;
   text-align: center;
@@ -676,6 +711,7 @@ export default {
 }
 .ready-body{
   font-size: 0.8rem;
+  padding: 15px 0px;
 }
 .ready-body p{
   margin-bottom: 10px;
