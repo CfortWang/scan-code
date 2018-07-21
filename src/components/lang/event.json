@@ -6,7 +6,7 @@
       "body1": "Hey, friend, have prepared some gifts for you.",
       "body2": "Come and guess it!",
       "btn-left": "Cancel",
-      "btn-right": "OK"
+      "btn-right": "Participate Now"
     },
     "rule": {
       "title": "Winning rules",
@@ -39,7 +39,7 @@
       "body1": "안녕, 친구, 너에게 선물을 준비 했어.",
       "body2": "와서 그것을 맞춰보세요!",
       "btn-left": "취소",
-      "btn-right": "결정"
+      "btn-right": "즉시 참여하기"
     },
     "rule": {
       "title": "승리 규칙",
@@ -72,7 +72,7 @@
       "body1": "嘿朋友，给你备了些好礼",
       "body2": "快来竞猜领取吧！",
       "btn-left": "取消",
-      "btn-right": "确定"
+      "btn-right": "立即参与"
     },
     "rule": {
       "title": "中奖规则",

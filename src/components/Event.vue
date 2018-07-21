@@ -243,7 +243,7 @@ export default {
       this.readyImgArr = [
         '/static/img/event/H5_alert_1.jpg',
         '/static/img/event/H5_alert_2.jpg',
-        '/static/img/event/H5_alert_3.jpg',
+        // '/static/img/event/H5_alert_3.jpg',
         '/static/img/event/H5_alert_4.jpg',
         '/static/img/event/H5_alert_5.jpg',
         '/static/img/event/H5_alert_6.jpg',
@@ -651,9 +651,7 @@ export default {
   display: none;
 } */
 .ready-top{
-  /* float: right; */
-  /* margin-right: 6%; */
-  margin-top: 29%;
+  margin-top: 30%;
   width: 80%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -673,7 +671,7 @@ export default {
 }
 .ready-btn{
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 8px 24px;
   border: none;
   background-color:#FFCB00;
@@ -688,7 +686,7 @@ export default {
   cursor: pointer;
   z-index: 999;
 }
-.ready{
+/* .ready{
   color: #000;
   width: 90%;
   height: 30%;
@@ -720,10 +718,6 @@ export default {
   width: 100%;
   display: inherit;
 }
-/* .ready img{
-  width: 100px;
-  height: 100px;
-} */
 .ready-logo{
   float: right;
   margin-right: 6%;
@@ -731,7 +725,6 @@ export default {
   width: 30%;
 }
 .ready-button{
-  /* margin-top: 20px; */
   font-size: 1.3rem;
   border-radius: 5px;
 }
@@ -743,7 +736,7 @@ export default {
   width: 100%;
   height: 50px;
   font-size: inherit;
-}
+} */
 
 .modal-wrapper {
   height: calc(100% - 60px);
