@@ -209,35 +209,54 @@ export default {
   created: function () {
     var qrCode = this.$route.query.code
     Vue.prototype.GLOBAL = _global
-    $.ajax({
-      url: 'https://geoip-db.com/json/',
-      // url: 'https://geoip.nekudo.com/api/',
-      dataType: 'json',
-      async: false,
-      type: 'GET',
-      success: function (req) {
-        // _global.ipAddress = req.country.code
-        _global.ipAddress = req.country_code
-      }
-    })
-    var getIP = this.GLOBAL.ipAddress
-    console.log(getIP)
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
-    } else if (getIP == 'CN') {
-      this.$i18n.locale = 'zh'
-      this.currentLanguage = 'zh'
-      vueCookie.set('qr_language', 'zh', 1)
-    } else if (getIP == 'KR') {
-      this.$i18n.locale = 'ko'
-      this.currentLanguage = 'ko'
-      vueCookie.set('qr_language', 'ko', 1)
     } else {
-      this.$i18n.locale = 'en'
-      this.currentLanguage = 'en'
-      vueCookie.set('qr_language', 'en', 1)
+      $.ajax({
+        // url: 'https://geoip-db.com/json/',
+        url: 'https://geoip.nekudo.com/api/',
+        dataType: 'json',
+        async: false,
+        type: 'GET',
+        success: function (req) {
+          _global.ipAddress = req.country.code
+          // _global.ipAddress = req.country_code
+        }
+      })
+      var getIP = this.GLOBAL.ipAddress
+      console.log(getIP)
+      if (getIP == 'CN') {
+        this.$i18n.locale = 'zh'
+        this.currentLanguage = 'zh'
+        vueCookie.set('qr_language', 'zh', 1)
+      } else if (getIP == 'KR') {
+        this.$i18n.locale = 'ko'
+        this.currentLanguage = 'ko'
+        vueCookie.set('qr_language', 'ko', 1)
+      } else {
+        this.$i18n.locale = 'en'
+        this.currentLanguage = 'en'
+        vueCookie.set('qr_language', 'en', 1)
+      }
     }
+    // console.log(getIP)
+    // if (vueCookie.get('qr_language')) {
+    //   this.$i18n.locale = vueCookie.get('qr_language')
+    //   this.currentLanguage = vueCookie.get('qr_language')
+    // } else if (getIP == 'CN') {
+    //   this.$i18n.locale = 'zh'
+    //   this.currentLanguage = 'zh'
+    //   vueCookie.set('qr_language', 'zh', 1)
+    // } else if (getIP == 'KR') {
+    //   this.$i18n.locale = 'ko'
+    //   this.currentLanguage = 'ko'
+    //   vueCookie.set('qr_language', 'ko', 1)
+    // } else {
+    //   this.$i18n.locale = 'en'
+    //   this.currentLanguage = 'en'
+    //   vueCookie.set('qr_language', 'en', 1)
+    // }
 
     if (this.currentLanguage === 'zh') {
       this.readyImgArr = [
@@ -651,7 +670,7 @@ export default {
   display: none;
 } */
 .ready-top{
-  margin-top: 30%;
+  margin-top: 40%;
   width: 80%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -675,6 +694,7 @@ export default {
   padding: 8px 24px;
   border: none;
   background-color:#FFCB00;
+  font-family:'PingFangSC-Regular';
   font-size: 1.3rem;
   border-radius: 20px;
 }
