@@ -670,7 +670,7 @@ export default {
   display: none;
 } */
 .ready-top{
-  margin-top: 40%;
+  margin-top: 30%;
   width: 80%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
