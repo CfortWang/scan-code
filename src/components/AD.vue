@@ -89,6 +89,7 @@ export default {
           downloadingShopEvent.src = responseData.shop.event_result[0].gift.shop_gift_image_file.url
           this.tmpUser = shopEventResult[0].temp_user
           this.shopEvent = shopEventResult[0].gift.shop_gift_image_file.url
+          console.log(this.tmpUser)
         }
       }
       if (marketResult.length !== 0) {
@@ -116,7 +117,8 @@ export default {
               bottomAd: this.bottomAdUrl,
               market: this.market,
               shopEvent: this.shopEvent,
-              shopAD: this.shopAD
+              shopAD: this.shopAD,
+              tmpUser: this.tmpUser
             }
           })
         }

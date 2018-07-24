@@ -155,12 +155,14 @@ export default {
       isEvent: true,
       termsChecked: true,
       termsOpen: false,
+      tmpUser: null,
       countDown: setNow - now,
       currentLanguage: 'zh'
     }
   },
   created: function () {
     var getParams = this.$route.params
+    this.tmpUser = getParams.tempUser
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
@@ -317,7 +319,6 @@ export default {
           recommendee_user_code: this.recommendCode
         }
       }).then((response) => {
-        console.log(this.phoneNumber + 'b')
         // var responseMessage = response.data.message
         // var responseData = response.data.data
         // console.log(responseMessage)
@@ -356,7 +357,6 @@ export default {
             // var responseData = response.data.data
             // console.log(responseMessage)
             // console.log(responseData)
-            console.log(this.phoneNumber + 'c')
             this.$router.push({name: 'AppDown', params: {code: 'default'}})
           }).catch((ex) => {
             console.log(ex)

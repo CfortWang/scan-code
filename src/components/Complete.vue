@@ -215,6 +215,7 @@ export default {
 
     var getParams = this.$route.params
 
+    this.tmpUser = getParams.tmpUser
     this.shopADUrl = getParams.shopAD
     this.shopEventUrl = getParams.shopEvent
     this.marketUrl = getParams.market
@@ -383,6 +384,7 @@ export default {
             // var responseData = response.data.data
             // console.log(responseMessage)
             // console.log(responseData)
+            console.log(this.tmpUser + '111')
             this.$router.push({name: 'AppDown', params: {code: 'default'}})
           }).catch((ex) => {
             console.log(ex)
