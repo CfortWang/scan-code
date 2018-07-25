@@ -198,7 +198,7 @@ export default {
         {title: '한국어', value: 'ko'},
         {title: '中国', value: 'zh'}
       ],
-      currentLanguage: 'en',
+      currentLanguage: 'zh',
       skipAD: null,
       banner: null,
       bottomAd: null,
@@ -226,18 +226,18 @@ export default {
       })
       var getIP = this.GLOBAL.ipAddress
       console.log(getIP)
-      if (getIP == 'CN') {
-        this.$i18n.locale = 'zh'
-        this.currentLanguage = 'zh'
-        vueCookie.set('qr_language', 'zh', 1)
+      if (getIP == 'GB' || getIP == 'FR' || getIP == 'AU' || getIP == 'CA' || getIP == 'BR' || getIP == 'JP' || getIP == 'RU' || getIP == 'US' || getIP == 'IT') {
+        this.$i18n.locale = 'en'
+        this.currentLanguage = 'en'
+        vueCookie.set('qr_language', 'en', 1)
       } else if (getIP == 'KR') {
         this.$i18n.locale = 'ko'
         this.currentLanguage = 'ko'
         vueCookie.set('qr_language', 'ko', 1)
       } else {
-        this.$i18n.locale = 'en'
-        this.currentLanguage = 'en'
-        vueCookie.set('qr_language', 'en', 1)
+        this.$i18n.locale = 'zh'
+        this.currentLanguage = 'zh'
+        vueCookie.set('qr_language', 'zh', 1)
       }
     }
     // console.log(getIP)
