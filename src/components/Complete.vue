@@ -133,7 +133,7 @@
       <!-- bottom ad -->
       <div class="complete-event-contents-wrapper">
         <div class="ad-wrapper">
-          <img v-bind:src="bottomAdUrl">
+          <img v-bind:src="bottomAdUrl" v-on:click="clickBottomAd(landingUrl)">
         </div>
       </div>
       <div class="section-divider">
@@ -201,7 +201,8 @@ export default {
       tmpUser: null,
       bannerUrl: null,
       bottomAdUrl: null,
-      rulePicUrl: ''
+      rulePicUrl: '',
+      landingUrl: ''
     }
   },
   created: function () {
@@ -221,6 +222,7 @@ export default {
     this.marketUrl = getParams.market
     this.bannerUrl = getParams.banner
     this.bottomAdUrl = getParams.bottomAd
+    this.landingUrl = getParams.landingUrl
     // this.yellowItems = ['yellow-' + getParams.yellowBall[0], 'yellow-' + getParams.yellowBall[1], 'yellow-' + getParams.yellowBall[2], 'yellow-' + getParams.yellowBall[3], 'yellow-' + getParams.yellowBall[4], 'yellow-' + getParams.yellowBall[5]]
     // this.greenItems = ['green-' + getParams.greenBall[0]]
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
@@ -295,6 +297,9 @@ export default {
     hide: function () {
       document.getElementsByClassName('modal-wrapper')[0].style.display = 'none'
       document.getElementsByClassName('mask')[0].style.display = 'none'
+    },
+    clickBottomAd: function (gotoUrl) {
+      window.location.href = gotoUrl
     },
     entryButton: function () {
       this.phoneNumber = this.phoneNumber.replace(/ /gi, '')

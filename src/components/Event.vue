@@ -203,7 +203,8 @@ export default {
       banner: null,
       bottomAd: null,
       readyImgArr: [],
-      readyImgUrl: ''
+      readyImgUrl: '',
+      landingUrl: ''
     }
   },
   created: function () {
@@ -303,11 +304,12 @@ export default {
           // var responseMessage = response.data.message
           var responseData = response.data.data
           // console.log(responseMessage)
-          // console.log(responseData)
+          console.log(responseData)
           // var banner = responseData.complete_banner.product.image_url
           // var bottomAd = responseData.complete_banner.bottom.image_url
           // console.log(banner)
           // console.log(bottomAd)
+          this.landingUrl = responseData.complete_banner.bottom.landing_url
           var downloadingImage = new Image()
           downloadingImage.src = responseData.game_ad
           this.skipAD = responseData.game_ad
@@ -574,7 +576,8 @@ export default {
           qrCode: qrCode,
           skipAD: this.skipAD,
           banner: this.banner,
-          bottomAd: this.bottomAd
+          bottomAd: this.bottomAd,
+          landingUrl: this.landingUrl
         }
       })
     }

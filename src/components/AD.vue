@@ -40,7 +40,8 @@ export default {
       bottomAdUrl: '',
       market: '',
       shopEvent: '',
-      shopAD: ''
+      shopAD: '',
+      landingUrl: ''
     }
   },
   created: function () {
@@ -61,6 +62,7 @@ export default {
     this.adURL = getParams.skipAD
     this.bannerUrl = getParams.banner
     this.bottomAdUrl = getParams.bottomAd
+    this.landingUrl = getParams.landingUrl
 
     axios({ // WAS event result
       method: 'POST',
@@ -118,7 +120,8 @@ export default {
               market: this.market,
               shopEvent: this.shopEvent,
               shopAD: this.shopAD,
-              tmpUser: this.tmpUser
+              tmpUser: this.tmpUser,
+              landingUrl: this.landingUrl
             }
           })
         }
