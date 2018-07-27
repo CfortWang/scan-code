@@ -22,13 +22,19 @@
         </div>
       </div>
     </transition>
+
     <div class="ready-box">
+      <div class="ready-img">
+          <img v-bind:src="readyImgArr" v-on:click="goEvent">
+      </div>
+    </div>
+    <!-- <div class="ready-box">
         <img src="static/img/event/ready-top.png" class="ready-top">
       <div class="ready-middle">
         <img v-bind:src="readyImgUrl">
         <button class="ready-btn" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
       </div>
-    </div>
+    </div> -->
     <!-- <div class="ready-box">
         <img class="ready-logo" src="/static/img/complete/rule-logo.png">
         <div class="ready-border">
@@ -261,27 +267,28 @@ export default {
 
     if (this.currentLanguage === 'zh') {
       this.readyImgArr = [
-        '/static/img/event/H5_alert_1.jpg',
-        '/static/img/event/H5_alert_2.jpg',
-        // '/static/img/event/H5_alert_3.jpg',
-        '/static/img/event/H5_alert_4.jpg',
-        '/static/img/event/H5_alert_5.jpg',
-        '/static/img/event/H5_alert_6.jpg',
-        '/static/img/event/H5_alert_7.jpg',
-        '/static/img/event/H5_alert_8.jpg',
-        '/static/img/event/H5_alert_9.jpg',
-        '/static/img/event/H5_alert_10.jpg',
-        '/static/img/event/H5_alert_11.jpg',
-        '/static/img/event/H5_alert_12.jpg'
+        '/static/img/event/tanchuang.png'
+        // '/static/img/event/H5_alert_1.jpg',
+        // '/static/img/event/H5_alert_2.jpg',
+        // // '/static/img/event/H5_alert_3.jpg',
+        // '/static/img/event/H5_alert_4.jpg',
+        // '/static/img/event/H5_alert_5.jpg',
+        // '/static/img/event/H5_alert_6.jpg',
+        // '/static/img/event/H5_alert_7.jpg',
+        // '/static/img/event/H5_alert_8.jpg',
+        // '/static/img/event/H5_alert_9.jpg',
+        // '/static/img/event/H5_alert_10.jpg',
+        // '/static/img/event/H5_alert_11.jpg',
+        // '/static/img/event/H5_alert_12.jpg'
       ]
     } else if (this.currentLanguage === 'ko') {
-      this.readyImgArr = ['/static/img/event/H5_alert_kr.jpg']
+      this.readyImgArr = ['/static/img/event/tanchuang.png']
     } else {
-      this.readyImgArr = ['/static/img/event/H5_alert_eng.jpg']
+      this.readyImgArr = ['/static/img/event/tanchuang.png']
     }
-    shuffle(this.readyImgArr)
-    this.readyImgUrl = this.readyImgArr.slice(0, 1)
-    console.log(this.readyImgUrl)
+    // shuffle(this.readyImgArr)
+    // this.readyImgUrl = this.readyImgArr.slice(0, 1)
+    // console.log(this.readyImgUrl)
 
     if (!this.$route.query.code) {
       this.$router.push({name: 'AppDown', params: {code: 'default'}})
@@ -677,6 +684,16 @@ export default {
   width: 80%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+.ready-img{
+  width: 80%;
+  margin-top: 30%;
+  margin-left: 10%;
+  /* padding: 10px 0px; */
+}
+.ready-img img{
+  width: 100%;
+  display: inherit;
 }
 .ready-middle{
   width: 80%;
