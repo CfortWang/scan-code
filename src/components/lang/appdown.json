@@ -53,7 +53,7 @@
     },
     "error": {
       "expireCode": "超过使用次数",
-      "invalidCode": "代码无法使用"
+      "invalidCode": "这个码被扫过啦，换一个扫更幸运"
     }
   },
   "ja": {
