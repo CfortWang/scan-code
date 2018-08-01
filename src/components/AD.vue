@@ -100,7 +100,7 @@ export default {
         this.tmpUser = marketResult[0].temp_user
         this.market = marketResult[0].img
       }
-      var setTimer = 3
+      var setTimer = 2
       var countDown = setInterval(() => {
         this.countdownText = setTimer
         setTimer = setTimer - 1
