@@ -267,7 +267,9 @@ export default {
 
     if (this.currentLanguage === 'zh') {
       this.readyImgArr = [
-        '/static/img/event/tanchuang.png'
+        '/static/img/event/tanchuang1.png',
+        '/static/img/event/tanchuang2.png',
+        '/static/img/event/tanchuang3.png'
         // '/static/img/event/H5_alert_1.jpg',
         // '/static/img/event/H5_alert_2.jpg',
         // // '/static/img/event/H5_alert_3.jpg',
@@ -282,13 +284,21 @@ export default {
         // '/static/img/event/H5_alert_12.jpg'
       ]
     } else if (this.currentLanguage === 'ko') {
-      this.readyImgArr = ['/static/img/event/tanchuang.png']
+      this.readyImgArr = [
+        '/static/img/event/tanchuang1.png',
+        '/static/img/event/tanchuang2.png',
+        '/static/img/event/tanchuang3.png'
+      ]
     } else {
-      this.readyImgArr = ['/static/img/event/tanchuang.png']
+      this.readyImgArr = [
+        '/static/img/event/tanchuang1.png',
+        '/static/img/event/tanchuang2.png',
+        '/static/img/event/tanchuang3.png'
+      ]
     }
-    // shuffle(this.readyImgArr)
-    // this.readyImgUrl = this.readyImgArr.slice(0, 1)
-    // console.log(this.readyImgUrl)
+    shuffle(this.readyImgArr)
+    this.readyImgUrl = this.readyImgArr.slice(0, 1)
+    console.log(this.readyImgUrl)
 
     if (!this.$route.query.code) {
       this.$router.push({name: 'AppDown', params: {code: 'default'}})
