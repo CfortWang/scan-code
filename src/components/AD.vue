@@ -74,7 +74,7 @@ export default {
       // var responseMessage = response.data.message
       var responseData = response.data.data
       // console.log(responseMessage)
-      // console.log(responseData)
+      console.log(responseData)
 
       var shopADResult = responseData.shop.ad
       var marketResult = responseData.marketing_event_result
@@ -95,10 +95,12 @@ export default {
         }
       }
       if (marketResult.length !== 0) {
+        // if (marketResult[0].result === 'win') {
         var downloadingMarket = new Image()
         downloadingMarket.src = responseData.marketing_event_result[0].img
         this.tmpUser = marketResult[0].temp_user
         this.market = marketResult[0].img
+        // }
       }
       var setTimer = 2
       var countDown = setInterval(() => {

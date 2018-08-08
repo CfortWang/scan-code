@@ -25,7 +25,7 @@
 
     <div class="ready-box">
       <div class="ready-img">
-          <img v-bind:src="readyImgArr" v-on:click="goEvent">
+          <img v-bind:src="readyImgUrl" v-on:click="goEvent">
       </div>
     </div>
     <!-- <div class="ready-box">
