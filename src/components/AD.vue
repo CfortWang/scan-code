@@ -33,7 +33,7 @@ export default {
   i18n: i18n,
   data: function () {
     return {
-      countdownText: 3,
+      countdownText: 2,
       endCountDown: false,
       adURL: '',
       bannerUrl: '',
@@ -102,7 +102,7 @@ export default {
         this.market = marketResult[0].img
         // }
       }
-      var setTimer = 2
+      var setTimer = 1
       var countDown = setInterval(() => {
         this.countdownText = setTimer
         setTimer = setTimer - 1
