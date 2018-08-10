@@ -202,7 +202,8 @@ export default {
       bannerUrl: null,
       bottomAdUrl: null,
       rulePicUrl: '',
-      landingUrl: ''
+      landingUrl: '',
+      phoneKind: ''
     }
   },
   created: function () {
@@ -303,6 +304,11 @@ export default {
     },
     entryButton: function () {
       this.phoneNumber = this.phoneNumber.replace(/ /gi, '')
+      if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+        this.phoneKind = 'ios'
+      } else if (/(Android)/i.test(navigator.userAgent)) {
+        this.phoneKind = 'android'
+      }
       if (this.phoneNumber === '') {
         alert(this.$i18n.t('message.insertPhone'))
         return false
@@ -385,12 +391,28 @@ export default {
               temp_user: this.tmpUser
             }
           }).then((response) => {
+            var this_ = this
+            if (this.phoneKind == 'android') {
+              window.location.href = 'http://www.baidu.com'
+              // window.location.href = 'seedo://'
+              window.setTimeout(function () {
+                this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+              }, 2000)
+            }
+            if (this.phoneKind == 'ios') {
+              window.location.href = 'http://www.hao123.com'
+              // window.location.href = 'seedo://'
+              window.setTimeout(function () {
+                this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+              }, 2000)
+            }
+
             // var responseMessage = response.data.message
             // var responseData = response.data.data
             // console.log(responseMessage)
             // console.log(responseData)
-            console.log(this.tmpUser + '111')
-            this.$router.push({name: 'AppDown', params: {code: 'default'}})
+
+            // this.$router.push({name: 'AppDown', params: {code: 'default'}})
           }).catch((ex) => {
             console.log(ex)
             var errorResponseData = ex.response.data

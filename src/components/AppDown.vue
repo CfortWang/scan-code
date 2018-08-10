@@ -45,7 +45,7 @@
             </div>
           </div>
         </button>
-        <button type="button" class="btn down-btn" v-on:click="commingSoon">
+        <button type="button" class="btn down-btn" v-on:click="downloadIos">
           <div class="ios">
             <img src="/static/img/app_down/ios_icon_white.png">
             <div class="ios-text fs-11">
@@ -130,8 +130,8 @@ export default {
     downloadAndroid: function () {
       window.location.href = process.env.appdown_url
     },
-    commingSoon: function () {
-      alert(this.$i18n.t('info.click'))
+    downloadIos: function () {
+      window.location.href = 'https://itunes.apple.com/cn/app/%E5%96%9C%E8%B1%86/id1399448154?mt=8'
     }
   }
 }
