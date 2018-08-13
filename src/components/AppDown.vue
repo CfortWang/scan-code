@@ -1,4 +1,5 @@
 <template>
+<div class="app-down-bc">
   <div class="app-down">
     <header>
       <div class="header-title-wrapper fs-14">
@@ -56,6 +57,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -179,13 +181,21 @@ export default {
   height:40px;
 }
 
+.app-down-bc{
+  width: 100%;
+  height: 100vh;
+  background-size:100%;
+  background-position:center 0px;
+  background-image: url('/static/img/app_down/app_down_bc.jpg');
+  z-index: 100;
+}
 .app-down {
   height:100vh;
-  background-color:#FFCB00;
+  /* background-color:#FFCB00; */
   background-repeat: no-repeat;
   background-size:145%;
-  background-position:center 230px;
-  background-image: url('/static/img/app_down/app_info_new.png');
+  background-position:center 305px;
+  background-image: url('/static/img/app_down/app_info.png');
 }
 
 .app-text-wrapper {
@@ -218,7 +228,7 @@ export default {
 }
 
 .down-btn {
-  background-color:#FFCB00;
+  background-color:#133461;
   border:1px solid #FFFFFF;
   color:#FFFFFF;
   border-radius:100px;
