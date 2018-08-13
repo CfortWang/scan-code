@@ -232,7 +232,7 @@ export default {
   border:1px solid #FFFFFF;
   color:#FFFFFF;
   border-radius:100px;
-  padding:10px 20px;
+  /* padding:10px 20px; */
   width:125px;
 }
 
