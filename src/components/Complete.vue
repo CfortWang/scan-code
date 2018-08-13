@@ -393,18 +393,18 @@ export default {
           }).then((response) => {
             var this_ = this
             if (this.phoneKind == 'android') {
-              // window.location.href = 'xidou://app'
-              window.location.href = 'https://www.baidu.com'
+              window.location.href = 'xidou://app'
+              // window.location.href = 'https://www.baidu.com'
               window.setTimeout(function () {
                 this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-              }, 2000)
+              }, 1500)
             }
             if (this.phoneKind == 'ios') {
-              window.location.href = 'http://www.hao123.com'
-              // window.location.href = 'seedo://'
+              // window.location.href = 'http://www.hao123.com'
+              window.location.href = 'seedo://'
               window.setTimeout(function () {
                 this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-              }, 2000)
+              }, 1500)
             }
 
             // var responseMessage = response.data.message
