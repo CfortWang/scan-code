@@ -203,7 +203,8 @@ export default {
       bottomAdUrl: null,
       rulePicUrl: '',
       landingUrl: '',
-      phoneKind: ''
+      phoneKind: '',
+      notWechat: ''
     }
   },
   created: function () {
@@ -303,12 +304,20 @@ export default {
       window.location.href = gotoUrl
     },
     entryButton: function () {
-      this.phoneNumber = this.phoneNumber.replace(/ /gi, '')
       if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         this.phoneKind = 'ios'
       } else if (/(Android)/i.test(navigator.userAgent)) {
         this.phoneKind = 'android'
       }
+
+      var ua = navigator.userAgent.toLowerCase()
+      if ((ua.match(/MicroMessenger/i) == 'micromessenger') || (ua.match(/QQ/i) == 'qq')) {
+        this.notWechat = false
+      } else {
+        this.notWechat = true
+      }
+
+      this.phoneNumber = this.phoneNumber.replace(/ /gi, '')
       if (this.phoneNumber === '') {
         alert(this.$i18n.t('message.insertPhone'))
         return false
@@ -393,18 +402,26 @@ export default {
           }).then((response) => {
             var this_ = this
             if (this.phoneKind == 'android') {
-              window.location.href = 'xidou://app'
-              // window.location.href = 'https://www.baidu.com'
-              window.setTimeout(function () {
-                this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-              }, 1500)
-            }
-            if (this.phoneKind == 'ios') {
-              // window.location.href = 'http://www.hao123.com'
-              window.location.href = 'seedo://'
-              window.setTimeout(function () {
-                this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-              }, 1500)
+              if (!this.notWechat) {
+                console.log(!this.notWechat)
+                window.location.href = 'xidou://app'
+                window.setTimeout(function () {
+                  this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+                }, 1500)
+              } else {
+                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind}})
+              }
+            } else if (this.phoneKind == 'ios') {
+              if (this.notWechat) {
+                window.location.href = 'seedo://'
+                window.setTimeout(function () {
+                  this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+                }, 1500)
+              } else {
+                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind}})
+              }
+            } else {
+              console.log('error')
             }
 
             // var responseMessage = response.data.message
