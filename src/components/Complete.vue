@@ -402,14 +402,13 @@ export default {
           }).then((response) => {
             var this_ = this
             if (this.phoneKind == 'android') {
-              if (!this.notWechat) {
-                console.log(!this.notWechat)
+              if (this.notWechat) {
                 window.location.href = 'xidou://app'
                 window.setTimeout(function () {
                   this_.$router.push({name: 'AppDown', params: {code: 'default'}})
                 }, 1500)
               } else {
-                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind}})
+                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
               }
             } else if (this.phoneKind == 'ios') {
               if (this.notWechat) {
@@ -418,7 +417,7 @@ export default {
                   this_.$router.push({name: 'AppDown', params: {code: 'default'}})
                 }, 1500)
               } else {
-                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind}})
+                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
               }
             } else {
               console.log('error')

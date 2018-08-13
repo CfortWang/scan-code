@@ -35,7 +35,8 @@ export default {
       ],
       currentLanguage: 'zh',
       pageMessageStatus: 200,
-      phoneKind: ''
+      phoneKind: '',
+      notWechat: ''
     }
   },
   created: function () {
@@ -49,32 +50,25 @@ export default {
     }
     var getParams = this.$route.params
     this.phoneKind = getParams.phoneKind
+    this.notWechat = getParams.notWechat
+    console.log(this.notWechat)
     var this_ = this
-    if (this.phoneKind == 'android') {
-      window.location.href = 'xidou://app'
-      window.setTimeout(function () {
-        this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-      }, 3000)
-    } else if (this.phoneKind == 'ios') {
-      window.location.href = 'seedo://'
-      window.setTimeout(function () {
-        this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-      }, 3000)
+    if (this.notWechat) {
+      if (this.phoneKind == 'android') {
+        window.location.href = 'xidou://app'
+        window.setTimeout(function () {
+          this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+        }, 3000)
+      } else if (this.phoneKind == 'ios') {
+        window.location.href = 'seedo://'
+        window.setTimeout(function () {
+          this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+        }, 3000)
+      } else {
+        console.log('error')
+      }
     } else {
-      console.log('error')
-    }
-  },
-  methods: {
-    changeItem: function (event) {
-      vueCookie.set('qr_language', event.target.value, 1)
-      this.$i18n.locale = vueCookie.get('qr_language')
-      this.currentLanguage = vueCookie.get('qr_language')
-    },
-    downloadAndroid: function () {
-      window.location.href = process.env.appdown_url
-    },
-    downloadIos: function () {
-      window.location.href = 'https://itunes.apple.com/cn/app/%E5%96%9C%E8%B1%86/id1399448154?mt=8'
+    //   this_.$router.push({name: 'AppDown', params: {code: 'default'}})
     }
   }
 }
