@@ -140,6 +140,9 @@ export default {
 </script>
 
 <style scoped>
+#_embed_v3_dc{
+  display: none;
+}
 .header-title-wrapper {
   display:table-cell;
   vertical-align:middle;
