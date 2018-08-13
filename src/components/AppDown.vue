@@ -185,7 +185,7 @@ export default {
   width: 100%;
   height: 100vh;
   background-size:100%;
-  background-position:center 0px;
+  background-position:center 110px;
   background-image: url('/static/img/app_down/app_down_bc.jpg');
   z-index: 100;
 }
@@ -193,8 +193,8 @@ export default {
   height:100vh;
   /* background-color:#FFCB00; */
   background-repeat: no-repeat;
-  background-size:145%;
-  background-position:center 305px;
+  background-size:120%;
+  background-position:center 325px;
   background-image: url('/static/img/app_down/app_info.png');
 }
 
