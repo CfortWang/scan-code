@@ -393,8 +393,7 @@ export default {
           }).then((response) => {
             // var this_ = this
             // if (this.phoneKind == 'android') {
-            //   window.location.href = 'http://www.baidu.com'
-            //   // window.location.href = 'seedo://'
+            //   window.location.href = 'xidou://app'
             //   window.setTimeout(function () {
             //     this_.$router.push({name: 'AppDown', params: {code: 'default'}})
             //   }, 2000)
