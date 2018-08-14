@@ -226,9 +226,13 @@ export default {
         dataType: 'json',
         async: false,
         type: 'GET',
+        timeout: 3000,
         success: function (req) {
           _global.ipAddress = req.country.code
           // _global.ipAddress = req.country_code
+        },
+        error: function () {
+          _global.ipAddress = 'ZH'
         }
       })
       var getIP = this.GLOBAL.ipAddress
