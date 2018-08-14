@@ -413,44 +413,39 @@ export default {
             }
           }).then((response) => {
             var this_ = this
-            console.log(this)
+            // if (this.notWechat) {
+            //   if (this.phoneKind == 'android') {
+            //     window.location.href = 'xidou://app'
+            //     window.setTimeout(function () {
+            //       this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+            //     }, 2000)
+            //   } else if (this.phoneKind == 'ios') {
+            //     window.location.href = 'seedo://'
+            //     window.setTimeout(function () {
+            //       this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+            //     }, 2000)
+            //   }
+            // } else {
+            //   this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+            // }
+
             if (this.notWechat) {
               if (this.phoneKind == 'android') {
                 window.location.href = 'xidou://app'
                 window.setTimeout(function () {
-                  this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-                }, 2000)
+                  this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+                }, 1500)
               } else if (this.phoneKind == 'ios') {
                 window.location.href = 'seedo://'
                 window.setTimeout(function () {
-                  this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-                }, 2000)
+                  this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+                }, 1500)
+              } else {
+                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
               }
             } else {
-              this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+              this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
             }
-
-            // if (this.phoneKind == 'android') {
-            //   if (this.notWechat) {
-            //     window.location.href = 'xidou://app'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-            //     }, 1500)
-            //   } else {
-            //     this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
-            //   }
-            // } else if (this.phoneKind == 'ios') {
-            //   if (this.notWechat) {
-            //     window.location.href = 'seedo://'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-            //     }, 1500)
-            //   } else {
-            //     this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
-            //   }
-            // } else {
-            //   console.log('error')
-            // }
 
             // var responseMessage = response.data.message
             // var responseData = response.data.data

@@ -48,10 +48,22 @@ export default {
       this.currentLanguage = 'zh'
       vueCookie.set('qr_language', 'zh', 1)
     }
-    var getParams = this.$route.params
-    this.phoneKind = getParams.phoneKind
-    this.notWechat = getParams.notWechat
-    console.log(this.notWechat)
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+      this.phoneKind = 'ios'
+    } else if (/(Android)/i.test(navigator.userAgent)) {
+      this.phoneKind = 'android'
+    }
+
+    var ua = navigator.userAgent.toLowerCase()
+    if ((ua.match(/MicroMessenger/i) == 'micromessenger') || (ua.match(/QQ/i) == 'qq')) {
+      this.notWechat = false
+    } else {
+      this.notWechat = true
+    }
+    // var getParams = this.$route.params
+    // this.phoneKind = getParams.phoneKind
+    // this.notWechat = getParams.notWechat
+    // console.log(this.notWechat)
     var this_ = this
     if (this.notWechat) {
       if (this.phoneKind == 'android') {
