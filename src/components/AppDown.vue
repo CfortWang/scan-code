@@ -1,63 +1,73 @@
 <template>
-<div class="app-down-bc">
-  <div class="app-down">
-    <header>
-      <div class="header-title-wrapper fs-14">
-        {{ $t("title") }}
-      </div>
-      <div class="header-language-wrapper">
-        <img src="/static/img/icon/language_icon_black.png">
-        <div class="header-language-text float-wrapper">
-          <select v-on:change="changeItem($event)" class="float-l">
-            <option v-for="item in items" v-bind:key="item.index" v-bind:value="item.value" :selected="currentLanguage === item.value">{{item.title}}</option>
-          </select>
-          <div class="language-arrow-wrapper fs-05 float-l dsp-table">
-            <div class="dsp-table-cell">▼</div>
+  <div class="father">
+    <div class="app-down-bc" v-bind:class="{showInBroswer: isActive, notShowInBroswer: noActive}">
+      <div class="app-down">
+        <header>
+          <div class="header-title-wrapper fs-14">
+            {{ $t("title") }}
           </div>
-        </div>
-      </div>
-    </header>
-    <div class="contents-wrapper">
-      <div class="app-text-wrapper">
-        <div class="main-text-wrapper fs-14" v-if="pageMessageStatus === 200">
-          <span v-if="currentLanguage === 'zh'">
-            {{ $t("mainText.text1") }} <span class="text-bold">{{ $t("mainText.text2") }}</span><br>{{ $t("mainText.text3") }}
-          </span>
-          <span v-else>
-            <span class="text-bold">{{ $t("mainText.text1") }}</span> {{ $t("mainText.text2") }}<br>{{ $t("mainText.text3") }}
-          </span>
-        </div>
-        <div class="main-text-wrapper fs-14" v-else-if="pageMessageStatus === 400">
-          {{ $t("error.invalidCode") }}
-        </div>
-        <div class="main-text-wrapper fs-14" v-else>
-          {{ $t("error.expireCode") }}
-        </div>
-        <div class="sub-text-wrapper">
-          {{ $t("subText.text1") }}<br>{{ $t("subText.text2") }}
-        </div>
-      </div>
-      <div class="app-button-wrapper">
-        <button type="button" class="btn down-btn" v-on:click="downloadAndroid">
-          <div class="android">
-            <img src="/static/img/app_down/android_icon_white.png">
-            <div class="android-text fs-11">
-              Android
+          <div class="header-language-wrapper">
+            <img src="/static/img/icon/language_icon_black.png">
+            <div class="header-language-text float-wrapper">
+              <select v-on:change="changeItem($event)" class="float-l">
+                <option v-for="item in items" v-bind:key="item.index" v-bind:value="item.value" :selected="currentLanguage === item.value">{{item.title}}</option>
+              </select>
+              <div class="language-arrow-wrapper fs-05 float-l dsp-table">
+                <div class="dsp-table-cell">▼</div>
+              </div>
             </div>
           </div>
-        </button>
-        <button type="button" class="btn down-btn" v-on:click="downloadIos">
-          <div class="ios">
-            <img src="/static/img/app_down/ios_icon_white.png">
-            <div class="ios-text fs-11">
-              iOS
+        </header>
+        <div class="contents-wrapper">
+          <div class="app-text-wrapper">
+            <div class="main-text-wrapper fs-14" v-if="pageMessageStatus === 200">
+              <span v-if="currentLanguage === 'zh'">
+                {{ $t("mainText.text1") }} <span class="text-bold">{{ $t("mainText.text2") }}</span><br>{{ $t("mainText.text3") }}
+              </span>
+              <span v-else>
+                <span class="text-bold">{{ $t("mainText.text1") }}</span> {{ $t("mainText.text2") }}<br>{{ $t("mainText.text3") }}
+              </span>
+            </div>
+            <div class="main-text-wrapper fs-14" v-else-if="pageMessageStatus === 400">
+              {{ $t("error.invalidCode") }}
+            </div>
+            <div class="main-text-wrapper fs-14" v-else>
+              {{ $t("error.expireCode") }}
+            </div>
+            <div class="sub-text-wrapper">
+              {{ $t("subText.text1") }}<br>{{ $t("subText.text2") }}
             </div>
           </div>
-        </button>
+          <div class="app-button-wrapper">
+            <button type="button" class="btn down-btn" v-on:click="downloadAndroid">
+              <div class="android">
+                <img src="/static/img/app_down/android_icon_white.png">
+                <div class="android-text fs-11">
+                  Android
+                </div>
+              </div>
+            </button>
+            <button type="button" class="btn down-btn" v-on:click="downloadIos">
+              <div class="ios">
+                <img src="/static/img/app_down/ios_icon_white.png">
+                <div class="ios-text fs-11">
+                  iOS
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="son" v-bind:class="{showInWechat: noActive, notShowInWechat: isActive}">
+      <div class="mask"></div>
+      <div class="ready-box">
+        <div class="ready-img">
+        <img src="http://dev-www.beanpop.cn/img/live_weixin.png">
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -85,7 +95,11 @@ export default {
         {title: '中国', value: 'zh'}
       ],
       currentLanguage: 'zh',
-      pageMessageStatus: 200
+      pageMessageStatus: 200,
+      notWechat: '',
+      phoneKind: '',
+      isActive: null,
+      noActive: null
     }
   },
   created: function () {
@@ -107,14 +121,26 @@ export default {
       //   this.currentLanguage = 'en'
       // }
     }
+
     var getParams = this.$route.params
+    this.phoneKind = getParams.phoneKind
+    this.notWechat = getParams.notWechat
+
+    if (this.notWechat) {
+      this.isActive = true
+      this.noActive = false
+    } else {
+      this.isActive = false
+      this.noActive = true
+    }
+
     var getParamCode = ''
     if (getParams.code) {
       getParamCode = getParams.code
     } else {
       getParamCode = 'default'
     }
-    console.log(getParamCode)
+    // console.log(getParamCode)
     if (getParamCode === 400) {
       this.pageMessageStatus = 400
     } else if (getParamCode === 410) {
@@ -141,6 +167,21 @@ export default {
 
 <style scoped>
 #_embed_v3_dc{
+  display: none;
+}
+.son{
+  /* display: none; */
+}
+.showInBroswer{
+  display: block;
+}
+.notShowInBroswer{
+  display: none;
+}
+.showInWechat{
+  display: block;
+}
+.notShowInWechat{
   display: none;
 }
 .header-title-wrapper {
@@ -264,5 +305,32 @@ export default {
   padding-left:10px;
   display:table-cell;
   vertical-align:middle;
+}
+
+.ready-box{
+  width: 100%;;
+  text-align: center;
+  top:0px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 999;
+  }.ready-img{
+  width: 80%;
+  margin-top: 10%;
+  margin-left: 13%;
+}
+.ready-img img{
+  width: 100%;
+  display: inherit;
+}
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  filter: alpha(opacity=80);
+  width: 100%;
+  height:100%;
+  z-index: 100;
 }
 </style>

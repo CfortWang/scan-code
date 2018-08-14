@@ -217,7 +217,6 @@ export default {
     }
 
     var getParams = this.$route.params
-
     this.tmpUser = getParams.tmpUser
     this.shopADUrl = getParams.shopAD
     this.shopEventUrl = getParams.shopEvent
@@ -247,6 +246,19 @@ export default {
         this.selectedRed.push(this.yellowItems[i])
       }
     }
+
+    // if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+    //   this.phoneKind = 'ios'
+    // } else if (/(Android)/i.test(navigator.userAgent)) {
+    //   this.phoneKind = 'android'
+    // }
+
+    // var ua = navigator.userAgent.toLowerCase()
+    // if ((ua.match(/MicroMessenger/i) == 'micromessenger') || (ua.match(/QQ/i) == 'qq')) {
+    //   this.notWechat = false
+    // } else {
+    //   this.notWechat = true
+    // }
 
     axios({ // Current Drawings Info
       url: process.env.api_url + '/api/drawings/progress'
@@ -401,27 +413,44 @@ export default {
             }
           }).then((response) => {
             var this_ = this
-            if (this.phoneKind == 'android') {
-              if (this.notWechat) {
+            console.log(this)
+            if (this.notWechat) {
+              if (this.phoneKind == 'android') {
                 window.location.href = 'xidou://app'
                 window.setTimeout(function () {
-                  this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-                }, 1500)
-              } else {
-                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
-              }
-            } else if (this.phoneKind == 'ios') {
-              if (this.notWechat) {
+                  this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+                }, 2000)
+              } else if (this.phoneKind == 'ios') {
                 window.location.href = 'seedo://'
                 window.setTimeout(function () {
-                  this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-                }, 1500)
-              } else {
-                this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
+                  this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+                }, 2000)
               }
             } else {
-              console.log('error')
+              this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
             }
+
+            // if (this.phoneKind == 'android') {
+            //   if (this.notWechat) {
+            //     window.location.href = 'xidou://app'
+            //     window.setTimeout(function () {
+            //       this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+            //     }, 1500)
+            //   } else {
+            //     this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
+            //   }
+            // } else if (this.phoneKind == 'ios') {
+            //   if (this.notWechat) {
+            //     window.location.href = 'seedo://'
+            //     window.setTimeout(function () {
+            //       this_.$router.push({name: 'AppDown', params: {code: 'default'}})
+            //     }, 1500)
+            //   } else {
+            //     this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
+            //   }
+            // } else {
+            //   console.log('error')
+            // }
 
             // var responseMessage = response.data.message
             // var responseData = response.data.data
