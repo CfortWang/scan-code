@@ -412,22 +412,22 @@ export default {
               temp_user: this.tmpUser
             }
           }).then((response) => {
-            // var this_ = this
-            // if (this.notWechat) {
-            //   if (this.phoneKind == 'android') {
-            //     window.location.href = 'xidou://app'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-            //     }, 2000)
-            //   } else if (this.phoneKind == 'ios') {
-            //     window.location.href = 'seedo://'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-            //     }, 2000)
-            //   }
-            // } else {
-            //   this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-            // }
+            var this_ = this
+            if (this.notWechat) {
+              if (this.phoneKind == 'android') {
+                window.location.href = 'xidou://app'
+                window.setTimeout(function () {
+                  this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+                }, 2000)
+              } else if (this.phoneKind == 'ios') {
+                window.location.href = 'seedo://'
+                window.setTimeout(function () {
+                  this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+                }, 2000)
+              }
+            } else {
+              this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
+            }
 
             // if (this.notWechat) {
             //   if (this.phoneKind == 'android') {
@@ -452,7 +452,7 @@ export default {
             // console.log(responseMessage)
             // console.log(responseData)
 
-            this.$router.push({name: 'AppDown', params: {code: 'default'}})
+            // this.$router.push({name: 'AppDown', params: {code: 'default'}})
           }).catch((ex) => {
             console.log(ex)
             var errorResponseData = ex.response.data

@@ -67,12 +67,12 @@ export default {
     var this_ = this
     if (this.notWechat) {
       if (this.phoneKind == 'android') {
-        window.location.href = 'xidou://app'
+        window.location.href = 'weixin://'
         window.setTimeout(function () {
           this_.$router.push({name: 'AppDown', params: {code: 'default'}})
         }, 3000)
       } else if (this.phoneKind == 'ios') {
-        window.location.href = 'seedo://'
+        window.location.href = 'weixin://'
         window.setTimeout(function () {
           this_.$router.push({name: 'AppDown', params: {code: 'default'}})
         }, 3000)

@@ -59,14 +59,14 @@
         </div>
       </div>
     </div>
-    <!-- <div class="son" v-bind:class="{showInWechat: noActive, notShowInWechat: isActive}">
+    <div class="son" v-bind:class="{showInWechat: noActive, notShowInWechat: isActive}">
       <div class="mask"></div>
       <div class="ready-box">
         <div class="ready-img">
         <img src="http://dev-www.beanpop.cn/img/live_weixin.png">
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -98,8 +98,8 @@ export default {
       pageMessageStatus: 200,
       notWechat: '',
       phoneKind: '',
-      isActive: false,
-      noActive: false
+      isActive: null,
+      noActive: null
     }
   },
   created: function () {
@@ -123,16 +123,17 @@ export default {
     }
 
     var getParams = this.$route.params
-    // this.phoneKind = getParams.phoneKind
-    // this.notWechat = getParams.notWechat
+    console.log(getParams)
+    this.phoneKind = getParams.phoneKind
+    this.notWechat = getParams.notWechat
 
-    // if (this.notWechat) {
-    //   this.isActive = true
-    //   this.noActive = false
-    // } else {
-    //   this.isActive = false
-    //   this.noActive = true
-    // }
+    if (this.notWechat) {
+      this.isActive = true
+      this.noActive = false
+    } else {
+      this.isActive = false
+      this.noActive = true
+    }
 
     var getParamCode = ''
     if (getParams.code) {
