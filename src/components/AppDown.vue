@@ -98,8 +98,8 @@ export default {
       pageMessageStatus: 200,
       notWechat: '',
       phoneKind: '',
-      isActive: null,
-      noActive: null
+      isActive: true,
+      noActive: false
     }
   },
   created: function () {
