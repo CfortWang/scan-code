@@ -19,7 +19,21 @@ export default new Router({
       path: '/',
       name: 'Root',
       redirect: '/app',
-      component: AppDown
+      component: AppDown,
+      afterEach: (to, from, next) => {
+        setTimeout(() => {
+          var _hmt = _hmt || []
+          window._hmt = _hmt;
+          (function () {
+            document.getElementById('baidu_tj') && document.getElementById('baidu_tj').remove()
+            var hm = document.createElement('script')
+            hm.src = 'https://hm.baidu.com/hm.js?a855d76dab351ab3c43db054b6bdb9ed'
+            hm.id = 'baidu_tj'
+            var s = document.getElementsByTagName('script')[0]
+            s.parentNode.insertBefore(hm, s)
+          })()
+        }, 0)
+      }
     },
     {
       path: '/app',

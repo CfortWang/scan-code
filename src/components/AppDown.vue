@@ -205,9 +205,6 @@ export default {
 #_embed_v3_dc{
   display: none;
 }
-.son{
-  /* display: none; */
-}
 .showInBroswer{
   display: block;
 }
