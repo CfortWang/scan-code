@@ -320,6 +320,7 @@ export default {
 .down-btn .android {
   height:20px;
   display:table;
+  margin: auto;
 }
 
 .android-text {
