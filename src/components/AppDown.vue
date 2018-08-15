@@ -161,12 +161,12 @@ export default {
     // console.log(getParamCode)
     if (getParamCode === 400) {
       this.pageMessageStatus = 400
-      this.isActive = true
-      this.noActive = false
+      // this.isActive = true
+      // this.noActive = false
     } else if (getParamCode === 410) {
       this.pageMessageStatus = 410
-      this.isActive = true
-      this.noActive = false
+      // this.isActive = true
+      // this.noActive = false
     } else {
       this.pageMessageStatus = 200
       if (this.notWechat) {
@@ -180,8 +180,8 @@ export default {
           console.log('why?')
         }
       } else {
-        this.isActive = false
-        this.noActive = true
+        // this.isActive = false
+        // this.noActive = true
       }
     }
   },
