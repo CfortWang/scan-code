@@ -98,8 +98,8 @@ export default {
       pageMessageStatus: 200,
       notWechat: '',
       phoneKind: '',
-      isActive: true,
-      noActive: false
+      isActive: null,
+      noActive: null
     }
   },
   created: function () {
@@ -161,8 +161,12 @@ export default {
     // console.log(getParamCode)
     if (getParamCode === 400) {
       this.pageMessageStatus = 400
+      this.isActive = true
+      this.noActive = false
     } else if (getParamCode === 410) {
       this.pageMessageStatus = 410
+      this.isActive = true
+      this.noActive = false
     } else {
       this.pageMessageStatus = 200
       if (this.notWechat) {
