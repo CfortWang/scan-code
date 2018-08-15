@@ -8,7 +8,7 @@ import AD from '@/components/AD'
 import Complete from '@/components/Complete'
 import Register from '@/components/Register'
 import CompleteEvent from '@/components/CompleteEvent'
-import WechatOpen from '@/components/WechatOpen'
+// import WechatOpen from '@/components/WechatOpen'
 
 Vue.use(Router)
 
@@ -48,11 +48,11 @@ export default new Router({
       name: 'Event',
       component: Event
     },
-    {
-      path: '/wechatopen',
-      name: 'WechatOpen',
-      component: WechatOpen
-    },
+    // {
+    //   path: '/wechatopen',
+    //   name: 'WechatOpen',
+    //   component: WechatOpen
+    // },
     {
       path: '/ad',
       name: 'AD',

@@ -164,6 +164,20 @@ export default {
       this.pageMessageStatus = 410
     } else {
       this.pageMessageStatus = 200
+      if (this.notWechat) {
+        this.isActive = true
+        this.noActive = false
+        if (this.phoneKind == 'android') {
+          window.location.href = 'xidou://app'
+        } else if (this.phoneKind == 'ios') {
+          window.location.href = 'seedo://'
+        } else {
+          console.log('why?')
+        }
+      } else {
+        this.isActive = false
+        this.noActive = true
+      }
     }
   },
   methods: {
