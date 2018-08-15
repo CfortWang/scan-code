@@ -2,8 +2,9 @@
   <div>
     <div class="contents-wrapper">
       <header>
-        <div class="header-logo-wrapper">
-          <img src="/static/img/logo/logo_text.png">
+        <div class="header-logo-wrapper fs-14">
+          <!-- <img src="/static/img/logo/logo_text.png"> -->
+          {{ $t("title") }}
         </div>
         <div class="header-language-wrapper">
           <img src="/static/img/icon/language_icon_black.png">
@@ -226,14 +227,14 @@ export default {
 
 .header-language-wrapper img {
   height:15px;
-  margin-top:22px;
+  margin-top:24px;
   margin-right:5px;
 }
 
 .header-language-text select {
   height:40px;
   background-color:#FFCB00;
-  color:#FFFFFF;
+  /* color:#FFFFFF; */
   border:0px;
   padding-left:5px;
   margin-right:10px;

@@ -1,5 +1,6 @@
 {
   "en": {
+    "title": "Bean Pop",
     "info": {
       "title": "Enjoy the 喜豆!",
       "remark1": "Mobile lottery event,",
@@ -20,6 +21,7 @@
     }
   },
   "ko": {
+    "title": "Bean Pop",
     "info": {
       "title": "喜豆 함께 즐겨요!",
       "remark1": "모바일로 즐기는 로또이벤트",
@@ -40,6 +42,7 @@
     }
   },
   "zh": {
+    "title": "喜豆一下",
     "info": {
       "title": "一起玩转喜豆吧",
       "remark1": "邀请您参加手机彩票抽奖喜豆",
@@ -60,6 +63,7 @@
     }
   },
   "ja": {
+    "title": "Bean Pop",
     "info": {
       "title": "喜豆 함께 즐겨요!",
       "remark1": "모바일로 즐기는 로또이벤트",

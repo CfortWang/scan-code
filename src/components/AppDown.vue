@@ -122,19 +122,35 @@ export default {
       // }
     }
 
-    var getParams = this.$route.params
-    console.log(getParams)
-    this.phoneKind = getParams.phoneKind
-    this.notWechat = getParams.notWechat
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+      this.phoneKind = 'ios'
+    } else if (/(Android)/i.test(navigator.userAgent)) {
+      this.phoneKind = 'android'
+    }
+
+    var ua = navigator.userAgent.toLowerCase()
+    if ((ua.match(/MicroMessenger/i) == 'micromessenger') || (ua.match(/QQ/i) == 'qq')) {
+      this.notWechat = false
+    } else {
+      this.notWechat = true
+    }
 
     if (this.notWechat) {
       this.isActive = true
       this.noActive = false
+      if (this.phoneKind == 'android') {
+        window.location.href = 'xidou://app'
+      } else if (this.phoneKind == 'ios') {
+        window.location.href = 'seedo://'
+      } else {
+        console.log('why?')
+      }
     } else {
       this.isActive = false
       this.noActive = true
     }
 
+    var getParams = this.$route.params
     var getParamCode = ''
     if (getParams.code) {
       getParamCode = getParams.code
