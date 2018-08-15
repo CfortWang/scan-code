@@ -129,26 +129,27 @@ export default {
     }
 
     var ua = navigator.userAgent.toLowerCase()
-    if ((ua.match(/MicroMessenger/i) == 'micromessenger') || (ua.match(/QQ/i) == 'qq')) {
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
       this.notWechat = false
     } else {
       this.notWechat = true
     }
 
-    if (this.notWechat) {
-      this.isActive = true
-      this.noActive = false
-      if (this.phoneKind == 'android') {
-        window.location.href = 'xidou://app'
-      } else if (this.phoneKind == 'ios') {
-        window.location.href = 'seedo://'
-      } else {
-        console.log('why?')
-      }
-    } else {
-      this.isActive = false
-      this.noActive = true
-    }
+    console.log(this.phoneKind + this.notWechat)
+    // if (this.notWechat) {
+    //   this.isActive = true
+    //   this.noActive = false
+    //   if (this.phoneKind == 'android') {
+    //     window.location.href = 'xidou://app'
+    //   } else if (this.phoneKind == 'ios') {
+    //     window.location.href = 'seedo://'
+    //   } else {
+    //     console.log('why?')
+    //   }
+    // } else {
+    //   this.isActive = false
+    //   this.noActive = true
+    // }
 
     var getParams = this.$route.params
     var getParamCode = ''
