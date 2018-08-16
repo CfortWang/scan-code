@@ -99,7 +99,8 @@ export default {
       notWechat: '',
       phoneKind: '',
       isActive: null,
-      noActive: null
+      noActive: null,
+      reload: false
     }
   },
   created: function () {
@@ -135,7 +136,7 @@ export default {
       this.notWechat = true
     }
 
-    console.log(this.phoneKind + this.notWechat)
+    console.log(this.phoneKind + ' ' + this.notWechat)
     // if (this.notWechat) {
     //   this.isActive = true
     //   this.noActive = false
@@ -152,13 +153,16 @@ export default {
     // }
 
     var getParams = this.$route.params
+    this.reload = getParams.reload
+    console.log(this.reload)
     var getParamCode = ''
     if (getParams.code) {
       getParamCode = getParams.code
     } else {
       getParamCode = 'default'
     }
-    // console.log(getParamCode)
+
+    console.log(getParamCode)
     if (getParamCode === 400) {
       this.pageMessageStatus = 400
       this.isActive = true
@@ -176,6 +180,15 @@ export default {
           window.location.href = 'xidou://app'
         } else if (this.phoneKind == 'ios') {
           window.location.href = 'seedo://'
+          if (this.reload) {
+            var t
+            clearTimeout(t)
+            t = setTimeout(function () {
+              console.log('2222')
+              window.location.href = location
+              this.phoneKind = '=='
+            }, 100)
+          }
         } else {
           console.log('why?')
         }

@@ -203,8 +203,7 @@ export default {
       bottomAdUrl: null,
       rulePicUrl: '',
       landingUrl: '',
-      phoneKind: '',
-      notWechat: ''
+      reload: true
     }
   },
   created: function () {
@@ -451,8 +450,8 @@ export default {
             // var responseData = response.data.data
             // console.log(responseMessage)
             // console.log(responseData)
-
-            this.$router.push({name: 'AppDown', params: {code: 'default'}})
+            console.log(this.reload)
+            this.$router.push({name: 'AppDown', params: {code: 'default', reload: this.reload}})
           }).catch((ex) => {
             console.log(ex)
             var errorResponseData = ex.response.data
