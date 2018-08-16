@@ -104,7 +104,6 @@ export default {
     }
   },
   created: function () {
-    // window.location.href = location.href
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
@@ -138,21 +137,6 @@ export default {
     }
 
     console.log(this.phoneKind + ' ' + this.notWechat)
-    // if (this.notWechat) {
-    //   this.isActive = true
-    //   this.noActive = false
-    //   if (this.phoneKind == 'android') {
-    //     window.location.href = 'xidou://app'
-    //   } else if (this.phoneKind == 'ios') {
-    //     window.location.href = 'seedo://'
-    //   } else {
-    //     console.log('why?')
-    //   }
-    // } else {
-    //   this.isActive = false
-    //   this.noActive = true
-    // }
-
     var getParams = this.$route.params
     this.reload = getParams.reload
     console.log(this.reload)
@@ -168,6 +152,13 @@ export default {
       this.pageMessageStatus = 400
       this.isActive = true
       this.noActive = false
+      if (this.reload) {
+        var t
+        clearTimeout(t)
+        t = setTimeout(function () {
+          window.location.reload()
+        }, 100)
+      }
     } else if (getParamCode === 410) {
       this.pageMessageStatus = 410
       this.isActive = true
@@ -181,15 +172,13 @@ export default {
           window.location.href = 'xidou://app'
         } else if (this.phoneKind == 'ios') {
           window.location.href = 'seedo://'
-          // if (this.reload) {
-          //   var t
-          //   clearTimeout(t)
-          //   t = setTimeout(function () {
-          //     console.log('2222')
-          //     window.location.href = location
-          //     this.phoneKind = '=='
-          //   }, 100)
-          // }
+          if (this.reload) {
+            var t
+            clearTimeout(t)
+            t = setTimeout(function () {
+              window.location.href = location
+            }, 100)
+          }
         } else {
           console.log('why?')
         }
