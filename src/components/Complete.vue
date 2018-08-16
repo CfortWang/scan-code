@@ -203,7 +203,7 @@ export default {
       bottomAdUrl: null,
       rulePicUrl: '',
       landingUrl: '',
-      reload: true
+      reload: false
     }
   },
   created: function () {
@@ -245,6 +245,13 @@ export default {
         this.selectedRed.push(this.yellowItems[i])
       }
     }
+
+    // var ua = navigator.userAgent.toLowerCase()
+    // if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+    //   this.reload = false
+    // } else {
+    //   this.reload = true
+    // }
 
     // if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
     //   this.phoneKind = 'ios'
@@ -451,7 +458,7 @@ export default {
             // console.log(responseMessage)
             // console.log(responseData)
             console.log(this.reload)
-            this.$router.push({name: 'AppDown', params: {code: 'default', reload: this.reload}})
+            this.$router.push({name: 'AppDown', params: {code: 'default', reload: this.reload, refresh: this.refresh}})
           }).catch((ex) => {
             console.log(ex)
             var errorResponseData = ex.response.data

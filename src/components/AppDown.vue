@@ -100,7 +100,8 @@ export default {
       phoneKind: '',
       isActive: null,
       noActive: null,
-      reload: false
+      reload: false,
+      refresh: false
     }
   },
   created: function () {
@@ -153,11 +154,7 @@ export default {
       this.isActive = true
       this.noActive = false
       if (this.reload) {
-        var t
-        clearTimeout(t)
-        t = setTimeout(function () {
-          window.location.reload()
-        }, 100)
+        window.location.reload()
       }
     } else if (getParamCode === 410) {
       this.pageMessageStatus = 410
@@ -173,11 +170,7 @@ export default {
         } else if (this.phoneKind == 'ios') {
           window.location.href = 'seedo://'
           if (this.reload) {
-            // var t
-            clearTimeout(t)
-            t = setTimeout(function () {
-              window.location.href = location
-            }, 100)
+            window.location.href = location
           }
         } else {
           console.log('why?')
