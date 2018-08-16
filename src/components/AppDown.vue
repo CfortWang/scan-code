@@ -104,6 +104,7 @@ export default {
     }
   },
   created: function () {
+    window.location.reload()
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
@@ -180,15 +181,15 @@ export default {
           window.location.href = 'xidou://app'
         } else if (this.phoneKind == 'ios') {
           window.location.href = 'seedo://'
-          if (this.reload) {
-            var t
-            clearTimeout(t)
-            t = setTimeout(function () {
-              console.log('2222')
-              window.location.href = location
-              this.phoneKind = '=='
-            }, 100)
-          }
+          // if (this.reload) {
+          //   var t
+          //   clearTimeout(t)
+          //   t = setTimeout(function () {
+          //     console.log('2222')
+          //     window.location.href = location
+          //     this.phoneKind = '=='
+          //   }, 100)
+          // }
         } else {
           console.log('why?')
         }
