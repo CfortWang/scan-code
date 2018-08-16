@@ -173,7 +173,7 @@ export default {
         } else if (this.phoneKind == 'ios') {
           window.location.href = 'seedo://'
           if (this.reload) {
-            var t
+            // var t
             clearTimeout(t)
             t = setTimeout(function () {
               window.location.href = location
