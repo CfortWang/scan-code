@@ -153,13 +153,13 @@ export default {
       this.pageMessageStatus = 400
       this.isActive = true
       this.noActive = false
-      // if (this.reload) {
-      //   var t
-      //   clearTimeout(t)
-      //   t = setTimeout(function () {
-      //     window.location.reload()
-      //   }, 1000)
-      // }
+      if (this.reload) {
+        var t
+        clearTimeout(t)
+        t = setTimeout(function () {
+          window.location.reload()
+        }, 1000)
+      }
     } else if (getParamCode === 410) {
       this.pageMessageStatus = 410
       this.isActive = true
