@@ -154,7 +154,11 @@ export default {
       this.isActive = true
       this.noActive = false
       if (this.reload) {
-        window.location.reload()
+        var t
+        clearTimeout(t)
+        t = setTimeout(function () {
+          window.location.reload()
+        }, 1000)
       }
     } else if (getParamCode === 410) {
       this.pageMessageStatus = 410
@@ -170,7 +174,11 @@ export default {
         } else if (this.phoneKind == 'ios') {
           window.location.href = 'seedo://'
           if (this.reload) {
-            window.location.href = location
+            var times
+            clearTimeout(times)
+            times = setTimeout(function () {
+              window.location.href = location
+            }, 1000)
           }
         } else {
           console.log('why?')
