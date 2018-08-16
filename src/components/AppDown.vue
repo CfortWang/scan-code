@@ -158,7 +158,7 @@ export default {
         clearTimeout(t)
         t = setTimeout(function () {
           window.location.reload()
-        }, 1000)
+        }, 500)
       }
     } else if (getParamCode === 410) {
       this.pageMessageStatus = 410
