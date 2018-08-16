@@ -351,13 +351,16 @@ export default {
         var errorStatus = ex.response.status
         // console.log(errorResponseData)
         if (errorStatus === 400) {
-          this.$router.push({name: 'AppDown', params: {code: errorStatus}})
+          // this.$router.push({name: 'AppDown', params: {code: errorStatus}})
+          window.location.href = 'dev-m.beanpop.cn/app'
           return false
         } else if (errorStatus === 410) {
-          this.$router.push({name: 'AppDown', params: {code: errorStatus}})
+          // this.$router.push({name: 'AppDown', params: {code: errorStatus}})
+          window.location.href = 'dev-m.beanpop.cn/app'
           return false
         } else {
-          this.$router.push({name: 'AppDown', params: {code: 'default'}})
+          // this.$router.push({name: 'AppDown', params: {code: 'default'}})
+          window.location.href = 'dev-m.beanpop.cn/app'
           return false
         }
       })

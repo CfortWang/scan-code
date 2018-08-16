@@ -104,7 +104,7 @@ export default {
     }
   },
   created: function () {
-    window.location.reload()
+    // window.location.href = location.href
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
       this.currentLanguage = vueCookie.get('qr_language')
