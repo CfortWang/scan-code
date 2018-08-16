@@ -174,9 +174,9 @@ export default {
         } else if (this.phoneKind == 'ios') {
           window.location.href = 'seedo://'
           if (this.reload) {
-            var t
-            clearTimeout(t)
-            t = setTimeout(function () {
+            var time
+            clearTimeout(time)
+            time = setTimeout(function () {
               window.location.href = location
             }, 1000)
           }
