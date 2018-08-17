@@ -113,7 +113,7 @@ header {
 .ball-wrapper.responsive-size {
   height:9vw;
   width:9vw;
-  margin:2.5vw;
+  margin: 1.1vw 2.5vw;
   cursor:pointer;
   background-color:#FFFFFF;
   border:0px;
@@ -122,8 +122,8 @@ header {
 }
 
 .ball-wrapper.yellow {
-  background-color:#EE6807;
-  border:1px solid #EE6807;
+  background-color:#FF5F57;
+  border:1px solid #FF5F57;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -131,12 +131,12 @@ header {
 
 .ball-wrapper.yellow.ballOff {
   background-color:#FFFFFF;
-  color:#EE6807;
+  color:#FF5F57;
 }
 
 .ball-wrapper.green {
-  background-color:#6985C6;
-  border:1px solid #6985C6;
+  background-color:#57A0FF;
+  border:1px solid #57A0FF;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -144,7 +144,7 @@ header {
 
 .ball-wrapper.green.ballOff {
   background-color:#FFFFFF;
-  color:#6985C6;
+  color:#57A0FF;
 }
 
 .ball-wrapper.yellow-1 {

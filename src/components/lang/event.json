@@ -19,12 +19,21 @@
       "sixthPrize": "Sixth Prize: Matching the numbers before and after the blue bean",
       "example": "(For example, if the blue bean is 4, then the 3 or 5 won)"
     },
+    "ball": {
+      "redBall": "红豆",
+      "blueBall": "蓝豆",
+      "selectRedBall": "请选择6个红豆",
+      "selectBlueBall": "请选择1个蓝豆"
+    },
+    "round": "st: ",
     "selectedNum": "Selected",
+    "lastTenRound": "近10期开奖",
     "guidMsg1": "Select ",
     "guidMsg2": " red beans ",
     "guidMsg3": " blue bean",
     "guidMsg4": "and ",
     "desc": "how to play",
+    "reSelect": "重新选号",
     "autoSelect": "Auto Select",
     "confirm" : "Confirm",
     "finishYellowBall": "You can choose red bean only six.",
@@ -52,12 +61,21 @@
       "sixthPrize": "6 등상 : 푸른 콩 전후의 숫자 매치",
       "example": "(예를 들어, 파란색 콩이 4이면 3 또는 5 원입니다)"
     },
+    "ball": {
+      "redBall": "红豆",
+      "blueBall": "蓝豆",
+      "selectRedBall": "请选择6个红豆",
+      "selectBlueBall": "请选择1个蓝豆"
+    },
+    "round": "st: ",
     "selectedNum": "응모번호",
+    "lastTenRound": "近10期开奖",
     "guidMsg1": "노랑콩",
     "guidMsg2": "개녹두",
     "guidMsg3": "개를선택해주세요",
     "guidMsg4": "과",
     "desc": "응모방법",
+    "reSelect": "重新选号",
     "autoSelect": "자동선택",
     "confirm" : "응모하기",
     "finishYellowBall": "이미 6개의 번호를 모두 선택하였습니다. (노란색: 6개, 초록색:1개)",
@@ -66,7 +84,7 @@
     "adMessage": "광고 시청 후에 응모가 완료됩니다."
   },
   "zh": {
-    "title": "喜豆一下",
+    "title": "喜豆大抽奖",
     "ready": {
       "title": "提示",
       "body1": "嘿朋友，给你备了些好礼",
@@ -85,14 +103,23 @@
       "sixthPrize": "六等奖：与蓝豆前后的数字相匹配",
       "example": "(比如蓝豆是4，则选3号或5号中奖)"
     },
+    "ball": {
+      "redBall": "红豆",
+      "blueBall": "蓝豆",
+      "selectRedBall": "请选择6个红豆",
+      "selectBlueBall": "请选择1个蓝豆"
+    },
+    "round": "期: ",
     "selectedNum": "已选号码",
+    "lastTenRound": "近10期开奖",
     "guidMsg1": "请选择",
     "guidMsg2": "个红豆",
     "guidMsg3": "个蓝豆",
     "guidMsg4": "和",
     "desc": " 教你来玩",
+    "reSelect": "重新选号",
     "autoSelect": "智能选号",
-    "confirm" : "提交",
+    "confirm" : "选好了",
     "finishYellowBall": "已经选择了6个红豆",
     "finishGreenBall": "已经选择了1个蓝豆",
     "notEnoughBall": "请重新选号并提交（红色：6个，蓝色：1个）",
