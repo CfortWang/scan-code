@@ -274,9 +274,9 @@ export default {
   height:100vh;
   /* background-color:#FFCB00; */
   background-repeat: no-repeat;
-  background-size:120%;
+  background-size:105%;
   background-position:center 325px;
-  background-image: url('/static/img/app_down/app_info.png');
+  background-image: url('/static/img/app_down/app_info_new.png');
 }
 
 .app-text-wrapper {

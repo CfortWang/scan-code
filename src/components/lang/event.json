@@ -26,6 +26,9 @@
       "selectBlueBall": "请选择1个蓝豆"
     },
     "round": "st: ",
+    "winTime": "21:15开奖",
+    "prizePool": "奖池",
+    "seedoPoint": "喜豆点",
     "selectedNum": "Selected",
     "lastTenRound": "近10期开奖",
     "guidMsg1": "Select ",
@@ -68,6 +71,9 @@
       "selectBlueBall": "请选择1个蓝豆"
     },
     "round": "st: ",
+    "winTime": "21:15开奖",
+    "prizePool": "奖池",
+    "seedoPoint": "喜豆点",
     "selectedNum": "응모번호",
     "lastTenRound": "近10期开奖",
     "guidMsg1": "노랑콩",
@@ -110,6 +116,9 @@
       "selectBlueBall": "请选择1个蓝豆"
     },
     "round": "期: ",
+    "winTime": "21:15开奖",
+    "prizePool": "奖池",
+    "seedoPoint": "喜豆点",
     "selectedNum": "已选号码",
     "lastTenRound": "近10期开奖",
     "guidMsg1": "请选择",

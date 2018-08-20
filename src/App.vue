@@ -379,4 +379,75 @@ header {
 .bottom-slide-wrapper .swiper-pagination-bullet {
   background: #FFFFFF;
 }
+
+.event-round-wrapper{
+  width: 100%;
+  background:rgba(248,248,248,1);
+  padding:12px 15px;
+  font-size: 14px;
+}
+.moreData{
+  display: none;
+  box-shadow:0px 5px 19px 1px rgba(51,85,164,0.18);
+  position: absolute
+}
+
+.moreData .event-round-wrapper:nth-child(odd){
+  background: #fff;
+}
+
+.event-round-left-wrapper {
+  width: 60%;
+  text-align: left;
+}
+
+.event-round {
+  width: 30%;
+  line-height: 14px;
+  color: #666;
+}
+
+.event-round-right-wrapper {
+  padding-left: 20px;
+  width: 100%;
+}
+
+.event-intro-ball-wrapper{
+  line-height: 14px;
+}
+
+.event-intro-ball-wrapper .ball-size {
+  margin-left:10px;
+  overflow:hidden;
+  /* color:rgba(255,95,87,1); */
+}
+.event-intro-ball-wrapper .ball-size:first-child{
+  margin-left: 0px;
+}
+.event-intro-ball-wrapper .ball-size:last-child{
+  /* color:rgba(87,160,255,1); */
+}
+.event-intro-ball-wrapper .ball-size:before {
+  content:'';
+  padding-top:100%;
+  float:left;
+}
+.lastTenRound{
+  line-height: 14px;
+  color: #666;
+}
+.ball-size-item {
+  width:100%;
+  font-size: 14px;
+}
+@media (max-width: 366px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 8px;
+  }
+}
+@media (max-width: 338px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 6px;
+  }
+}
 </style>

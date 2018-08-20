@@ -28,341 +28,126 @@
           <img v-bind:src="readyImgUrl" v-on:click="goEvent">
       </div>
     </div>
+    <!-- <div class="ready-box">
+        <img src="static/img/event/ready-top.png" class="ready-top">
+      <div class="ready-middle">
+        <img v-bind:src="readyImgUrl">
+        <button class="ready-btn" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
+      </div>
+    </div> -->
+    <!-- <div class="ready-box">
+        <img class="ready-logo" src="/static/img/complete/rule-logo.png">
+        <div class="ready-border">
+          <div class="ready">
+            <div class="ready-title">{{ $t("ready.title") }}</div>
+            <div class="ready-body">
+              <img v-bind:src="readyImgUrl">
+            </div>
+          <div class="ready-button">
+            <button class="btn-right" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
     <header>
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
       </div>
+      <div class="header-language-wrapper">
+        <img src="/static/img/icon/language_icon_black.png">
+        <div class="header-language-text float-wrapper">
+          <select v-on:change="changeItem($event)" class="float-l">
+            <option v-for="item in items" v-bind:key="item.index" v-bind:value="item.value" :selected="currentLanguage === item.value">{{item.title}}</option>
+          </select>
+          <div class="language-arrow-wrapper fs-05 float-l dsp-table">
+            <div class="dsp-table-cell">▼</div>
+          </div>
+        </div>
+      </div>
     </header>
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
-      <div class="event-round-wrapper dsp-table">
-        <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-          <div class="dsp-table-cell event-round">{{round[0]}}{{ $t("round") }}</div>
-          <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-            <div class="ball-wrapper ball-size float-l">
-              <div class="ball-size-item">{{ballNums0[0]}}</div>
-            </div>
-            <div class="ball-wrapper ball-size float-l">
-              <div class="ball-size-item">{{ballNums0[1]}}</div>
-            </div>
-            <div class="ball-wrapper ball-size float-l">
-              <div class="ball-size-item">{{ballNums0[2]}}</div>
-            </div>
-            <div class="ball-wrapper ball-size float-l">
-              <div class="ball-size-item">{{ballNums0[3]}}</div>
-            </div>
-            <div class="ball-wrapper ball-size float-l">
-              <div class="ball-size-item">{{ballNums0[4]}}</div>
-            </div>
-            <div class="ball-wrapper ball-size float-l">
-              <div class="ball-size-item">{{ballNums0[5]}}</div>
-            </div>
-            <div class="ball-wrapper ball-size float-l">
-              <div class="ball-size-item">{{ballNums0[6]}}</div>
-            </div>
+      <div class="event-intro-wrapper">
+        <div class="event-intro-top-wrapper float-wrapper">
+          <div class="event-intro-top-title float-l dsp-table">
+            <div class="dsp-table-cell fs-auto1">{{ $t("selectedNum") }}</div>
           </div>
-        </div>
-        <div class="event-round-right-wrapper float-l dsp-table-cell" v-on:click="getMoreWinner">
-          <div class="lastTenRound">{{ $t("lastTenRound") }}</div>
-          <div class="round-icon"></div>
-        </div>
-      </div>
-      <div class="moreData">
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[1]}}{{ $t("round") }}</div>
+          <div class="event-intro-top-ball float-r dsp-table">
             <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums1[0]}}</div>
+              <div class="ball-wrapper ball-size float-l yellow" v-if="selected1">
+                <div class="ball-size-item">{{selected1}}</div>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums1[1]}}</div>
+              <div class="ball-wrapper ball-size float-l gray" v-else>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums1[2]}}</div>
+              <div class="ball-wrapper ball-size float-l yellow" v-if="selected2">
+                <div class="ball-size-item">{{selected2}}</div>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums1[3]}}</div>
+              <div class="ball-wrapper ball-size float-l gray" v-else>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums1[4]}}</div>
+              <div class="ball-wrapper ball-size float-l yellow" v-if="selected3">
+                <div class="ball-size-item">{{selected3}}</div>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums1[5]}}</div>
+              <div class="ball-wrapper ball-size float-l gray" v-else>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums1[6]}}</div>
+              <div class="ball-wrapper ball-size float-l yellow" v-if="selected4">
+                <div class="ball-size-item">{{selected4}}</div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[2]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums2[0]}}</div>
+              <div class="ball-wrapper ball-size float-l gray" v-else>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums2[1]}}</div>
+              <div class="ball-wrapper ball-size float-l yellow" v-if="selected5">
+                <div class="ball-size-item">{{selected5}}</div>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums2[2]}}</div>
+              <div class="ball-wrapper ball-size float-l gray" v-else>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums2[3]}}</div>
+              <div class="ball-wrapper ball-size float-l yellow" v-if="selected6">
+                <div class="ball-size-item">{{selected6}}</div>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums2[4]}}</div>
+              <div class="ball-wrapper ball-size float-l gray" v-else>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums2[5]}}</div>
+              <div class="ball-wrapper ball-size float-l green" v-if="selected7">
+                <div class="ball-size-item">{{selected7}}</div>
               </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums2[6]}}</div>
+              <div class="ball-wrapper ball-size float-l gray" v-else>
               </div>
             </div>
           </div>
         </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[3]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums3[0]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums3[1]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums3[2]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums3[3]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums3[4]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums3[5]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums3[6]}}</div>
-              </div>
-            </div>
+        <div class="event-intro-desc-wrapper float-wrapper">
+          <div class="float-l fs-auto">
+          {{ $t("guidMsg1") }}<span class="event-text-red">6{{ $t("guidMsg2") }}</span>{{ $t("guidMsg4") }}<span class="event-text-blue">1{{ $t("guidMsg3") }}</span>
           </div>
-        </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[4]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums4[0]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums4[1]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums4[2]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums4[3]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums4[4]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums4[5]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums4[6]}}</div>
-              </div>
-            </div>
+          <div class="desc-text float-r fs-09 dsp-table" v-on:click="openModal">
+            <!-- <img src="/static/img/event/question.jpg"> -->
+            <!-- {{ $t("desc") }} -->
           </div>
-        </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[5]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums5[0]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums5[1]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums5[2]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums5[3]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums5[4]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums5[5]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums5[6]}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[6]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums6[0]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums6[1]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums6[2]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums6[3]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums6[4]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums6[5]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums6[6]}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[7]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums7[0]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums7[1]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums7[2]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums7[3]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums7[4]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums7[5]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums7[6]}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[8]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums8[0]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums8[1]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums8[2]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums8[3]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums8[4]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums8[5]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums8[6]}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="event-round-wrapper dsp-table">
-          <div class="event-round-left-wrapper float-wrapper dsp-table-cell">
-            <div class="dsp-table-cell event-round">{{round[9]}}{{ $t("round") }}</div>
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums9[0]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums9[1]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums9[2]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums9[3]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums9[4]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums9[5]}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l">
-                <div class="ball-size-item">{{ballNums9[6]}}</div>
-              </div>
-            </div>
-          </div>
+          <div class="ques" v-on:click="openModal"><img src="/static/img/event/nav_question.png"></div>
         </div>
       </div>
       <div class="event-balls-wrapper float-wrapper">
-        <div class="select-ball-title">
-          <span class="ball-kind">{{ $t("ball.redBall") }}</span>
-          <span class="plz-select">{{ $t("ball.selectRedBall") }}</span>
-        </div>
-        <div class="red-ball-wrapper clear-fix">
-          <button class="ball-wrapper responsive-size float-l yellow" v-for="item in yellowItems" v-bind:key="item.ballKey" v-bind:class="{ballOff: !item.active}" v-on:click="yellowBallClicked(item.number)">
-            <span v-if="item.number < 10">
-              0{{item.number}}
-            </span>
-            <span v-else>
-              {{item.number}}
-            </span>
-          </button>
-        </div>
-        <div class="select-ball-title">
-          <span class="ball-kind">{{ $t("ball.blueBall") }}</span>
-          <span class="plz-select">{{ $t("ball.selectBlueBall") }}</span>
-        </div>
-        <div class="blue-ball-wrapper clear-fix">
-          <button class="ball-wrapper responsive-size float-l green" v-for="item in greenItems" v-bind:key="item.ballKey" v-bind:class="{ ballOff: !item.active }" v-on:click="greenBallClicked(item.number)">
-            <span v-if="item.number < 10">
-              0{{item.number}}
-            </span>
-            <span v-else>
-              {{item.number}}
-            </span>
-          </button>
-        </div>
+        <button class="ball-wrapper responsive-size float-l yellow" v-for="item in yellowItems" v-bind:key="item.ballKey" v-bind:class="{ballOff: !item.active}" v-on:click="yellowBallClicked(item.number)">
+          <span v-if="item.number < 10">
+            0{{item.number}}
+          </span>
+          <span v-else>
+            {{item.number}}
+          </span>
+        </button>
+        <button class="ball-wrapper responsive-size float-l green" v-for="item in greenItems" v-bind:key="item.ballKey" v-bind:class="{ ballOff: !item.active }" v-on:click="greenBallClicked(item.number)">
+          <span v-if="item.number < 10">
+            0{{item.number}}
+          </span>
+          <span v-else>
+            {{item.number}}
+          </span>
+        </button>
       </div>
       <div class="event-btn-wrapper float-wrapper">
-        <div class="w-30 float-l">
-          <div class="re-btn-wrapper">
-            <button type="button" class="btn btn-re-select fs-11" v-on:click="reSelect">{{ $t("reSelect") }}</button>
-          </div>
-        </div>
-        <div class="w-30 float-l">
+        <div class="w-50 float-l">
           <div class="auto-btn-wrapper">
             <button type="button" class="btn btn-auto-select fs-11" v-on:click="autoSelect">{{ $t("autoSelect") }}</button>
           </div>
         </div>
-        <div class="w-30 float-r">
+        <div class="w-50 float-l">
           <div class="confirm-btn-wrapper">
             <button type="button" class="btn btn-confirm fs-11" v-on:click="confirmGame">{{ $t("confirm") }}</button>
           </div>
@@ -414,19 +199,6 @@ export default {
       selected5: '',
       selected6: '',
       selected7: '',
-      pastWinnerNum: [],
-      round: [],
-      nowRound: '',
-      ballNums0: [],
-      ballNums1: [],
-      ballNums2: [],
-      ballNums3: [],
-      ballNums4: [],
-      ballNums5: [],
-      ballNums6: [],
-      ballNums7: [],
-      ballNums8: [],
-      ballNums9: [],
       items: [
         {title: 'English', value: 'en'},
         {title: '한국어', value: 'ko'},
@@ -480,24 +252,47 @@ export default {
         vueCookie.set('qr_language', 'zh', 1)
       }
     }
+    // console.log(getIP)
+    // if (vueCookie.get('qr_language')) {
+    //   this.$i18n.locale = vueCookie.get('qr_language')
+    //   this.currentLanguage = vueCookie.get('qr_language')
+    // } else if (getIP == 'CN') {
+    //   this.$i18n.locale = 'zh'
+    //   this.currentLanguage = 'zh'
+    //   vueCookie.set('qr_language', 'zh', 1)
+    // } else if (getIP == 'KR') {
+    //   this.$i18n.locale = 'ko'
+    //   this.currentLanguage = 'ko'
+    //   vueCookie.set('qr_language', 'ko', 1)
+    // } else {
+    //   this.$i18n.locale = 'en'
+    //   this.currentLanguage = 'en'
+    //   vueCookie.set('qr_language', 'en', 1)
+    // }
 
     if (this.currentLanguage === 'zh') {
       this.readyImgArr = [
-        '/static/img/event/tanchuang1.png',
-        '/static/img/event/tanchuang2.png',
-        '/static/img/event/tanchuang3.png'
+        '/static/img/event/tanchuang.png'
+        // '/static/img/event/H5_alert_1.jpg',
+        // '/static/img/event/H5_alert_2.jpg',
+        // // '/static/img/event/H5_alert_3.jpg',
+        // '/static/img/event/H5_alert_4.jpg',
+        // '/static/img/event/H5_alert_5.jpg',
+        // '/static/img/event/H5_alert_6.jpg',
+        // '/static/img/event/H5_alert_7.jpg',
+        // '/static/img/event/H5_alert_8.jpg',
+        // '/static/img/event/H5_alert_9.jpg',
+        // '/static/img/event/H5_alert_10.jpg',
+        // '/static/img/event/H5_alert_11.jpg',
+        // '/static/img/event/H5_alert_12.jpg'
       ]
     } else if (this.currentLanguage === 'ko') {
-      this.readyImgArr = [
-        '/static/img/event/tanchuang1.png',
-        '/static/img/event/tanchuang2.png',
-        '/static/img/event/tanchuang3.png'
+      [
+        '/static/img/event/tanchuang.png'
       ]
     } else {
       this.readyImgArr = [
-        '/static/img/event/tanchuang1.png',
-        '/static/img/event/tanchuang2.png',
-        '/static/img/event/tanchuang3.png'
+        '/static/img/event/tanchuang.png'
       ]
     }
     shuffle(this.readyImgArr)
@@ -516,35 +311,6 @@ export default {
         // var responseData = response.data.data
         // console.log(responseMessage)
         // console.log(responseData)
-
-        axios({ // get the newest winner number
-          method: 'GET',
-          url: process.env.api_url + '/api/drawings/complete'
-        }).then((response) => {
-          // var responseMessage = response.data.message
-          var responseData = response.data.data
-          // console.log(responseData)
-          for (var j = 0; j < 10; j++) {
-            var ballNums = []
-            var ball = 'ballNums' + j
-            for (var k = 1; k <= 7; k++) {
-              var round = responseData[j].drawing_num
-              var ballNum = 'num_' + k
-              ballNums[k - 1] = responseData[j][ballNum]
-              if (ballNums[k - 1] < 10) {
-                ballNums[k - 1] = '0' + ballNums[k - 1]
-              }
-            }
-            this.pastWinnerNum[j] = ballNums
-            this.round[j] = round
-            this[ball] = this.pastWinnerNum[j]
-          }
-          // $('.moreData').append()
-          // console.log(this.pastWinnerNum)
-          this.nowRound = this.round[0] + 1
-        }).catch((ex) => {
-          console.log(ex)
-        })
 
         axios({ // get skip AD
           method: 'GET',
@@ -624,15 +390,6 @@ export default {
       document.getElementsByClassName('ready-box')[0].style.display = 'none'
       document.getElementsByClassName('contents-wrapper')[0].style.display = 'block'
       document.getElementsByClassName('mask')[0].style.display = 'none'
-    },
-    getMoreWinner: function () {
-      var status = document.getElementsByClassName('moreData')[0].style.display
-      if (status == '' || status == 'none') {
-        document.getElementsByClassName('moreData')[0].style.display = 'block'
-      }
-      if (status == 'block') {
-        document.getElementsByClassName('moreData')[0].style.display = 'none'
-      }
     },
     yellowBallClicked: function (event) {
       var currentNumber = parseInt(event) - 1
@@ -716,19 +473,6 @@ export default {
         }
       })
       this.selected7 = selectedArray[0]
-    },
-    reSelect: function () {
-      this.yellowItems.forEach(function (value, key) {
-        if (value.active === true) {
-          value.active = false
-        }
-      })
-
-      this.greenItems.forEach(function (value, key) {
-        if (value.active === true) {
-          value.active = false
-        }
-      })
     },
     autoSelect: function (event) {
       this.yellowItems.forEach(function (value, key) {
@@ -900,96 +644,51 @@ export default {
   height:40px;
 }
 
-.event-round-wrapper{
-  width: 100%;
-  background:rgba(248,248,248,1);
-  padding:12px 15px;
-  font-size: 14px;
+.event-intro-top-wrapper {
+  margin:0px 3.5vw;
+  padding:10px 0px;
+  border-bottom:1px solid #CCCCCC;
+  height:10vw;
 }
 
-.moreData{
-  display: none;
-  box-shadow:0px 5px 19px 1px rgba(51,85,164,0.18);
-  position: absolute
+.event-intro-top-title {
+  text-align:left;
+  border-right:1px solid #CCCCCC;
+  width:calc(25% - 1px);
+  height:10vw
 }
 
-.moreData .event-round-wrapper:nth-child(odd){
-  /* background:rgba(248,248,248,1); */
-  background: #fff;
-}
-
-.event-round-left-wrapper {
-  width: 60%;
-  text-align: left;
-}
-
-.event-round {
-  width: 30%;
-  line-height: 14px;
-  color: #666;
-}
-
-.event-round-right-wrapper {
-  padding-left: 20px;
-  width: 100%;
-  /* text-align:left; */
-}
-
-.event-intro-ball-wrapper{
-  line-height: 14px;
+.event-intro-top-ball {
+  text-align:center;
+  width:calc(75% - 20px);
+  height:10vw;
+  margin-left:10px;
 }
 
 .event-intro-ball-wrapper .ball-size {
-  margin-left:10px;
+  width:12%;
+  margin-left:calc((30% - 28px)/13);
   overflow:hidden;
-  color:rgba(255,95,87,1);
+  font-size:0.6em;
 }
-.event-intro-ball-wrapper .ball-size:first-child{
-  margin-left: 0px;
-}
-.event-intro-ball-wrapper .ball-size:last-child{
-  color:rgba(87,160,255,1);
-}
+
 .event-intro-ball-wrapper .ball-size:before {
   content:'';
   padding-top:100%;
   float:left;
 }
-.lastTenRound{
-  line-height: 14px;
-  color: #666;
-}
+
 .ball-size-item {
   width:100%;
-  /* margin-top:20%; */
+  margin-top:28%;
   /* margin-top:calc((90vw - 100px)/25); */
-  font-size: 12px;
+  font-size: 4vw;
   /* font-size: calc((100vw - 110px)/20); */
 }
 
-.select-ball-title{
-  margin-top: 20px;
-  font-size: 14px;
-  color: #000;
-}
-.ball-kind{
-  margin-left: 2.5vw;
-}
-.plz-select{
-  color: #999;
-  padding-left: 8px;
-}
-
-.clear-fix:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.red-ball-wrapper, .blue-ball-wrapper{
-  margin-top: 15px;
-}
-
+/* .contents-wrapper{
+  display: none;
+} */
 .ready-top{
   margin-top: 30%;
   width: 80%;
@@ -1187,12 +886,12 @@ export default {
 }
 
 .event-text-red {
-  color:#FF5F57;
+  color:#EE6807;
   font-weight:bold;
 }
 
 .event-text-blue {
-  color:#57A0FF;
+  color:#6985C6;
   font-weight:bold;
 }
 
@@ -1203,44 +902,35 @@ export default {
 
 .event-btn-wrapper {
   /* border-top:1px solid #CCCCCC; */
-  padding: 15px;
+  padding:20px 3.5vw;
 }
 
-.w-30 {
-  width:30%;
+.w-50 {
+  width:50%;
 }
 
-.btn-re-select {
-  background-color:#DDDDDD;
-  border:none;
-  color:#666666;
-}
 .btn-auto-select {
   /* background-color:#FFCB00;
   border:1px solid #FFCB00; */
-  background-color:#57A0FF;
-  border:none;
+  background-color:#6985C6;
+  border:1px solid #6985C6;
   color:#FFFFFF;
 }
 
-.re-btn-wrapper{
-  padding-right: 3px;
-}
-
 .auto-btn-wrapper {
-  padding-left: 3px;
+  padding-right:5px;
 }
 
 .btn-confirm {
   /* background-color:#A7AC00;
   border:1px solid #A7AC00; */
-  background-color:#FF5F57;
-  border:none;
+  background-color:#EE6807;
+  border:1px solid #EE6807;
   color:#FFFFFF;
 }
 
 .confirm-btn-wrapper {
-  padding-left:3px;
+  padding-left:5px;
 }
 
 .btn {
@@ -1258,11 +948,8 @@ export default {
 .fs-auto{
   font-size: calc((100vw - 110px)/15);
 }
-
 .fs-auto1{
-  /* font-size: calc((100vw - 140px)/15); */
-  font-size: 14px;
-  line-height: 14px;
+  font-size: calc((100vw - 140px)/15);
 }
 .ques{
   height: 20px;
