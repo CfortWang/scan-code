@@ -170,6 +170,7 @@ const langData = require('./lang/event.json')
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
+  phone: '',
   messages: langData
 })
 
@@ -205,6 +206,7 @@ export default {
         {title: '中国', value: 'zh'}
       ],
       currentLanguage: 'zh',
+      currentPhoneNum: '',
       skipAD: null,
       banner: null,
       bottomAd: null,
@@ -216,6 +218,10 @@ export default {
   },
   created: function () {
     var qrCode = this.$route.query.code
+    if (vueCookie.get('qr_phone_num')) {
+      this.$i18n.phone = vueCookie.get('qr_phone_num')
+    }
+    console.log(this.$i18n.phone)
     Vue.prototype.GLOBAL = _global
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')

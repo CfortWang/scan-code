@@ -82,7 +82,7 @@
             </div>
             <div class="w-70 float-l">
               <div class="input-wrapper float-wrapper">
-                <input type="text" v-model="recommendCode" class="p-l-10 w-100" :disabled="!isEvent">
+                <input type="text" id="regPhone" v-model="recommendCode" class="p-l-10 w-100" :disabled="!isEvent">
               </div>
               <div class="remark-text fs-08">
                 {{ $t("recommendRemark") }}
@@ -130,6 +130,7 @@ const langData = require('./lang/register.json')
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
+  phone: '',
   messages: langData
 })
 
@@ -157,7 +158,8 @@ export default {
       termsOpen: false,
       tmpUser: null,
       countDown: setNow - now,
-      currentLanguage: 'zh'
+      currentLanguage: 'zh',
+      currentPhoneNum: ''
     }
   },
   created: function () {
@@ -357,6 +359,12 @@ export default {
             // var responseData = response.data.data
             // console.log(responseMessage)
             // console.log(responseData)
+
+            // save the phone number has been registed success
+            var phoneNum = document.getElementById('phoneNum').value
+            vueCookie.set('qr_phone_num', phoneNum, 1)
+            this.$i18n.phone = vueCookie.get('qr_phone_num')
+            this.currentPhoneNum = vueCookie.get('qr_phone_num')
             this.$router.push({name: 'AppDown', params: {code: 'default'}})
           }).catch((ex) => {
             console.log(ex)

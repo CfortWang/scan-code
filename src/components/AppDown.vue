@@ -63,7 +63,8 @@
       <div class="mask"></div>
       <div class="ready-box">
         <div class="ready-img">
-        <img src="http://dev-www.beanpop.cn/img/live_weixin.png">
+        <!-- <img src="https://www.beanpop.cn/img/live_weixin.png"> -->
+        <img src="/static/img/app_down/live_weixin.png" alt="">
         </div>
       </div>
     </div>

@@ -138,7 +138,7 @@
       </div>
       <div class="section-divider">
       </div>
-      <div class="login-wrapper">
+      <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}">
         <div class="complete-info-wrapper">
           <div class="info-title float-wrapper fs-11">
             {{ $t("info.title") }}
@@ -149,12 +149,15 @@
             <select class="w-25 float-l" v-on:change="countryChangeItem($event)">
               <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
             </select>
-            <input type="number" class="phone-number-input w-72 float-r" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
+            <input type="number" id="phoneNum" class="phone-number-input w-72 float-r" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
           </div>
           <div class="login-btn-wrapper">
             <button type="button" class="btn btn-green fs-11" v-on:click="entryButton">{{ $t("phone.button")}}</button>
           </div>
         </div>
+      </div>
+      <div class="hasLogined"  v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">
+        {{currentPhoneNum}}
       </div>
     </div>
   </div>
@@ -172,6 +175,7 @@ const langData = require('./lang/complete.json')
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
+  phone: '',
   messages: langData
 })
 
@@ -192,6 +196,7 @@ export default {
       yellowItems: [],
       greenItems: [],
       currentLanguage: 'zh',
+      currentPhoneNum: '',
       countryItems: [],
       phoneNumber: '',
       selectedCountry: 1,
@@ -203,7 +208,9 @@ export default {
       bottomAdUrl: null,
       rulePicUrl: '',
       landingUrl: '',
-      reload: false
+      reload: false,
+      hasCookie: false,
+      noCookie: true
     }
   },
   created: function () {
@@ -215,6 +222,16 @@ export default {
       this.currentLanguage = 'zh'
     }
 
+    if (vueCookie.get('qr_phone_num')) {
+      this.$i18n.phone = vueCookie.get('qr_phone_num')
+      this.currentPhoneNum = vueCookie.get('qr_phone_num')
+      // this.hasCookie = true
+      // this.noCookie = false
+    } else {
+      // this.hasCookie = false
+      // this.noCookie = true
+    }
+    console.log(this.$i18n.phone)
     var getParams = this.$route.params
     this.tmpUser = getParams.tmpUser
     this.shopADUrl = getParams.shopAD
@@ -457,7 +474,10 @@ export default {
             // var responseData = response.data.data
             // console.log(responseMessage)
             // console.log(responseData)
-            console.log(this.reload)
+            var phoneNum = document.getElementById('phoneNum').value
+            vueCookie.set('qr_phone_num', phoneNum, 1)
+            this.$i18n.phone = vueCookie.get('qr_phone_num')
+            this.currentPhoneNum = vueCookie.get('qr_phone_num')
             this.$router.push({name: 'AppDown', params: {code: 'default', reload: this.reload, refresh: this.refresh}})
           }).catch((ex) => {
             console.log(ex)
@@ -478,6 +498,13 @@ export default {
 </script>
 
 <style scoped>
+.showLoginBox, .showLoginedBox{
+  display: block;
+}
+.notShowLoginBox, .notShowLoginedBox{
+  display: none;
+}
+
 .header-title-wrapper {
   display:table-cell;
   vertical-align:middle;
