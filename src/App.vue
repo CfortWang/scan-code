@@ -122,8 +122,8 @@ header {
 }
 
 .ball-wrapper.yellow {
-  background-color:#FF5F57;
-  border:1px solid #FF5F57;
+  background-color:#EE6807;
+  border:1px solid #EE6807;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -131,12 +131,12 @@ header {
 
 .ball-wrapper.yellow.ballOff {
   background-color:#FFFFFF;
-  color:#FF5F57;
+  color:#EE6807;
 }
 
 .ball-wrapper.green {
-  background-color:#57A0FF;
-  border:1px solid #57A0FF;
+  background-color:#6985C6;
+  border:1px solid #6985C6;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -144,7 +144,7 @@ header {
 
 .ball-wrapper.green.ballOff {
   background-color:#FFFFFF;
-  color:#57A0FF;
+  color:#6985C6;
 }
 
 .ball-wrapper.yellow-1 {
