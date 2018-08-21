@@ -23,18 +23,18 @@
       </div>
     </transition>
 
-    <div class="ready-box">
+    <!-- <div class="ready-box">
       <div class="ready-img">
           <img v-bind:src="readyImgUrl" v-on:click="goEvent">
       </div>
-    </div>
-    <!-- <div class="ready-box">
+    </div> -->
+    <div class="ready-box">
         <img src="static/img/event/ready-top.png" class="ready-top">
       <div class="ready-middle">
         <img v-bind:src="readyImgUrl">
         <button class="ready-btn" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
       </div>
-    </div> -->
+    </div>
     <!-- <div class="ready-box">
         <img class="ready-logo" src="/static/img/complete/rule-logo.png">
         <div class="ready-border">
@@ -272,27 +272,29 @@ export default {
 
     if (this.currentLanguage === 'zh') {
       this.readyImgArr = [
-        '/static/img/event/tanchuang.png'
-        // '/static/img/event/H5_alert_1.jpg',
-        // '/static/img/event/H5_alert_2.jpg',
-        // // '/static/img/event/H5_alert_3.jpg',
-        // '/static/img/event/H5_alert_4.jpg',
-        // '/static/img/event/H5_alert_5.jpg',
-        // '/static/img/event/H5_alert_6.jpg',
-        // '/static/img/event/H5_alert_7.jpg',
-        // '/static/img/event/H5_alert_8.jpg',
-        // '/static/img/event/H5_alert_9.jpg',
-        // '/static/img/event/H5_alert_10.jpg',
-        // '/static/img/event/H5_alert_11.jpg',
-        // '/static/img/event/H5_alert_12.jpg'
+        // '/static/img/event/tanchuang.png'
+        '/static/img/event/H5_alert_1.jpg',
+        '/static/img/event/H5_alert_2.jpg',
+        // '/static/img/event/H5_alert_3.jpg',
+        '/static/img/event/H5_alert_4.jpg',
+        '/static/img/event/H5_alert_5.jpg',
+        '/static/img/event/H5_alert_6.jpg',
+        '/static/img/event/H5_alert_7.jpg',
+        '/static/img/event/H5_alert_8.jpg',
+        '/static/img/event/H5_alert_9.jpg',
+        '/static/img/event/H5_alert_10.jpg',
+        '/static/img/event/H5_alert_11.jpg',
+        '/static/img/event/H5_alert_12.jpg'
       ]
     } else if (this.currentLanguage === 'ko') {
-      [
-        '/static/img/event/tanchuang.png'
+      this.readyImgArr = [
+        // '/static/img/event/tanchuang.png',
+        '/static/img/event/H5_alert_kr.jpg'
       ]
     } else {
       this.readyImgArr = [
-        '/static/img/event/tanchuang.png'
+        // '/static/img/event/tanchuang.png',
+        '/static/img/event/H5_alert_eng.jpg'
       ]
     }
     shuffle(this.readyImgArr)

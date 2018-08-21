@@ -265,17 +265,17 @@ export default {
 .app-down-bc{
   width: 100%;
   height: 100vh;
-  background-size:100%;
-  background-position:center 110px;
-  background-image: url('/static/img/app_down/app_down_bc.jpg');
+  /* background-size:100%; */
+  /* background-position:center 110px; */
+  /* background-image: url('/static/img/app_down/app_down_bc.jpg'); */
   z-index: 100;
 }
 .app-down {
   height:100vh;
-  /* background-color:#FFCB00; */
+  background-color:#FFCB00;
   background-repeat: no-repeat;
-  background-size:105%;
-  background-position:center 325px;
+  background-size:120%;
+  background-position:center 260px;
   background-image: url('/static/img/app_down/app_info_new.png');
 }
 
@@ -309,7 +309,7 @@ export default {
 }
 
 .down-btn {
-  background-color:#133461;
+  background-color:#FFCB00;
   border:1px solid #FFFFFF;
   color:#FFFFFF;
   border-radius:100px;
