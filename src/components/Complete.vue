@@ -156,7 +156,7 @@
           </div>
         </div>
       </div>
-      <div class="hasLogined"  v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">
+      <div class="hasLogined" v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">
         {{currentPhoneNum}}
       </div>
     </div>

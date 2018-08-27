@@ -40,6 +40,78 @@ body {
   color:#333333;
 }
 
+.clear-fix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.justified{
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-pack:justify;
+  -webkit-justify-content:space-between;
+  -ms-flex-pack:justify;
+  justify-content:space-between;
+}
+.join-pindou-desc{
+	text-align: center;
+}
+.join-pindou-desc span:nth-child(even){
+	color: #EE6807;
+}
+.fixed-right-btn{
+	position: fixed;
+	right: 0%;
+	top: 50px;
+	z-index: 10;
+	background:rgba(255,226,0,1);
+	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
+	border-radius:19px 0px 0px 19px;
+	padding: 8px 12px 8px 16px;
+}
+.swiper-div img{
+	width: 100%;
+}
+.swiper-pagination-bullet{
+	width: 8px;
+	height: 8px;
+	background: RGBA(0, 0, 0, 1);
+	border-radius: 50%;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 16px;
+    background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+    border-radius:8px;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+    width: 100%;
+}
+.mask1, .mask2{
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.6);
+	filter: alpha(opacity=80);
+	width: 100%;
+	z-index: 30;
+}
+
+.package, .pindou-content, .tips, .shop-info, .pindouing{
+	padding: 15px;
+	background: #FFFFFF;
+	margin-bottom: 10px;
+	color: #333333;
+}
+.pindou-titlt, .pindou-remarks-title, .tips-title, .shop-info-title{
+	font-family: "PingFangSC-Semibold";
+	font-size: 16px;
+	line-height: 22px;
+	margin-bottom: 12px;
+}
 #app {
   font-family: 'PingFangSC', 'NanumBarunGothic', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

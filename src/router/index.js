@@ -9,6 +9,12 @@ import Complete from '@/components/Complete'
 import Register from '@/components/Register'
 import CompleteEvent from '@/components/CompleteEvent'
 // import WechatOpen from '@/components/WechatOpen'
+import FunnyQuiz from '@/components/share/FunnyQuiz'
+import SpellBean from '@/components/share/SpellBean'
+import ShopDetails from '@/components/share/ShopDetails'
+import PindouDetails from '@/components/share/PindouDetails'
+import PayDeposit from '@/components/share/PayDeposit'
+import PaySuccess from '@/components/share/PaySuccess'
 
 Vue.use(Router)
 
@@ -39,6 +45,36 @@ export default new Router({
       path: '/app',
       name: 'AppDown',
       component: AppDown
+    },
+    {
+      path: '/funnyQuiz',
+      name: 'FunnyQuiz',
+      component: FunnyQuiz
+    },
+    {
+      path: '/spellBean',
+      name: 'SpellBean',
+      component: SpellBean
+    },
+    {
+      path: '/shopDetails',
+      name: 'ShopDetails',
+      component: ShopDetails
+    },
+    {
+      path: '/pindouDetails',
+      name: 'PindouDetails',
+      component: PindouDetails
+    },
+    {
+      path: '/payDeposit',
+      name: 'PayDeposit',
+      component: PayDeposit
+    },
+    {
+      path: '/paySuccess',
+      name: 'PaySuccess',
+      component: PaySuccess
     },
     {
       path: '/recommend',
