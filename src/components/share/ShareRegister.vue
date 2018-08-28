@@ -189,7 +189,7 @@ export default {
 			axios({ // sign up
 				method: 'POST',
 				// url: process.env.api_url + '/api/register/code',
-				url: process.env.api_url + '/login/register',
+				url: 'http://dev-new-api.beanpop.cn/login/register',
 				params: {
 					phoneNumber: this.phoneNumber,
 					country: this.selectedCountry,
