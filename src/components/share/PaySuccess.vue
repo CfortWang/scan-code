@@ -90,13 +90,13 @@ export default {
 		},
 		showRule: function () {
 			var ruleStatus = $(".rule-detail").css('display')
-			if(ruleStatus == 'none') {
+			if (ruleStatus == 'none') {
 				$(".rule-detail").show()
-				$(".pindou-rule").css('margin-bottom','0px')
+				$(".pindou-rule").css('margin-bottom', '0px')
 				$(".open-rule img").attr('src', '/static/img/share/opened.png')
 			} else {
 				$(".rule-detail").hide()
-				$(".pindou-rule").css('margin-bottom','10px')
+				$(".pindou-rule").css('margin-bottom', '10px')
 				$(".open-rule img").attr('src', '/static/img/share/closed.png')
 			}
 		},

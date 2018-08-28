@@ -28,7 +28,6 @@
 				<div class="old-price"><del>￥2018</del></div>
 			</div>
 		</div>
-		
 		<div class="pindou-content">
 			<div class="pindou-titlt">拼豆豆内容</div>
 			<div class="selected-food">
@@ -70,7 +69,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div class="tips">
 			<div class="tips-title">温馨提示</div>
 			<div class="tips-content">
@@ -84,12 +82,11 @@
 				<div class="use-rule">不可与店内其他优惠同时使用</div>
 			</div>
 		</div>
-		
 		<div class="shop-info">
 			<div class="shop-info-title">袁老四的火锅店·蛇口店</div>
 			<div class="location-info justified">
 				<div class="location justified">
-					<div class="location-icon">						
+					<div class="location-icon">
 						<img src="/static/img/share/position.png"/>
 					</div>
 					<div class="address">
@@ -102,7 +99,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div class="pindouing-title">
 			<span class="people-count">1225人</span>
 			<span>正在拼豆豆</span>
@@ -118,7 +114,7 @@
 						<span>还差</span><span class="lack-people">3人</span><span>拼成</span>
 						<p>剩余22:33:44.5</p>
 					</div>
-					<div class="go-pindou"><span>去拼豆</span></div>
+					<div class="go-pindou" v-on:click="goToPindou"><span>去拼豆</span></div>
 				</div>
 			</div>
 			<div class="pindou-box justified">
@@ -131,7 +127,7 @@
 						<span>还差</span><span class="lack-people">3人</span><span>拼成</span>
 						<p>剩余22:33:44.5</p>
 					</div>
-					<div class="go-pindou"><span>去拼豆</span></div>
+					<div class="go-pindou" v-on:click="goToPindou"><span>去拼豆</span></div>
 				</div>
 			</div>
 		</div>
@@ -139,9 +135,9 @@
 			<div class="initiate-failed">
 				<div class="initiate-failed-title">您还没资格成为拼主哦！</div>
 				<div class="get-qualifications">您可以去购买带有喜豆码商品后获得发起资格，享更多优惠或参与其他拼主已发起的拼豆豆。</div>
-				<div class="join-other-btn"><span>参与其他拼豆豆</span></div>
+				<div class="join-other-btn" v-on:click="joinOther"><span>参与其他拼豆豆</span></div>
 			</div>
-			<div class="close-join-other">
+			<div class="close-join-other" v-on:click="closeSign">
 				<img src="/static/img/share/close.png" alt="" />
 			</div>
 		</div>
@@ -188,7 +184,7 @@
 				</div>
 				<div class="join-pindou-btn"><span>参与拼豆豆</span></div>
 			</div>
-			<div class="close-join-pindou">
+			<div class="close-join-pindou" v-on:click="closePindou">
 				<img src="/static/img/share/close.png" alt="" />
 			</div>
 		</div>
@@ -205,7 +201,7 @@
 				<span class="initiate-remark">拼主拼团成功将获得额外奖励</span>
 				<img class="pindou-question" src="/static/img/share/question.png"/>
 			</div>
-			<div class="initiate-btn">
+			<div class="initiate-btn" v-on:click="signPindou">
 				<span>发起拼豆豆</span>
 			</div>
 		</div>
@@ -220,7 +216,7 @@ import axios from 'axios'
 import $ from 'jquery'
 import Swiper from 'swiper'
 export default {
-	name: 'shopDetails',
+	name: 'pindouDetails',
 	// i18n: i18n,
 	components: {
 	},
@@ -246,12 +242,31 @@ export default {
 	},
 	methods: {
 		goToPindou: function () {
+			var cliheight = $(window).height();
+			$('.mask1, .mask2').height(cliheight + 100)
 			$(".join-pindou-box, .mask2").show()
-			// $(".initiate-box").hide()
+			$(".initiate-box").hide()
 		},
 		closePindou: function () {
-			// $(".join-pindou-box, .mask2").hide()
-			// $(".initiate-box").show()
+			$(".join-pindou-box, .mask2").hide()
+			$(".initiate-box").show()
+		},
+		signPindou: function () {
+			var cliheight = $(window).height();
+			$('.mask1, .mask2').height(cliheight + 100)
+			$(".initiate-failed-box, .mask2").show()
+			$(".initiate-box").hide()
+		},
+		closeSign: function () {
+			$(".initiate-failed-box, .mask2").hide()
+			$(".initiate-box").show()
+		},
+		joinOther: function () {
+			$(".initiate-failed-box, .mask2").hide()
+			$(".initiate-box").show()
+			$("html,body").animate({
+				scrollTop: $(".pindouing").offset().top
+			}, 500)
 		}
 	}
 }

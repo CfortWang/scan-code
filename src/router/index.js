@@ -15,6 +15,7 @@ import ShopDetails from '@/components/share/ShopDetails'
 import PindouDetails from '@/components/share/PindouDetails'
 import PayDeposit from '@/components/share/PayDeposit'
 import PaySuccess from '@/components/share/PaySuccess'
+import ShareRegister from '@/components/share/ShareRegister'
 
 Vue.use(Router)
 
@@ -47,34 +48,39 @@ export default new Router({
       component: AppDown
     },
     {
-      path: '/funnyQuiz',
+      path: '/share/funnyQuiz',
       name: 'FunnyQuiz',
       component: FunnyQuiz
     },
     {
-      path: '/spellBean',
+      path: '/share/spellBean',
       name: 'SpellBean',
       component: SpellBean
     },
     {
-      path: '/shopDetails',
+      path: '/share/shopDetails',
       name: 'ShopDetails',
       component: ShopDetails
     },
     {
-      path: '/pindouDetails',
+      path: '/share/pindouDetails',
       name: 'PindouDetails',
       component: PindouDetails
     },
     {
-      path: '/payDeposit',
+      path: '/share/payDeposit',
       name: 'PayDeposit',
       component: PayDeposit
     },
     {
-      path: '/paySuccess',
+      path: '/share/paySuccess',
       name: 'PaySuccess',
       component: PaySuccess
+    },
+    {
+      path: '/shareRegister',
+      name: 'ShareRegister',
+      component: ShareRegister
     },
     {
       path: '/recommend',

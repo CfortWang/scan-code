@@ -48,9 +48,11 @@
 						<span>2018.08.02 22:33:44 </span>
 					</div>
 					<div>
-						<span>还剩</span>
-						<span>3个</span>
-						<span>名额即可获得优惠 </span>
+						<span></span>
+						<span>猪猪侠豆塞雷</span>
+						<span>发起的拼豆豆还差</span>
+						<span>3人</span>
+						<span>，即可获得优惠 </span>
 					</div>
 				</div>
 			</div>

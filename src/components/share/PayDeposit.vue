@@ -18,7 +18,7 @@
 			<div class="amount-desc">·更多细节请咨询店内工作人员</div>
 			<div class="amount-remark">※最终解释权归商家所有，与深圳喜豆文化发展无关</div>
 		</div>
-		<div class="wechat-pay justified">
+		<div class="wechat-pay justified" v-on:click="changeWePay">
 			<div class="wechat-icon">
 				<img src="/static/img/share/wechat-pay.png"/>
 				<span>微信支付</span>
@@ -27,7 +27,7 @@
 				<img src="/static/img/share/pay-choose.png"/>
 			</div>
 		</div>
-		<div class="alipay justified">
+		<div class="alipay justified" v-on:click="changeAliPay">
 			<div class="alipay-icon">
 				<img src="/static/img/share/alipay.png"/>
 				<span>支付宝支付</span>
@@ -42,7 +42,7 @@
 				<span class="tip-error-msg">请选择支付方式</span>
 			</div>
 		</div>
-		<div class="sure-pay-btn"><span>确认支付</span></div>
+		<div class="sure-pay-btn" v-on:click="paySuccess"><span>确认支付</span></div>
 	</div>
 </template>
 
@@ -55,7 +55,7 @@ import $ from 'jquery'
 import Swiper from 'swiper'
 
 export default {
-	name: 'shopDetails',
+	name: 'payDeposit',
 	// i18n: i18n,
 	components: {
 	},
@@ -67,7 +67,17 @@ export default {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 	},
 	methods: {
-		
+		changeWePay: function () {
+			$(".wechat-pay .pay-choose").show()
+			$(".alipay .pay-choose").hide()
+		},
+		changeAliPay: function () {
+			$(".wechat-pay .pay-choose").hide()
+			$(".alipay .pay-choose").show()
+		},
+		paySuccess: function () {
+
+		}
 	}
 }
 </script>
@@ -169,6 +179,9 @@ p, li{
 .pay-choose{
 	display: none;
 	height: 20px;
+}
+.wechat-pay .pay-choose{
+	display: block;
 }
 .pay-choose img{
 	width: 16px;
