@@ -188,14 +188,14 @@ export default {
 			}
 			axios({ // sign up
 				method: 'POST',
-				// url: process.env.api_url + '/api/register/code',
-				url: 'http://dev-new-api.beanpop.cn/login/register',
+				url: process.env.api_url + '/api/register/code',
+				// url: 'http://dev-new-api.beanpop.cn/login/register',
 				params: {
 					phoneNumber: this.phoneNumber,
 					country: this.selectedCountry,
 					// country: 'zh',
 					code: this.verificationCode,
-					mobileOs: this.phoneKind,
+					// mobileOs: this.phoneKind,
 					password: this.password1,
 					recommendCode: this.recommendCode
 				}
@@ -205,53 +205,54 @@ export default {
 				// console.log(responseMessage)
 				// console.log(responseData)
 				var getParams = this.$route.params
-				if (getParams.type === 'event') {
-					var qrCode = getParams.qrCode
-					var num1 = getParams.yellowBall[0]
-					var num2 = getParams.yellowBall[1]
-					var num3 = getParams.yellowBall[2]
-					var num4 = getParams.yellowBall[3]
-					var num5 = getParams.yellowBall[4]
-					var num6 = getParams.yellowBall[5]
-					var num7 = getParams.greenBall[0]
-					var tmpUser = getParams.tempUser
+				console.log(getParams.type)
+				// if (getParams.type === 'event') {
+				// 	var qrCode = getParams.qrCode
+				// 	var num1 = getParams.yellowBall[0]
+				// 	var num2 = getParams.yellowBall[1]
+				// 	var num3 = getParams.yellowBall[2]
+				// 	var num4 = getParams.yellowBall[3]
+				// 	var num5 = getParams.yellowBall[4]
+				// 	var num6 = getParams.yellowBall[5]
+				// 	var num7 = getParams.greenBall[0]
+				// 	var tmpUser = getParams.tempUser
 
-					axios({
-						method: 'POST',
-						url: process.env.api_url + '/api/entries/phone-num',
-						params: {
-							code: qrCode,
-							num_1: num1,
-							num_2: num2,
-							num_3: num3,
-							num_4: num4,
-							num_5: num5,
-							num_6: num6,
-							num_7: num7,
-							country: getParams.countryCode,
-							phone_num: getParams.phoneNumber,
-							temp_user: tmpUser
-						}
-					}).then((response) => {
-						// var responseMessage = response.data.message
-						// var responseData = response.data.data
-						// console.log(responseMessage)
-						// console.log(responseData)
+				// 	axios({
+				// 		method: 'POST',
+				// 		url: process.env.api_url + '/api/entries/phone-num',
+				// 		params: {
+				// 			code: qrCode,
+				// 			num_1: num1,
+				// 			num_2: num2,
+				// 			num_3: num3,
+				// 			num_4: num4,
+				// 			num_5: num5,
+				// 			num_6: num6,
+				// 			num_7: num7,
+				// 			country: getParams.countryCode,
+				// 			phone_num: getParams.phoneNumber,
+				// 			temp_user: tmpUser
+				// 		}
+				// 	}).then((response) => {
+				// 		// var responseMessage = response.data.message
+				// 		// var responseData = response.data.data
+				// 		// console.log(responseMessage)
+				// 		// console.log(responseData)
 
-						// save the phone number has been registed success
-						var phoneNum = document.getElementById('phoneNum').value
-						vueCookie.set('qr_phone_num', phoneNum, 1)
-						this.$i18n.phone = vueCookie.get('qr_phone_num')
-						this.currentPhoneNum = vueCookie.get('qr_phone_num')
-						this.$router.push({name: 'AppDown', params: {code: 'default'}})
-					}).catch((ex) => {
-						console.log(ex)
-						// var errorResponseData = ex.response.data
-						// console.log(errorResponseData)
-					})
-				} else if (getParams.type === 'recommend') {
-					this.$router.push({name: 'AppDown', params: {code: 'recommend'}})
-				}
+				// 		// save the phone number has been registed success
+				// 		var phoneNum = document.getElementById('phoneNum').value
+				// 		vueCookie.set('qr_phone_num', phoneNum, 1)
+				// 		this.$i18n.phone = vueCookie.get('qr_phone_num')
+				// 		this.currentPhoneNum = vueCookie.get('qr_phone_num')
+				// 		this.$router.push({name: 'AppDown', params: {code: 'default'}})
+				// 	}).catch((ex) => {
+				// 		console.log(ex)
+				// 		// var errorResponseData = ex.response.data
+				// 		// console.log(errorResponseData)
+				// 	})
+				// } else if (getParams.type === 'recommend') {
+				// 	this.$router.push({name: 'AppDown', params: {code: 'recommend'}})
+				// }
 			}).catch((ex) => {
 				console.log(ex)
 				var responseStatus = ex.response.status
