@@ -16,6 +16,7 @@ import PindouDetails from '@/components/share/PindouDetails'
 import PayDeposit from '@/components/share/PayDeposit'
 import PaySuccess from '@/components/share/PaySuccess'
 import ShareRegister from '@/components/share/ShareRegister'
+import Login from '@/components/share/Login'
 
 Vue.use(Router)
 
@@ -81,6 +82,11 @@ export default new Router({
       path: '/shareRegister',
       name: 'ShareRegister',
       component: ShareRegister
+    },
+    {
+      path: '/share/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/recommend',

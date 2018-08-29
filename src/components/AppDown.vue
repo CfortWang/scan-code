@@ -60,11 +60,13 @@
       </div>
     </div>
     <div class="son" v-bind:class="{showInWechat: noActive, notShowInWechat: isActive}">
-      <div class="mask"></div>
       <div class="ready-box">
         <div class="ready-img">
-        <!-- <img src="https://www.beanpop.cn/img/live_weixin.png"> -->
-        <img src="/static/img/app_down/live_weixin.png" alt="">
+          <img src="/static/img/app_down/phone.png" alt="">
+        </div>
+        <div class="ready-text">
+          <p>下载「喜豆」客户端, 新人领取100喜豆点</p>
+          <p>参与抽奖获得更多优惠</p>
         </div>
       </div>
     </div>
@@ -244,7 +246,7 @@ export default {
 
 .header-language-text select {
   height:40px;
-  background-color:#FFCB00;
+  background-color:#FFE300;
   /* color:#FFFFFF; */
   border:0px;
   padding-left:5px;
@@ -273,7 +275,7 @@ export default {
 }
 .app-down {
   height:100vh;
-  background-color:#FFCB00;
+  background-color:#FFE300;
   background-repeat: no-repeat;
   background-size:120%;
   background-position:center 260px;
@@ -310,7 +312,7 @@ export default {
 }
 
 .down-btn {
-  background-color:#FFCB00;
+  background-color:#FFE300;
   border:1px solid #FFFFFF;
   color:#FFFFFF;
   border-radius:100px;
@@ -345,7 +347,10 @@ export default {
   display:table-cell;
   vertical-align:middle;
 }
-
+.son{
+  height: 100vh;
+  background: #57A0FF;
+}
 .ready-box{
   width: 100%;;
   text-align: center;
@@ -354,13 +359,21 @@ export default {
   cursor: pointer;
   z-index: 999;
   }.ready-img{
-  width: 80%;
+  width: 66%;
   margin-top: 10%;
-  margin-left: 13%;
+  margin-left: 17%;
 }
 .ready-img img{
   width: 100%;
   display: inherit;
+}
+.ready-text{
+  font-size: 15px;
+  color: #FFFFFF;
+  margin-top: 30px;
+}
+.ready-text p{
+  margin: 0px;
 }
 .mask {
   position: absolute;

@@ -84,7 +84,7 @@
     "appDownMessage": "앱에서 응모현황, 당첨현황 등을 확인할 수 있습니다."
   },
   "zh": {
-    "title": "抽奖完成",
+    "title": "喜豆大抽奖",
     "rule": {
       "title": "中奖规则",
       "rules": "挑选6颗红豆与一颗蓝豆作为你的竞猜号码",
@@ -102,7 +102,7 @@
       "title3": "劲爆大奖"
     },
     "info": {
-      "title": "登陆领取奖品",
+      "title": "送你喜豆大礼包",
       "date": "申请日期",
       "winningDate": "开奖时间",
       "drawing": "届次",
@@ -113,8 +113,8 @@
     },
     "phone": {
       "title": "确认注册与否",
-      "placeholder": "请输入手机号",
-      "button": "留下手机号，让大奖砸中你"
+      "placeholder": "输入手机号,送你喜豆大礼包",
+      "button": "点击领取"
     },
     "message": {
       "insertPhone": "请输入手机号",
@@ -122,7 +122,7 @@
       "noUser": "加入喜豆大军，完成竞猜30000元大奖就差一步",
       "noUser2": "您已经这么幸运，为什么不继续呢？"
     },
-    "moreInfo": "查看中奖规则",
+    "moreInfo": "中奖规则及说明",
     "appDownMessage": "喜豆一下，有吃有喝有钱拿"
   },
   "ja": {

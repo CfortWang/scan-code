@@ -119,7 +119,7 @@ body {
 }
 
 header {
-  background-color:#FFCB00;
+  background-color:#FFE300;
   display:table;
   text-align:center;
   width:100%;
@@ -194,8 +194,8 @@ header {
 }
 
 .ball-wrapper.yellow {
-  background-color:#EE6807;
-  border:1px solid #EE6807;
+  background-color:#FF5F57;
+  border:1px solid #FF5F57;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -203,12 +203,12 @@ header {
 
 .ball-wrapper.yellow.ballOff {
   background-color:#FFFFFF;
-  color:#EE6807;
+  color:#FF5F57;
 }
 
 .ball-wrapper.green {
-  background-color:#6985C6;
-  border:1px solid #6985C6;
+  background-color:#57A0FF;
+  border:1px solid #57A0FF;
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
@@ -216,7 +216,7 @@ header {
 
 .ball-wrapper.green.ballOff {
   background-color:#FFFFFF;
-  color:#6985C6;
+  color:#57A0FF;
 }
 
 .ball-wrapper.yellow-1 {
@@ -455,8 +455,10 @@ header {
 .event-round-wrapper{
   width: 100%;
   background:rgba(248,248,248,1);
-  padding:12px 15px;
+  padding:12px 0px;
   font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 .moreData{
   display: none;
@@ -471,17 +473,15 @@ header {
 .event-round-left-wrapper {
   width: 60%;
   text-align: left;
+  display: flex;
+  flex: 2;
+  margin-left: 15px;
 }
 
 .event-round {
-  width: 30%;
+  width: 20%;
   line-height: 14px;
   color: #666;
-}
-
-.event-round-right-wrapper {
-  padding-left: 20px;
-  width: 100%;
 }
 
 .event-intro-ball-wrapper{
@@ -491,13 +491,13 @@ header {
 .event-intro-ball-wrapper .ball-size {
   margin-left:10px;
   overflow:hidden;
-  /* color:rgba(255,95,87,1); */
+  color:rgba(255,95,87,1);
 }
 .event-intro-ball-wrapper .ball-size:first-child{
   margin-left: 0px;
 }
 .event-intro-ball-wrapper .ball-size:last-child{
-  /* color:rgba(87,160,255,1); */
+  color:rgba(87,160,255,1);
 }
 .event-intro-ball-wrapper .ball-size:before {
   content:'';
@@ -512,14 +512,25 @@ header {
   width:100%;
   font-size: 14px;
 }
-@media (max-width: 366px){
+
+@media (max-width: 376px){
   .event-intro-ball-wrapper .ball-size{
     margin-left: 8px;
   }
 }
-@media (max-width: 338px){
+@media (max-width: 350px){
   .event-intro-ball-wrapper .ball-size{
     margin-left: 6px;
+  }
+}
+@media (max-width: 330px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 4px;
+  }
+}
+@media (max-width: 302px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 2px;
   }
 }
 </style>

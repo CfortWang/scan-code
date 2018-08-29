@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <div class="reg-box">
+        <div class="login-box">
             <div class="phone-num-box">
                 <select name="" v-on:change="countryChangeItem($event)">
                     <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
@@ -14,17 +14,7 @@
 				</vue-countdown>
                 <button class="get-verification" v-on:click="getVerification">获取验证码</button>
             </div>
-            <div class="password-box">
-                <input type="password" name="pwd" id="pwd" value="" v-bind:placeholder="$t('placeholder.password')"/>
-            </div>
-            <div class="re-password-box">
-                <input type="password" name="" id="rePwd" value="" v-bind:placeholder="$t('placeholder.rePassword')"/>
-            </div>
-            <div class="recommend-box">
-                <input type="text" name="recommend" id="recommend" value="" v-bind:placeholder="$t('placeholder.recommend')"/>
-            </div>
-            <div class="reg-success-desc">{{ $t("regAward")}}</div>
-            <div class="reg-btn-box" v-on:click="doRegister">{{ $t("ensureReg")}}</div>
+            <div class="login-btn-box" v-on:click="doLogin">{{ $t("login")}}</div>
 			<div class="tip-container">
 				<div class="tip-error">
 					<img src="/static/img/share/error.png"/>
@@ -47,11 +37,11 @@ const langData = require('../lang/share.json')
 
 Vue.use(VueI18n)
 const i18n = new VueI18n({
-  locale: 'shareRegister',
+  locale: 'login',
   messages: langData
 })
 export default {
-	name: 'shareRegister',
+	name: 'login',
 	i18n: i18n,
 	components: {
 		VueCountdown
@@ -111,21 +101,20 @@ export default {
 			this.type = 'sign_up'
 			axios({ // get verification code
 				method: 'POST',
-				// url: process.env.api_url + '/api/certifications/phone-num/sign-up',
-				url: 'http://dev-new-api.beanpop.cn/login/sendCode',
-				params: { phoneNumber: this.phoneNumber, country: this.selectedCountry, type: this.type }
+				url: process.env.api_url + '/api/certifications/phone-num/sign-up',
+				// url: 'http://result.eolinker.com/MnuF6m4bd13e4d683ae76277d42bc7ece74b1c46c6303da?uri=/login/sendCode?type=' + this.type,
+				params: { phone_num: this.phoneNumber, country: this.selectedCountry }
 			}).then((response) => {
-				console.log(response)
-				// var responseMessage = response.data.message
-				// var responseData = response.data.data
-				// console.log(responseMessage)
-				// console.log(responseData)
-				// // alert(this.$i18n.t('message.sendSuccess'))
-				// var now = new Date()
-				// var setNow = new Date(now.getTime() + 180000)
-				// this.countDown = setNow - now
-				// this.$refs.countdown.init()
-				// this.$refs.countdown.start()
+				var responseMessage = response.data.message
+				var responseData = response.data.data
+				console.log(responseMessage)
+				console.log(responseData)
+				// alert(this.$i18n.t('message.sendSuccess'))
+				var now = new Date()
+				var setNow = new Date(now.getTime() + 180000)
+				this.countDown = setNow - now
+				this.$refs.countdown.init()
+				this.$refs.countdown.start()
 			}).catch((ex) => {
 				console.log(ex)
 				$(".tip-error").text(this.$i18n.t('message.sendFail'))
@@ -135,14 +124,9 @@ export default {
 				// console.log(errorResponseData)
 			})
 		},
-		doRegister: function () {
+		doLogin: function () {
 			this.phoneNumber = $("#phoneNum").val().replace(/ /gi, '')
-			this.password1 = $("#pwd").val().replace(/ /gi, '')
-			this.password2 = $("#rePwd").val().replace(/ /gi, '')
-			this.recommendCode = $("#recommend").val().replace(/ /gi, '')
 			this.verificationCode = $("#verification").val().replace(/ /gi, '')
-			console.log(this.verificationCode)
-			this.phoneNumber = $("#phoneNum").val()
 			// if (!this.termsChecked) {
 			// 	alert(this.$i18n.t('message.termsCheck'))
 			// 	return false
@@ -162,41 +146,16 @@ export default {
 				this.$options.methods.showMessage()
 				return false
 			}
-			if (this.password1 === '') {
-				$(".tip-error").text(this.$i18n.t('message.insertPW'))
-				this.$options.methods.showMessage()
-				return false
-			}
-			if (this.password1.length < 8 || this.password1.length > 20) {
-				$(".tip-error").text(this.$i18n.t('message.wrongPWSize'))
-				this.$options.methods.showMessage()
-				return false
-			}
-			if (this.password2 === '') {
-				$(".tip-error").text(this.$i18n.t('message.rePwd'))
-				this.$options.methods.showMessage()
-				return false
-			}
-			if (this.password1 !== this.password2) {
-				$(".tip-error").text(this.$i18n.t('message.differentPW'))
-				this.$options.methods.showMessage()
-				return false
-			}
-			if (this.recommendCode !== '' && this.recommendCode.length !== 6) {
-				$(".tip-error").text(this.$i18n.t('message.wrongRecommendCodeSize'))
-				this.$options.methods.showMessage()
-				return false
-			}
 			axios({ // sign up
 				method: 'POST',
-				// url: process.env.api_url + '/api/register/code',
-				url: 'http://dev-new-api.beanpop.cn/login/register',
+				url: process.env.api_url + '/api/register/code',
+				// url: 'http://dev-new-api.beanpop.cn/login/register',
 				params: {
 					phoneNumber: this.phoneNumber,
 					country: this.selectedCountry,
 					// country: 'zh',
 					code: this.verificationCode,
-					mobileOs: this.phoneKind,
+					// mobileOs: this.phoneKind,
 					password: this.password1,
 					recommendCode: this.recommendCode
 				}
@@ -207,16 +166,6 @@ export default {
 				// console.log(responseData)
 				var getParams = this.$route.params
 				console.log(getParams.type)
-				// if (getParams.type === 'event') {
-				// 	var qrCode = getParams.qrCode
-				// 	var num1 = getParams.yellowBall[0]
-				// 	var num2 = getParams.yellowBall[1]
-				// 	var num3 = getParams.yellowBall[2]
-				// 	var num4 = getParams.yellowBall[3]
-				// 	var num5 = getParams.yellowBall[4]
-				// 	var num6 = getParams.yellowBall[5]
-				// 	var num7 = getParams.greenBall[0]
-				// 	var tmpUser = getParams.tempUser
 
 				// 	axios({
 				// 		method: 'POST',
@@ -310,10 +259,10 @@ input::-moz-placeholder, textarea::-moz-placeholder {
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color:#CCC;
 }
-.reg-box{
+.login-box{
 	padding-top: 15px;
 }
-.phone-num-box, .verification-code-box, .password-box, .re-password-box, .recommend-box{
+.phone-num-box, .verification-code-box{
 	width: 70%;
 	margin-left: 15%;
 	display: flex;
@@ -349,7 +298,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .get-verification:focus{
 	outline: none;
 }
-.reg-box input{
+.login-box input{
 	flex: 1;
 	height: 20px;
 	padding: 0px;
@@ -359,16 +308,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	-webkit-appearance: none;
 	font-size: 14px;
 }
-.reg-box input:focus{
+.login-box input:focus{
 	outline: none;
 }
-.reg-success-desc{
-	font-size: 12px;
-	color: #999999;
-	text-align: center;
-	padding-top: 8px;
-}
-.reg-btn-box{
+.login-btn-box{
 	width: 70%;
 	background:linear-gradient(90deg,rgba(255,222,0,1) 0%,rgba(255,230,0,1) 100%);
 	border-radius:22px;

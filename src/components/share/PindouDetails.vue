@@ -242,7 +242,7 @@ export default {
 	},
 	methods: {
 		goToPindou: function () {
-			var cliheight = $(window).height();
+			var cliheight = $(window).height()
 			$('.mask1, .mask2').height(cliheight + 100)
 			$(".join-pindou-box, .mask2").show()
 			$(".initiate-box").hide()
@@ -252,7 +252,7 @@ export default {
 			$(".initiate-box").show()
 		},
 		signPindou: function () {
-			var cliheight = $(window).height();
+			var cliheight = $(window).height()
 			$('.mask1, .mask2').height(cliheight + 100)
 			$(".initiate-failed-box, .mask2").show()
 			$(".initiate-box").hide()

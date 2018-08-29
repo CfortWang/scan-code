@@ -22,132 +22,116 @@
         </div>
       </div>
     </transition>
-
-    <!-- <div class="ready-box">
-      <div class="ready-img">
-          <img v-bind:src="readyImgUrl" v-on:click="goEvent">
-      </div>
-    </div> -->
     <div class="ready-box">
-        <img src="static/img/event/ready-top.png" class="ready-top">
-      <div class="ready-middle">
-        <img v-bind:src="readyImgUrl">
-        <button class="ready-btn" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
+      <div class="ready-img">
+        <img v-bind:src="readyImgArr" v-on:click="goEvent" usemap="#alert-map">
+        <!-- <map name="alert-map" v-on:click="goEvent">
+            <area shape="rect" coords="30,313,260,362" alt="know" class="maparea"/>
+        </map> -->
       </div>
     </div>
     <!-- <div class="ready-box">
-        <img class="ready-logo" src="/static/img/complete/rule-logo.png">
-        <div class="ready-border">
-          <div class="ready">
-            <div class="ready-title">{{ $t("ready.title") }}</div>
-            <div class="ready-body">
-              <img v-bind:src="readyImgUrl">
-            </div>
-          <div class="ready-button">
-            <button class="btn-right" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
-          </div>
-        </div>
+      <img src="static/img/event/ready-top.png" class="ready-top">
+      <div class="ready-middle">
+        <img v-bind:src="readyImgUrl">
+        <button class="ready-btn" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
       </div>
     </div> -->
     <header>
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
       </div>
-      <div class="header-language-wrapper">
-        <img src="/static/img/icon/language_icon_black.png">
-        <div class="header-language-text float-wrapper">
-          <select v-on:change="changeItem($event)" class="float-l">
-            <option v-for="item in items" v-bind:key="item.index" v-bind:value="item.value" :selected="currentLanguage === item.value">{{item.title}}</option>
-          </select>
-          <div class="language-arrow-wrapper fs-05 float-l dsp-table">
-            <div class="dsp-table-cell">▼</div>
-          </div>
-        </div>
-      </div>
     </header>
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
-      <div class="event-intro-wrapper">
-        <div class="event-intro-top-wrapper float-wrapper">
-          <div class="event-intro-top-title float-l dsp-table">
-            <div class="dsp-table-cell fs-auto1">{{ $t("selectedNum") }}</div>
-          </div>
-          <div class="event-intro-top-ball float-r dsp-table">
-            <div class="event-intro-ball-wrapper float-wrapper dsp-table-cell">
-              <div class="ball-wrapper ball-size float-l yellow" v-if="selected1">
-                <div class="ball-size-item">{{selected1}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l gray" v-else>
-              </div>
-              <div class="ball-wrapper ball-size float-l yellow" v-if="selected2">
-                <div class="ball-size-item">{{selected2}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l gray" v-else>
-              </div>
-              <div class="ball-wrapper ball-size float-l yellow" v-if="selected3">
-                <div class="ball-size-item">{{selected3}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l gray" v-else>
-              </div>
-              <div class="ball-wrapper ball-size float-l yellow" v-if="selected4">
-                <div class="ball-size-item">{{selected4}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l gray" v-else>
-              </div>
-              <div class="ball-wrapper ball-size float-l yellow" v-if="selected5">
-                <div class="ball-size-item">{{selected5}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l gray" v-else>
-              </div>
-              <div class="ball-wrapper ball-size float-l yellow" v-if="selected6">
-                <div class="ball-size-item">{{selected6}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l gray" v-else>
-              </div>
-              <div class="ball-wrapper ball-size float-l green" v-if="selected7">
-                <div class="ball-size-item">{{selected7}}</div>
-              </div>
-              <div class="ball-wrapper ball-size float-l gray" v-else>
-              </div>
+      <div class="event-round-wrapper">
+        <div class="event-round-left-wrapper float-wrapper">
+          <div class="event-round">{{round[0]}}{{ $t("round") }}</div>
+          <div class="event-intro-ball-wrapper float-wrapper justified">
+            <div class="ball-wrapper ball-size float-l">
+              <div class="ball-size-item">{{ballNums0[0]}}</div>
+            </div>
+            <div class="ball-wrapper ball-size float-l">
+              <div class="ball-size-item">{{ballNums0[1]}}</div>
+            </div>
+            <div class="ball-wrapper ball-size float-l">
+              <div class="ball-size-item">{{ballNums0[2]}}</div>
+            </div>
+            <div class="ball-wrapper ball-size float-l">
+              <div class="ball-size-item">{{ballNums0[3]}}</div>
+            </div>
+            <div class="ball-wrapper ball-size float-l">
+              <div class="ball-size-item">{{ballNums0[4]}}</div>
+            </div>
+            <div class="ball-wrapper ball-size float-l">
+              <div class="ball-size-item">{{ballNums0[5]}}</div>
+            </div>
+            <div class="ball-wrapper ball-size float-l">
+              <div class="ball-size-item">{{ballNums0[6]}}</div>
             </div>
           </div>
         </div>
-        <div class="event-intro-desc-wrapper float-wrapper">
-          <div class="float-l fs-auto">
-          {{ $t("guidMsg1") }}<span class="event-text-red">6{{ $t("guidMsg2") }}</span>{{ $t("guidMsg4") }}<span class="event-text-blue">1{{ $t("guidMsg3") }}</span>
-          </div>
-          <div class="desc-text float-r fs-09 dsp-table" v-on:click="openModal">
-            <!-- <img src="/static/img/event/question.jpg"> -->
-            <!-- {{ $t("desc") }} -->
-          </div>
-          <div class="ques" v-on:click="openModal"><img src="/static/img/event/nav_question.png"></div>
+        <div class="event-round-right-wrapper float-l" v-on:click="getMoreWinner">
+          <div class="lastTenRound">{{ $t("lastTenRound") }}<img class="round-icon1" src="/static/img/event/close.png" alt=""><img class="round-icon2" src="/static/img/event/open.png" alt=""></div>
+          <!-- <div class="round-icon1"><img class="round-icon1" src="/static/img/event/close.png" alt=""></div>
+          <div class="round-icon2"><img class="round-icon2" src="/static/img/event/open.png" alt=""></div> -->
         </div>
       </div>
+      <div class="moreData"></div>
       <div class="event-balls-wrapper float-wrapper">
-        <button class="ball-wrapper responsive-size float-l yellow" v-for="item in yellowItems" v-bind:key="item.ballKey" v-bind:class="{ballOff: !item.active}" v-on:click="yellowBallClicked(item.number)">
-          <span v-if="item.number < 10">
-            0{{item.number}}
-          </span>
-          <span v-else>
-            {{item.number}}
-          </span>
-        </button>
-        <button class="ball-wrapper responsive-size float-l green" v-for="item in greenItems" v-bind:key="item.ballKey" v-bind:class="{ ballOff: !item.active }" v-on:click="greenBallClicked(item.number)">
-          <span v-if="item.number < 10">
-            0{{item.number}}
-          </span>
-          <span v-else>
-            {{item.number}}
-          </span>
-        </button>
+        <div class="select-ball-title">
+          <span class="ball-kind">{{ $t("ball.redBall") }}</span>
+          <span class="plz-select">{{ $t("ball.selectRedBall") }}</span>
+        </div>
+        <div class="red-ball-wrapper clear-fix">
+          <button class="ball-wrapper responsive-size float-l yellow" v-for="item in yellowItems" v-bind:key="item.ballKey" v-bind:class="{ballOff: !item.active}" v-on:click="yellowBallClicked(item.number)">
+            <span v-if="item.number < 10">
+              0{{item.number}}
+            </span>
+            <span v-else>
+              {{item.number}}
+            </span>
+          </button>
+        </div>
+        <div class="select-ball-title">
+          <span class="ball-kind">{{ $t("ball.blueBall") }}</span>
+          <span class="plz-select">{{ $t("ball.selectBlueBall") }}</span>
+        </div>
+        <div class="blue-ball-wrapper clear-fix">
+          <button class="ball-wrapper responsive-size float-l green" v-for="item in greenItems" v-bind:key="item.ballKey" v-bind:class="{ ballOff: !item.active }" v-on:click="greenBallClicked(item.number)">
+            <span v-if="item.number < 10">
+              0{{item.number}}
+            </span>
+            <span v-else>
+              {{item.number}}
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="dividing-line"></div>
+      <div class="event-bottom-text clear-fix">
+        <div class="winTimeBox">
+          <span class="nowRound">{{nowRound}}{{ $t("round") }}</span>
+          <span class="winTime">{{ $t("winTime") }}</span>
+        </div>
+        <div class="pointCount">
+          <span class="pointText1">{{ $t("prizePool") }}</span>
+          <span class="pointText2">{{prizePool}}</span>
+          <span class="pointText3">{{ $t("seedoPoint") }}</span>
+        </div>
       </div>
       <div class="event-btn-wrapper float-wrapper">
-        <div class="w-50 float-l">
+        <div class="w-30-l float-l">
+          <div class="re-btn-wrapper">
+            <button type="button" class="btn btn-re-select fs-11" v-on:click="reSelect">{{ $t("reSelect") }}</button>
+          </div>
+        </div>
+        <div class="w-30-l float-l">
           <div class="auto-btn-wrapper">
             <button type="button" class="btn btn-auto-select fs-11" v-on:click="autoSelect">{{ $t("autoSelect") }}</button>
           </div>
         </div>
-        <div class="w-50 float-l">
+        <div class="w-30 float-r">
           <div class="confirm-btn-wrapper">
             <button type="button" class="btn btn-confirm fs-11" v-on:click="confirmGame">{{ $t("confirm") }}</button>
           </div>
@@ -170,7 +154,6 @@ const langData = require('./lang/event.json')
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
-  phone: '',
   messages: langData
 })
 
@@ -200,13 +183,26 @@ export default {
       selected5: '',
       selected6: '',
       selected7: '',
+      pastWinnerNum: [],
+      round: [],
+      nowRound: '',
+      prizePool: '',
+      ballNums0: [],
+      ballNums1: [],
+      ballNums2: [],
+      ballNums3: [],
+      ballNums4: [],
+      ballNums5: [],
+      ballNums6: [],
+      ballNums7: [],
+      ballNums8: [],
+      ballNums9: [],
       items: [
         {title: 'English', value: 'en'},
-        {title: '한국어', value: 'ko'},
+        {title: '???', value: 'ko'},
         {title: '中国', value: 'zh'}
       ],
       currentLanguage: 'zh',
-      currentPhoneNum: '',
       skipAD: null,
       banner: null,
       bottomAd: null,
@@ -218,10 +214,6 @@ export default {
   },
   created: function () {
     var qrCode = this.$route.query.code
-    if (vueCookie.get('qr_phone_num')) {
-      this.$i18n.phone = vueCookie.get('qr_phone_num')
-    }
-    console.log(this.$i18n.phone)
     Vue.prototype.GLOBAL = _global
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
@@ -258,54 +250,23 @@ export default {
         vueCookie.set('qr_language', 'zh', 1)
       }
     }
-    // console.log(getIP)
-    // if (vueCookie.get('qr_language')) {
-    //   this.$i18n.locale = vueCookie.get('qr_language')
-    //   this.currentLanguage = vueCookie.get('qr_language')
-    // } else if (getIP == 'CN') {
-    //   this.$i18n.locale = 'zh'
-    //   this.currentLanguage = 'zh'
-    //   vueCookie.set('qr_language', 'zh', 1)
-    // } else if (getIP == 'KR') {
-    //   this.$i18n.locale = 'ko'
-    //   this.currentLanguage = 'ko'
-    //   vueCookie.set('qr_language', 'ko', 1)
-    // } else {
-    //   this.$i18n.locale = 'en'
-    //   this.currentLanguage = 'en'
-    //   vueCookie.set('qr_language', 'en', 1)
-    // }
 
     if (this.currentLanguage === 'zh') {
       this.readyImgArr = [
-        // '/static/img/event/tanchuang.png'
-        '/static/img/event/H5_alert_1.jpg',
-        '/static/img/event/H5_alert_2.jpg',
-        // '/static/img/event/H5_alert_3.jpg',
-        '/static/img/event/H5_alert_4.jpg',
-        '/static/img/event/H5_alert_5.jpg',
-        '/static/img/event/H5_alert_6.jpg',
-        '/static/img/event/H5_alert_7.jpg',
-        '/static/img/event/H5_alert_8.jpg',
-        '/static/img/event/H5_alert_9.jpg',
-        '/static/img/event/H5_alert_10.jpg',
-        '/static/img/event/H5_alert_11.jpg',
-        '/static/img/event/H5_alert_12.jpg'
+      '/static/img/event/tanchuang.png'
       ]
     } else if (this.currentLanguage === 'ko') {
       this.readyImgArr = [
-        // '/static/img/event/tanchuang.png',
-        '/static/img/event/H5_alert_kr.jpg'
+      '/static/img/event/tanchuang.png'
       ]
     } else {
       this.readyImgArr = [
-        // '/static/img/event/tanchuang.png',
-        '/static/img/event/H5_alert_eng.jpg'
+      '/static/img/event/tanchuang.png'
       ]
     }
-    shuffle(this.readyImgArr)
-    this.readyImgUrl = this.readyImgArr.slice(0, 1)
-    console.log(this.readyImgUrl)
+    // shuffle(this.readyImgArr)
+    // this.readyImgUrl = this.readyImgArr.slice(0, 1)
+    // console.log(this.readyImgUrl)
 
     if (!this.$route.query.code) {
       this.$router.push({name: 'AppDown', params: {code: 'default'}})
@@ -319,6 +280,63 @@ export default {
         // var responseData = response.data.data
         // console.log(responseMessage)
         // console.log(responseData)
+
+        axios({ // get the old winner number
+          method: 'GET',
+          url: process.env.api_url + '/api/drawings/complete'
+        }).then((response) => {
+          // var responseMessage = response.data.message
+          var responseData = response.data.data
+          // console.log(responseData)
+          for (var j = 0; j < 10; j++) {
+            var ballNums = []
+            var ball = 'ballNums' + j
+            for (var k = 1; k <= 7; k++) {
+              var round = responseData[j].drawing_num
+              var ballNum = 'num_' + k
+              ballNums[k - 1] = responseData[j][ballNum]
+              if (ballNums[k - 1] < 10) {
+                ballNums[k - 1] = '0' + ballNums[k - 1]
+              }
+            }
+            this.pastWinnerNum[j] = ballNums
+            this.round[j] = round
+            this[ball] = this.pastWinnerNum[j]
+          }
+          // console.log(this.pastWinnerNum)
+
+          var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
+          var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
+          for (let i = 1; i <= 9; i++) {
+            var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
+            var t = i - 1
+            $('.moreData').append($div1)
+            $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
+            for (var m = 1; m <= 7; m++) {
+              var ballnum = 'ballNums' + i
+              var mm = m-1
+              var ballnums = ""+this[ballnum][mm]+""
+              $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
+              $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
+            }
+          }
+        }).catch((ex) => {
+          console.log(ex)
+        })
+
+        axios({ // get the newest prizePool point
+          method: 'GET',
+          url: process.env.api_url + '/api/drawings/progress'
+        }).then((response) => {
+          // var responseMessage = response.data.message
+          var responseData = response.data.data
+          console.log(responseData)
+          this.nowRound = responseData.drawing_num
+          this.prizePool = responseData.prev_drawing_point + responseData.point
+          console.log(this.prizePool)
+        }).catch((ex) => {
+          console.log(ex)
+        })
 
         axios({ // get skip AD
           method: 'GET',
@@ -398,6 +416,19 @@ export default {
       document.getElementsByClassName('ready-box')[0].style.display = 'none'
       document.getElementsByClassName('contents-wrapper')[0].style.display = 'block'
       document.getElementsByClassName('mask')[0].style.display = 'none'
+    },
+    getMoreWinner: function () {
+      var status = document.getElementsByClassName('moreData')[0].style.display
+      if (status == '' || status == 'none') {
+        document.getElementsByClassName('moreData')[0].style.display = 'block'
+        document.getElementsByClassName('round-icon1')[0].style.display = 'none'
+        document.getElementsByClassName('round-icon2')[0].style.display = 'block'
+      }
+      if (status == 'block') {
+        document.getElementsByClassName('moreData')[0].style.display = 'none'
+        document.getElementsByClassName('round-icon1')[0].style.display = 'block'
+        document.getElementsByClassName('round-icon2')[0].style.display = 'none'
+      }
     },
     yellowBallClicked: function (event) {
       var currentNumber = parseInt(event) - 1
@@ -481,6 +512,19 @@ export default {
         }
       })
       this.selected7 = selectedArray[0]
+    },
+    reSelect: function () {
+      this.yellowItems.forEach(function (value, key) {
+        if (value.active === true) {
+          value.active = false
+        }
+      })
+
+      this.greenItems.forEach(function (value, key) {
+        if (value.active === true) {
+          value.active = false
+        }
+      })
     },
     autoSelect: function (event) {
       this.yellowItems.forEach(function (value, key) {
@@ -652,51 +696,114 @@ export default {
   height:40px;
 }
 
-.event-intro-top-wrapper {
-  margin:0px 3.5vw;
-  padding:10px 0px;
-  border-bottom:1px solid #CCCCCC;
-  height:10vw;
+.event-round-wrapper{
+  width: 100%;
+  background:rgba(248,248,248,1);
+  padding:12px 0px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
-.event-intro-top-title {
-  text-align:left;
-  border-right:1px solid #CCCCCC;
-  width:calc(25% - 1px);
-  height:10vw
+.moreData{
+  width: 100%;
+  display: none;
+  box-shadow:0px 5px 19px 1px rgba(51,85,164,0.18);
+  position: absolute
 }
 
-.event-intro-top-ball {
-  text-align:center;
-  width:calc(75% - 20px);
-  height:10vw;
-  margin-left:10px;
+.moreData .event-round-wrapper:nth-child(odd){
+  /* background:rgba(248,248,248,1); */
+  background: #fff;
+}
+
+.event-round-left-wrapper {
+  width: 60%;
+  text-align: left;
+  display: flex;
+  flex: 2;
+  margin-left: 15px;
+}
+
+.event-round {
+  width: 30%;
+  line-height: 14px;
+  color: #666;
+}
+
+.event-round-right-wrapper {
+  /* padding-left: 20px; */
+  width: 100%;
+  flex: 1;
+}
+
+.event-intro-ball-wrapper{
+  line-height: 14px;
 }
 
 .event-intro-ball-wrapper .ball-size {
-  width:12%;
-  margin-left:calc((30% - 28px)/13);
+  margin-left:8px;
   overflow:hidden;
-  font-size:0.6em;
+  color:rgba(255,95,87,1);
 }
-
+.event-intro-ball-wrapper .ball-size:first-child{
+  margin-left: 0px;
+}
+.event-intro-ball-wrapper .ball-size:last-child{
+  color:rgba(87,160,255,1);
+}
 .event-intro-ball-wrapper .ball-size:before {
   content:'';
   padding-top:100%;
   float:left;
 }
-
+.lastTenRound{
+  line-height: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+.round-icon1{
+  height: 13px;
+  margin-left: 6px;
+}
+.round-icon2{
+  width: 13px;
+  display: none;
+  margin-left: 6px;
+}
 .ball-size-item {
   width:100%;
-  margin-top:28%;
+  /* margin-top:20%; */
   /* margin-top:calc((90vw - 100px)/25); */
-  font-size: 4vw;
+  font-size: 14px;
   /* font-size: calc((100vw - 110px)/20); */
 }
 
-/* .contents-wrapper{
-  display: none;
-} */
+.select-ball-title{
+  margin-top: 20px;
+  font-size: 14px;
+  color: #000;
+}
+.ball-kind{
+  margin-left: 2.5vw;
+}
+.plz-select{
+  color: #999;
+  padding-left: 8px;
+}
+
+.clear-fix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.red-ball-wrapper, .blue-ball-wrapper{
+  margin-top: 15px;
+}
+
 .ready-top{
   margin-top: 30%;
   width: 80%;
@@ -863,8 +970,8 @@ export default {
   height: 100%;
   background-color: #000;
   filter: alpha(opacity=70);
-  -moz-opacity: 0.7;
-  opacity: 0.7;
+  -moz-opacity: 0.5;
+  opacity: 0.5;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -894,12 +1001,12 @@ export default {
 }
 
 .event-text-red {
-  color:#EE6807;
+  color:#FF5F57;
   font-weight:bold;
 }
 
 .event-text-blue {
-  color:#6985C6;
+  color:#57A0FF;
   font-weight:bold;
 }
 
@@ -908,41 +1015,106 @@ export default {
   padding-bottom:20px;
 }
 
+.dividing-line{
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #DDD;
+}
+
+.event-bottom-text{
+  padding: 0px 15px;
+  font-size:16px;
+  font-family: "PingFangSC-Regular";
+  color:rgba(51,51,51,1);
+}
+.winTimeBox{
+  float: left;
+}
+.winTime, .pointText2{
+  color: #EE4E07;
+}
+.pointCount{
+  float: right;
+}
+
 .event-btn-wrapper {
   /* border-top:1px solid #CCCCCC; */
-  padding:20px 3.5vw;
+  padding:15px;
 }
 
-.w-50 {
-  width:50%;
+.w-30 {
+  width:30%;
 }
-
+.w-30-l {
+  width:30%;
+}
+.btn-re-select {
+  background-color:#DDDDDD;
+  border:none;
+  color:#666666;
+}
 .btn-auto-select {
   /* background-color:#FFCB00;
   border:1px solid #FFCB00; */
-  background-color:#6985C6;
-  border:1px solid #6985C6;
+  background-color:#57A0FF;
+  border:none;
   color:#FFFFFF;
+  padding: 10px 0px;
+}
+@media (max-width: 344px){
+  .w-30-l{
+    width: 35%;
+  }
+}
+@media (min-width: 377px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 10px;
+  }
+}
+@media (max-width: 376px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 8px;
+  }
+}
+@media (max-width: 350px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 6px;
+  }
+}
+@media (max-width: 330px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 4px;
+  }
+}
+@media (max-width: 302px){
+  .event-intro-ball-wrapper .ball-size{
+    margin-left: 2px;
+  }
+}
+.re-btn-wrapper{
+  padding-right: 3px;
 }
 
 .auto-btn-wrapper {
-  padding-right:5px;
+  padding-left: 3px;
 }
 
 .btn-confirm {
   /* background-color:#A7AC00;
   border:1px solid #A7AC00; */
-  background-color:#EE6807;
-  border:1px solid #EE6807;
+  background-color:#FF5F57;
+  border:none;
   color:#FFFFFF;
 }
 
 .confirm-btn-wrapper {
-  padding-left:5px;
+  padding-left:3px;
 }
 
 .btn {
   width:100%;
+  height: 44px;
 }
 
 .fs-05 {
@@ -956,8 +1128,11 @@ export default {
 .fs-auto{
   font-size: calc((100vw - 110px)/15);
 }
+
 .fs-auto1{
-  font-size: calc((100vw - 140px)/15);
+  /* font-size: calc((100vw - 140px)/15); */
+  font-size: 14px;
+  line-height: 14px;
 }
 .ques{
   height: 20px;
