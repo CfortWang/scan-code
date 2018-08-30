@@ -61,6 +61,15 @@
     </div>
     <div class="son" v-bind:class="{showInWechat: noActive, notShowInWechat: isActive}">
       <div class="ready-box">
+        <div class="ready-top clear-fix">
+          <div class="ready-top-img">
+            <img src="/static/img/app_down/arrow.png" alt="">
+          </div>
+          <div class="ready-top-text">
+            <p>点击右上角</p>
+            <p>选择在浏览器中打开</p>
+          </div>
+        </div>
         <div class="ready-img">
           <img src="/static/img/app_down/phone.png" alt="">
         </div>
@@ -362,6 +371,29 @@ export default {
   width: 66%;
   margin-top: 10%;
   margin-left: 17%;
+}
+.ready-top{
+  margin-top: 10px;
+}
+.ready-top-text{
+  padding-top: 30px;
+  font-size: 20px;
+  color: #FFFFFF;
+}
+.ready-top-text p{
+  margin: 0px;
+  margin-bottom: 12px;
+}
+.ready-top-img{
+  position: absolute;
+  right: 10%;
+  top: 10px;
+}
+.ready-top-img img{
+  height: 80px;
+}
+.ready-img{
+  margin-top: 22px;
 }
 .ready-img img{
   width: 100%;

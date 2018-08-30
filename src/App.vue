@@ -219,202 +219,6 @@ header {
   color:#57A0FF;
 }
 
-.ball-wrapper.yellow-1 {
-  background-image: url('/static/img/ball/yellow_01.png');
-}
-
-.ball-wrapper.yellow-2 {
-  background-image: url('/static/img/ball/yellow_02.png');
-}
-
-.ball-wrapper.yellow-3 {
-  background-image: url('/static/img/ball/yellow_03.png');
-}
-
-.ball-wrapper.yellow-4 {
-  background-image: url('/static/img/ball/yellow_04.png');
-}
-
-.ball-wrapper.yellow-5 {
-  background-image: url('/static/img/ball/yellow_05.png');
-}
-
-.ball-wrapper.yellow-6 {
-  background-image: url('/static/img/ball/yellow_06.png');
-}
-
-.ball-wrapper.yellow-7 {
-  background-image: url('/static/img/ball/yellow_07.png');
-}
-
-.ball-wrapper.yellow-8 {
-  background-image: url('/static/img/ball/yellow_08.png');
-}
-
-.ball-wrapper.yellow-9 {
-  background-image: url('/static/img/ball/yellow_09.png');
-}
-
-.ball-wrapper.yellow-10 {
-  background-image: url('/static/img/ball/yellow_10.png');
-}
-
-.ball-wrapper.yellow-11 {
-  background-image: url('/static/img/ball/yellow_11.png');
-}
-
-.ball-wrapper.yellow-12 {
-  background-image: url('/static/img/ball/yellow_12.png');
-}
-
-.ball-wrapper.yellow-13 {
-  background-image: url('/static/img/ball/yellow_13.png');
-}
-
-.ball-wrapper.yellow-14 {
-  background-image: url('/static/img/ball/yellow_14.png');
-}
-
-.ball-wrapper.yellow-15 {
-  background-image: url('/static/img/ball/yellow_15.png');
-}
-
-.ball-wrapper.yellow-16 {
-  background-image: url('/static/img/ball/yellow_16.png');
-}
-
-.ball-wrapper.yellow-17 {
-  background-image: url('/static/img/ball/yellow_17.png');
-}
-
-.ball-wrapper.yellow-18 {
-  background-image: url('/static/img/ball/yellow_18.png');
-}
-
-.ball-wrapper.yellow-19 {
-  background-image: url('/static/img/ball/yellow_19.png');
-}
-
-.ball-wrapper.yellow-20 {
-  background-image: url('/static/img/ball/yellow_20.png');
-}
-
-.ball-wrapper.yellow-21 {
-  background-image: url('/static/img/ball/yellow_21.png');
-}
-
-.ball-wrapper.yellow-22 {
-  background-image: url('/static/img/ball/yellow_22.png');
-}
-
-.ball-wrapper.yellow-23 {
-  background-image: url('/static/img/ball/yellow_23.png');
-}
-
-.ball-wrapper.yellow-24 {
-  background-image: url('/static/img/ball/yellow_24.png');
-}
-
-.ball-wrapper.yellow-25 {
-  background-image: url('/static/img/ball/yellow_25.png');
-}
-
-.ball-wrapper.yellow-26 {
-  background-image: url('/static/img/ball/yellow_26.png');
-}
-
-.ball-wrapper.yellow-27 {
-  background-image: url('/static/img/ball/yellow_27.png');
-}
-
-.ball-wrapper.yellow-28 {
-  background-image: url('/static/img/ball/yellow_28.png');
-}
-
-.ball-wrapper.yellow-29 {
-  background-image: url('/static/img/ball/yellow_29.png');
-}
-
-.ball-wrapper.yellow-30 {
-  background-image: url('/static/img/ball/yellow_30.png');
-}
-
-.ball-wrapper.yellow-31 {
-  background-image: url('/static/img/ball/yellow_31.png');
-}
-
-.ball-wrapper.yellow-32 {
-  background-image: url('/static/img/ball/yellow_32.png');
-}
-
-.ball-wrapper.yellow-33 {
-  background-image: url('/static/img/ball/yellow_33.png');
-}
-
-.ball-wrapper.green-1 {
-  background-image: url('/static/img/ball/green_01.png');
-}
-
-.ball-wrapper.green-2 {
-  background-image: url('/static/img/ball/green_02.png');
-}
-
-.ball-wrapper.green-3 {
-  background-image: url('/static/img/ball/green_03.png');
-}
-
-.ball-wrapper.green-4 {
-  background-image: url('/static/img/ball/green_04.png');
-}
-
-.ball-wrapper.green-5 {
-  background-image: url('/static/img/ball/green_05.png');
-}
-
-.ball-wrapper.green-6 {
-  background-image: url('/static/img/ball/green_06.png');
-}
-
-.ball-wrapper.green-7 {
-  background-image: url('/static/img/ball/green_07.png');
-}
-
-.ball-wrapper.green-8 {
-  background-image: url('/static/img/ball/green_08.png');
-}
-
-.ball-wrapper.green-9 {
-  background-image: url('/static/img/ball/green_09.png');
-}
-
-.ball-wrapper.green-10 {
-  background-image: url('/static/img/ball/green_10.png');
-}
-
-.ball-wrapper.green-11 {
-  background-image: url('/static/img/ball/green_11.png');
-}
-
-.ball-wrapper.green-12 {
-  background-image: url('/static/img/ball/green_12.png');
-}
-
-.ball-wrapper.green-13 {
-  background-image: url('/static/img/ball/green_13.png');
-}
-
-.ball-wrapper.green-14 {
-  background-image: url('/static/img/ball/green_14.png');
-}
-
-.ball-wrapper.green-15 {
-  background-image: url('/static/img/ball/green_15.png');
-}
-
-.ball-wrapper.green-16 {
-  background-image: url('/static/img/ball/green_16.png');
-}
-
 .dsp-table {
   display:table;
 }
@@ -532,5 +336,123 @@ header {
   .event-intro-ball-wrapper .ball-size{
     margin-left: 2px;
   }
+}
+
+/* share */
+.rules{
+	margin-bottom: 4px;
+	line-height: 20px;
+}
+
+.package-data{
+	background:rgba(255,255,255,1);
+	box-shadow:0px 0px 0px 0px rgba(221,221,221,1);
+	border-bottom: 1px solid #DDDDDD;
+	padding: 15px;
+	font-family: "PingFangSC-Regular";
+	display: flex;
+}
+.package-data-box .package-data:last-child{
+	border: none;
+}
+.package-img{
+	width:80px;
+	height:80px;
+	display: inline-block;
+}
+.package-img img{
+	border-radius:4px;
+	width: 100%;
+	height: 100%;
+}
+.package-data-detail{
+	flex: 1;
+	padding-left: 15px;
+	vertical-align: top;
+}
+.package-name{
+	font-size:16px;
+	color: #333333;
+	width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.package-new-price{
+	color: #EE6807;
+	font-family: "PingFangSC-Semibold";
+	font-size: 16px;
+}
+.package-old-price{
+	color: #999999;
+	font-size: 12px;
+}
+.team-scale{
+	float: right;
+}
+.team-scale span{
+	color: #999999;
+	font-size: 14px;
+	display: inline-block;
+	margin-right: 3px;
+}
+.team-scale .go-pindou{
+	display: inline-block;
+}
+.go-pindou{
+	width: 75px;
+	height: 30px;
+	background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
+	border-radius:15px;
+	text-align: center;
+	line-height: 30px;
+}
+.go-pindou span{
+	font-size: 14px;
+}
+
+.shop-coupon{
+	display: flex;
+	background: #FFFFFF;
+	padding: 15px;
+	margin: 10px 15px 0px;
+}
+.coupon-img{
+	width: 60px;
+	height: 60px;
+}
+.coupon-img img{
+	width: 100%;
+  height: 100%;
+	border-radius: 2px;
+}
+.shop-coupon-detail{
+	flex: 1;
+	padding-left: 15px;
+	align-items: center;
+}
+.coupon-name{
+	font-family: "PingFangSC-Semibold";
+	font-size: 14px;
+	color: #333333;
+}
+.store-name, .term{
+	color: #666666;
+	font-size: 10px;
+	line-height: 14px;
+}
+.store-name{
+	margin: 4px 0 8px;
+}
+.use-shop-coupon-btn{
+	float: right;
+	width: 75px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
+	border-radius:15px;
 }
 </style>

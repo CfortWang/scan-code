@@ -16,25 +16,30 @@
 		</div>
 		<div class="fixed-right-btn">打开App</div>
 		<div class="mask2"></div>
+		<div class="download-wrapper">
+			<div class="download-title">下载喜豆APP</div>
+			<div class="download-text">获得更多奖励</div>
+			<div class="download-btn">去下载</div>
+		</div>
 		<div class="shop-name-box">
-			<div class="shop-name">袁老四的火锅店·蛇口店</div>
+			<div class="shop-name">{{shopName}}</div>
 			<div class="operate-time">
 				<img src="/static/img/share/operate_time.png"/>
-				<span>10:00-22:00（法定工作日）</span>
+				<span>{{shopOpenTime}}-{{shopCloseTime}}（法定工作日）</span>
 			</div>
 		</div>
 		<div class="shop-info">
 			<div class="location-info justified">
-				<div class="location justified">
+				<div class="location">
 					<div class="location-icon">
 						<img src="/static/img/share/position.png"/>
 					</div>
 					<div class="address">
-						<span>深圳市南山区蛇口街道石云路喜豆 大厦7楼(招商银行总行对面）</span>
-						<p>距地铁2号线湾厦地铁站D口300米</p>
+						<span>{{shopAddress}}</span>
+						<p>{{addressDetail}}</p>
 					</div>
 				</div>
-				<div class="contact-box">
+				<div class="contact-box" v-on:click="callShop">
 					<img src="/static/img/share/contact.png"/>
 				</div>
 			</div>
@@ -49,122 +54,14 @@
 		</div>
 		<div class="pindou-rule" v-on:click="showRule">
 			<img src="/static/img/share/pin-icon.png"/>
-			<span>拼豆豆规则说明</span>
+			<span>{{ruleTitle}}</span>
 			<div class="open-rule">
 				<img src="/static/img/share/closed.png"/>
 			</div>
 		</div>
-		<div class="rule-detail">
-			<div class="rules">参与拼豆豆需支付押金，拼豆成功可享受优惠</div>
-			<div class="rules">拼豆不成功，则退还用户押金</div>
-			<div class="rules">拼豆成功后，用户不予使用，押金不予退还</div>
-			<div class="rules">拼主可享受额外优惠</div>
-			<div class="rules">购买带有喜豆码商品可获得拼豆发起团机会一次</div>
-		</div>
-		<div class="package-data-box">
-			<div class="package-data">
-				<div class="package-img">
-					<img src="/static/img/share/pindou-img.jpg"/>
-				</div>
-				<div class="package-data-detail">
-					<div class="package-name">招牌双人餐</div>
-					<div class="package-price">
-						<span class="package-new-price">￥2048</span>
-						<span class="package-old-price"><del>8848</del></span>
-					</div>
-					<div class="team-scale">
-						<span>2人成团</span>
-						<div class="go-pindou" v-on:click="goToPindou">去拼豆</div>
-					</div>
-				</div>
-			</div>
-			<div class="package-data">
-				<div class="package-img">
-					<img src="/static/img/share/pindou-img.jpg"/>
-				</div>
-				<div class="package-data-detail">
-					<div class="package-name">招牌双人餐撒大苏打实打实的风速达到撒旦</div>
-					<div class="package-price">
-						<span class="package-new-price">￥2048</span>
-						<span class="package-old-price"><del>8848</del></span>
-					</div>
-					<div class="team-scale">
-						<span>2人成团</span>
-						<div class="go-pindou" v-on:click="goToPindou">去拼豆</div>
-					</div>
-				</div>
-			</div>
-			<div class="package-data">
-				<div class="package-img">
-					<img src="/static/img/share/pindou-img.jpg"/>
-				</div>
-				<div class="package-data-detail">
-					<div class="package-name">招牌双人餐</div>
-					<div class="package-price">
-						<span class="package-new-price">￥2048</span>
-						<span class="package-old-price"><del>8848</del></span>
-					</div>
-					<div class="team-scale">
-						<span>2人成团</span>
-						<div class="go-pindou" v-on:click="goToPindou">去拼豆</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="shop-coupon-box">
-			<div class="shop-coupon">
-				<div class="coupon-img">
-					<img src="/static/img/share/pindou-img.jpg"/>
-				</div>
-				<div class="shop-coupon-detail justified">
-					<div class="coupon-desc">
-						<div class="coupon-name">买一送一</div>
-						<div class="store-name">袁老四的火锅店</div>
-						<div class="term">2018/03/24至2018/05/24</div>
-					</div>
-					<div class="use-shop-coupon-btn">使用</div>
-				</div>
-			</div>
-			<div class="shop-coupon">
-				<div class="coupon-img">
-					<img src="/static/img/share/pindou-img.jpg"/>
-				</div>
-				<div class="shop-coupon-detail justified">
-					<div class="coupon-desc">
-						<div class="coupon-name">买一送一</div>
-						<div class="store-name">袁老四的火锅店</div>
-						<div class="term">2018/03/24至2018/05/24</div>
-					</div>
-					<div class="use-shop-coupon-btn">使用</div>
-				</div>
-			</div>
-			<div class="shop-coupon">
-				<div class="coupon-img">
-					<img src="/static/img/share/pindou-img.jpg"/>
-				</div>
-				<div class="shop-coupon-detail justified">
-					<div class="coupon-desc">
-						<div class="coupon-name">买一送一</div>
-						<div class="store-name">袁老四的火锅店</div>
-						<div class="term">2018/03/24至2018/05/24</div>
-					</div>
-					<div class="use-shop-coupon-btn">使用</div>
-				</div>
-			</div>
-			<div class="shop-coupon">
-				<div class="coupon-img">
-					<img src="/static/img/share/pindou-img.jpg"/>
-				</div>
-				<div class="shop-coupon-detail justified">
-					<div class="coupon-desc">
-						<div class="coupon-name">买一送一</div>
-						<div class="store-name">袁老四的火锅店</div>
-						<div class="term">2018/03/24至2018/05/24</div>
-					</div>
-					<div class="use-shop-coupon-btn">使用</div>
-				</div>
-			</div>
-		</div>
+		<div class="rule-detail"></div>
+		<div class="package-data-box"></div>
+		<div class="shop-coupon-box"></div>
 		<div class="no-mare-data">
 			<div class="nodata-line"></div>
 			<div class="nodata-text">
@@ -183,17 +80,102 @@ import axios from 'axios'
 import $ from 'jquery'
 import Swiper from 'swiper'
 
+const langData = require('../lang/share.json')
+
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'shopDetails',
+  messages: langData
+})
+
 export default {
 	name: 'shopDetails',
-	// i18n: i18n,
+	i18n: i18n,
 	components: {
 	},
 	data () {
 		return {
+			shopName: '',
+			shopOpenTime: '',
+			shopCloseTime: '',
+			shopAddress: '',
+			addressDetail: '',
+			shopPhoneNum: '',
+			ruleTitle: '',
+			rule: []
 		}
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
+		axios({
+			method: 'GET',
+			url: 'http://dev-new-api.beanpop.cn/event/shop/1'
+			// url: 'http://dev-new-api.beanpop.cn/game/recentWinnerRecord'
+		}).then((response) => {
+			var responseData = response.data.data
+			console.log(responseData)
+			this.shopName = responseData.name
+			this.shopOpenTime = responseData.openTime
+			this.shopCloseTime = responseData.closeTime
+			this.shopAddress = responseData.addressDetail
+			this.addressDetail = responseData.nearAddress
+			this.shopPhoneNum = responseData.phoneNum
+			this.ruleTitle = responseData.rule.title
+
+			// get the rule
+			var ruleArr = responseData.rule.content.split('<br>')
+			var $ruleDiv = '<div class="rules"></div>'
+			var ruleBox = $('.rule-detail')
+			for (var i = 0; i < ruleArr.length; i++) {
+				$('.rule-detail').append($ruleDiv)
+				$(".rule-detail .rules:eq(" + i + ")").text(ruleArr[i])
+			}
+
+			// get pdd package data
+			var pddData = responseData.GroupProduct
+			var $pddBox = '<div class="package-data"><div class="package-img"><img src=""/></div><div class="package-data-detail"><div class="package-name"></div><div class="package-price"><span class="package-new-price"></span><span class="package-old-price"><del></del></span></div><div class="team-scale"><span></span><div class="go-pindou">去拼豆</div></div></div></div>'
+			for (i = 0; i < pddData.length; i++) {
+				$('.package-data-box').append($pddBox)
+				var discountedPrice = '￥' + pddData[i].discountedPrice
+				var groupSize = pddData[i].groupSize + '人成团'
+				var pddDataImage = pddData[i].image
+				var price = pddData[i].price
+				var title = pddData[i].title
+				$(".package-data-box .package-data:eq("+ i +") img").attr('src', pddDataImage)
+				$(".package-data-box .package-data:eq("+ i +") .package-name").text(title)
+				$(".package-data-box .package-data:eq("+ i +") .package-new-price").text(discountedPrice)
+				$(".package-data-box .package-data:eq("+ i +") .package-old-price del").text(price)
+				$(".package-data-box .package-data:eq("+ i +") .team-scale span").text(groupSize)
+			}
+
+			// get shop coupon data
+			var couponData = responseData.ShopEvent
+			var $couponBox = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
+			for (i = 0; i < couponData.length; i++) {
+				$('.shop-coupon-box').append($couponBox)
+				var startDate = couponData[i].startDate.replace(/-/,'/') + '至'
+				var endDate = couponData[i].endDate.replace(/-/,'/')
+				var couponImage = couponData[i].image
+				var couponTitle = couponData[i].title
+				$(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
+				$(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
+				$(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(this.shopName)
+				$(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
+				$(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
+			}
+			$('.go-pindou, .use-shop-coupon-btn').click(function () {
+				var cliheight = $(window).height()
+				$('.mask1, .mask2').height(cliheight + 100)
+				$(".download-wrapper, .mask2").show()
+			})
+			$('.mask2').click(function () {
+				$(".download-wrapper, .mask2").hide()
+			})
+		}).catch((ex) => {
+			console.log(ex)
+			// var errorResponseData = ex.response.data
+			// console.log(errorResponseData)
+		})
 	},
 	mounted () {
 		new Swiper('#top-swiper', {
@@ -233,13 +215,10 @@ export default {
 				$(".open-rule img").attr('src', '/static/img/share/closed.png')
 			}
 		},
-		goToPindou: function () {
-			$(".join-pindou-box, .mask2").show()
-			// $(".initiate-box").hide()
-		},
-		closePindou: function () {
-			// $(".join-pindou-box, .mask2").hide()
-			// $(".initiate-box").show()
+		callShop: function () {
+			var tel = 'tel:' + this.shopPhoneNum
+			console.log(tel)
+			window.location.href = "tel:400-825-0266"
 		}
 	}
 }
@@ -290,6 +269,7 @@ p, li{
 	width: 85%;
 	padding-right: 10px;
 	border-right: 1px solid #E6E7E8;
+	display: flex;
 }
 .location img{
 	width: 13px;
@@ -299,6 +279,9 @@ p, li{
 }
 .contact-box img{
 	width: 24px;
+}
+.address{
+	flex: 1;
 }
 .address span{
 	line-height: 20px;
@@ -363,112 +346,12 @@ p, li{
 	margin-bottom: 10px;
 	display: none;
 }
-.rules{
-	margin-bottom: 4px;
-	line-height: 20px;
-}
-.package-data{
-	background:rgba(255,255,255,1);
-	box-shadow:0px 0px 0px 0px rgba(221,221,221,1);
-	border-bottom: 1px solid #DDDDDD;
-	padding: 15px;
-	font-family: "PingFangSC-Regular";
-	display: flex;
-}
-.package-data-box .package-data:last-child{
-	border: none;
-}
-.package-img{
-	width:80px;
-	height:80px;
-	display: inline-block;
-}
-.package-img img{
-	border-radius:4px;
-	width: 100%;
-}
-.package-data-detail{
-	flex: 1;
-	padding-left: 15px;
-	vertical-align: top;
-}
-.package-name{
-	font-size:16px;
-	color: #333333;
-	width: 180px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-.package-new-price{
-	color: #EE6807;
-	font-family: "PingFangSC-Semibold";
-	font-size: 16px;
-}
-.package-old-price{
-	color: #999999;
-	font-size: 12px;
-}
-.team-scale{
-	float: right;
-}
-.team-scale span{
-	color: #999999;
-	font-size: 14px;
-	display: inline-block;
-	margin-right: 3px;
-}
-.team-scale .go-pindou{
-	display: inline-block;
-}
+
 .shop-coupon-box{
 	width: 100%;
 	display: none;
 }
-.shop-coupon{
-	display: flex;
-	background: #FFFFFF;
-	padding: 15px;
-	margin: 10px 15px 0px;
-}
-.coupon-img{
-	width: 60px;
-	height: 60px;
-}
-.coupon-img img{
-	width: 100%;
-	border-radius: 2px;
-}
-.shop-coupon-detail{
-	flex: 1;
-	padding-left: 15px;
-	align-items: center;
-}
-.coupon-desc{
-}
-.coupon-name{
-	font-family: "PingFangSC-Semibold";
-	font-size: 14px;
-	color: #333333;
-}
-.store-name, .term{
-	color: #666666;
-	font-size: 10px;
-	line-height: 14px;
-}
-.store-name{
-	margin: 4px 0 8px;
-}
-.use-shop-coupon-btn{
-	float: right;
-	width: 75px;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
-	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
-	border-radius:15px;
-}
+
 .go-pindou{
 	width: 75px;
 	height: 30px;
@@ -497,5 +380,39 @@ p, li{
 	font-family:"PingFangSC-Light";
 	color:#CCCCCC;
 	margin: 0 12px;
+}
+.download-wrapper{
+	font-family: 'PingFangSC-Regular';
+	width: 80%;
+	background: #FFFFFF;
+	color: #333333;
+	padding: 20px 0px;
+	text-align: center;
+	position: fixed;
+	left: 10%;
+	top: 35%;
+	border-radius:4px;
+	z-index: 50;
+	display: none;
+}
+.download-title{
+	font-size:18px;
+	font-weight:400;
+	line-height:25px;
+}
+.download-text{
+	margin: 12px 0px 16px;
+	font-size:14px;
+	font-weight:400;
+	line-height:20px;
+}
+.download-btn{
+	width: 42%;
+	margin: 0 auto;
+	height:44px;
+	line-height: 44px;
+	background:linear-gradient(90deg,rgba(255,222,0,1) 0%,rgba(255,230,0,1) 100%);
+	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
+	border-radius:22px;
 }
 </style>

@@ -287,7 +287,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	padding: 0px 8px;
 }
 .count-down{
-	vertical-align: middle
+	vertical-align: middle;
+	padding: 3px 5px 0px 0px;
+	font-size: 14px;
 }
 .get-verification{
 	border: none;

@@ -20,12 +20,12 @@
 		<div class="fixed-right-btn">打开App</div>
 		<div class="package">
 			<div class="package-top justified">
-				<div class="package-name">单身贵族套餐&nbsp;&nbsp;3选1</div>
-				<div class="new-price">￥998</div>
+				<div class="package-name">{{packageName}}</div>
+				<div class="new-price">{{newPackagePrice}}</div>
 			</div>
 			<div class="package-bottom justified">
-				<div class="package-desc">5人成团·10086人已拼</div>
-				<div class="old-price"><del>￥2018</del></div>
+				<div class="package-desc">{{packageDesc}}</div>
+				<div class="old-price"><del>{{packagePrice}}</del></div>
 			</div>
 		</div>
 		<div class="pindou-content">
@@ -100,7 +100,7 @@
 			</div>
 		</div>
 		<div class="pindouing-title">
-			<span class="people-count">1225人</span>
+			<span class="people-count">{{groupOnNumber}}人</span>
 			<span>正在拼豆豆</span>
 		</div>
 		<div class="pindouing">
@@ -222,10 +222,36 @@ export default {
 	},
 	data () {
 		return {
+			packageName: '',
+			packagePrice: '',
+			packageDesc: '',
+			newPackagePrice: '',
+			groupSize: '',
+			joinNumber: '',
+			groupOnNumber: ''
 		}
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
+		axios({
+			method: 'GET',
+			url: 'http://dev-new-api.beanpop.cn/event/groupOn/1'
+		}).then((response) => {
+			var responseData = response.data.data
+			console.log(responseData)
+
+			this.packageName = responseData.title
+			this.packagePrice = '￥' + responseData.price
+			this.newPackagePrice = '￥' + responseData.discountedPrice
+			this.groupSize = responseData.groupSize
+			this.joinNumber = responseData.joinNumber
+			this.packageDesc = this.groupSize + '人成团·' + this.joinNumber + '人已拼'
+			this.groupOnNumber = responseData.groupOnNumber
+		}).catch((ex) => {
+			console.log(ex)
+			// var errorResponseData = ex.response.data
+			// console.log(errorResponseData)
+		})
 	},
 	mounted () {
 		new Swiper('#top-swiper', {

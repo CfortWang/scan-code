@@ -16,6 +16,7 @@
   "dependencies": {
     "@xkeshi/vue-countdown": "^0.5.0",
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "countup.js": "^1.9.3",
     "install": "^0.10.4",
     "jquery": "^3.3.1",

@@ -160,6 +160,7 @@
         <div class="hasLogined" v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">
           礼包已放入手机号 : {{currentPhoneNum}}
         </div>
+        <div class="go-to-download">登录或下载APP即可使用</div>
         <div class="dashed-line"></div>
 
         <!-- bottom ad -->
@@ -600,7 +601,6 @@ export default {
   padding-top: 25px;
 }
 
-
 .app-down-wrapper {
   padding:0 20px 30px 20px;
 }
@@ -986,6 +986,19 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 45px;
   text-align: center;
   color: #FFFFFF;
+}
+.go-to-download{
+    width: 86%;
+    margin-left: 7%;
+    margin-top: 20px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background: -webkit-gradient(linear,left top, right top,from(rgba(255,222,0,1)),to(rgba(255,230,0,1)));
+    background: linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(255,226,0,0.3);
+    box-shadow: 0px 2px 4px 0px rgba(255,226,0,0.3);
+    border-radius: 22px;
 }
 @media (max-width: 340px){
   .login-input-wrapper select{

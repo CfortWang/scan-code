@@ -42,6 +42,7 @@ import vueCookie from 'vue-cookie'
 import $ from 'jquery'
 import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
+import bcrypt from 'bcryptjs'
 
 const langData = require('../lang/share.json')
 
@@ -71,7 +72,8 @@ export default {
 			selectedCountry: 1,
 			countDown: setNow - now,
 			phoneKind: '',
-			type: ''
+			type: '',
+			from: 'web'
 		}
 	},
 	created: function () {
@@ -109,6 +111,17 @@ export default {
 		getVerification: function () {
 			this.phoneNumber = $("#phoneNum").val()
 			this.type = 'sign_up'
+			if (this.phoneNumber === '') {
+				$(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
+				this.$options.methods.showMessage()
+				return false
+			}
+			var pattern = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+			if (!pattern.test(this.phoneNumber)) {
+				$(".tip-error").text(this.$i18n.t('message.wrongPhoneNum'))
+				this.$options.methods.showMessage()
+				return false
+			}
 			axios({ // get verification code
 				method: 'POST',
 				// url: process.env.api_url + '/api/certifications/phone-num/sign-up',
@@ -120,12 +133,12 @@ export default {
 				// var responseData = response.data.data
 				// console.log(responseMessage)
 				// console.log(responseData)
-				// // alert(this.$i18n.t('message.sendSuccess'))
-				// var now = new Date()
-				// var setNow = new Date(now.getTime() + 180000)
-				// this.countDown = setNow - now
-				// this.$refs.countdown.init()
-				// this.$refs.countdown.start()
+				// alert(this.$i18n.t('message.sendSuccess'))
+				var now = new Date()
+				var setNow = new Date(now.getTime() + 180000)
+				this.countDown = setNow - now
+				this.$refs.countdown.init()
+				this.$refs.countdown.start()
 			}).catch((ex) => {
 				console.log(ex)
 				$(".tip-error").text(this.$i18n.t('message.sendFail'))
@@ -141,10 +154,9 @@ export default {
 			this.password2 = $("#rePwd").val().replace(/ /gi, '')
 			this.recommendCode = $("#recommend").val().replace(/ /gi, '')
 			this.verificationCode = $("#verification").val().replace(/ /gi, '')
-			console.log(this.verificationCode)
-			this.phoneNumber = $("#phoneNum").val()
+			this.from = 'web'
 			// if (!this.termsChecked) {
-			// 	alert(this.$i18n.t('message.termsCheck'))
+				// 	alert(this.$i18n.t('message.termsCheck'))
 			// 	return false
 			// }
 			if (this.phoneNumber === '') {
@@ -187,6 +199,9 @@ export default {
 				this.$options.methods.showMessage()
 				return false
 			}
+			var salt = bcrypt.genSaltSync(10)
+			this.password = bcrypt.hashSync(this.password1, salt)
+			console.log(this.password)
 			axios({ // sign up
 				method: 'POST',
 				// url: process.env.api_url + '/api/register/code',
@@ -197,16 +212,35 @@ export default {
 					// country: 'zh',
 					code: this.verificationCode,
 					mobileOs: this.phoneKind,
-					password: this.password1,
-					recommendCode: this.recommendCode
+					password: this.password,
+					recommendCode: this.recommendCode,
+					from: this.from
 				}
 			}).then((response) => {
 				// var responseMessage = response.data.message
 				// var responseData = response.data.data
 				// console.log(responseMessage)
 				// console.log(responseData)
-				var getParams = this.$route.params
-				console.log(getParams.type)
+
+				// axios({ // check the verification Code
+				// 	method: 'POST',
+				// 	url: 'http://dev-new-api.beanpop.cn/login/verificationCode',
+				// 	params: {
+				// 		phoneNumber: this.phoneNumber,
+				// 		country: this.selectedCountry,
+				// 		code: this.verificationCode
+				// 	}
+				// }).then((response) => {
+				// 	console.log(this.phoneNumber)
+				// 	console.log(this.selectedCountry)
+				// 	console.log(this.verificationCode)
+				// }).catch((ex) => {
+				// 	console.log(ex)
+				// 	$(".tip-error").text(this.$i18n.t('message.wrongAuthCode'))
+				// 	this.$options.methods.showMessage()
+				// 	this.isCountDown = false
+				// })
+
 				// if (getParams.type === 'event') {
 				// 	var qrCode = getParams.qrCode
 				// 	var num1 = getParams.yellowBall[0]
@@ -338,7 +372,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	padding: 0px 8px;
 }
 .count-down{
-	vertical-align: middle
+	vertical-align: middle;
+	padding: 3px 5px 0px 0px;
+	font-size: 14px;
 }
 .get-verification{
 	border: none;
