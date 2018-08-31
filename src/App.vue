@@ -455,4 +455,204 @@ header {
 	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
 	border-radius:15px;
 }
+
+.food-details, .remarks-desc{
+	font-size: 14px;
+	margin-bottom: 8px;
+	line-height: 20px;
+}
+.food-amount{
+	color: #999999;
+}
+.food-details:last-child{
+	margin-bottom: 12px;
+}
+.pindou-remarks-content{
+  font-size: 14px;
+	line-height: 20px;
+}
+.pindou-remarks-content p, .pindou-remarks-content div, .pindou-remarks-content li{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  font-size: 14px;
+	margin-bottom: 8px;
+	line-height: 20px;
+}
+.pindou-remarks-content p:last-child, .pindou-remarks-content div:last-child, .pindou-remarks-content li:last-child{
+  margin-bottom: 0px;
+}
+.tips-content div{
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 8px;
+}
+.tips-content div:nth-child(odd){
+	font-family: "PingFangSC-Semibold";
+}
+.tips div:last-child{
+	margin-bottom: 0px;
+}
+.pindouing{
+  padding-top: 0px;
+}
+.pindou-box{
+	padding: 15px 0px;
+	border-bottom: 1px solid #E6E7E8;
+	color: #333333;
+}
+.user-info{
+	display: flex;
+	align-items: center;
+}
+.user-info img{
+	width: 40px;
+	border-radius: 50%;
+}
+.user-name{
+	font-size: 12px;
+}
+.pindou-right{
+	align-items: center;
+}
+.pindou-info{
+	text-align: center;
+	margin-right: 10px;
+}
+.pindou-info span{
+	font-size: 12px;
+}
+.pindou-info .lack-people{
+	color: #EE6807;
+}
+.pindou-info p{
+  margin: 0px;
+	font-size: 10px;
+	color: #999999;
+}
+
+/* quiz */
+.quizing, .quized{
+	font-family: "PingFangSC-Regular";
+}
+.quizing-content, .quized-content{
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	background:rgba(255,255,255,1);
+	border-radius:4px;
+	box-shadow:0px 3px 7px 0px rgba(51,85,164,0.14);
+}
+.quizing-top img, .quized-top img{
+	width: 100%;
+  border-radius: 4px;
+}
+.quizing-bottom, .quized-bottom{
+	padding: 15px;
+}
+.question{
+	font-size: 16px;
+	color: #333333;
+	line-height: 24px;
+	padding: 4px 5px 10px;
+}
+.answer-btn{
+	background: #FFFFFF;
+	border-radius:5px;
+	color: #57A0FF;
+	font-size: 16px;
+	border: 1px solid #57A0FF;
+	padding: 13px 15px;
+	margin-top: 5px;
+}
+.option{
+	float: left;
+	line-height: 16px;
+}
+.reward{
+	float: right;
+	line-height: 16px;
+}
+.countdown{
+	margin-top: 5px;
+	display: flex;
+	align-items: center;
+}
+.countdown-line{
+	float: left;
+	flex: 1;
+	border: none;
+	height: 1px;
+	color: #DDDDDD;
+	background: #DDDDDD;
+}
+.countdown-time img{
+	width: 14px;
+	margin:0 4px 0 5px;
+}
+.countdown-text{
+	flex: 4;
+	margin-right: 5px;
+	color: #333333;
+}
+.my-answer-box{
+	font-size: 14px;
+	border-bottom: 1px solid #DDDDDD;
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+}
+.my-answer-box:last-child{
+	border:none;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+.answer-date{
+	font-size: 12px;
+	color: #999999;
+}
+.my-answer{
+	color: #666666;
+}
+.dividing-line{
+	width: 100%;
+	border-bottom: 1px solid #DDDDDD;
+	margin: 8px 0px;
+}
+.quized{
+	display: none;
+}
+.quized .question{
+	color: #999999;
+}
+.quized .answer-btn{
+	border: none;
+	background: #F4F4F4;
+	color: #999999;
+}
+.quized .my-answer{
+	color: #333333;
+	align-items: center;
+}
+.quized .my-answer span{
+	vertical-align: bottom;
+}
+.quized .answer-right{
+	color: #333333;
+	background: #FFE200;
+}
+.loser{
+	padding: 4px 10px;
+	background: #EEEEEE;
+	border-radius: 4px;
+}
+.winner{
+	background: #EE6807;
+	color: #FFFFFF;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+.winner p{
+	text-align: center;
+}
 </style>

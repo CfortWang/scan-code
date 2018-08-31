@@ -97,6 +97,12 @@ export default {
 			// var errorResponseData = ex.response.data
 			// console.log(errorResponseData)
 		})
+		// var now = new Date()
+		// 		var setNow = new Date(now.getTime() + 3601200)
+		// 		this.countDown = setNow - now
+		// 		console.log(this.countDown)
+		// 		this.$refs.countdown.init()
+		// 		this.$refs.countdown.start()
 	},
 	methods: {
 		countryChangeItem: function (event) {
@@ -394,6 +400,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	-moz-appearance:none;
 	-webkit-appearance: none;
 	font-size: 14px;
+	width: 100px;
 }
 .reg-box input:focus{
 	outline: none;

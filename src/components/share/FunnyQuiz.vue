@@ -18,50 +18,7 @@
 			</div>
 		</div>
 		<div class="quizing">
-			<div class="quizing-content">
-				<div class="quizing-top">
-					<img src="/static/img/share/quizing-top.png"/>
-				</div>
-				<div class="quizing-bottom">
-					<div class="question">长条形杜萨开奖号打卡获得不少客户的单空间安康电话快点哈算了电话快点哈算</div>
-					<div class="answer-box">
-						<div class="answer-btn-no clear-fix" v-on:click="changeAnswer">
-							<span class="option">A.不会</span>
-							<span class="reward">奖励×1.7</span>
-						</div>
-						<div class="answer-btn-yes clear-fix" v-on:click="changeAnswer">
-							<span class="option">B.会</span>
-							<span class="reward">奖励×1.7</span>
-						</div>
-					</div>
-					<div class="countdown clear-fix">
-						<hr class="countdown-line" />
-						<div class="countdown-time">
-							<img src="/static/img/share/clock.png"/>
-							<span class="countdown-text">截止倒计时：15:25:23</span>
-						</div>
-						<hr class="countdown-line" />
-					</div>
-					<div class="my-answer-box">
-						<div class="answer-date">08-03&nbsp;&nbsp;12:30</div>
-						<div class="my-answer justified">
-							<span class="answer">我猜:B.涨或不变</span>
-							<span class="betting">100喜豆</span>
-							<span class="odds">赔率1.70</span>
-						</div>
-					</div>
-					<div class="dividing-line"></div>
-					<div class="my-answer-box">
-						<div class="answer-date">08-03&nbsp;&nbsp;12:30</div>
-						<div class="my-answer justified">
-							<span class="answer">我猜:B.涨或不变</span>
-							<span class="betting">100喜豆</span>
-							<span class="odds">赔率1.70</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="quizing-content">
+			<!-- <div class="quizing-content">
 				<div class="quizing-top">
 					<img src="/static/img/share/quizing-top.png"/>
 				</div>
@@ -85,22 +42,40 @@
 						</div>
 						<hr class="countdown-line" />
 					</div>
+					<div class="answer-div">
+						<div class="my-answer-box">
+							<div class="answer-date">08-03&nbsp;&nbsp;12:30</div>
+							<div class="my-answer justified">
+								<span class="answer">我猜:B.涨或不变</span>
+								<span class="betting">100喜豆</span>
+								<span class="odds">赔率1.70</span>
+							</div>
+						</div>
+						<div class="my-answer-box">
+							<div class="answer-date">08-03&nbsp;&nbsp;12:30</div>
+							<div class="my-answer justified">
+								<span class="answer">我猜:B.涨或不变</span>
+								<span class="betting">100喜豆</span>
+								<span class="odds">赔率1.70</span>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="quized">
-			<div class="quized-content">
+			<!-- <div class="quized-content">
 				<div class="quized-top">
 					<img src="/static/img/share/quizing-top.png"/>
 				</div>
 				<div class="quized-bottom">
 					<div class="question">长条形杜萨开奖号打卡获得不少客户的单空间安康电话快点哈算了电话快点哈算</div>
 					<div class="answer-box">
-						<div class="answer-btn-no clear-fix">
+						<div class="answer-btn clear-fix">
 							<span class="option">A.不会</span>
 							<span class="reward">奖励×1.7</span>
 						</div>
-						<div class="answer-btn-yes clear-fix">
+						<div class="answer-btn clear-fix">
 							<span class="option">B.会</span>
 							<span class="reward">奖励×1.7</span>
 						</div>
@@ -174,7 +149,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
@@ -193,11 +168,66 @@ export default {
 	},
 	data () {
 		return {
-			refresh: false
 		}
 	},
 	created: function () {
+		axios({
+			method: 'GET',
+			url: 'http://dev-new-api.beanpop.cn/hotQuiz'
+		}).then((response) => {
+			var responseData = response.data.data
+			console.log(responseData)
 
+			// get the quizing data
+			var quizList = responseData.quizList
+			var $quizDiv = '<div class="quizing-content"><div class="quizing-top"><img /></div><div class="quizing-bottom"><div class="question"></div><div class="answer-box"></div></div><div class="countdown clear-fix"><hr class="countdown-line" /><div class="countdown-time"><img src="/static/img/share/clock.png"/><span class="countdown-text"></span></div><hr class="countdown-line" /></div></div></div>'
+			var $answerBtn = '<div class="answer-btn clear-fix"><span class="option"></span><span class="reward"></span></div>'
+			for (var i = 0; i < quizList.length; i++) {
+				$('.quizing').append($quizDiv)
+				var quizTitle = quizList[i].quizTitle
+				var quizImg = quizList[i].image
+				var timeLeft = quizList[i].time
+				var seconds = timeLeft % 60
+				var minutes = Math.floor((timeLeft / 60) % 60)
+				var hours = Math.floor((timeLeft / 3600) % 24)
+				var days = Math.floor(timeLeft / (3600 * 24)) >= 1 ? Math.floor(timeLeft / (3600 * 24)) + ':' : ''
+				var leftDate = '截止倒计时：' + days + hours + ':' + minutes + ':' + seconds
+				$(".quizing .quizing-content:eq("+ i +") .quizing-top img").attr('src', quizImg)
+				$(".quizing .quizing-content:eq("+ i +") .question").text(quizTitle)
+				$(".quizing .quizing-content:eq("+ i +") .countdown-text").text(leftDate)
+				var answerList = quizList[i].optionList
+				for (var j = 0; j < answerList.length; j++) {
+					$(".quizing .quizing-content:eq("+ i +") .answer-box").append($answerBtn)
+					var answer = answerList[j].title
+					var odd = answerList[j].odds
+					$(".quizing .quizing-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .option").text(answer)
+					$(".quizing .quizing-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .reward").text(odd)
+				}
+			}
+
+			// get the quized data
+			var quizedList = responseData.overList
+			var $quizedDiv = '<div class="quized-content"><div class="quized-top"><img /></div><div class="quized-bottom"><div class="question"></div><div class="answer-box"></div></div><div class="countdown clear-fix"><hr class="countdown-line" /><div class="countdown-time"><span class="countdown-text"></span></div><hr class="countdown-line" /></div></div></div>'
+			for (i = 0; i < quizedList.length; i++) {
+				$('.quized').append($quizedDiv)
+				var quizedTitle = quizedList[i].quizTitle
+				var quizedImg = quizedList[i].image
+				$(".quized .quized-content:eq("+ i +") .quized-top img").attr('src', quizedImg)
+				$(".quized .quized-content:eq("+ i +") .question").text(quizedTitle)
+				var quizedAnswer = quizedList[i].optionList
+				for (j = 0; j < quizedAnswer.length; j++) {
+					$(".quized .quized-content:eq("+ i +") .answer-box").append($answerBtn)
+					var answer = quizedAnswer[j].title
+					var odd = quizedAnswer[j].odds
+					$(".quized .quized-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .option").text(answer)
+					$(".quized .quized-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .reward").text(odd)
+				}
+			}
+		}).catch((ex) => {
+			console.log(ex)
+			// var errorResponseData = ex.response.data
+			// console.log(errorResponseData)
+		})
 	},
 	methods: {
 		changeTabIng: function () {
@@ -352,23 +382,7 @@ p, li{
 	line-height: 24px;
 	padding: 4px 5px 10px;
 }
-.answer-btn-no, .answer-btn-yes{
-	background: #FFFFFF;
-	border-radius:5px;
-	color: #57A0FF;
-	font-size: 16px;
-	border: 1px solid #57A0FF;
-	padding: 13px 15px;
-	margin-top: 5px;
-}
-.option{
-	float: left;
-	line-height: 16px;
-}
-.reward{
-	float: right;
-	line-height: 16px;
-}
+
 .countdown{
 	margin-top: 5px;
 	display: flex;
@@ -393,6 +407,14 @@ p, li{
 }
 .my-answer-box{
 	font-size: 14px;
+	border-bottom: 1px solid #DDDDDD;
+	padding-bottom: 8px;
+	margin-bottom: 8px;
+}
+.my-answer-box:last-child{
+	border:none;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 .answer-date{
 	font-size: 12px;
@@ -412,7 +434,7 @@ p, li{
 .quized .question{
 	color: #999999;
 }
-.quized .answer-btn-no, .quized .answer-btn-yes{
+.quized .answer-btn{
 	border: none;
 	background: #F4F4F4;
 	color: #999999;

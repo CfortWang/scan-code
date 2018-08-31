@@ -125,7 +125,6 @@ export default {
 			// get the rule
 			var ruleArr = responseData.rule.content.split('<br>')
 			var $ruleDiv = '<div class="rules"></div>'
-			var ruleBox = $('.rule-detail')
 			for (var i = 0; i < ruleArr.length; i++) {
 				$('.rule-detail').append($ruleDiv)
 				$(".rule-detail .rules:eq(" + i + ")").text(ruleArr[i])
@@ -153,8 +152,8 @@ export default {
 			var $couponBox = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
 			for (i = 0; i < couponData.length; i++) {
 				$('.shop-coupon-box').append($couponBox)
-				var startDate = couponData[i].startDate.replace(/-/,'/') + '至'
-				var endDate = couponData[i].endDate.replace(/-/,'/')
+				var startDate = couponData[i].startDate.replace(/-/, '/') + '至'
+				var endDate = couponData[i].endDate.replace(/-/, '/')
 				var couponImage = couponData[i].image
 				var couponTitle = couponData[i].title
 				$(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
@@ -217,8 +216,7 @@ export default {
 		},
 		callShop: function () {
 			var tel = 'tel:' + this.shopPhoneNum
-			console.log(tel)
-			window.location.href = "tel:400-825-0266"
+			window.location.href = tel
 		}
 	}
 }
