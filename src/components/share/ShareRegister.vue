@@ -31,7 +31,7 @@
 					<span class="tip-error-msg"></span>
 				</div>
 			</div>
-        </div>
+		</div>
     </div>
 </template>
 
@@ -51,6 +51,7 @@ const i18n = new VueI18n({
   locale: 'shareRegister',
   messages: langData
 })
+
 export default {
 	name: 'shareRegister',
 	i18n: i18n,
@@ -83,26 +84,18 @@ export default {
 			this.phoneKind = 'android'
 		}
 		axios({ // Get Country Info
-			url: process.env.api_url + '/api/countries'
+			// url: process.env.api_url + '/api/countries'
+			url: 'http://dev-new-api.beanpop.cn/common/country'
 		}).then((response) => {
 			// var responseMessage = response.data.message
 			var responseData = response.data.data
-			// console.log(responseMessage)
-			console.log(responseData)
-
-			this.countryItems = responseData.data
+			this.countryItems = responseData
 			this.selectedCountry = parseInt(this.countryItems[0].seq)
-			}).catch((ex) => {
+		}).catch((ex) => {
 			console.log(ex)
 			// var errorResponseData = ex.response.data
 			// console.log(errorResponseData)
 		})
-		// var now = new Date()
-		// 		var setNow = new Date(now.getTime() + 3601200)
-		// 		this.countDown = setNow - now
-		// 		console.log(this.countDown)
-		// 		this.$refs.countdown.init()
-		// 		this.$refs.countdown.start()
 	},
 	methods: {
 		countryChangeItem: function (event) {
@@ -134,17 +127,17 @@ export default {
 				url: 'http://dev-new-api.beanpop.cn/login/sendCode',
 				params: { phoneNumber: this.phoneNumber, country: this.selectedCountry, type: this.type }
 			}).then((response) => {
-				console.log(response)
 				// var responseMessage = response.data.message
-				// var responseData = response.data.data
-				// console.log(responseMessage)
-				// console.log(responseData)
-				// alert(this.$i18n.t('message.sendSuccess'))
-				var now = new Date()
-				var setNow = new Date(now.getTime() + 180000)
-				this.countDown = setNow - now
-				this.$refs.countdown.init()
-				this.$refs.countdown.start()
+				// let responseData = response.data
+				// let responseStatus = response.status
+				let responseCode = response.data.code
+				if (responseCode == 200) {
+					var now = new Date()
+					var setNow = new Date(now.getTime() + 180000)
+					this.countDown = setNow - now
+					this.$refs.countdown.init()
+					this.$refs.countdown.start()
+				}
 			}).catch((ex) => {
 				console.log(ex)
 				$(".tip-error").text(this.$i18n.t('message.sendFail'))
@@ -207,7 +200,6 @@ export default {
 			}
 			var salt = bcrypt.genSaltSync(10)
 			this.password = bcrypt.hashSync(this.password1, salt)
-			console.log(this.password)
 			axios({ // sign up
 				method: 'POST',
 				// url: process.env.api_url + '/api/register/code',
@@ -224,76 +216,15 @@ export default {
 				}
 			}).then((response) => {
 				// var responseMessage = response.data.message
-				// var responseData = response.data.data
-				// console.log(responseMessage)
+				// let responseData = response.data
+				let responseCode = response.data.code
+				let responseMessage = response.data.message
 				// console.log(responseData)
-
-				// axios({ // check the verification Code
-				// 	method: 'POST',
-				// 	url: 'http://dev-new-api.beanpop.cn/login/verificationCode',
-				// 	params: {
-				// 		phoneNumber: this.phoneNumber,
-				// 		country: this.selectedCountry,
-				// 		code: this.verificationCode
-				// 	}
-				// }).then((response) => {
-				// 	console.log(this.phoneNumber)
-				// 	console.log(this.selectedCountry)
-				// 	console.log(this.verificationCode)
-				// }).catch((ex) => {
-				// 	console.log(ex)
-				// 	$(".tip-error").text(this.$i18n.t('message.wrongAuthCode'))
-				// 	this.$options.methods.showMessage()
-				// 	this.isCountDown = false
-				// })
-
-				// if (getParams.type === 'event') {
-				// 	var qrCode = getParams.qrCode
-				// 	var num1 = getParams.yellowBall[0]
-				// 	var num2 = getParams.yellowBall[1]
-				// 	var num3 = getParams.yellowBall[2]
-				// 	var num4 = getParams.yellowBall[3]
-				// 	var num5 = getParams.yellowBall[4]
-				// 	var num6 = getParams.yellowBall[5]
-				// 	var num7 = getParams.greenBall[0]
-				// 	var tmpUser = getParams.tempUser
-
-				// 	axios({
-				// 		method: 'POST',
-				// 		url: process.env.api_url + '/api/entries/phone-num',
-				// 		params: {
-				// 			code: qrCode,
-				// 			num_1: num1,
-				// 			num_2: num2,
-				// 			num_3: num3,
-				// 			num_4: num4,
-				// 			num_5: num5,
-				// 			num_6: num6,
-				// 			num_7: num7,
-				// 			country: getParams.countryCode,
-				// 			phone_num: getParams.phoneNumber,
-				// 			temp_user: tmpUser
-				// 		}
-				// 	}).then((response) => {
-				// 		// var responseMessage = response.data.message
-				// 		// var responseData = response.data.data
-				// 		// console.log(responseMessage)
-				// 		// console.log(responseData)
-
-				// 		// save the phone number has been registed success
-				// 		var phoneNum = document.getElementById('phoneNum').value
-				// 		vueCookie.set('qr_phone_num', phoneNum, 1)
-				// 		this.$i18n.phone = vueCookie.get('qr_phone_num')
-				// 		this.currentPhoneNum = vueCookie.get('qr_phone_num')
-				// 		this.$router.push({name: 'AppDown', params: {code: 'default'}})
-				// 	}).catch((ex) => {
-				// 		console.log(ex)
-				// 		// var errorResponseData = ex.response.data
-				// 		// console.log(errorResponseData)
-				// 	})
-				// } else if (getParams.type === 'recommend') {
-				// 	this.$router.push({name: 'AppDown', params: {code: 'recommend'}})
-				// }
+				if (responseCode > 200) {
+					$(".tip-error").text(this.$i18n.t(responseMessage))
+					this.$options.methods.showMessage()
+					return false
+				}
 			}).catch((ex) => {
 				console.log(ex)
 				var responseStatus = ex.response.status

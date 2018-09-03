@@ -79,13 +79,14 @@ export default {
       var shopADResult = responseData.shop.ad
       var marketResult = responseData.marketing_event_result
       var shopEventResult = responseData.shop.event_result
-
+      console.log()
+      console.log(shopADResult.length + '__' + marketResult.length + '__' + shopEventResult.length)
       if (shopADResult.length !== 0) {
         var downloadingShopAd = new Image()
         downloadingShopAd.src = responseData.shop.ad[0].shop_ad_image_file_url
         this.shopAD = shopADResult[0].shop_ad_image_file_url
       }
-      if (shopEventResult.length !== 0) {
+      if (shopEventResult.length !== 0 && shopEventResult[0] !== null) {
         if (shopEventResult[0].result === 'win') {
           var downloadingShopEvent = new Image()
           downloadingShopEvent.src = responseData.shop.event_result[0].gift.shop_gift_image_file.url

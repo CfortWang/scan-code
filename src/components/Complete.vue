@@ -391,29 +391,6 @@ export default {
             tempUser: this.tmpUser
           }
         })
-
-        // 取消跳转注册弹窗
-        // if (!confirm(this.$i18n.t('message.noUser'))) {
-        //   return false
-        // } else {
-        //   if (!confirm(this.$i18n.t('message.noUser2'))) {
-        //     return false
-        //   } else {
-        //     var getParams = this.$route.params
-        //     this.$router.push({
-        //       name: 'Register',
-        //       params: {
-        //         yellowBall: getParams.yellowBall,
-        //         greenBall: getParams.greenBall,
-        //         type: 'event',
-        //         qrCode: getParams.qrCode,
-        //         phoneNumber: this.phoneNumber,
-        //         countryCode: this.selectedCountry,
-        //         tempUser: this.tmpUser
-        //       }
-        //     })
-        //   }
-        // }
       }).catch((ex) => {
         console.log(ex)
         var errorResponseData = ex.response.data

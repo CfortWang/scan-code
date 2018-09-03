@@ -71,16 +71,16 @@ export default {
 			this.phoneKind = 'android'
 		}
 		axios({ // Get Country Info
-			url: process.env.api_url + '/api/countries'
+			// url: process.env.api_url + '/api/countries'
+			url: 'http://dev-new-api.beanpop.cn/common/country'
 		}).then((response) => {
 			// var responseMessage = response.data.message
 			var responseData = response.data.data
 			// console.log(responseMessage)
-			console.log(responseData)
-
-			this.countryItems = responseData.data
+			// console.log(responseData)
+			this.countryItems = responseData
 			this.selectedCountry = parseInt(this.countryItems[0].seq)
-			}).catch((ex) => {
+		}).catch((ex) => {
 			console.log(ex)
 			// var errorResponseData = ex.response.data
 			// console.log(errorResponseData)
@@ -98,18 +98,27 @@ export default {
 		},
 		getVerification: function () {
 			this.phoneNumber = $("#phoneNum").val()
-			this.type = 'sign_up'
+			this.type = 'login'
+			if (this.phoneNumber === '') {
+				$(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
+				this.$options.methods.showMessage()
+				return false
+			}
+			let pattern = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+			if (!pattern.test(this.phoneNumber)) {
+				$(".tip-error").text(this.$i18n.t('message.wrongPhoneNum'))
+				this.$options.methods.showMessage()
+				return false
+			}
 			axios({ // get verification code
 				method: 'POST',
-				url: process.env.api_url + '/api/certifications/phone-num/sign-up',
-				// url: 'http://result.eolinker.com/MnuF6m4bd13e4d683ae76277d42bc7ece74b1c46c6303da?uri=/login/sendCode?type=' + this.type,
-				params: { phone_num: this.phoneNumber, country: this.selectedCountry }
+				// url: process.env.api_url + '/api/certifications/phone-num/sign-up',
+				url: 'http://dev-new-api.beanpop.cn/login/sendCode',
+				params: { phoneNumber: this.phoneNumber, country: this.selectedCountry, type: this.type}
 			}).then((response) => {
-				var responseMessage = response.data.message
+				// var responseMessage = response.data.message
 				var responseData = response.data.data
-				console.log(responseMessage)
 				console.log(responseData)
-				// alert(this.$i18n.t('message.sendSuccess'))
 				var now = new Date()
 				var setNow = new Date(now.getTime() + 180000)
 				this.countDown = setNow - now
@@ -127,12 +136,14 @@ export default {
 		doLogin: function () {
 			this.phoneNumber = $("#phoneNum").val().replace(/ /gi, '')
 			this.verificationCode = $("#verification").val().replace(/ /gi, '')
-			// if (!this.termsChecked) {
-			// 	alert(this.$i18n.t('message.termsCheck'))
-			// 	return false
-			// }
 			if (this.phoneNumber === '') {
 				$(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
+				this.$options.methods.showMessage()
+				return false
+			}
+			let pattern = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+			if (!pattern.test(this.phoneNumber)) {
+				$(".tip-error").text(this.$i18n.t('message.wrongPhoneNum'))
 				this.$options.methods.showMessage()
 				return false
 			}
@@ -146,68 +157,31 @@ export default {
 				this.$options.methods.showMessage()
 				return false
 			}
-			axios({ // sign up
+			axios({ // login
 				method: 'POST',
-				url: process.env.api_url + '/api/register/code',
-				// url: 'http://dev-new-api.beanpop.cn/login/register',
+				// url: process.env.api_url + '/api/register/code',
+				url: 'http://dev-new-api.beanpop.cn/login/code',
 				params: {
 					phoneNumber: this.phoneNumber,
 					country: this.selectedCountry,
-					// country: 'zh',
 					code: this.verificationCode,
-					// mobileOs: this.phoneKind,
-					password: this.password1,
-					recommendCode: this.recommendCode
+					mobileOs: this.phoneKind
 				}
 			}).then((response) => {
-				// var responseMessage = response.data.message
-				// var responseData = response.data.data
+				var responseMessage = response.data.message
+				var responseData = response.data.data
+				var responseStatus = response.data.code
 				// console.log(responseMessage)
-				// console.log(responseData)
-				var getParams = this.$route.params
-				console.log(getParams.type)
-
-				// 	axios({
-				// 		method: 'POST',
-				// 		url: process.env.api_url + '/api/entries/phone-num',
-				// 		params: {
-				// 			code: qrCode,
-				// 			num_1: num1,
-				// 			num_2: num2,
-				// 			num_3: num3,
-				// 			num_4: num4,
-				// 			num_5: num5,
-				// 			num_6: num6,
-				// 			num_7: num7,
-				// 			country: getParams.countryCode,
-				// 			phone_num: getParams.phoneNumber,
-				// 			temp_user: tmpUser
-				// 		}
-				// 	}).then((response) => {
-				// 		// var responseMessage = response.data.message
-				// 		// var responseData = response.data.data
-				// 		// console.log(responseMessage)
-				// 		// console.log(responseData)
-
-				// 		// save the phone number has been registed success
-				// 		var phoneNum = document.getElementById('phoneNum').value
-				// 		vueCookie.set('qr_phone_num', phoneNum, 1)
-				// 		this.$i18n.phone = vueCookie.get('qr_phone_num')
-				// 		this.currentPhoneNum = vueCookie.get('qr_phone_num')
-				// 		this.$router.push({name: 'AppDown', params: {code: 'default'}})
-				// 	}).catch((ex) => {
-				// 		console.log(ex)
-				// 		// var errorResponseData = ex.response.data
-				// 		// console.log(errorResponseData)
-				// 	})
-				// } else if (getParams.type === 'recommend') {
-				// 	this.$router.push({name: 'AppDown', params: {code: 'recommend'}})
-				// }
+				console.log(responseStatus)
+				if (responseStatus > 200) {
+					$(".tip-error").text(this.$i18n.t(responseMessage))
+					this.$options.methods.showMessage()
+					return false
+				}
 			}).catch((ex) => {
-				console.log(ex)
 				var responseStatus = ex.response.status
 				var errorResponseData = ex.response.data
-				console.log(responseStatus)
+				// console.log(responseStatus)
 				// console.log(errorResponseData)
 				if (responseStatus === 404) {
 					if (errorResponseData.status === 100) {
@@ -309,6 +283,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	-moz-appearance:none;
 	-webkit-appearance: none;
 	font-size: 14px;
+	width: 100px;
 }
 .login-box input:focus{
 	outline: none;

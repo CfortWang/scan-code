@@ -19,7 +19,7 @@
 
 			</div>
 		</div>
-		<div class="fixed-right-btn">打开App</div>
+		<div class="fixed-right-btn" @click="send">{{rtime}}打开App</div>
 		<div class="package">
 			<div class="package-top justified">
 				<div class="package-name">{{packageName}}</div>
@@ -59,6 +59,7 @@
 				</div>
 			</div>
 		</div>
+		<p>{{rtime}}</p>
 		<div class="pindouing-title">
 			<span class="people-count">{{groupOnNumber}}人</span>
 			<span>正在拼豆豆</span>
@@ -167,7 +168,8 @@ export default {
 			shopName: '',
 			shopAddress: '',
 			shopAddressDetail: '',
-			shopPhoneNum: ''
+			shopPhoneNum: '',
+			rtime: 80
 		}
 	},
 	created: function () {
@@ -238,7 +240,11 @@ export default {
 				$(".pindouing .pindou-box:eq("+ i +") .lack-people").text(needNum)
 				$(".pindouing .pindou-box:eq("+ i +") .pindou-info p").text(leftDate)
 			}
-			// this.$options.methods.timer(timeLeft)
+
+			for (i = 0; i < 10; i++) {
+				this.$options.methods.timer(i)
+			}
+			// this.$options.methods.send(this.rtime)
 			// get owner arawd
 			var $ownerGot = responseData.ownerGot
 			$('.award').append($ownerGot)
@@ -307,6 +313,7 @@ export default {
 			}
 		},
 		timer: function (event) {
+			console.log(event)
 			// var seconds = parseInt(event % 60)
 			// var minutes = parseInt((event / 60) % 60)
 			// var hours = parseInt((event / 3600) % 24)
@@ -320,6 +327,17 @@ export default {
 			// setTimeout(() => {
 			// 	this_.timer
 			// }, 1000)
+		},
+		send: function () {
+			let that = this
+			let rtime = that.rtime
+			console.log(that.rtime)
+			let interval = setInterval(() => {
+				if (that.rtime >= 0) {
+					that.rtime--
+					console.log(event)
+				}
+			}, 1000)
 		}
 	}
 }

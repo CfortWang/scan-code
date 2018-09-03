@@ -160,6 +160,7 @@ import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import $ from 'jquery'
+// import wx from 'weixin-js-sdk'
 
 export default {
 	name: 'funnyQuiz',
@@ -171,6 +172,31 @@ export default {
 		}
 	},
 	created: function () {
+		// wx.config({
+		// 	debug: true,
+		// 	appId: 'wx5dc2298841cf0098',
+		// 	timestamp: '',
+		// 	nonceStr: '',
+		// 	signature: '',
+		// 	jsApiList: [
+		// 		'onMenuShareTimeline',
+		// 		'onMenuShareAppMessage',
+		// 		'onMenuShareQQ',
+		// 		'onMenuShareWeibo'
+		// 	]
+		// })
+		// wx.ready(function () {
+		// 	wx.onMenuShareAppMessage({
+		// 		title: '老王保健开业啦', // 分享标题
+		// 		desc: '啦啦啦', // 分享描述
+		// 		link: 'dev-www.beanpop.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+		// 		imgUrl: '/static/img/share/avatar.jpg', // 分享图标
+		// 		type: '', // 分享类型,music、video或link，不填默认为link
+		// 		success: function () {
+		// 			console.log('hahaha')
+		// 		}
+		// 	})
+		// })
 		axios({
 			method: 'GET',
 			url: 'http://dev-new-api.beanpop.cn/hotQuiz'
@@ -184,22 +210,22 @@ export default {
 			var $answerBtn = '<div class="answer-btn clear-fix"><span class="option"></span><span class="reward"></span></div>'
 			for (var i = 0; i < quizList.length; i++) {
 				$('.quizing').append($quizDiv)
-				var quizTitle = quizList[i].quizTitle
-				var quizImg = quizList[i].image
-				var timeLeft = quizList[i].time
-				var seconds = timeLeft % 60
-				var minutes = Math.floor((timeLeft / 60) % 60)
-				var hours = Math.floor((timeLeft / 3600) % 24)
-				var days = Math.floor(timeLeft / (3600 * 24)) >= 1 ? Math.floor(timeLeft / (3600 * 24)) + ':' : ''
-				var leftDate = '截止倒计时：' + days + hours + ':' + minutes + ':' + seconds
+				let quizTitle = quizList[i].quizTitle
+				let quizImg = quizList[i].image
+				let timeLeft = quizList[i].time
+				let seconds = timeLeft % 60
+				let minutes = Math.floor((timeLeft / 60) % 60)
+				let hours = Math.floor((timeLeft / 3600) % 24)
+				let days = Math.floor(timeLeft / (3600 * 24)) >= 1 ? Math.floor(timeLeft / (3600 * 24)) + ':' : ''
+				let leftDate = '截止倒计时：' + days + hours + ':' + minutes + ':' + seconds
 				$(".quizing .quizing-content:eq("+ i +") .quizing-top img").attr('src', quizImg)
 				$(".quizing .quizing-content:eq("+ i +") .question").text(quizTitle)
 				$(".quizing .quizing-content:eq("+ i +") .countdown-text").text(leftDate)
 				var answerList = quizList[i].optionList
 				for (var j = 0; j < answerList.length; j++) {
 					$(".quizing .quizing-content:eq("+ i +") .answer-box").append($answerBtn)
-					var answer = answerList[j].title
-					var odd = answerList[j].odds
+					let answer = answerList[j].title
+					let odd = answerList[j].odds
 					$(".quizing .quizing-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .option").text(answer)
 					$(".quizing .quizing-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .reward").text(odd)
 				}
