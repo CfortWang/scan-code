@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="outer-box">
     <transition>
       <div class="modal-wrapper">
-            <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
+          <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
           <div v-if="openModal">
               <div class="modal-img">
                   <!-- <img v-bind:src="rulePicUrl"> -->
@@ -16,8 +16,8 @@
                   <div class="rule-prize">{{ $t("rule.sixthPrize") }}</div>
                   <div class="rule-example">{{ $t("rule.example") }}</div>
               </div>
-              <div class="modal-close" v-on:click="hide">
-                  <img src="/static/img/complete/delete_new.png">
+              <div class="modal-close">
+                  <img src="/static/img/complete/delete_new.png" v-on:click="hide">
               </div>
           </div>
       </div>
@@ -29,8 +29,12 @@
     </header>
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
-      <div class="complete-event-contents-wrapper">
-        <div class="complete-ball-wrapper-title">
+      <div class="complete-event-top-wrapper">
+        <div class="win-rule" v-on:click="openModal">
+          <img src="/static/img/complete/rule.png" alt="">
+          <span>{{ $t("moreInfo") }}</span>
+        </div>
+        <!-- <div class="complete-ball-wrapper-title">
           <div class="ball-title float-wrapper fs-09">
             <div class="ball-title-date float-l dsp-table">
               <div class="dsp-table-cell">
@@ -46,16 +50,17 @@
               </div>
             </div>
           </div>
+        </div> -->
+        <div class="lottery-date">
+          <div class="lottery-date-line"></div>
+            <div class="lottery-date-text">
+              <span>距离开奖2天9小时</span>
+              <span></span>
+              <span></span>
+            </div>
+          <div class="lottery-date-line"></div>
         </div>
-        <div class="complete-ball-wrapper float-wrapper">
-          <!-- <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[0]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[1]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[2]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[3]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[4]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[yellowItems[5]]"></div>
-          <div class="ball-wrapper complete-size float-l" v-bind:class="[greenItems[0]]"></div> -->
-
+        <div class="complete-ball-wrapper float-wrapper justified">
           <div class="ball-wrapper ball-size yellow complete-size float-l" >
             <div data-v-18718bba="" class="ball-size-item1">{{selectedRed[0]}}</div>
           </div>
@@ -78,86 +83,92 @@
             <div data-v-18718bba="" class="ball-size-item1">{{selectedBlue[0]}}</div>
           </div>
         </div>
+        <div class="terms">
+          <span></span>
+          <span>20180908期</span>
+        </div>
+      </div>
+      <div class="complete-event-bottom-wrapper">
+        <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}">
+          <div class="complete-info-wrapper">
+            <div class="info-title float-wrapper">
+              {{ $t("info.title") }}
+            </div>
+          </div>
+          <div class="login-box">
+            <div class="login-input-wrapper">
+              <select class="country-selete" v-on:change="countryChangeItem($event)">
+                <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
+              </select>
+              <input type="number" id="phoneNum" class="phone-number-input" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
+            </div>
+            <div class="login-btn">
+              <span v-on:click="entryButton">{{ $t("phone.button")}}</span>
+            </div>
+          </div>
+          <div class="dashed-line"></div>
+        </div>
 
-        <button type="button" class="btn more-info-btn" v-on:click="openModal">{{ $t("moreInfo") }}</button>
-      </div>
+        <!-- 非扫码进入不显示 -->
+        <div class="shop-coupon-wrapper">
+          <div class="shop-coupon-title">商家优惠卷</div>
+          <div class="shop-coupon-box">
+            <div class="shop-coupon">
+              <div class="coupon-img">
+                <img src="/static/img/share/pindou-img.jpg"/>
+              </div>
+              <div class="shop-coupon-detail justified">
+                <div class="coupon-desc">
+                  <div class="coupon-name">买一送一</div>
+                  <div class="store-name">袁老四的火锅店</div>
+                  <div class="term">2018/03/24至2018/05/24</div>
+                </div>
+                <div class="use-shop-coupon-btn">使用</div>
+              </div>
+            </div>
+            <div class="shop-coupon">
+              <div class="coupon-img">
+                <img src="/static/img/share/pindou-img.jpg"/>
+              </div>
+              <div class="shop-coupon-detail justified">
+                <div class="coupon-desc">
+                  <div class="coupon-name">买一送一</div>
+                  <div class="store-name">袁老四的火锅店</div>
+                  <div class="term">2018/03/24至2018/05/24</div>
+                </div>
+                <div class="use-shop-coupon-btn">使用</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <!-- shop AD -->
-      <div class="section-divider" v-if="shopADUrl !== null || marketUrl !== null"></div>
-      <div class="complete-event-contents-wrapper" v-if="shopADUrl !== ''">
-        <div class="company-event-wrapper">
-          <div class="event-title fs-09">
-            {{ $t("event.title1") }}
+        <div class="seedo-gifts-wrapper">
+          <div class="seedo-gifts-title">喜豆大礼包</div>
+          <div class="seedo-gifts-box">
+            <div class="seedo-gifts">
+              <div class="congratulate">恭喜您获得800喜豆点</div>
+              <div class="gifts-desc">累积喜豆点可兑换现金及其他礼物哦</div>
+            </div>
           </div>
-          <div class="section-divider1"></div>
-          <div class="event-img-wrapper">
-            <img v-bind:src="shopADUrl">
-          </div>
-        </div>
-      </div>
-      <!-- shop event -->
-      <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== ''">
-        <div class="company-event-wrapper">
-          <div class="event-title fs-09">
-            {{ $t("event.title1") }}
-          </div>
-          <div class="section-divider1"></div>
-          <div class="event-img-wrapper">
-            <img v-bind:src="shopEventUrl">
+          <div class="seedo-gifts-box">
+            <div class="seedo-gifts">
+              <div class="congratulate">恭喜您获得一次发起拼豆豆机会</div>
+              <div class="gifts-desc">成为拼主发起拼豆豆获更多奖励</div>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="hasLogined" v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">
+          礼包已放入手机号 : {{currentPhoneNum}}
+        </div>
+        <div class="go-to-download">登录或下载APP即可使用</div>
+        <div class="dashed-line"></div>
 
-      <!-- seedo event -->
-      <div class="complete-event-contents-wrapper" v-if="marketUrl !== ''">
-        <div class="company-event-wrapper">
-          <div class="event-title fs-09">
-            {{ $t("event.title2") }}
-          </div>
-          <div class="section-divider1"></div>
-          <div class="event-img-wrapper">
-            <img v-bind:src="marketUrl">
+        <!-- bottom ad -->
+        <div class="complete-event-contents-wrapper">
+          <div class="ad-wrapper">
+            <img v-bind:src="bottomAdUrl" v-on:click="clickBottomAd(landingUrl)">
           </div>
         </div>
-      </div>
-
-      <!-- banner -->
-      <div class="complete-event-contents-wrapper"  v-if="bannerUrl !== ''">
-        <div class="company-event-wrapper">
-          <div class="main-game-img-wrapper">
-            <img v-bind:src="bannerUrl">
-          </div>
-        </div>
-      </div>
-
-      <!-- bottom ad -->
-      <div class="complete-event-contents-wrapper">
-        <div class="ad-wrapper">
-          <img v-bind:src="bottomAdUrl" v-on:click="clickBottomAd(landingUrl)">
-        </div>
-      </div>
-      <div class="section-divider">
-      </div>
-      <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}">
-        <div class="complete-info-wrapper">
-          <div class="info-title float-wrapper fs-11">
-            {{ $t("info.title") }}
-          </div>
-        </div>
-        <div class="login-box">
-          <div class="login-input-wrapper float-wrapper">
-            <select class="w-25 float-l" v-on:change="countryChangeItem($event)">
-              <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
-            </select>
-            <input type="number" id="phoneNum" class="phone-number-input w-72 float-r" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
-          </div>
-          <div class="login-btn-wrapper">
-            <button type="button" class="btn btn-green fs-11" v-on:click="entryButton">{{ $t("phone.button")}}</button>
-          </div>
-        </div>
-      </div>
-      <div class="hasLogined" v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">
-        {{currentPhoneNum}}
       </div>
     </div>
   </div>
@@ -225,11 +236,11 @@ export default {
     if (vueCookie.get('qr_phone_num')) {
       this.$i18n.phone = vueCookie.get('qr_phone_num')
       this.currentPhoneNum = vueCookie.get('qr_phone_num')
-      // this.hasCookie = true
-      // this.noCookie = false
+      this.hasCookie = true
+      this.noCookie = false
     } else {
-      // this.hasCookie = false
-      // this.noCookie = true
+      this.hasCookie = false
+      this.noCookie = true
     }
     console.log(this.$i18n.phone)
     var getParams = this.$route.params
@@ -380,29 +391,6 @@ export default {
             tempUser: this.tmpUser
           }
         })
-
-        // 取消跳转注册弹窗
-        // if (!confirm(this.$i18n.t('message.noUser'))) {
-        //   return false
-        // } else {
-        //   if (!confirm(this.$i18n.t('message.noUser2'))) {
-        //     return false
-        //   } else {
-        //     var getParams = this.$route.params
-        //     this.$router.push({
-        //       name: 'Register',
-        //       params: {
-        //         yellowBall: getParams.yellowBall,
-        //         greenBall: getParams.greenBall,
-        //         type: 'event',
-        //         qrCode: getParams.qrCode,
-        //         phoneNumber: this.phoneNumber,
-        //         countryCode: this.selectedCountry,
-        //         tempUser: this.tmpUser
-        //       }
-        //     })
-        //   }
-        // }
       }).catch((ex) => {
         console.log(ex)
         var errorResponseData = ex.response.data
@@ -510,16 +498,29 @@ export default {
   vertical-align:middle;
 }
 
+.outer-box{
+  background: #57A0FF;
+}
+
 .contents-wrapper {
   min-height:calc(100vh - 60px);
 }
 
-.complete-event-contents-wrapper {
+.complete-event-top-wrapper {
+  width: 100vw;
+  height: 108vw;
   background-color:#FFFFFF;
-  padding:10px 20px;
+  background: url('/static/img/complete/complete-background.png') no-repeat;
+  background-size: 100vw 108vw;
+  /* padding:10px 20px; */
   text-align:center;
+  margin-top: -2px;
+  border-top: 1px solid #FFE300;
 }
-
+.complete-event-contents-wrapper{
+  padding: 20px 15px;
+  text-align: center;
+}
 .event-title {
   text-align:left;
   /* padding-bottom:10px; */
@@ -544,9 +545,13 @@ export default {
 }
 
 .complete-size {
-  height:calc((100vw - 110px)/7);
-  width:calc((100vw - 110px)/7);
-  margin:1%;
+  /* height:calc((100vw - 110px)/7);
+  width:calc((100vw - 110px)/7); */
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-game-img-wrapper {
@@ -566,6 +571,11 @@ export default {
 
 .section-divider1 {
   height:10px;
+}
+
+.complete-event-bottom-wrapper{
+  background: #57A0FF;
+  padding-top: 25px;
 }
 
 .app-down-wrapper {
@@ -633,7 +643,8 @@ export default {
 }
 
 .complete-ball-wrapper {
-  margin-bottom:10px;
+  width: 90%;
+  margin: 5vw 5%;
 }
 
 .modal-wrapper {
@@ -719,40 +730,74 @@ export default {
   overflow-y:scroll;
 }
 
+.win-rule{
+  display: inline-block;
+  margin-top: 63vw;
+  margin-bottom: 5.7vw;
+  vertical-align: middle;
+}
+.win-rule img{
+  width: 13px;
+}
+
 .complete-ball-wrapper-title {
   margin-bottom:10px;
 }
 
 .login-wrapper {
-  width:100%;
+  padding: 0px 30px;
+  margin-bottom: 18px;
 }
-
-.login-title {
-  background-color:#666666;
-  padding:10px 20px;
+.dashed-line{
+  width: 100%;
+  margin-top: 25px;
+  border-bottom: 1px dashed #ffffff;
 }
 
 .login-input-wrapper {
-  padding:0px 20px 5px 20px;
+  display: flex;
+  height:35px;
+  padding: 10px 0px;
+  background:rgba(255,255,255,1);
+  border-radius:5px;
+  box-shadow:0px 0px 11px 0px rgba(255,95,87,0.18);
+  margin-bottom: 15px;
 }
 
 .login-input-wrapper select {
-  height:40px;
-  border:1px solid #CCCCCC;
-  color:#666666;
-  padding:10px;
-  border-radius:3px;
-  font-size:1em;
+  border: none;
+	outline: none;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance: none;
+  background: #fff;
+	padding: 0px 13px 0px 20px;
+  height:35px;
+  color:#000;
+  font-size:16px;
+  border-right: 1px solid #DDD;
+  text-align: center;
 }
 
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color:#999999;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color:#999999;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color:#999999;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color:#999999;
+}
 .phone-number-input {
-  height:40px;
-  border:0px;
-  border:1px solid #CCCCCC;
+  flex: 1;
+  height:35px;
+  border:none;
   color:#666666;
-  font-size:1em;
-  border-radius:3px;
-  padding:10px;
+  padding-left: 10px;
+  font-size:16px;
   box-sizing: border-box;
   -webkit-appearance:none;
   -moz-appearance:none;
@@ -769,28 +814,177 @@ export default {
 
 .complete-info-wrapper {
   text-align:center;
-  margin:20px 0;
 }
 
 .info-title {
-  color:#333333;
-  margin-bottom:10px;
-  font-weight:bold;
+  color:#FFF;
+  margin-bottom:25px;
+  font-weight:600;
+  font-size: 18px;
 }
 
-.login-btn-wrapper {
-  padding:10px 20px;
+.login-btn {
+  height:55px;
+  text-align: center;
+  line-height: 55px;
+  background:rgba(255,226,0,1);
+  border-radius:4px;
+  box-shadow:0px 0px 11px 0px rgba(87,160,255,0.18);
+  font-size: 16px;
+  font-weight:600;
+  color:rgba(91,57,25,1);
 }
 
-.login-btn-wrapper .btn {
-  width:100%;
-  border-radius:8px;
+.ball-wrapper.yellow, .ball-wrapper.green{
+    font-weight: normal;
 }
-
 .ball-size-item1 {
-  width:100%;
-  margin-top:calc((90vw - 100px)/25);
-  font-size: 5vw;
+  /* width:100%; */
+  /* margin-top:calc((90vw - 100px)/25); */
+  /* font-size: 5vw; */
   /* font-size: calc((100vw - 110px)/20); */
+  font-size: 16px;
+}
+.lottery-date{
+	display: flex;
+	width: 88%;
+	margin-left: 6%;
+	align-items: center;
+}
+.lottery-date-line{
+	border-bottom: 1px solid #FFFFFF;
+	flex: 1;
+}
+.lottery-date-text{
+	font-size:16px;
+	font-family:"PingFangSC-Light";
+	color:#333333;
+	margin: 0 20px;
+}
+.terms{
+  font-size: 12px;
+  color: #666666;
+  text-align: center;
+  line-height: 12px;
+}
+.shop-coupon-wrapper{
+  margin-bottom: 20px;
+  padding: 0px 15px;
+}
+.shop-coupon-title, .seedo-gifts-title{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.shop-coupon-box{
+	width: 100%;
+  border-bottom: 1px solid #57A0FF;
+  border-top: 1px solid #57A0FF;
+}
+
+.shop-coupon{
+	display: flex;
+	background: #FFFFFF;
+	padding: 15px;
+	margin: 10px 0px;
+}
+.coupon-img{
+	width: 77px;
+	height: 77px;
+}
+.coupon-img img{
+	width: 100%;
+	border-radius: 2px;
+}
+.shop-coupon-detail{
+	flex: 1;
+	padding-left: 15px;
+	align-items: center;
+}
+
+.coupon-name{
+	font-family: "PingFangSC-Semibold";
+	font-size: 14px;
+	color: #333333;
+}
+.store-name, .term{
+	color: #666666;
+	font-size: 10px;
+	line-height: 14px;
+}
+.store-name{
+	margin: 10px 0 20px;
+}
+.use-shop-coupon-btn{
+	float: right;
+	width: 75px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
+	border-radius:15px;
+}
+.seedo-gifts-wrapper{
+  padding: 0px 15px;
+}
+.seedo-gifts-title{
+  margin-bottom: 20px;
+}
+.seedo-gifts-box{
+  margin: 10px 0px 10px;
+}
+.seedo-gifts{
+  width: 91vw;
+  height: 25vw;
+  margin: 0 auto;
+  background: url('/static/img/complete/awrad-background.png') no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+  color: #5B3919;
+  display: table-cell;
+  vertical-align: middle;
+}
+.congratulate{
+  font-size: 16px;
+  font-weight: 600;
+}
+.gifts-desc{
+  font-size: 11px;
+  font-weight: 400;
+}
+.hasLogined{
+  width: 86%;
+  margin: 25px auto 0px;
+  height:45px;
+  background:rgba(116,174,250,1);
+  border-radius:5px;
+  line-height: 45px;
+  text-align: center;
+  color: #FFFFFF;
+}
+.go-to-download{
+    width: 86%;
+    margin-left: 7%;
+    margin-top: 20px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background: -webkit-gradient(linear,left top, right top,from(rgba(255,222,0,1)),to(rgba(255,230,0,1)));
+    background: linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(255,226,0,0.3);
+    box-shadow: 0px 2px 4px 0px rgba(255,226,0,0.3);
+    border-radius: 22px;
+}
+@media (max-width: 340px){
+  .login-input-wrapper select{
+    padding: 0px 4px 0px 10px;
+  }
+}
+@media (max-width: 320px){
+  .login-input-wrapper select{
+    padding: 0px 0px 0px 6px;
+  }
 }
 </style>
