@@ -185,6 +185,15 @@ export default {
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
+		axios({
+			method: 'GET',
+			url: 'http://dev-new-api.beanpop.cn/myGroupOn/id'
+		}).then((response) => {
+			let responseData = response.data
+			console.log(response)
+		}).catch((ex) => {
+			console.log(ex)
+		})
 	},
 	methods: {
 		showMustKnow: function () {
