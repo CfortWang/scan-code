@@ -32,7 +32,7 @@
             <div class="w-70 float-l">
               <div class="input-wrapper float-wrapper">
                 <!-- <input type="text" v-model="countryCode" class="p-l-10 w-23 float-l" disabled> -->
-                <input type="text" v-model="phoneAndCountry" class="p-l-10 w-100 float-r">
+                <input type="text" id="phoneNum" v-model="phoneAndCountry" class="p-l-10 w-100 float-r">
               </div>
             </div>
           </div>
@@ -361,10 +361,12 @@ export default {
             // console.log(responseData)
 
             // save the phone number has been registed success
-            var phoneNum = document.getElementById('phoneNum').value
-            vueCookie.set('qr_phone_num', phoneNum, 1)
-            this.$i18n.phone = vueCookie.get('qr_phone_num')
-            this.currentPhoneNum = vueCookie.get('qr_phone_num')
+            // 添加cookie
+            // var phoneNum = document.getElementById('phoneNum').value
+            // vueCookie.set('qr_phone_num', phoneNum, 1)
+            // this.$i18n.phone = vueCookie.get('qr_phone_num')
+            // this.currentPhoneNum = vueCookie.get('qr_phone_num')
+
             this.$router.push({name: 'AppDown', params: {code: 'default'}})
           }).catch((ex) => {
             console.log(ex)

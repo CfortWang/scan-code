@@ -52,6 +52,9 @@ const i18n = new VueI18n({
   messages: langData
 })
 
+Vue.prototype.$http = axios
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
 export default {
 	name: 'shareRegister',
 	i18n: i18n,
@@ -110,22 +113,26 @@ export default {
 		getVerification: function () {
 			this.phoneNumber = $("#phoneNum").val()
 			this.type = 'sign_up'
-			if (this.phoneNumber === '') {
-				$(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
-				this.$options.methods.showMessage()
-				return false
-			}
-			var pattern = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
-			if (!pattern.test(this.phoneNumber)) {
-				$(".tip-error").text(this.$i18n.t('message.wrongPhoneNum'))
-				this.$options.methods.showMessage()
-				return false
-			}
+			// if (this.phoneNumber === '') {
+			// 	$(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
+			// 	this.$options.methods.showMessage()
+			// 	return false
+			// }
+			// var pattern = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+			// if (!pattern.test(this.phoneNumber)) {
+			// 	$(".tip-error").text(this.$i18n.t('message.wrongPhoneNum'))
+			// 	this.$options.methods.showMessage()
+			// 	return false
+			// }
+
 			axios({ // get verification code
 				method: 'POST',
 				// url: process.env.api_url + '/api/certifications/phone-num/sign-up',
 				url: 'http://dev-new-api.beanpop.cn/login/sendCode',
-				params: { phoneNumber: this.phoneNumber, country: this.selectedCountry, type: this.type }
+				params: { phoneNumber: this.phoneNumber, country: this.selectedCountry, type: this.type },
+				// headers: {'lang': 'zh', 'token': '', 'os': this.phoneKind, 'version': '1.0.0', 'time': ''}
+				// headers: {os: 'zh'}
+				headers: {'content-type': 'application/x-www-form-urlencoded', 'accept': 'text/html'}
 			}).then((response) => {
 				// var responseMessage = response.data.message
 				// let responseData = response.data

@@ -157,6 +157,7 @@ export default {
 				this.$options.methods.showMessage()
 				return false
 			}
+
 			axios({ // login
 				method: 'POST',
 				// url: process.env.api_url + '/api/register/code',
