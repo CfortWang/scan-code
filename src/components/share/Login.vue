@@ -167,7 +167,8 @@ export default {
 					country: this.selectedCountry,
 					code: this.verificationCode,
 					mobileOs: this.phoneKind
-				}
+				},
+				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 			}).then((response) => {
 				var responseMessage = response.data.message
 				var responseData = response.data.data
@@ -180,28 +181,28 @@ export default {
 					return false
 				}
 			}).catch((ex) => {
-				var responseStatus = ex.response.status
-				var errorResponseData = ex.response.data
-				// console.log(responseStatus)
-				// console.log(errorResponseData)
-				if (responseStatus === 404) {
-					if (errorResponseData.status === 100) {
-						alert(this.$i18n.t('message.wrongRecommendCode'))
-						return false
-					} else if (errorResponseData.status === 200) {
-						alert(this.$i18n.t('message.wrongAuthCode'))
-						return false
-					} else {
-						console.log(ex)
-						return false
-					}
-				} else if (responseStatus === 400) {
-					alert(this.$i18n.t('message.wrongAuthCode'))
-					return false
-				} else {
-					console.log(ex)
-					return false
-				}
+				// var responseStatus = ex.response.status
+				// var errorResponseData = ex.response.data
+				// // console.log(responseStatus)
+				// // console.log(errorResponseData)
+				// if (responseStatus === 404) {
+				// 	if (errorResponseData.status === 100) {
+				// 		alert(this.$i18n.t('message.wrongRecommendCode'))
+				// 		return false
+				// 	} else if (errorResponseData.status === 200) {
+				// 		alert(this.$i18n.t('message.wrongAuthCode'))
+				// 		return false
+				// 	} else {
+				// 		console.log(ex)
+				// 		return false
+				// 	}
+				// } else if (responseStatus === 400) {
+				// 	alert(this.$i18n.t('message.wrongAuthCode'))
+				// 	return false
+				// } else {
+				// 	console.log(ex)
+				// 	return false
+				// }
 			})
 		}
 	}

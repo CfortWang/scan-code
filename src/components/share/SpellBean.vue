@@ -187,7 +187,8 @@ export default {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		axios({
 			method: 'GET',
-			url: 'http://dev-new-api.beanpop.cn/myGroupOn/id'
+			url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
+			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 		}).then((response) => {
 			let responseData = response.data
 			console.log(response)

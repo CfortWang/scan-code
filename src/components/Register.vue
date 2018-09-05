@@ -20,100 +20,39 @@
         {{ $t("title") }}
       </div>
     </header>
-    <div class="contents-wrapper" :class="{ blockScroll: termsOpen }">
-      <div class="input-box-wrapper">
-        <div class="register-input-wrapper">
-          <div class="inline-input-wrapper float-wrapper">
-            <div class="input-label w-30 float-l dsp-table">
-              <div class="dsp-table-cell">
-                {{ $t("phone") }} :
+    <div class="content">
+        <div class="reg-box">
+            <div class="phone-num-box">
+                <select id="select" name="" v-on:change="countryChangeItem($event)">
+                    <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
+                </select>
+                <input type="number" name="phoneNum" id="phoneNum" value="" v-bind:placeholder="$t('placeholder.phoneNum')" v-model="phoneNumber"/>
+            </div>
+            <div class="verification-code-box">
+                <input type="text" name="verification" id="verification" value="" v-bind:placeholder="$t('placeholder.verification')"/>
+                <vue-countdown :time="countDown" :interval="1000" :auto-start="false" ref="countdown" class="count-down">
+                  <template slot-scope="props">{{ props.minutes }}:{{ props.seconds }}</template>
+                </vue-countdown>
+                <button class="get-verification" v-on:click="getAuthCode">获取验证码</button>
+            </div>
+            <div class="password-box">
+                <input type="password" name="pwd" id="pwd" value="" v-bind:placeholder="$t('placeholder.password')"/>
+            </div>
+            <div class="re-password-box">
+                <input type="password" name="" id="rePwd" value="" v-bind:placeholder="$t('placeholder.rePassword')"/>
+            </div>
+            <div class="recommend-box">
+                <input type="text" name="recommend" id="recommend" value="" v-bind:placeholder="$t('placeholder.recommend')"/>
+            </div>
+            <div class="reg-success-desc">{{ $t("regAward")}}</div>
+            <div class="reg-btn-box" v-on:click="doRegister">{{ $t("ensureReg")}}</div>
+            <div class="tip-container">
+              <div class="tip-error">
+                <img src="/static/img/share/error.png"/>
+                <span class="tip-error-msg"></span>
               </div>
             </div>
-            <div class="w-70 float-l">
-              <div class="input-wrapper float-wrapper">
-                <!-- <input type="text" v-model="countryCode" class="p-l-10 w-23 float-l" disabled> -->
-                <input type="text" id="phoneNum" v-model="phoneAndCountry" class="p-l-10 w-100 float-r">
-              </div>
-            </div>
-          </div>
-          <div class="inline-input-wrapper float-wrapper">
-            <div class="input-label w-30 float-l dsp-table">
-              <div class="dsp-table-cell">
-                {{ $t("authCode") }} :
-              </div>
-            </div>
-            <div class="w-70 float-l">
-              <div class="input-wrapper float-wrapper">
-                <input type="text" class="code-input w-40 float-l" v-model="authCode">
-                <div class="timer-wrapper w-20 float-l fs-08">
-                  <div class="timer-contents-wrapper float-wrapper">
-                    <div class="timer-text-wrapper dsp-table float-l">
-                      <vue-countdown :time="countDown" :interval="1000" :auto-start="false" ref="countdown" class="dsp-table-cell">
-                        <template slot-scope="props">{{ props.minutes }}:{{ props.seconds }}</template>
-                      </vue-countdown>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn code-button w-35 float-r" v-on:click="getAuthCode">{{ $t("authCodeBtn") }}</button>
-              </div>
-            </div>
-          </div>
-          <!-- 取消密码输入框 -->
-          <!-- <div class="inline-input-wrapper float-wrapper">
-            <div class="input-label w-30 float-l dsp-table">
-              <div class="dsp-table-cell">
-                {{ $t("password1") }} :
-              </div>
-            </div>
-            <div class="w-70 float-l">
-              <div class="input-wrapper float-wrapper">
-                <input type="password" v-model="password1" class="w-100">
-              </div>
-              <div class="remark-text fs-08">
-                {{ $t("passwordRemark") }}
-              </div>
-            </div>
-          </div> -->
-          <div class="inline-input-wrapper float-wrapper" v-if="!isEvent">
-            <div class="input-label must-insert w-30 float-l dsp-table">
-              <div class="dsp-table-cell">
-                {{ $t("recommendCode") }}
-              </div>
-            </div>
-            <div class="w-70 float-l">
-              <div class="input-wrapper float-wrapper">
-                <input type="text" id="regPhone" v-model="recommendCode" class="p-l-10 w-100" :disabled="!isEvent">
-              </div>
-              <div class="remark-text fs-08">
-                {{ $t("recommendRemark") }}
-              </div>
-            </div>
-          </div>
-          <div class="terms-wrapper float-wrapper">
-            <div class="terms-btn float-l" v-on:click="termsCheck">
-              <img src="/static/img/register/signUp_agree.jpg" class="check-img" v-if="termsChecked">
-              <img src="/static/img/register/signUp_disagree.jpg" class="check-img" v-else>
-            </div>
-            <div class="terms-text float-l dsp-table">
-              <div class="dsp-table-cell">
-                <div v-if="currentLanguage === 'ko'">
-                  <span class="text-red" v-on:click="termsOn">{{ $t("terms.text1") }}</span>{{ $t("terms.text2") }}
-                </div>
-                <div v-else>
-                  {{ $t("terms.text2") }}<span class="text-red" v-on:click="termsOn">{{ $t("terms.text1") }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="input-box-wrapper">
-        <div class="register-input-wrapper">
-          <div class="confirm-button-wrapper">
-            <button type="button" class="btn btn-green fs-12" v-on:click="doRegister">{{ $t("register") }}</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -124,6 +63,7 @@ import VueI18n from 'vue-i18n'
 import axios from 'axios'
 import vueCookie from 'vue-cookie'
 import VueCountdown from '@xkeshi/vue-countdown'
+import $ from 'jquery'
 
 const langData = require('./lang/register.json')
 
@@ -152,10 +92,9 @@ export default {
       password1: '',
       password2: '',
       recommendCode: '',
+      countryItems: [],
       authCode: '',
       isEvent: true,
-      termsChecked: true,
-      termsOpen: false,
       tmpUser: null,
       countDown: setNow - now,
       currentLanguage: 'zh',
@@ -163,7 +102,29 @@ export default {
     }
   },
   created: function () {
+    axios({ // Get Country Info
+      url: process.env.api_url + '/api/countries'
+    }).then((response) => {
+      var responseData = response.data.data
+      // console.log(responseData)
+      this.countryItems = responseData.data
+      this.countrySeq = parseInt(this.countryItems[0].seq)
+    }).catch((ex) => {
+      console.log(ex)
+      // var errorResponseData = ex.response.data
+      // console.log(errorResponseData)
+    })
+
     var getParams = this.$route.params
+    this.countrySeq = getParams.countryCode
+    console.log(this.countrySeq)
+    var coun = this.countrySeq
+    this.phoneNumber = getParams.phoneNumber
+    setTimeout(function () {
+      var sel = document.getElementById('select')
+      var op = coun - 1
+      sel.options[op].selected = true
+    }, 500)
     this.tmpUser = getParams.tempUser
     if (vueCookie.get('qr_language')) {
       this.$i18n.locale = vueCookie.get('qr_language')
@@ -183,59 +144,16 @@ export default {
       }
     }
 
-    // register page add the countryCode
-    if (getParams.countryCode === 1) {
-      this.countryCode = 86
-    } else if (getParams.countryCode === 2) {
-      this.countryCode = 61
-    } else if (getParams.countryCode === 3) {
-      this.countryCode = 82
-    } else if (getParams.countryCode === 4) {
-      this.countryCode = 81
-    } else if (getParams.countryCode === 5) {
-      this.countryCode = 60
-    } else if (getParams.countryCode === 6) {
-      this.countryCode = 62
-    } else if (getParams.countryCode === 7) {
-      this.countryCode = 852
-    } else if (getParams.countryCode === 8) {
-      this.countryCode = 886
-    } else if (getParams.countryCode === 9) {
-      this.countryCode = 1
-    } else if (getParams.countryCode === 10) {
-      this.countryCode = 64
-    }
-
-    this.phoneNumber = getParams.phoneNumber
-    this.phoneAndCountry = '+' + this.countryCode + ' ' + this.phoneNumber
-    // console.log(this.phoneAndCountry)
-
     if (getParams.type === 'recommend') {
       this.isEvent = false
       this.recommendCode = getParams.code
     }
-
-    axios({ // Get Country Info
-      url: process.env.api_url + '/api/countries'
-    }).then((response) => {
-      // var responseMessage = response.data.message
-      var responseData = response.data.data
-      // console.log(responseMessage)
-      // console.log(responseData)
-
-      for (var i = 0; i < responseData.total_cnt; i++) {
-        if (responseData.data[i].seq === getParams.countryCode) {
-          this.countrySeq = responseData.data[i].seq
-          this.countryCode = '+' + responseData.data[i].calling_code
-        }
-      }
-    }).catch((ex) => {
-      console.log(ex)
-      // var errorResponseData = ex.response.data
-      // console.log(errorResponseData)
-    })
   },
   methods: {
+    countryChangeItem: function (event) {
+      this.countrySeq = parseInt(event.target.value)
+      console.log(this.countrySeq)
+    },
     termsCheck: function () {
       if (this.termsChecked === true) {
         this.termsChecked = false
@@ -249,24 +167,23 @@ export default {
     backKey: function () {
       this.termsOpen = false
     },
-    agreeTerms: function () {
-      this.termsOpen = false
-      this.termsChecked = true
-    },
+    showMessage: function () {
+			$(".tip-container").fadeIn()
+			setTimeout(function () {
+				$(".tip-container").fadeOut()
+			}, 1000)
+		},
     getAuthCode: function () {
       var getParams = this.$route.params
-      this.phoneNumber = this.phoneAndCountry.split(' ')[1]
+      this.phoneNumber = document.getElementById('phoneNum').value
       // console.log(getParams.countryCode)
       axios({ // get auth code
         method: 'POST',
         url: process.env.api_url + '/api/certifications/phone-num/sign-up',
-        params: { phone_num: this.phoneNumber, country: getParams.countryCode }
+        params: { phone_num: this.phoneNumber, country: this.countrySeq }
       }).then((response) => {
-        // var responseMessage = response.data.message
         // var responseData = response.data.data
-        // console.log(responseMessage)
         // console.log(responseData)
-        // alert(this.$i18n.t('message.sendSuccess'))
         var now = new Date()
         var setNow = new Date(now.getTime() + 180000)
         this.countDown = setNow - now
@@ -281,46 +198,66 @@ export default {
       })
     },
     doRegister: function () {
-      this.password1 = this.password1.replace(/ /gi, '')
-      this.recommendCode = this.recommendCode.replace(/ /gi, '')
-      this.authCode = this.authCode.replace(/ /gi, '')
-      this.phoneNumber = this.phoneAndCountry.split(' ')[1]
-      if (!this.termsChecked) {
-        alert(this.$i18n.t('message.termsCheck'))
+      this.countrySeq = document.getElementById('select').value
+      this.phoneNumber = document.getElementById('phoneNum').value
+      this.authCode = document.getElementById('verification').value.replace(/ /gi, '')
+      this.password1 = document.getElementById('pwd').value.replace(/ /gi, '')
+      this.password2 = document.getElementById('rePwd').value.replace(/ /gi, '')
+      this.recommendCode = document.getElementById('recommend').value.replace(/ /gi, '')
+      if (this.phoneNumber === '') {
+        $(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
+        this.$options.methods.showMessage()
         return false
       }
       if (this.authCode === '') {
-        alert(this.$i18n.t('message.insertAuthCode'))
+        $(".tip-error").text(this.$i18n.t('message.insertAuthCode'))
+        this.$options.methods.showMessage()
         return false
       }
       if (this.authCode.length !== 6) {
-        alert(this.$i18n.t('message.wrongAuthCodeSize'))
+        $(".tip-error").text(this.$i18n.t('message.wrongAuthCodeSize'))
+        this.$options.methods.showMessage()
         return false
       }
-      // 取消密码输入及验证功能
-      // if (this.password1 === '') {
-      //   alert(this.$i18n.t('message.insertPW'))
-      //   return false
-      // }
-      // if (this.password1.length < 8 || this.password1.length > 20) {
-      //   alert(this.$i18n.t('message.wrongPWSize'))
-      //   return false
-      // }
-      // if (this.recommendCode !== '' && this.recommendCode.length !== 6) {
-      //   alert(this.$i18n.t('message.wrongRecommendCodeSize'))
-      //   return false
-      // }
+      if (this.password1 === '') {
+        $(".tip-error").text(this.$i18n.t('message.insertPW'))
+        this.$options.methods.showMessage()
+        return false
+      }
+      if (this.password1.length < 8 || this.password1.length > 20) {
+        $(".tip-error").text(this.$i18n.t('message.wrongPWSize'))
+        this.$options.methods.showMessage()
+        return false
+      }
+      if (this.password2 === '') {
+        $(".tip-error").text(this.$i18n.t('message.rePwd'))
+        this.$options.methods.showMessage()
+        return false
+      }
+      if (this.password1 !== this.password2) {
+        $(".tip-error").text(this.$i18n.t('message.differentPW'))
+        this.$options.methods.showMessage()
+        return false
+      }
+      if (this.recommendCode !== '' && this.recommendCode.length !== 6) {
+        $(".tip-error").text(this.$i18n.t('message.wrongRecommendCodeSize'))
+        this.$options.methods.showMessage()
+        return false
+      }
+
       axios({ // sign up
         method: 'POST',
-        url: process.env.api_url + '/api/register/code',
+        url: process.env.api_url + '/api/register/mobile-web',
         params: {
           country: this.countrySeq,
-          phone_num: this.phoneNumber,
-          // password: this.password1,
           code: this.authCode,
-          recommendee_user_code: this.recommendCode
+          phone_num: this.phoneNumber,
+          password: this.password1,
+          password_conf: this.password2,
+          recommender_code: this.recommendCode
         }
       }).then((response) => {
+        console.log('oh yeah')
         // var responseMessage = response.data.message
         // var responseData = response.data.data
         // console.log(responseMessage)
@@ -616,5 +553,140 @@ input:disabled {
   width:20px;
   height:20px;
   margin-top:5px;
+}
+
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+a:active, a:hover{
+	text-decoration: none;
+}
+p, li{
+	margin: 0px;
+	padding: 0px;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color:#CCC;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color:#CCC;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color:#CCC;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color:#CCC;
+}
+.reg-box{
+	padding-top: 15px;
+}
+.phone-num-box, .verification-code-box, .password-box, .re-password-box, .recommend-box{
+	width: 70%;
+	margin-left: 15%;
+	display: flex;
+	border-bottom: 1px solid #DDDDDD;
+	padding: 15px 0px;
+}
+.phone-num-box select{
+	/*float: left;*/
+	border: none;
+	outline: none;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance: none;
+	background: url('/static/img/share/open_hollow.png') no-repeat scroll right center transparent;
+	background-size: 16px 16px;
+	padding-right: 15px;
+	height: 20px;
+}
+.phone-num-box #phoneNum{
+	margin-left: 10px;
+	border-left: 1px solid #DDDDDD;
+	padding: 0px 8px;
+}
+.count-down{
+	vertical-align: middle;
+	padding: 3px 5px 0px 0px;
+	font-size: 14px;
+}
+.get-verification{
+	border: none;
+	background: #FFFFFF;
+	padding: 0px;
+	color: #EE6807;
+}
+.get-verification:focus{
+	outline: none;
+}
+.reg-box input{
+	flex: 1;
+	height: 20px;
+	padding: 0px;
+	border: none;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance: none;
+	font-size: 14px;
+	width: 100px;
+}
+.reg-box input:focus{
+	outline: none;
+}
+.reg-success-desc{
+	font-size: 12px;
+	color: #999999;
+	text-align: center;
+	padding-top: 8px;
+}
+.reg-btn-box{
+	width: 70%;
+	background:linear-gradient(90deg,rgba(255,222,0,1) 0%,rgba(255,230,0,1) 100%);
+	border-radius:22px;
+	text-align: center;
+	font-size: 18px;
+	padding: 10px 0px;
+	margin: 20px 0px 20px 15%;
+}
+.tip-container{
+	position: fixed;
+    z-index: 999;
+    pointer-events: none;
+    left: 0;
+    top: 35%;
+    width: 100%;
+    display: none;
+}
+.tip-error{
+    width: 50%;
+    left: 25%;
+    height: 24px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    overflow: hidden;
+    padding: 10px 0px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0 0 12px #999;
+    -webkit-box-shadow: 0 0 12px #999;
+    box-shadow: 0 0 12px #999;
+    background: #BD362F;
+    color: #FFF;
+    opacity: .8;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    filter: alpha(opacity=80);
+}
+.tip-error-msg{
+	word-wrap: break-word;
+	font-size: 14px;
+	line-height: 20px;
+	margin-left: 15px;
 }
 </style>

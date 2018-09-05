@@ -6,6 +6,16 @@
       "text1": "Check",
       "text2": "Terms"
     },
+    "placeholder": {
+      "phoneNum": "请输入您的手机号",
+      "verification": "请输入验证码",
+      "password": "请输入您的密码",
+      "rePassword": "请确认您的密码",
+      "recommend": "推荐码（没有可不填）"
+    },
+    "getVerification": "获取验证码",
+    "regAward": "填写推荐码，注册成功后双方可获得100喜豆点",
+    "ensureReg": "确认注册",
     "title": "Sign Up",
     "mustInsert": "must requiyellow.",
     "phone": "Mobile",
@@ -43,6 +53,16 @@
       "text1": "이용약관",
       "text2": "내용보기"
     },
+    "placeholder": {
+      "phoneNum": "请输入您的手机号",
+      "verification": "请输入验证码",
+      "password": "请输入您的密码",
+      "rePassword": "请确认您的密码",
+      "recommend": "推荐码（没有可不填）"
+    },
+    "getVerification": "获取验证码",
+    "regAward": "填写推荐码，注册成功后双方可获得100喜豆点",
+    "ensureReg": "确认注册",
     "title": "회원가입",
     "mustInsert": "필수항목 입니다.",
     "phone": "핸드폰 번호",

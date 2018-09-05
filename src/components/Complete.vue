@@ -113,7 +113,7 @@
         <div class="shop-coupon-wrapper">
           <div class="shop-coupon-title">商家优惠卷</div>
           <div class="shop-coupon-box">
-            <div class="shop-coupon">
+            <!-- <div class="shop-coupon">
               <div class="coupon-img">
                 <img src="/static/img/share/pindou-img.jpg"/>
               </div>
@@ -125,8 +125,8 @@
                 </div>
                 <div class="use-shop-coupon-btn">使用</div>
               </div>
-            </div>
-            <div class="shop-coupon">
+            </div> -->
+            <!-- <div class="shop-coupon">
               <div class="coupon-img">
                 <img src="/static/img/share/pindou-img.jpg"/>
               </div>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="use-shop-coupon-btn">使用</div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
 
@@ -180,6 +180,7 @@ import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
+import $ from 'jquery'
 
 const langData = require('./lang/complete.json')
 
@@ -221,7 +222,8 @@ export default {
       landingUrl: '',
       reload: false,
       hasCookie: false,
-      noCookie: true
+      noCookie: true,
+      shopCoupon: []
     }
   },
   created: function () {
@@ -251,6 +253,8 @@ export default {
     this.bannerUrl = getParams.banner
     this.bottomAdUrl = getParams.bottomAd
     this.landingUrl = getParams.landingUrl
+    this.shopCoupon = getParams.shopCoupon
+    // console.log(this.shopCoupon.length)
     // this.yellowItems = ['yellow-' + getParams.yellowBall[0], 'yellow-' + getParams.yellowBall[1], 'yellow-' + getParams.yellowBall[2], 'yellow-' + getParams.yellowBall[3], 'yellow-' + getParams.yellowBall[4], 'yellow-' + getParams.yellowBall[5]]
     // this.greenItems = ['green-' + getParams.greenBall[0]]
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
@@ -333,6 +337,26 @@ export default {
       // var errorResponseData = ex.response.data
       // console.log(errorResponseData)
     })
+    var that = this
+    setTimeout(function () {
+      let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
+      let counponLength = that.shopCoupon.length
+      // $('.shop-coupon-box').append($shopCoupon)
+      console.log(counponLength)
+      for (let i = 0; i < counponLength; i++) {
+        $('.shop-coupon-box').append($shopCoupon)
+        let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
+        let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
+        let couponImage = that.shopCoupon[i].coupon.shop_logo
+        let couponTitle = that.shopCoupon[i].coupon.name
+        let shopName = that.shopCoupon[i].coupon.shop_name
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
+      }
+    }, 100)
   },
   methods: {
     countryChangeItem: function (event) {

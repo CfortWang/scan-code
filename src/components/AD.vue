@@ -41,7 +41,8 @@ export default {
       market: '',
       shopEvent: '',
       shopAD: '',
-      landingUrl: ''
+      landingUrl: '',
+      shopCoupon: []
     }
   },
   created: function () {
@@ -75,12 +76,10 @@ export default {
       var responseData = response.data.data
       // console.log(responseMessage)
       console.log(responseData)
-
       var shopADResult = responseData.shop.ad
       var marketResult = responseData.marketing_event_result
       var shopEventResult = responseData.shop.event_result
-      console.log()
-      console.log(shopADResult.length + '__' + marketResult.length + '__' + shopEventResult.length)
+      this.shopCoupon = shopEventResult
       if (shopADResult.length !== 0) {
         var downloadingShopAd = new Image()
         downloadingShopAd.src = responseData.shop.ad[0].shop_ad_image_file_url
@@ -124,7 +123,8 @@ export default {
               shopEvent: this.shopEvent,
               shopAD: this.shopAD,
               tmpUser: this.tmpUser,
-              landingUrl: this.landingUrl
+              landingUrl: this.landingUrl,
+              shopCoupon: this.shopCoupon
             }
           })
         }
