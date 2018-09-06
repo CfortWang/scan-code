@@ -1,20 +1,5 @@
 <template>
   <div>
-    <div class="terms-div-wrapper" v-if="termsOpen">
-      <div class="terms-div-header">
-        <div class="header-title-wrapper fs-14">
-          {{ $t("terms.title") }}
-        </div>
-        <div class="header-back-wrapper" v-on:click="backKey">
-          <div class="header-back-arrow">
-            <img src="/static/img/icon/title_back_icon.png">
-          </div>
-        </div>
-      </div>
-      <div class="terms-div-contents">
-        <iframe src="http://www.qr3355.cn/policy/policy.html"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
-      </div>
-    </div>
     <header>
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
@@ -154,19 +139,6 @@ export default {
       this.countrySeq = parseInt(event.target.value)
       console.log(this.countrySeq)
     },
-    termsCheck: function () {
-      if (this.termsChecked === true) {
-        this.termsChecked = false
-      } else {
-        this.termsChecked = true
-      }
-    },
-    termsOn: function () {
-      this.termsOpen = true
-    },
-    backKey: function () {
-      this.termsOpen = false
-    },
     showMessage: function () {
 			$(".tip-container").fadeIn()
 			setTimeout(function () {
@@ -174,7 +146,6 @@ export default {
 			}, 1000)
 		},
     getAuthCode: function () {
-      var getParams = this.$route.params
       this.phoneNumber = document.getElementById('phoneNum').value
       // console.log(getParams.countryCode)
       axios({ // get auth code
@@ -475,16 +446,6 @@ input:disabled {
   border:1px solid #666666;
 }
 
-.terms-div-wrapper {
-  position: absolute;
-  z-index:999;
-  top:0;
-  left:0;
-  height:100vh;
-  background-color:#FFFFFF;
-  width:100%;
-}
-
 .contents-wrapper.blockScroll {
   width:100%;
   position:fixed;
@@ -510,19 +471,6 @@ input:disabled {
   height:50px;
 }
 
-.terms-div-header {
-  background-color:#FFCB00;
-  display:table;
-  text-align:center;
-  width:100%;
-  height:60px;
-  color:#FFFFFF;
-}
-
-.terms-div-contents {
-  height: calc(100vh - 70px);
-}
-
 .terms-div-button-wrapper {
   height:50px;
   padding:10px 20px;
@@ -531,28 +479,6 @@ input:disabled {
 .terms-div-button-wrapper button {
   width:100%;
   height:100%;
-}
-
-.header-back-wrapper {
-  height:60px;
-  width:60px;
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  right:0;
-  display:table;
-}
-
-.header-back-arrow {
-  display:table-cell;
-  vertical-align: middle;
-}
-
-.header-back-arrow img {
-  width:20px;
-  height:20px;
-  margin-top:5px;
 }
 
 li{

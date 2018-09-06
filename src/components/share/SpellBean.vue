@@ -1,9 +1,24 @@
 <template>
 	<div class="content">
+		<div class="terms-div-wrapper" v-if="rulesOpen">
+			<div class="terms-div-header">
+			<div class="header-title-wrapper">
+				{{ $t("pddrule") }}
+			</div>
+			<div class="header-back-wrapper" v-on:click="backKey">
+				<div class="header-back-arrow">
+				<img src="/static/img/icon/goback.png">
+				</div>
+			</div>
+			</div>
+			<div class="terms-div-contents">
+				<iframe src="https://www.beanpop.cn/pddrule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
+			</div>
+		</div>
 		<div class="fixed-right-btn">打开App</div>
 		<div class="main-top">
 			<div class="main-top-title">
-				<img src="/static/img/share/rule.png" alt="" />
+				<img src="/static/img/share/rule.png" alt="" v-on:click="rulesClick"/>
 				<span>拼豆中…</span>
 			</div>
 			<div class="finish-time">
@@ -169,18 +184,26 @@
 <script>
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import vueCookie from 'vue-cookie'
+// import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import $ from 'jquery'
 
+const langData = require('../lang/share.json')
+
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'spellBean',
+  phone: '',
+  messages: langData
+})
 export default {
 	name: 'spellBean',
-	// i18n: i18n,
+	i18n: i18n,
 	components: {
 	},
 	data () {
 		return {
-			refresh: false
+			rulesOpen: false
 		}
 	},
 	created: function () {
@@ -188,9 +211,10 @@ export default {
 		axios({
 			method: 'GET',
 			url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
+			// url: 'http://dev-new-api.beanpop.cn/hotQuiz',
 			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 		}).then((response) => {
-			let responseData = response.data
+			// let responseData = response.data
 			console.log(response)
 		}).catch((ex) => {
 			console.log(ex)
@@ -220,6 +244,12 @@ export default {
 				$(".applicative-icon div span:last-child").html('1314米')
 				$(".applicative-icon img").attr('src', '/static/img/share/close_hollow.png')
 			}
+		},
+		rulesClick: function () {
+			this.rulesOpen = true
+		},
+		backKey: function () {
+			this.rulesOpen = false
 		}
 	}
 }
@@ -244,6 +274,51 @@ a:active, a:hover{
 p, li{
 	margin: 0px;
 	padding: 0px;
+}
+.header-title-wrapper {
+  display:table-cell;
+  vertical-align:middle;
+}
+.terms-div-wrapper {
+  position: absolute;
+  z-index:999;
+  top:0;
+  left:0;
+  height:100vh;
+  background-color:#FFFFFF;
+  width:100%;
+}
+.terms-div-header {
+  background-color:#FFE300;
+  display:table;
+  text-align:center;
+  width:100%;
+  height:60px;
+  color:#333333;
+  font-size: 18px;
+}
+.header-back-wrapper {
+  height:60px;
+  width:60px;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  right:0;
+  display:table;
+}
+.terms-div-contents {
+  height: calc(100vh - 70px);
+}
+.header-back-arrow {
+  display:table-cell;
+  vertical-align: middle;
+}
+
+.header-back-arrow img {
+  width:20px;
+  height:20px;
+  margin-top:5px;
 }
 .main-top{
 	/* border-top: 1px solid #DDDDDD; */

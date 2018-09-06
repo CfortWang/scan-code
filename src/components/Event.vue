@@ -330,10 +330,8 @@ export default {
         }).then((response) => {
           // var responseMessage = response.data.message
           var responseData = response.data.data
-          console.log(responseData)
           this.nowRound = responseData.drawing_num
           this.prizePool = responseData.prev_drawing_point + responseData.point
-          console.log(this.prizePool)
         }).catch((ex) => {
           console.log(ex)
         })

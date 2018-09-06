@@ -28,7 +28,7 @@
 <script>
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import vueCookie from 'vue-cookie'
+// import vueCookie from 'vue-cookie'
 import $ from 'jquery'
 import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
@@ -61,7 +61,8 @@ export default {
 			selectedCountry: 1,
 			countDown: setNow - now,
 			phoneKind: '',
-			type: ''
+			type: '',
+			cookies: ''
 		}
 	},
 	created: function () {
@@ -70,6 +71,7 @@ export default {
 		} else if (/(Android)/i.test(navigator.userAgent)) {
 			this.phoneKind = 'android'
 		}
+		this.cookies = document.cookie
 		axios({ // Get Country Info
 			// url: process.env.api_url + '/api/countries'
 			url: 'http://dev-new-api.beanpop.cn/common/country'
@@ -114,7 +116,7 @@ export default {
 				method: 'POST',
 				// url: process.env.api_url + '/api/certifications/phone-num/sign-up',
 				url: 'http://dev-new-api.beanpop.cn/login/sendCode',
-				params: { phoneNumber: this.phoneNumber, country: this.selectedCountry, type: this.type}
+				params: {phoneNumber: this.phoneNumber, country: this.selectedCountry, type: this.type}
 			}).then((response) => {
 				// var responseMessage = response.data.message
 				var responseData = response.data.data
@@ -166,12 +168,12 @@ export default {
 					phoneNumber: this.phoneNumber,
 					country: this.selectedCountry,
 					code: this.verificationCode,
-					mobileOs: this.phoneKind
+					mobileOs: 'web'
 				},
 				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 			}).then((response) => {
 				var responseMessage = response.data.message
-				var responseData = response.data.data
+				// var responseData = response.data.data
 				var responseStatus = response.data.code
 				// console.log(responseMessage)
 				console.log(responseStatus)

@@ -144,8 +144,8 @@
 
 <script>
 import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import vueCookie from 'vue-cookie'
+// import VueI18n from 'vue-i18n'
+// import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'
@@ -255,7 +255,7 @@ export default {
 		})
 	},
 	mounted () {
-		new Swiper('#top-swiper', {
+		let sp = new Swiper('#top-swiper', {
 			autoplay: true,
 			pagination: {
 				el: '.swiper-pagination',
@@ -265,6 +265,10 @@ export default {
 			paginationClickable: true,
 			centeredSlides: true,
 			loop: true
+		})
+
+		Vue.use({
+			sp
 		})
 	},
 	methods: {
@@ -329,15 +333,15 @@ export default {
 			// }, 1000)
 		},
 		send: function () {
-			let that = this
-			let rtime = that.rtime
-			console.log(that.rtime)
-			let interval = setInterval(() => {
-				if (that.rtime >= 0) {
-					that.rtime--
-					console.log(event)
-				}
-			}, 1000)
+			// let that = this
+			// let rtime = that.rtime
+			// console.log(that.rtime)
+			// let interval = setInterval(() => {
+			// 	if (that.rtime >= 0) {
+			// 		that.rtime--
+			// 		console.log(event)
+			// 	}
+			// }, 1000)
 		}
 	}
 }

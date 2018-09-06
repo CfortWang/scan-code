@@ -1,5 +1,20 @@
 <template>
   <div class="outer-box">
+    <div class="terms-div-wrapper" v-if="rulesOpen">
+      <div class="terms-div-header">
+        <div class="header-title-wrapper">
+          {{ $t("gameRule") }}
+        </div>
+        <div class="header-back-wrapper" v-on:click="backKey">
+          <div class="header-back-arrow">
+            <img src="/static/img/icon/goback.png">
+          </div>
+        </div>
+      </div>
+      <div class="terms-div-contents">
+        <iframe src="https://www.beanpop.cn/rule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
+      </div>
+    </div>
     <transition>
       <div class="modal-wrapper">
           <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
@@ -30,7 +45,7 @@
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
       <div class="complete-event-top-wrapper">
-        <div class="win-rule" v-on:click="openModal">
+        <div class="win-rule" v-on:click="rulesClick">
           <img src="/static/img/complete/rule.png" alt="">
           <span>{{ $t("moreInfo") }}</span>
         </div>
@@ -223,6 +238,7 @@ export default {
       reload: false,
       hasCookie: false,
       noCookie: true,
+      rulesOpen: false,
       shopCoupon: []
     }
   },
@@ -369,6 +385,12 @@ export default {
     hide: function () {
       document.getElementsByClassName('modal-wrapper')[0].style.display = 'none'
       document.getElementsByClassName('mask')[0].style.display = 'none'
+    },
+    rulesClick: function () {
+      this.rulesOpen = true
+    },
+    backKey: function () {
+      this.rulesOpen = false
     },
     clickBottomAd: function (gotoUrl) {
       window.location.href = gotoUrl
@@ -524,6 +546,47 @@ export default {
 
 .outer-box{
   background: #57A0FF;
+}
+.terms-div-wrapper {
+  position: absolute;
+  z-index:999;
+  top:0;
+  left:0;
+  height:100vh;
+  background-color:#FFFFFF;
+  width:100%;
+}
+.terms-div-header {
+  background-color:#FFE300;
+  display:table;
+  text-align:center;
+  width:100%;
+  height:60px;
+  color:#333333;
+  font-size: 18px;
+}
+.header-back-wrapper {
+  height:60px;
+  width:60px;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  right:0;
+  display:table;
+}
+.terms-div-contents {
+  height: calc(100vh - 70px);
+}
+.header-back-arrow {
+  display:table-cell;
+  vertical-align: middle;
+}
+
+.header-back-arrow img {
+  width:20px;
+  height:20px;
+  margin-top:5px;
 }
 
 .contents-wrapper {

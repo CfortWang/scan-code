@@ -38,7 +38,7 @@
 <script>
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import vueCookie from 'vue-cookie'
+// import vueCookie from 'vue-cookie'
 import $ from 'jquery'
 import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
@@ -51,9 +51,6 @@ const i18n = new VueI18n({
   locale: 'shareRegister',
   messages: langData
 })
-
-Vue.prototype.$http = axios
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export default {
 	name: 'shareRegister',

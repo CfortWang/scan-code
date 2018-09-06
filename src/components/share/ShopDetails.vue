@@ -75,7 +75,7 @@
 <script>
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import vueCookie from 'vue-cookie'
+// import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import $ from 'jquery'
 import Swiper from 'swiper'
@@ -177,7 +177,7 @@ export default {
 		})
 	},
 	mounted () {
-		new Swiper('#top-swiper', {
+		let sp = new Swiper('#top-swiper', {
 			autoplay: true,
 			pagination: {
 				el: '.swiper-pagination',
@@ -187,6 +187,9 @@ export default {
 			paginationClickable: true,
 			centeredSlides: true,
 			loop: true
+		})
+		Vue.use({
+			sp
 		})
 	},
 	methods: {
