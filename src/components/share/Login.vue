@@ -35,6 +35,10 @@ import VueCountdown from '@xkeshi/vue-countdown'
 
 const langData = require('../lang/share.json')
 
+Vue.use(axios)
+axios.defaults.withCredentials = true
+Vue.prototype.$axios = axios;
+
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'login',
@@ -163,8 +167,8 @@ export default {
 			axios({ // login
 				method: 'POST',
 				// url: process.env.api_url + '/api/register/code',
-				// url: 'http://dev-new-api.beanpop.cn/login/code',
-				url: '/api/login/code',
+				url: 'http://dev-new-api.beanpop.cn/login/code',
+				// url: '/api/login/code',
 				params: {
 					phoneNumber: this.phoneNumber,
 					country: this.selectedCountry,
@@ -172,7 +176,7 @@ export default {
 					mobileOs: 'web'
 				},
 				withCredentials: true,
-				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'cookie': this.cookies}
+				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then((response) => {
 				var responseMessage = response.data.message
 				// var responseData = response.data.data

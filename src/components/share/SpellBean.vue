@@ -188,8 +188,8 @@ import VueI18n from 'vue-i18n'
 import axios from 'axios'
 import $ from 'jquery'
 
-// axios.defaults.withCredentials=true
-// Vue.prototype.$axios = axios
+axios.defaults.withCredentials=true
+Vue.prototype.$axios = axios
 
 const langData = require('../lang/share.json')
 
@@ -222,7 +222,8 @@ export default {
 			url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
 			// url: '/api/myGroupOn/1',
 			withCredentials: true,
-			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+			crossDomain: true,
+			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 		}).then((response) => {
 			// let responseData = response.data
 			console.log(response)
