@@ -125,8 +125,8 @@
         </div>
 
         <!-- 非扫码进入不显示 -->
-        <div class="shop-coupon-wrapper">
-          <div class="shop-coupon-title">商家优惠卷</div>
+        <div class="shop-coupon-wrapper" v-if="shopCouponShow">
+          <div class="shop-coupon-title">{{ $t("event.title1")}}</div>
           <div class="shop-coupon-box">
             <!-- <div class="shop-coupon">
               <div class="coupon-img">
@@ -239,6 +239,7 @@ export default {
       hasCookie: false,
       noCookie: true,
       rulesOpen: false,
+      shopCouponShow: false,
       shopCoupon: []
     }
   },
@@ -353,6 +354,9 @@ export default {
       // var errorResponseData = ex.response.data
       // console.log(errorResponseData)
     })
+    if (this.shopCoupon.length > 0) {
+      this.shopCouponShow = true
+    }
     var that = this
     setTimeout(function () {
       let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'

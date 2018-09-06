@@ -15,7 +15,7 @@
 				<iframe src="https://www.beanpop.cn/pddrule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
 			</div>
 		</div>
-		<div class="fixed-right-btn">打开App</div>
+		<div class="fixed-right-btn" v-on:click="openApp(phoneKind)">打开App</div>
 		<div class="main-top">
 			<div class="main-top-title">
 				<img src="/static/img/share/rule.png" alt="" v-on:click="rulesClick"/>
@@ -188,6 +188,9 @@ import VueI18n from 'vue-i18n'
 import axios from 'axios'
 import $ from 'jquery'
 
+// axios.defaults.withCredentials=true
+// Vue.prototype.$axios = axios
+
 const langData = require('../lang/share.json')
 
 Vue.use(VueI18n)
@@ -203,15 +206,22 @@ export default {
 	},
 	data () {
 		return {
-			rulesOpen: false
+			rulesOpen: false,
+			phoneKind: ''
 		}
 	},
 	created: function () {
+		if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+			this.phoneKind = 'ios'
+		} else if (/(Android)/i.test(navigator.userAgent)) {
+			this.phoneKind = 'android'
+		}
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		axios({
 			method: 'GET',
 			url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
-			// url: 'http://dev-new-api.beanpop.cn/hotQuiz',
+			// url: '/api/myGroupOn/1',
+			withCredentials: true,
 			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 		}).then((response) => {
 			// let responseData = response.data
@@ -219,6 +229,24 @@ export default {
 		}).catch((ex) => {
 			console.log(ex)
 		})
+
+		// $.ajax({
+		// 	url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
+		// 	dataType: 'json',
+		// 	async: false,
+		// 	type: 'GET',
+		// 	// timeout: 3000,
+		// 	xhrFields: {
+		// 		withCredentials: true
+		// 	},
+		// 	headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''},
+		// 	success: function (req) {
+		// 		console.log(req)
+		// 	},
+		// 	error: function () {
+		// 		console.log('error')
+		// 	}
+		// })
 	},
 	methods: {
 		showMustKnow: function () {
@@ -349,7 +377,7 @@ p, li{
 	color: #EE6807;
 }
 .main-top .join-pindou-desc{
-	padding: 30px 0px;
+	padding: 20px 0px 30px;
 }
 .main-top .join-pindou-desc > div:first-child span{
 	color: #999999;
@@ -358,9 +386,6 @@ p, li{
 .pin-success-box, .ped-success-box{
 	width: 70%;
 	margin-left: 15%;
-}
-.user-joined{
-	padding-bottom: 20px;
 }
 .avatar img{
 	width: 42px;

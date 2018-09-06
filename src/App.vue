@@ -9,7 +9,7 @@ export default {
   name: 'App',
   created: function () {
   },
-  ipAddress: ' '
+	ipAddress: ' '
 }
 </script>
 

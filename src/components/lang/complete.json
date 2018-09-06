@@ -13,7 +13,7 @@
       "example": "(For example, if the blue bean is 4, then the 3 or 5 won)"
     },
     "event": {
-      "title1": "Shop AD/Event",
+      "title1": "Shop Coupon",
       "title2": "Maket' AD/Event",
       "title3": "Gift"
     },
@@ -99,7 +99,7 @@
       "example": "(比如蓝豆是4，则选3号或5号中奖)"
     },
     "event": {
-      "title1": "商家活动",
+      "title1": "商家优惠券",
       "title2": "喜豆活动",
       "title3": "劲爆大奖"
     },

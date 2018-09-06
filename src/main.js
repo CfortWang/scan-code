@@ -4,14 +4,23 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import moment from 'moment'
-import axios from 'axios'
-
-axios.defaults.withCredentials=true
-Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
 Vue.prototype.moment = moment
-
+Vue.prototype.openApp = function (event) {
+  if (event == 'android') {
+    window.location.href = 'xidou://app'
+    setTimeout(function () {
+      window.location.href = 'https://www.beanpop.cn/downloads'
+    }, 3000)
+  }
+  if (event == 'ios') {
+    window.location.href = 'seedo://'
+    setTimeout(function () {
+      window.location.href = 'https://www.beanpop.cn/downloads'
+    }, 3000)
+  }
+}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

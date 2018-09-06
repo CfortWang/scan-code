@@ -75,11 +75,12 @@ export default {
 		axios({ // Get Country Info
 			// url: process.env.api_url + '/api/countries'
 			url: 'http://dev-new-api.beanpop.cn/common/country'
+			// url: '/api/common/country'
 		}).then((response) => {
 			// var responseMessage = response.data.message
 			var responseData = response.data.data
 			// console.log(responseMessage)
-			// console.log(responseData)
+			console.log(responseData)
 			this.countryItems = responseData
 			this.selectedCountry = parseInt(this.countryItems[0].seq)
 		}).catch((ex) => {
@@ -159,18 +160,19 @@ export default {
 				this.$options.methods.showMessage()
 				return false
 			}
-
 			axios({ // login
 				method: 'POST',
 				// url: process.env.api_url + '/api/register/code',
-				url: 'http://dev-new-api.beanpop.cn/login/code',
+				// url: 'http://dev-new-api.beanpop.cn/login/code',
+				url: '/api/login/code',
 				params: {
 					phoneNumber: this.phoneNumber,
 					country: this.selectedCountry,
 					code: this.verificationCode,
 					mobileOs: 'web'
 				},
-				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+				withCredentials: true,
+				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'cookie': this.cookies}
 			}).then((response) => {
 				var responseMessage = response.data.message
 				// var responseData = response.data.data
