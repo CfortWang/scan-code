@@ -58,7 +58,10 @@ body {
 .join-pindou-desc{
 	text-align: center;
 }
-.join-pindou-desc span:nth-child(even){
+.grey{
+	color: #999999;
+}
+.orange{
 	color: #EE6807;
 }
 .fixed-right-btn{
@@ -654,5 +657,14 @@ header {
 }
 .winner p{
 	text-align: center;
+}
+
+.must-know-contain div{
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 8px;
+}
+.must-know-title{
+	font-family: "PingFangSC-Semibold";
 }
 </style>

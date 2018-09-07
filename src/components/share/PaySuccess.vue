@@ -42,12 +42,12 @@
 				</div>
 			</div>
 			<div class="join-pindou-desc">
-				<span>还剩</span>
-				<span>3个</span>
-				<span>名额即可获得优惠 </span>
-				<br /><span></span>
-				<span>22:33:44.0</span>
-				<span>后结束</span>
+				<span class="grey">还剩</span>
+				<span class="orange">3个</span>
+				<span class="grey">名额即可获得优惠 </span>
+				<br />
+				<span class="orange">22:33:44.0</span>
+				<span class="grey">后结束</span>
 			</div>
 			<div class="share-soon">赶紧邀请好友来拼豆豆吧！</div>
 		</div>
@@ -168,10 +168,6 @@ p, li{
 .pin-success-box .user-joined, .ped-success-box .user-joined{
 	padding-bottom: 0px;
 }
-.pin-success-box .join-pindou-desc span:nth-child(odd),
-.ped-success-box .join-pindou-desc span:nth-child(odd){
-	color: #999999;
-}
 .get-qualifications, .join-pindou-desc{
 	font-size: 14px;
 	padding: 20px 5px;
@@ -188,9 +184,6 @@ p, li{
 }
 .success-tips{
 	margin: 28px 0px 40px;
-}
-.join-pindou-desc span:nth-child(even){
-	color: #EE6807;
 }
 .user-joined{
 	padding-bottom: 20px;

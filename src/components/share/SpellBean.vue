@@ -19,11 +19,11 @@
 		<div class="main-top">
 			<div class="main-top-title">
 				<img src="/static/img/share/rule.png" alt="" v-on:click="rulesClick"/>
-				<span>拼豆中…</span>
+				<span>{{groupStatusDesc}}</span>
 			</div>
-			<div class="finish-time">
+			<div class="finish-time" v-if="pinIng">
 				<span>22:33:44.0</span>
-				<span>后结束</span>
+				<span class="orange">后结束</span>
 			</div>
 			<div class="pin-success-box">
 				<div class="user-joined justified">
@@ -58,46 +58,55 @@
 					</div>
 				</div>
 				<div class="join-pindou-desc">
-					<div>
+					<div class="times">
 						<span>发起时间：</span>
-						<span>2018.08.02 22:33:44 </span>
+						<span>{{groupCreateAt}}</span>
 					</div>
-					<div>
-						<span></span>
-						<span>猪猪侠豆塞雷</span>
-						<span>发起的拼豆豆还差</span>
-						<span>3人</span>
-						<span>，即可获得优惠 </span>
+					<div class="times" v-if="pinSuccess">
+						<span>成功时间：</span>
+						<span>{{groupSuccessAt}}</span>
+					</div>
+					<div class="times" v-if="!pinSuccess">
+						<span>失败时间：</span>
+						<span>{{groupExpriedAt}}</span>
+					</div>
+					<div class="group-info" v-if="pinIng">
+						<span class="orange">猪猪侠豆塞雷</span>
+						<span class="grey">发起的拼豆豆还差</span>
+						<span class="orange">3人</span>
+						<span class="grey">，即可获得优惠 </span>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="pindou-details">
-			<div class="pindou-details-top">袁老四的火锅店</div>
+			<div class="pindou-details-top">{{shopName}}</div>
 			<div class="pindou-details-middle">
 				<div class="middle-left">
-					<img src="/static/img/share/pindou-img.jpg" alt="" />
+					<img v-bind:src="shopImage" alt="" />
 				</div>
 				<div class="middle-right">
-					<div class="package-name">钻石王老五单身贵族套餐</div>
+					<div class="package-name">{{groupName}}</div>
 					<div class="right-second-div clear-fix">
 						<div class="owner-box">拼主</div>
-						<div class="new-package-price">￥58</div>
+						<div class="new-package-price">￥{{discountPrice}}</div>
 					</div>
 					<div class="right-third-div clear-fix">
 						<div class="really-price-box">
 							<span>到店使用仍需支付：</span>
-							<span>￥48</span>
+							<span>￥{{newPrice}}</span>
 						</div>
-						<div class="old-package-price"><del>2018</del></div>
+						<div class="old-package-price"><del>￥{{oldPrice}}</del></div>
 					</div>
 				</div>
 			</div>
 			<div class="pindou-details-bottom">
-				<span>使用期限：</span>
-				<span>2018.08.20</span>
-				<span>至</span>
-				<span>2018.09.22</span>
+				<div v-if="pinSuccess">
+					<span>使用期限：</span>
+					<span>{{startUseTime}}</span>
+					<span>至</span>
+					<span>{{endUseTime}}</span>
+				</div>
 			</div>
 		</div>
 		<div class="must-know justified" v-on:click="showMustKnow">
@@ -107,7 +116,7 @@
 			</div>
 		</div>
 		<div class="must-know-contain">
-			<div class="use-condition">使用条件</div>
+			<!-- <div class="use-condition">使用条件</div>
 			<div class="condition-desc">订单满300元使用</div>
 			<div class="warm-tips">温馨提示</div>
 			<div class="wram-tips-contain">
@@ -115,7 +124,7 @@
 				<div class="wram-tips-desc">2.哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩</div>
 				<div class="wram-tips-desc">3.哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩</div>
 				<div class="wram-tips-desc">4.哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="applicative justified" v-on:click="showApplicative">
 			<div class="applicative-text">适用门店</div>
@@ -188,8 +197,8 @@ import VueI18n from 'vue-i18n'
 import axios from 'axios'
 import $ from 'jquery'
 
-axios.defaults.withCredentials=true
-Vue.prototype.$axios = axios
+// axios.defaults.withCredentials=true
+// Vue.prototype.$axios = axios
 
 const langData = require('../lang/share.json')
 
@@ -207,7 +216,26 @@ export default {
 	data () {
 		return {
 			rulesOpen: false,
-			phoneKind: ''
+			phoneKind: '',
+			groupStatus: '',
+			groupCreateAt: '',
+			groupExpriedAt: '',
+			groupSuccessAt: '',
+			groupStatusDesc: '',
+			groupName: '',
+			shopImage: '',
+			groupSize: '',
+			groupLeftTime: '',
+			pinSuccess: true,
+			pinFailed: true,
+			pinIng: true,
+			shopName: '',
+			groupOnPrice: '',
+			oldPrice: '',
+			discountPrice: '',
+			newPrice: '',
+			startUseTime: '',
+			endUseTime: ''
 		}
 	},
 	created: function () {
@@ -222,32 +250,55 @@ export default {
 			url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
 			// url: '/api/myGroupOn/1',
 			withCredentials: true,
-			crossDomain: true,
 			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 		}).then((response) => {
-			// let responseData = response.data
-			console.log(response)
+			let responseData = response.data.data
+			this.groupName = responseData.groupName
+			this.groupCreateAt = responseData.createdAt
+			this.groupSuccessAt = responseData.paidAt
+			this.groupExpriedAt = responseData.expriedAt
+			this.shopName = responseData.shopName
+			this.shopImage = responseData.image
+			this.groupOnPrice = responseData.grouponPrice
+			this.oldPrice = responseData.price
+			this.discountPrice = responseData.discountedPrice
+			this.newPrice = parseFloat(this.discountPrice - this.groupOnPrice)
+			this.startUseTime = responseData.startUseTime
+			this.endUseTime = responseData.endUseTime
+			this.groupStatus = responseData.groupStatus
+			if (this.groupStatus == 1) {
+				this.groupStatusDesc = '拼团成功'
+				this.pinSuccess = true
+			} else if (this.groupStatus == 2) {
+				this.groupStatusDesc = '拼豆中...'
+				this.pinSuccess = false
+				this.pinIng = true
+			} else {
+				this.groupStatusDesc = '拼团失败'
+				this.pinSuccess = false
+				this.pinIng = false
+			}
+			this.groupLeftTime = responseData.timeLeft
+			this.groupSize = responseData.groupSize
+
+			var tips = responseData.tips
+			var $tipsDiv = '<div class="must-know-title"></div><div class="must-know-text"></div>'
+			for (let i = 0; i < tips.length; i++) {
+				let tipsTitle = tips[i].title
+				let tipsValue = tips[i].value
+				$('.must-know-contain').append($tipsDiv)
+				$(".must-know-contain .must-know-title:eq("+ i +")").text(tipsTitle)
+				$(".must-know-contain .must-know-text:eq("+ i +")").text(tipsValue)
+			}
+
+			// var groupNum = responseData.nowSize
+			// for (let i = 0; i < groupNum; i++) {
+				
+			// }
+			console.log(responseData)
 		}).catch((ex) => {
 			console.log(ex)
 		})
-
-		// $.ajax({
-		// 	url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
-		// 	dataType: 'json',
-		// 	async: false,
-		// 	type: 'GET',
-		// 	// timeout: 3000,
-		// 	xhrFields: {
-		// 		withCredentials: true
-		// 	},
-		// 	headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''},
-		// 	success: function (req) {
-		// 		console.log(req)
-		// 	},
-		// 	error: function () {
-		// 		console.log('error')
-		// 	}
-		// })
 	},
 	methods: {
 		showMustKnow: function () {
@@ -374,13 +425,11 @@ p, li{
 	font-size: 18px;
 	margin: 8px 10px 20px;
 }
-.finish-time span:first-child{
-	color: #EE6807;
-}
 .main-top .join-pindou-desc{
-	padding: 20px 0px 30px;
+	padding-bottom: 30px;
+	font-size: 14px;
 }
-.main-top .join-pindou-desc > div:first-child span{
+.times{
 	color: #999999;
 	font-size: 14px;
 }
@@ -412,7 +461,9 @@ p, li{
 	color: #999999;
 	font-size: 14px;
 }
-
+.user-joined{
+	margin: 20px 0px;
+}
 .pindou-details{
 	font-family: "PingFangSC-Regular";
 	font-size: 14px;
@@ -428,6 +479,9 @@ p, li{
 .pindou-details-bottom{
 	text-align: right;
 	color: #999999;
+	padding: 0px 15px;
+	height: 36px;
+	line-height: 36px;
 }
 .pindou-details-middle{
 	background: #F3F4F7;
@@ -441,6 +495,7 @@ p, li{
 }
 .middle-left img{
 	width: 100%;
+	height: 100%;
 	border-radius: 4px;
 }
 .middle-right{
@@ -485,6 +540,7 @@ p, li{
 }
 .must-know, .applicative{
 	padding: 15px;
+	font-size: 14px;
 	background: #FFFFFF;
 	/* box-shadow:0px 0px 0px 0px rgba(221,221,221,1),0px 1px 0px 0px rgba(221,221,221,1); */
 	border-bottom: 1px solid #dddddd;
@@ -497,6 +553,7 @@ p, li{
 	background: #FFFFFF;
 	border-bottom: 1px solid #DDDDDD;
 	display: none;
+	font-size: 14px;
 }
 .use-condition, .warm-tips{
 	font-family: "PingFangSC-Semibold";

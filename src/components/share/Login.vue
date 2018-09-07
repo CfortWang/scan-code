@@ -35,15 +35,15 @@ import VueCountdown from '@xkeshi/vue-countdown'
 
 const langData = require('../lang/share.json')
 
-Vue.use(axios)
-axios.defaults.withCredentials = true
-Vue.prototype.$axios = axios;
+// axios.defaults.withCredentials=true
+// Vue.prototype.$axios = axios
 
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'login',
   messages: langData
 })
+
 export default {
 	name: 'login',
 	i18n: i18n,
@@ -65,8 +65,7 @@ export default {
 			selectedCountry: 1,
 			countDown: setNow - now,
 			phoneKind: '',
-			type: '',
-			cookies: ''
+			type: ''
 		}
 	},
 	created: function () {
@@ -75,7 +74,7 @@ export default {
 		} else if (/(Android)/i.test(navigator.userAgent)) {
 			this.phoneKind = 'android'
 		}
-		this.cookies = document.cookie
+		// document.domain = "beanpop.cn"
 		axios({ // Get Country Info
 			// url: process.env.api_url + '/api/countries'
 			url: 'http://dev-new-api.beanpop.cn/common/country'
@@ -84,7 +83,7 @@ export default {
 			// var responseMessage = response.data.message
 			var responseData = response.data.data
 			// console.log(responseMessage)
-			console.log(responseData)
+			// console.log(responseData)
 			this.countryItems = responseData
 			this.selectedCountry = parseInt(this.countryItems[0].seq)
 		}).catch((ex) => {
@@ -179,15 +178,14 @@ export default {
 				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then((response) => {
 				var responseMessage = response.data.message
-				// var responseData = response.data.data
 				var responseStatus = response.data.code
-				// console.log(responseMessage)
-				console.log(responseStatus)
 				if (responseStatus > 200) {
 					$(".tip-error").text(this.$i18n.t(responseMessage))
 					this.$options.methods.showMessage()
 					return false
 				}
+				console.log(document.cookie)
+				this.$router.push({name: 'SpellBean'})
 			}).catch((ex) => {
 				// var responseStatus = ex.response.status
 				// var errorResponseData = ex.response.data
