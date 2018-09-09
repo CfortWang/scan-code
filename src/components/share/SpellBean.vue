@@ -29,31 +29,11 @@
 				<div class="user-joined justified">
 					<div class="pindou-owner">
 						<div class="avatar">
-							<img src="/static/img/share/pindou-img.jpg"/>
+							<img v-bind:src="ownerAvater"/>
 						</div>
 						<div class="owner">
 							<img src="/static/img/share/pindou-owner.png"/>
 							<div class="owner-text">拼主</div>
-						</div>
-					</div>
-					<div class="pindou-partner">
-						<div class="avatar">
-							<img src="/static/img/share/pindou-img.jpg"/>
-						</div>
-					</div>
-					<div class="pindou-partner">
-						<div class="avatar">
-							<img src="/static/img/share/pindou-img.jpg"/>
-						</div>
-					</div>
-					<div class="pindou-wait">
-						<div class="avatar">
-							<img src="/static/img/share/pindou-wait.png"/>
-						</div>
-					</div>
-					<div class="pindou-wait">
-						<div class="avatar">
-							<img src="/static/img/share/pindou-wait.png"/>
 						</div>
 					</div>
 				</div>
@@ -66,12 +46,12 @@
 						<span>成功时间：</span>
 						<span>{{groupSuccessAt}}</span>
 					</div>
-					<div class="times" v-if="!pinSuccess">
+					<div class="times" v-if="!pinSuccess&&!pinIng">
 						<span>失败时间：</span>
 						<span>{{groupExpriedAt}}</span>
 					</div>
 					<div class="group-info" v-if="pinIng">
-						<span class="orange">猪猪侠豆塞雷</span>
+						<span class="orange">{{pinzhu}}</span>
 						<span class="grey">发起的拼豆豆还差</span>
 						<span class="orange">3人</span>
 						<span class="grey">，即可获得优惠 </span>
@@ -115,77 +95,20 @@
 				<img src="/static/img/share/close_hollow.png"/>
 			</div>
 		</div>
-		<div class="must-know-contain">
-			<!-- <div class="use-condition">使用条件</div>
-			<div class="condition-desc">订单满300元使用</div>
-			<div class="warm-tips">温馨提示</div>
-			<div class="wram-tips-contain">
-				<div class="wram-tips-desc">1.哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩</div>
-				<div class="wram-tips-desc">2.哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩</div>
-				<div class="wram-tips-desc">3.哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩</div>
-				<div class="wram-tips-desc">4.哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩哔哩</div>
-			</div> -->
-		</div>
+		<div class="must-know-contain"></div>
 		<div class="applicative justified" v-on:click="showApplicative">
 			<div class="applicative-text">适用门店</div>
 			<div class="applicative-icon justified">
-				<div>
-					<span>最近门店</span>
-					<span class="nearest">1314米</span>
+				<div class="min-distance">
+					<span>最近门店{{minDistance}}米</span>
+				</div>
+				<div class="shop-count">
+					<span>共{{shopCount}}家门店</span>
 				</div>
 				<img src="/static/img/share/close_hollow.png"/>
 			</div>
 		</div>
-		<div class="applicative-contain">
-			<div class="applicative-shop justified">
-				<div class="applicative-shop-desc">
-					<div class="applicative-shop-name-box justified">
-						<div class="applicative-shop-name">袁老四的火锅店（蛇口店）</div>
-						<div class="applicative-shop-distance">1.3km</div>
-					</div>
-					<div class="applicative-shop-location">深圳市南山区蛇口街道石云路喜豆大厦7楼(招商银行总行对面）</div>
-				</div>
-				<div class="applicative-shop-icon">
-					<img src="/static/img/share/position.png"/>
-				</div>
-			</div>
-			<div class="applicative-shop justified">
-				<div class="applicative-shop-desc">
-					<div class="applicative-shop-name-box justified">
-						<div class="applicative-shop-name">袁老四的火锅店（蛇口店）</div>
-						<div class="applicative-shop-distance">1.3km</div>
-					</div>
-					<div class="applicative-shop-location">深圳市南山区蛇口街道石云路喜豆大厦7楼</div>
-				</div>
-				<div class="applicative-shop-icon">
-					<img src="/static/img/share/position.png"/>
-				</div>
-			</div>
-			<div class="applicative-shop justified">
-				<div class="applicative-shop-desc">
-					<div class="applicative-shop-name-box justified">
-						<div class="applicative-shop-name">袁老四的火锅店（蛇口店）</div>
-						<div class="applicative-shop-distance">1.3km</div>
-					</div>
-					<div class="applicative-shop-location">深圳市南山区蛇口街道石云路喜豆大厦7楼(招商银行总行对面）</div>
-				</div>
-				<div class="applicative-shop-icon">
-					<img src="/static/img/share/position.png"/>
-				</div>
-			</div>
-			<div class="applicative-shop justified">
-				<div class="applicative-shop-desc">
-					<div class="applicative-shop-name-box justified">
-						<div class="applicative-shop-name">袁老四的火锅店（蛇口店）</div>
-						<div class="applicative-shop-distance">1.3km</div>
-					</div>
-					<div class="applicative-shop-location">深圳市南山区蛇口街道石云路喜豆大厦7楼</div>
-				</div>
-				<div class="applicative-shop-icon">
-					<img src="/static/img/share/position.png"/>
-				</div>
-			</div>
-		</div>
+		<div class="applicative-contain"></div>
 		<div class="goto-pindou"><span>去拼豆</span></div>
 	</div>
 </template>
@@ -226,6 +149,8 @@ export default {
 			shopImage: '',
 			groupSize: '',
 			groupLeftTime: '',
+			pinzhu: '',
+			ownerAvater: '',
 			pinSuccess: true,
 			pinFailed: true,
 			pinIng: true,
@@ -235,7 +160,9 @@ export default {
 			discountPrice: '',
 			newPrice: '',
 			startUseTime: '',
-			endUseTime: ''
+			endUseTime: '',
+			minDistance: '',
+			shopCount: ''
 		}
 	},
 	created: function () {
@@ -291,10 +218,52 @@ export default {
 				$(".must-know-contain .must-know-text:eq("+ i +")").text(tipsValue)
 			}
 
-			// var groupNum = responseData.nowSize
-			// for (let i = 0; i < groupNum; i++) {
-				
-			// }
+			var user = responseData.user
+			for (let i = 0; i < user.length; i++) {
+				let isOwner = user[i].isOwner
+				if (isOwner == 1){
+					this.ownerAvater = user[i].image
+					this.pinzhu = user[i].nickname
+					if (this.ownerAvater == null) {
+						this.ownerAvater = '/static/img/share/pindou-wait.png'
+					}
+				}
+			}
+
+			var groupNum = responseData.nowSize
+			var $partnerBox = '<div class="pindou-partner"><div class="avatar"><img/></div></div>'
+			for (let i = 1; i < groupNum; i++) {
+				console.log('====')
+				$('.user-joined').append($partnerBox)
+				let partnerAvater = user[i].image
+				if (partnerAvater == null) {
+					partnerAvater = '/static/img/share/pindou-wait.png'
+				}
+				$(".user-joined .avater:eq("+ i +") img").attr('src', partnerAvater)
+			}
+			
+			var shop = responseData.shop
+			var $shopBox = '<div class="applicative-shop justified"><div class="applicative-shop-desc"><div class="applicative-shop-name-box justified"><div class="applicative-shop-name"></div><div class="applicative-shop-distance"></div></div><div class="applicative-shop-location"></div></div><div class="applicative-shop-icon"><img src="/static/img/share/position.png"/></div></div>'
+			this.minDistance = 9999999
+			this.shopCount = shop.length
+			if (this.shopCount == 0) {
+				$(".min-distance span").text("附近无门店")
+			}
+			for (let i = 0; i < shop.length; i++) {
+				$(".applicative-contain").append($shopBox)
+				let sName = shop[i].name
+				let sLocation = shop[i].location
+				let sDistance = shop[i].distance
+				this.minDistance = sDistance < this.minDistance ? sDistance : this.minDistance
+				if (sDistance >= 1000) {
+					sDistance = parseFloat(sDistance/1000) + 'km'
+				} else {
+					sDistance = sDistance + 'm'
+				}
+				$(".applicative-contain .applicative-shop-name:eq("+ i +")").text(sName)
+				$(".applicative-contain .applicative-shop-distance:eq("+ i +")").text(sDistance)
+				$(".applicative-contain .applicative-shop-location:eq("+ i +")").text(sLocation)
+			}
 			console.log(responseData)
 		}).catch((ex) => {
 			console.log(ex)
@@ -312,17 +281,19 @@ export default {
 			}
 		},
 		showApplicative: function () {
-			var appStatus = $(".applicative-contain").css('display')
-			if (appStatus == 'none') {
-				$(".applicative-contain").show()
-				$(".applicative-icon div span:first-child").html('共4家门店')
-				$(".applicative-icon div span:last-child").html('')
-				$(".applicative-icon img").attr('src', '/static/img/share/open_hollow.png')
-			} else {
-				$(".applicative-contain").hide()
-				$(".applicative-icon div span:first-child").html('最近门店')
-				$(".applicative-icon div span:last-child").html('1314米')
-				$(".applicative-icon img").attr('src', '/static/img/share/close_hollow.png')
+			if (this.shopCount > 0) {
+				var appStatus = $(".applicative-contain").css('display')
+				if (appStatus == 'none') {
+					$(".applicative-contain").show()
+					$(".shop-count").show()
+					$(".min-distance").hide()
+					$(".applicative-icon img").attr('src', '/static/img/share/open_hollow.png')
+				} else {
+					$(".applicative-contain").hide()
+					$(".shop-count").hide()
+					$(".min-distance").show()
+					$(".applicative-icon img").attr('src', '/static/img/share/close_hollow.png')
+				}
 			}
 		},
 		rulesClick: function () {
@@ -446,7 +417,7 @@ p, li{
 	font-size: 8px;
 	line-height: 12px;
 	text-align: center;
-	margin-top: -5px;
+	margin-top: -8px;
 	z-index: 20;
 	color: #FFFFFF;
 }
@@ -463,6 +434,15 @@ p, li{
 }
 .user-joined{
 	margin: 20px 0px;
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: center;
+}
+.user-joined > div{
+	margin: 0px 2vw;
 }
 .pindou-details{
 	font-family: "PingFangSC-Regular";
@@ -570,41 +550,8 @@ p, li{
 .applicative-contain{
 	display: none;
 }
-.applicative-icon{
-	align-items: center;
-}
-.applicative-icon div{
-	color: #999999;
-}
-.applicative-icon img{
-	width: 16px;
-	height: 16px;
-}
-.applicative-shop{
-	padding: 12px 0px 12px 15px;
-	font-family: "PingFangSC-Regular";
-	font-size: 12px;
-	background: #FFFFFF;
-	align-items: center;
-	color: #999999;
-	/* box-shadow:0px 0px 0px 0px rgba(221,221,221,1); */
-	border-bottom: 1px solid #DDDDDD;
-}
-.applicative-shop-desc{
-	padding-right: 12px;
-	border-right: 1px solid #E6E7E8;
-	flex: 1;
-	/*box-shadow:1px 0px 0px 0px rgba(221,221,221,1);*/
-}
-.applicative-shop-icon{
-	padding: 0px 20px;
-}
-.applicative-shop-icon img{
-	width: 20px;
-}
-.applicative-shop-name{
-	color: #333333;
-	margin-bottom: 3px;
+.shop-count{
+	display: none;
 }
 .goto-pindou{
 	width: 70%;

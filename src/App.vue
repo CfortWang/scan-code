@@ -667,4 +667,47 @@ header {
 .must-know-title{
 	font-family: "PingFangSC-Semibold";
 }
+
+.avatar img{
+	width: 42px;
+	border-radius: 50%;
+	z-index: 5;
+}
+
+.applicative-icon{
+	align-items: center;
+}
+.applicative-icon div{
+	color: #999999;
+}
+.applicative-icon img{
+	width: 16px;
+	height: 16px;
+}
+.applicative-shop{
+	padding: 12px 0px 12px 15px;
+	font-family: "PingFangSC-Regular";
+	font-size: 12px;
+	background: #FFFFFF;
+	align-items: center;
+	color: #999999;
+	/* box-shadow:0px 0px 0px 0px rgba(221,221,221,1); */
+	border-bottom: 1px solid #DDDDDD;
+}
+.applicative-shop-desc{
+	padding-right: 12px;
+	border-right: 1px solid #E6E7E8;
+	flex: 1;
+	/*box-shadow:1px 0px 0px 0px rgba(221,221,221,1);*/
+}
+.applicative-shop-icon{
+	padding: 0px 20px;
+}
+.applicative-shop-icon img{
+	width: 20px;
+}
+.applicative-shop-name{
+	color: #333333;
+	margin-bottom: 3px;
+}
 </style>
