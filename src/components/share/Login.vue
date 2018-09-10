@@ -52,7 +52,7 @@ export default {
 	},
 	data () {
 		var now = new Date()
-		var setNow = new Date(now.getTime() + 180000)
+		var setNow = new Date(now.getTime() + 60000)
 		return {
 			countryCode: '',
 			countrySeq: '',
@@ -69,6 +69,7 @@ export default {
 		}
 	},
 	created: function () {
+		$('body').css({'background-color': '#FFF'})
 		if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 			this.phoneKind = 'ios'
 		} else if (/(Android)/i.test(navigator.userAgent)) {
@@ -126,10 +127,14 @@ export default {
 				var responseData = response.data.data
 				console.log(responseData)
 				var now = new Date()
-				var setNow = new Date(now.getTime() + 180000)
+				var setNow = new Date(now.getTime() + 60000)
 				this.countDown = setNow - now
 				this.$refs.countdown.init()
 				this.$refs.countdown.start()
+				$(".get-verification").attr('disabled', true).css('color', 'gray')
+				setInterval(function () {
+					$(".get-verification").attr('disabled', false).css('color', '#EE6807')
+				}, 60000)
 			}).catch((ex) => {
 				console.log(ex)
 				$(".tip-error").text(this.$i18n.t('message.sendFail'))
@@ -184,7 +189,6 @@ export default {
 					this.$options.methods.showMessage()
 					return false
 				}
-				console.log(document.cookie)
 				this.$router.push({name: 'SpellBean'})
 			}).catch((ex) => {
 				// var responseStatus = ex.response.status

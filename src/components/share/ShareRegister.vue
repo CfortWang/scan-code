@@ -110,17 +110,17 @@ export default {
 		getVerification: function () {
 			this.phoneNumber = $("#phoneNum").val()
 			this.type = 'sign_up'
-			// if (this.phoneNumber === '') {
-			// 	$(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
-			// 	this.$options.methods.showMessage()
-			// 	return false
-			// }
-			// var pattern = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
-			// if (!pattern.test(this.phoneNumber)) {
-			// 	$(".tip-error").text(this.$i18n.t('message.wrongPhoneNum'))
-			// 	this.$options.methods.showMessage()
-			// 	return false
-			// }
+			if (this.phoneNumber === '') {
+				$(".tip-error").text(this.$i18n.t('message.insertPhoneNum'))
+				this.$options.methods.showMessage()
+				return false
+			}
+			var pattern = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+			if (!pattern.test(this.phoneNumber)) {
+				$(".tip-error").text(this.$i18n.t('message.wrongPhoneNum'))
+				this.$options.methods.showMessage()
+				return false
+			}
 
 			axios({ // get verification code
 				method: 'POST',

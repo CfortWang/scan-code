@@ -19,7 +19,7 @@
 
 			</div>
 		</div>
-		<div class="fixed-right-btn" @click="send">{{rtime}}打开App</div>
+		<div class="fixed-right-btn">打开App</div>
 		<div class="package">
 			<div class="package-top justified">
 				<div class="package-name">{{packageName}}</div>
@@ -59,7 +59,6 @@
 				</div>
 			</div>
 		</div>
-		<p>{{rtime}}</p>
 		<div class="pindouing-title">
 			<span class="people-count">{{groupOnNumber}}人</span>
 			<span>正在拼豆豆</span>
@@ -169,14 +168,16 @@ export default {
 			shopAddress: '',
 			shopAddressDetail: '',
 			shopPhoneNum: '',
-			rtime: 80
+			groupID: ''
 		}
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
+		var getParams = this.$route.params
+		this.groupID = getParams.groupID
 		axios({
 			method: 'GET',
-			url: 'http://dev-new-api.beanpop.cn/event/groupOn/1'
+			url: 'http://dev-new-api.beanpop.cn/event/groupOn/' + this.groupID
 		}).then((response) => {
 			var responseData = response.data.data
 			console.log(responseData)
@@ -244,7 +245,7 @@ export default {
 			for (i = 0; i < 10; i++) {
 				this.$options.methods.timer(i)
 			}
-			// this.$options.methods.send(this.rtime)
+			// this.$options.methods.send()
 			// get owner arawd
 			var $ownerGot = responseData.ownerGot
 			$('.award').append($ownerGot)

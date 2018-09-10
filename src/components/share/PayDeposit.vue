@@ -1,21 +1,19 @@
 <template>
 	<div class="content">
 		<header class="header">
-			<div class="goback-pindou"><img src="/static/img/share/goback.png"/></div>
+			<div class="goback-pindou"><img src="/static/img/share/goback.png" v-on:click="goBack"/></div>
 			<div class="pay-header-title">拼豆豆订金支付</div>
 		</header>
 		<div class="order-amount-box">
 			<div class="order-amount">
 				<span>￥</span>
-				<span>10.00</span>
+				<span>{{payAmount}}</span>
 			</div>
-			<div class="shop-package">袁老四的火锅店 - 单身贵族套餐 3选1</div>
+			<div class="shop-package">{{payShopName}} - {{payPackageName}}</div>
 		</div>
 		<div class="amount-desc-box">
 			<div class="amount-desc-title">拼豆豆订金说明:</div>
-			<div class="amount-desc">·10元订金只做预定用，可用来充当支付金额使用</div>
-			<div class="amount-desc">·到店后支付后续优惠金额，方可消费</div>
-			<div class="amount-desc">·更多细节请咨询店内工作人员</div>
+			<div v-html = "payRule"></div>
 			<div class="amount-remark">※最终解释权归商家所有，与深圳喜豆文化发展无关</div>
 		</div>
 		<div class="wechat-pay justified" v-on:click="changeWePay">
@@ -42,7 +40,7 @@
 				<span class="tip-error-msg">请选择支付方式</span>
 			</div>
 		</div>
-		<div class="sure-pay-btn" v-on:click="paySuccess"><span>确认支付</span></div>
+		<div class="sure-pay-btn" v-on:click="goToPay"><span>确认支付</span></div>
 	</div>
 </template>
 
@@ -50,9 +48,8 @@
 // import Vue from 'vue'
 // import VueI18n from 'vue-i18n'
 // import vueCookie from 'vue-cookie'
-// import axios from 'axios'
+import axios from 'axios'
 import $ from 'jquery'
-// import Swiper from 'swiper'
 
 export default {
 	name: 'payDeposit',
@@ -61,22 +58,87 @@ export default {
 	},
 	data () {
 		return {
+			payID: '',
+			payAmount: '',
+			payPackageName: '',
+			payShopName: '',
+			payRule: '',
+			payWay: '',
+			payReturnUrl: '',
+			payType: '',
+			alipayReturn: '',
+			timeLeft: ''
 		}
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
+		var getParams = this.$route.params
+		this.payID = getParams.payID
+		this.payAmount = getParams.payAmount
+		this.payPackageName = getParams.payPackageName
+		this.payShopName = getParams.payShopName
+		this.payRule = getParams.payRule
+		this.payWay = 'wechat'
 	},
 	methods: {
+		goBack: function () {
+			this.$router.push({name: 'SpellBean'})
+		},
 		changeWePay: function () {
 			$(".wechat-pay .pay-choose").show()
 			$(".alipay .pay-choose").hide()
+			this.payWay = 'wechat'
 		},
 		changeAliPay: function () {
 			$(".wechat-pay .pay-choose").hide()
 			$(".alipay .pay-choose").show()
+			this.payWay = 'alipay'
 		},
-		paySuccess: function () {
+		goToPay: function () {
+			axios({
+				method: 'GET',
+				url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
+				withCredentials: true,
+				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+			}).then((response) => {
+				let responseData = response.data.data
+				this.timeLeft = responseData.timeLeft
+			}).catch((ex) => {
+				console.log(ex)
+			})
+			var that = this
+			setTimeout(function () {
+				that.payReturnUrl = 'http://wang.beanpop.cn:8081/share/paySuccess?groupon_record_id=' + this.payID + '&timeLeft=' + this.timeLeft
+				that.payType = 'groupon'
+			}, 1000)
+			// if (this.payWay == 'wechat') {
+			// 	axios({
+			// 		method: 'POST',
+			// 		url: '',
+			// 		params: {},
+			// 		headers: ''
+			// 	})
+			// }
 
+			if (this.payWay == 'alipay') {
+				axios({
+					method: 'POST',
+					url: 'http://dev-new-api.beanpop.cn/pay/alipay',
+					params: {type: this.payType, id: this.payID, return_url: this.payReturnUrl},
+					withCredentials: true,
+					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
+				}).then((response) => {
+					if (response.status == 200) {
+						$('body').append(response.data)
+						$("form").attr("target", "_blank")
+						console.log(this.payReturnUrl)
+					} else {
+						console.log('error~')
+					}
+				}).catch((ex) => {
+					console.log(ex)
+				})
+			}
 		}
 	}
 }

@@ -60,8 +60,8 @@
 			</div>
 		</div>
 		<div class="pindou-details">
-			<div class="pindou-details-top">{{shopName}}</div>
-			<div class="pindou-details-middle">
+			<div class="pindou-details-top" v-on:click="goShopDetail">{{shopName}}</div>
+			<div class="pindou-details-middle" v-on:click="goPindouDetail">
 				<div class="middle-left">
 					<img v-bind:src="shopImage" alt="" />
 				</div>
@@ -109,7 +109,7 @@
 			</div>
 		</div>
 		<div class="applicative-contain"></div>
-		<div class="goto-pindou"><span>去拼豆</span></div>
+		<div class="goto-pindou" v-on:click="goPindou"><span>去拼豆</span></div>
 	</div>
 </template>
 
@@ -162,7 +162,14 @@ export default {
 			startUseTime: '',
 			endUseTime: '',
 			minDistance: '',
-			shopCount: ''
+			shopCount: '',
+			shopID: '',
+			groupID: '',
+			payAmount: '',
+			payID: '',
+			payPackageName: '',
+			payShopName: '',
+			payRule: ''
 		}
 	},
 	created: function () {
@@ -193,6 +200,8 @@ export default {
 			this.startUseTime = responseData.startUseTime
 			this.endUseTime = responseData.endUseTime
 			this.groupStatus = responseData.groupStatus
+			this.shopID = responseData.buyerID
+			this.groupID = responseData.groupOnId
 			if (this.groupStatus == 1) {
 				this.groupStatusDesc = '拼团成功'
 				this.pinSuccess = true
@@ -221,10 +230,10 @@ export default {
 			var user = responseData.user
 			for (let i = 0; i < user.length; i++) {
 				let isOwner = user[i].isOwner
-				if (isOwner == 1){
+				if (isOwner == 1) {
 					this.ownerAvater = user[i].image
 					this.pinzhu = user[i].nickname
-					if (this.ownerAvater == null) {
+					if (this.ownerAvater == null || this.ownerAvater == '') {
 						this.ownerAvater = '/static/img/share/pindou-wait.png'
 					}
 				}
@@ -241,7 +250,7 @@ export default {
 				}
 				$(".user-joined .avater:eq("+ i +") img").attr('src', partnerAvater)
 			}
-			
+
 			var shop = responseData.shop
 			var $shopBox = '<div class="applicative-shop justified"><div class="applicative-shop-desc"><div class="applicative-shop-name-box justified"><div class="applicative-shop-name"></div><div class="applicative-shop-distance"></div></div><div class="applicative-shop-location"></div></div><div class="applicative-shop-icon"><img src="/static/img/share/position.png"/></div></div>'
 			this.minDistance = 9999999
@@ -301,6 +310,47 @@ export default {
 		},
 		backKey: function () {
 			this.rulesOpen = false
+		},
+		goShopDetail: function () {
+			this.$router.push({name: 'ShopDetails', params: {shopID: this.shopID}})
+		},
+		goPindouDetail: function () {
+			this.$router.push({name: 'PindouDetails', params: {groupID: this.groupID}})
+		},
+		goPindou: function () {
+			axios({
+				method: 'POST',
+				url: 'http://dev-new-api.beanpop.cn/event/groupOn',
+				// params: {groupon_id: this.groupID},
+				params: {groupon_id: 100},
+				withCredentials: true,
+				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
+			}).then((response) => {
+				let responseData = response.data.data
+				let responseStauts = response.data.code
+				this.payID = responseData.id
+				this.payAmount = responseData.amount
+				this.payPackageName = responseData.priductName
+				this.payShopName = responseData.shopName
+				this.payRule = responseData.rule
+				console.log(responseData)
+				if (responseStauts == 410) {
+					this.$router.push({name: 'Login'})
+				} else if (responseStauts == 200) {
+					this.$router.push({
+						name: 'PayDeposit',
+						params: {
+							payID: this.payID,
+							payAmount: this.payAmount,
+							payPackageName: this.payPackageName,
+							payShopName: this.payShopName,
+							payRule: this.payRule
+						}
+					})
+				}
+			}).catch((ex) => {
+				console.log(ex)
+			})
 		}
 	}
 }

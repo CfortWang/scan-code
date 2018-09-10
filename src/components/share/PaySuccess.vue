@@ -13,40 +13,24 @@
 			<div class="user-joined justified">
 				<div class="pindou-owner">
 					<div class="avatar">
-						<img src="/static/img/share/avatar.jpg"/>
+						<img v-bind:src="ownerAvater"/>
 					</div>
 					<div class="owner">
 						<img src="/static/img/share/pindou-owner.png"/>
 						<div class="owner-text">拼主</div>
 					</div>
 				</div>
-				<div class="pindou-partner">
-					<div class="avatar">
-						<img src="/static/img/share/avatar.jpg"/>
-					</div>
-				</div>
-				<div class="pindou-partner">
-					<div class="avatar">
-						<img src="/static/img/share/avatar.jpg"/>
-					</div>
-				</div>
-				<div class="pindou-wait">
-					<div class="avatar">
-						<img src="/static/img/share/pindou-wait.png"/>
-					</div>
-				</div>
-				<div class="pindou-wait">
-					<div class="avatar">
-						<img src="/static/img/share/pindou-wait.png"/>
-					</div>
-				</div>
 			</div>
 			<div class="join-pindou-desc">
 				<span class="grey">还剩</span>
-				<span class="orange">3个</span>
+				<span class="orange">{{needNum}}个</span>
 				<span class="grey">名额即可获得优惠 </span>
 				<br />
-				<span class="orange">22:33:44.0</span>
+				<span class="orange">
+					<vue-countdown :time="countDown" :interval="1000" :auto-start="true" ref="countdown" class="count-down">
+						<template slot-scope="props">{{ props.days }}天{{ props.hours }}时{{ props.minutes }}分{{ props.seconds }}秒</template>
+					</vue-countdown>
+				</span>
 				<span class="grey">后结束</span>
 			</div>
 			<div class="share-soon">赶紧邀请好友来拼豆豆吧！</div>
@@ -59,53 +43,106 @@
 // import Vue from 'vue'
 // import VueI18n from 'vue-i18n'
 // import vueCookie from 'vue-cookie'
-// import axios from 'axios'
+import axios from 'axios'
+import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'
 // import Swiper from 'swiper'
 
 export default {
-	name: 'shopDetails',
+	name: 'paySuccess',
 	// i18n: i18n,
 	components: {
+		VueCountdown
 	},
 	data () {
 		return {
+			payID: '',
+			needNum: '',
+			timeLeft: '',
+			payStatus: '',
+			countDown: 0,
+			ownerAvater: ''
 		}
 	},
 	created: function () {
+		var args = this.$options.methods.getArgs()
+		this.payID = args['groupon_record_id']
+		// this.timeLeft = args['timeLeft']
+		// console.log(this.timeLeft)
+		// let now = new Date()
+		// let timer = (this.timeLeft + 0) * 1000
+		// let setNow = new Date(now.getTime() + timer)
+		// this.countDown = setNow - now
+		// this.$refs.countdown.init()
+		// this.$refs.countdown.start()
+		axios({
+			method: 'GET',
+			url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
+			withCredentials: true,
+			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+		}).then((response) => {
+			let responseData = response.data.data
+			let responseStatus = response.data.code
+			this.needNum = responseData.needNum
+			this.timeLeft = responseData.timeLeft
+			if (responseStatus == 200) {
+				this.payStatus = true
+				let now = new Date()
+				let timer = (this.timeLeft + 0) * 1000
+				let setNow = new Date(now.getTime() + timer)
+				this.countDown = setNow - now
+				this.$refs.countdown.init()
+				this.$refs.countdown.start()
+			} else if (responseStatus == 100) {
+				this.payStatus = false
+			} else if (responseStatus == 101) {
+
+			}
+
+			var user = responseData.user
+			for (let i = 0; i < user.length; i++) {
+				let isOwner = user[i].isOwner
+				if (isOwner == 1) {
+					this.ownerAvater = user[i].image
+					if (this.ownerAvater == null || this.ownerAvater == '') {
+						this.ownerAvater = '/static/img/share/pindou-wait.png'
+					}
+				}
+			}
+			var groupSize = this.needNum + user.length
+			var $partnerBox = '<div class="pindou-partner"><div class="avatar"><img/></div></div>'
+			for (let i = 1; i < user.length; i++) {
+				$('.user-joined').append($partnerBox)
+				let partnerAvater = user[i].image
+				if (partnerAvater == null) {
+					partnerAvater = '/static/img/share/pindou-wait.png'
+				}
+				$(".user-joined .avater:eq("+ i +") img").attr('src', partnerAvater)
+			}
+			for (let i = user.length; i < groupSize; i++) {
+				// console.log(user.length)
+				console.log(i)
+				$('.user-joined').append($partnerBox)
+				let partnerAvater = '/static/img/share/pindou-wait.png'
+				$(".user-joined .avater:eq("+ i +") img").attr('src', partnerAvater)
+			}
+			console.log(responseData)
+		}).catch((ex) => {
+			console.log(ex)
+		})
 	},
 	methods: {
-		changeTabMarket: function () {
-			$(".shop-coupon-box").hide()
-			$(".package-data-box").show()
-			$(".shop-kind-left .shop-text").addClass('kind-active')
-			$(".shop-kind-right .shop-text").removeClass('kind-active')
-		},
-		changeTabShop: function () {
-			$(".shop-coupon-box").show()
-			$(".package-data-box").hide()
-			$(".shop-kind-left .shop-text").removeClass('kind-active')
-			$(".shop-kind-right .shop-text").addClass('kind-active')
-		},
-		showRule: function () {
-			var ruleStatus = $(".rule-detail").css('display')
-			if (ruleStatus == 'none') {
-				$(".rule-detail").show()
-				$(".pindou-rule").css('margin-bottom', '0px')
-				$(".open-rule img").attr('src', '/static/img/share/opened.png')
-			} else {
-				$(".rule-detail").hide()
-				$(".pindou-rule").css('margin-bottom', '10px')
-				$(".open-rule img").attr('src', '/static/img/share/closed.png')
+		getArgs: function () {
+			var url = location.search
+			var args = {}
+			if (url.indexOf("?") != -1) {
+				var str = url.substr(1)
+				var strs = str.split("&")
+				for (let i = 0; i < strs.length; i++) {
+					args[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1])
+				}
 			}
-		},
-		goToPindou: function () {
-			$(".join-pindou-box, .mask2").show()
-			// $(".initiate-box").hide()
-		},
-		closePindou: function () {
-			// $(".join-pindou-box, .mask2").hide()
-			// $(".initiate-box").show()
+			return args
 		}
 	}
 }
@@ -197,7 +234,7 @@ p, li{
 	font-size: 8px;
 	line-height: 12px;
 	text-align: center;
-	margin-top: -5px;
+	margin-top: -8px;
 	z-index: 20;
 	color: #FFFFFF;
 }

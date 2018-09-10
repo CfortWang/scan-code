@@ -549,7 +549,7 @@ header {
 }
 .quizing-top img, .quized-top img{
 	width: 100%;
-  border-radius: 4px;
+  border-radius: 4px 4px 0 0;
 }
 .quizing-bottom, .quized-bottom{
 	padding: 15px;

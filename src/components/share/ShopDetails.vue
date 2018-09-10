@@ -102,14 +102,17 @@ export default {
 			addressDetail: '',
 			shopPhoneNum: '',
 			ruleTitle: '',
-			rule: []
+			rule: [],
+			shopID: ''
 		}
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
+		var getParams = this.$route.params
+		this.shopID = getParams.shopID
 		axios({
 			method: 'GET',
-			url: 'http://dev-new-api.beanpop.cn/event/shop/1'
+			url: 'http://dev-new-api.beanpop.cn/event/shop/' + this.shopID
 			// url: 'http://dev-new-api.beanpop.cn/game/recentWinnerRecord'
 		}).then((response) => {
 			var responseData = response.data.data
