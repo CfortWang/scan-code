@@ -1,5 +1,16 @@
 <template>
 	<div class="content">
+		<div class="terms-div-wrapper" v-if="moreData">
+			<div class="terms-div-header">
+				<div class="header-title-wrapper">更多拼豆豆</div>
+				<div class="header-back-wrapper" v-on:click="goBack">
+				<div class="header-back-arrow">
+					<img src="/static/img/icon/goback.png">
+				</div>
+				</div>
+			</div>
+			<div class="terms-div-contents"></div>
+		</div>
 		<div class="swiper-container" id="top-swiper">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide swiper-div">
@@ -62,6 +73,7 @@
 		<div class="pindouing-title">
 			<span class="people-count">{{groupOnNumber}}人</span>
 			<span>正在拼豆豆</span>
+			<span class="more-pindou" v-on:click="morePindou">查看更多</span>
 		</div>
 		<div class="pindouing"></div>
 		<div class="initiate-failed-box">
@@ -76,45 +88,15 @@
 		</div>
 		<div class="join-pindou-box">
 			<div class="join-pindou">
-				<div class="join-pindou-title">参与猪猪侠豆塞雷的拼豆豆单</div>
+				<div class="join-pindou-title"></div>
 				<div class="join-pindou-desc">
-					<span>仅限</span>
-					<span>3个</span>
-					<span>名额，</span>
-					<span>22:33:44.0</span>
-					<span>后结束</span>
+					<span class="grey">仅限</span>
+					<span class="orange"></span>
+					<span class="grey">名额，</span>
+					<span class="orange"></span>
+					<span class="grey">后结束</span>
 				</div>
-				<div class="user-joined justified">
-					<div class="pindou-owner">
-						<div class="avatar">
-							<img src="/static/img/share/avatar.jpg"/>
-						</div>
-						<div class="owner">
-							<img src="/static/img/share/pindou-owner.png"/>
-							<div class="owner-text">拼主</div>
-						</div>
-					</div>
-					<div class="pindou-partner">
-						<div class="avatar">
-							<img src="/static/img/share/avatar.jpg"/>
-						</div>
-					</div>
-					<div class="pindou-partner">
-						<div class="avatar">
-							<img src="/static/img/share/avatar.jpg"/>
-						</div>
-					</div>
-					<div class="pindou-wait">
-						<div class="avatar">
-							<img src="/static/img/share/pindou-wait.png"/>
-						</div>
-					</div>
-					<div class="pindou-wait">
-						<div class="avatar">
-							<img src="/static/img/share/pindou-wait.png"/>
-						</div>
-					</div>
-				</div>
+				<div class="user-joined"></div>
 				<div class="join-pindou-btn"><span>参与拼豆豆</span></div>
 			</div>
 			<div class="close-join-pindou" v-on:click="closePindou">
@@ -125,8 +107,6 @@
 		<div class="mask2"></div>
 		<div class="award">
 			<div class="award-title">拼主拼团成功额外奖励</div>
-			<!-- <p>·拼主拼团成功后，除了商品优惠外，将获得额外的<span class="aqiyi">15元爱奇艺月卡</span></p>
-			<p>·额外奖励请在我的 - 中奖纪录中查看</p> -->
 		</div>
 		<div class="initiate-box">
 			<div class="initiate-left">
@@ -143,15 +123,25 @@
 
 <script>
 import Vue from 'vue'
-// import VueI18n from 'vue-i18n'
-// import vueCookie from 'vue-cookie'
+import VueI18n from 'vue-i18n'
+import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'
 import Swiper from 'swiper'
+
+const langData = require('../lang/share.json')
+
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'pindouDetails',
+  groupID: '',
+  messages: langData
+})
+
 export default {
 	name: 'pindouDetails',
-	// i18n: i18n,
+	i18n: i18n,
 	components: {
 		VueCountdown
 	},
@@ -168,18 +158,26 @@ export default {
 			shopAddress: '',
 			shopAddressDetail: '',
 			shopPhoneNum: '',
-			groupID: ''
+			groupID: '',
+			moreData: false
 		}
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		var getParams = this.$route.params
-		this.groupID = getParams.groupID
+		if (getParams.groupID) {
+			this.groupID = getParams.groupID
+		} else {
+			this.groupID = vueCookie.get('group_id')
+		}
 		axios({
 			method: 'GET',
-			url: 'http://dev-new-api.beanpop.cn/event/groupOn/' + this.groupID
+			url: 'http://dev-new-api.beanpop.cn/event/groupOn/' + this.groupID,
+			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 		}).then((response) => {
 			var responseData = response.data.data
+			vueCookie.set('group_id', this.groupID, 1)
+			this.$i18n.groupID = vueCookie.get('group_id')
 			console.log(responseData)
 			this.packageName = responseData.title
 			this.packagePrice = '￥' + responseData.price
@@ -197,7 +195,7 @@ export default {
 			// get the seleted food
 			var food = responseData.goods
 			var $foodDiv = '<div class="food-details justified"><span><span class="food-name"></span><span class="food-amount"></span></span><span class="price"></span></div>'
-			for (var i = 0; i < food.length; i++) {
+			for (let i = 0; i < food.length; i++) {
 				var foodName = '·' + food[i].name
 				var foodAmount = '（' + food[i].number + '份）'
 				var foodPrice = '￥' + food[i].price
@@ -214,7 +212,7 @@ export default {
 			// get the tips
 			var tips = responseData.tips
 			var $tipsDiv = '<div class="tips-content-title"></div><div class="tips-content-text"></div>'
-			for (i = 0; i < tips.length; i++) {
+			for (let i = 0; i < tips.length; i++) {
 				var tipsTitle = tips[i].title
 				var tipsValue = tips[i].value
 				$('.tips-content').append($tipsDiv)
@@ -224,26 +222,82 @@ export default {
 
 			// get pindouimg data
 			var groupOn = responseData.groupOn
-			var $pingBox = '<div class="pindou-box justified"><div class="user-info"><img/><span class="user-name"></span></div><div class="pindou-right justified"><div class="pindou-info"><span>还差</span><span class="lack-people"></span><span>拼成</span><p></p></div><div class="go-pindou" v-on:click="goToPindou"><span>去拼豆</span></div></div></div>'
-			for (i = 0; i < groupOn.length; i++) {
-				var groupOnImg = groupOn[i].image
+			var that = this
+			var $pingBox = '<div class="pindou-box justified"><div class="user-info"><img/><span class="user-name"></span></div><div class="pindou-right justified"><div class="pindou-info"><span>还差</span><span class="lack-people"></span><span>拼成</span><p></p></div><div class="go-pindou" data-groupid=""><span>去拼豆</span></div></div></div>'
+			for (let i = 0; i < groupOn.length; i++) {
+				var groupOnImg
+				if (groupOn[i].iamge == '' || groupOn[i].image == null) {
+					groupOnImg = '/static/img/share/no-image.png'
+				} else {
+					groupOnImg = groupOn[i].image
+				}
+				var groupOnID = groupOn[i].id
 				var groupOnUser = groupOn[i].nickname
 				var needNum = groupOn[i].needNum + '人'
 				var timeLeft = groupOn[i].timeLeft
-				var seconds = timeLeft % 60
-				var minutes = Math.floor((timeLeft / 60) % 60)
-				var hours = Math.floor((timeLeft / 3600) % 24)
-				var days = Math.floor(timeLeft / (3600 * 24)) >= 1 ? Math.floor(timeLeft / (3600 * 24)) + '天' : ''
-				var leftDate = '剩余' + days + hours + ':' + minutes + ':' + seconds
 				$('.pindouing').append($pingBox)
+				$(".pindouing .pindou-box:eq("+ i +") .go-pindou").attr('data-groupid', groupOnID)
 				$(".pindouing .pindou-box:eq("+ i +") img").attr('src', groupOnImg)
 				$(".pindouing .pindou-box:eq("+ i +") .user-name").text(groupOnUser)
 				$(".pindouing .pindou-box:eq("+ i +") .lack-people").text(needNum)
-				$(".pindouing .pindou-box:eq("+ i +") .pindou-info p").text(leftDate)
+				this.timer(timeLeft, i);
+				(function (timeLeft) {
+					setInterval(function () {
+						timeLeft--
+						that.timer(timeLeft, i)
+					}, 1000)
+				})(timeLeft)
 			}
 
-			for (i = 0; i < 10; i++) {
-				this.$options.methods.timer(i)
+			$('.go-pindou').click(function () {
+				that.$options.methods.goToPindou()
+				let beforeGroupId = $(this).attr('data-groupid')
+				axios({
+					method: 'GET',
+					// url: 'http://dev-new-api.beanpop.cn/event/beforeGroupOn/' + 133,
+					url: 'http://dev-new-api.beanpop.cn/event/beforeGroupOn/' + beforeGroupId,
+					withCredentials: true,
+					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+				}).then((response) => {
+					let responseData = response.data.data
+					console.log(responseData)
+					let ownerName = responseData.ownerName
+					let needNum = responseData.needNum
+					let timeLeft = responseData.timeLeft
+					let user = responseData.user
+					var groupSize = responseData.groupSize
+					console.log(user.length)
+					var $ownerBox = '<div class="pindou-partner"><div class="avatar"><img/></div><div class="owner"><img src="/static/img/share/pindou-owner.png"/><div class="owner-text">拼主</div></div></div>'
+					var $partnerBox = '<div class="pindou-partner"><div class="avatar"><img/></div></div>'
+					$(".join-pindou-box .join-pindou-title").text("参与" + ownerName + "的拼豆豆单")
+					$(".join-pindou-box .join-pindou-desc .orange:eq(0)").text(needNum + "个")
+					$(".join-pindou-box .join-pindou-desc .orange:eq(1)").text(timeLeft)
+					$('.user-joined').append($ownerBox)
+					setTimeout(() => {
+						for (let i = 0; i < user.length; i++) {
+							// 第一个子元素为拼主，已添加，无需重复添加
+							if (i >= 1) {
+								$('.user-joined').append($partnerBox)
+							}
+							let partnerAvatar = user[i].image
+							if (partnerAvatar == null || partnerAvatar == '') {
+								partnerAvatar = '/static/img/share/pindou-wait.png'
+							}
+							$(".user-joined .avatar:eq("+ i +") img").attr('src', partnerAvatar)
+						}
+						for (let i = user.length; i < groupSize; i++) {
+							$('.user-joined').append($partnerBox)
+							let partnerAvatar = '/static/img/share/pindou-wait.png'
+							$(".user-joined .avatar:eq("+ i +") img").attr('src', partnerAvatar)
+						}
+					}, 1)
+				}).catch((ex) => {
+					console.log(ex)
+				})
+			})
+
+			for (let i = 0; i < 10; i++) {
+				// this.$options.methods.timer(i)
 			}
 			// this.$options.methods.send()
 			// get owner arawd
@@ -282,6 +336,7 @@ export default {
 		closePindou: function () {
 			$(".join-pindou-box, .mask2").hide()
 			$(".initiate-box").show()
+			$(".user-joined").empty()
 		},
 		signPindou: function () {
 			var cliheight = $(window).height()
@@ -312,37 +367,64 @@ export default {
 			var tel = 'tel:' + this.shopPhoneNum
 			window.location.href = tel
 		},
-		addZero: function (event) {
-			if (event < 10) {
-				event = '0' + event
-			}
+		goBack: function () {
+			this.moreData = false
 		},
-		timer: function (event) {
-			console.log(event)
-			// var seconds = parseInt(event % 60)
-			// var minutes = parseInt((event / 60) % 60)
-			// var hours = parseInt((event / 3600) % 24)
-			// var days = Math.floor(event / (3600 * 24)) >= 1 ? Math.floor(event / (3600 * 24)) + '天' : ''
-			// seconds = this.option.methods.addZero(seconds)
-			// minutes = this.option.methods.addZero(minutes)
-			// hours = this.option.methods.addZero(hours)
-			// var leftDate = '剩余' + days + hours + ':' + minutes + ':' + seconds
-			// $('.fixed-right-btn').text(event)
-			// let this_ = this
-			// setTimeout(() => {
-			// 	this_.timer
-			// }, 1000)
+		timer: function (event, item) {
+			var seconds = parseInt(event % 60) < 10 ? '0' + parseInt(event % 60) : parseInt(event % 60)
+			var minutes = parseInt((event / 60) % 60) < 10 ? '0' + parseInt((event / 60) % 60) : parseInt((event / 60) % 60)
+			var hours = parseInt((event / 3600) % 24) < 10 ? '0' + parseInt((event / 3600) % 24) : parseInt((event / 3600) % 24)
+			var days = Math.floor(event / (3600 * 24)) >= 1 ? Math.floor(event / (3600 * 24)) : ''
+			var leftDate = days + ':' + hours + ':' + minutes + ':' + seconds
+			$(".pindouing .pindou-box:eq("+ item +") .pindou-info p").text(leftDate)
 		},
-		send: function () {
-			// let that = this
-			// let rtime = that.rtime
-			// console.log(that.rtime)
-			// let interval = setInterval(() => {
-			// 	if (that.rtime >= 0) {
-			// 		that.rtime--
-			// 		console.log(event)
-			// 	}
-			// }, 1000)
+		moreDataTimer: function (event, item) {
+			var seconds = parseInt(event % 60) < 10 ? '0' + parseInt(event % 60) : parseInt(event % 60)
+			var minutes = parseInt((event / 60) % 60) < 10 ? '0' + parseInt((event / 60) % 60) : parseInt((event / 60) % 60)
+			var hours = parseInt((event / 3600) % 24) < 10 ? '0' + parseInt((event / 3600) % 24) : parseInt((event / 3600) % 24)
+			var days = Math.floor(event / (3600 * 24)) >= 1 ? Math.floor(event / (3600 * 24)) : ''
+			var leftDate = "剩余" + days + ':' + hours + ':' + minutes + ':' + seconds
+			$(".terms-div-contents .pindou-box:eq("+ item +") .pindou-info p").text(leftDate)
+		},
+		morePindou: function () {
+			this.moreData = true
+			axios({
+				method: 'GET',
+				url: 'http://dev-new-api.beanpop.cn/event/groupOnList/' + this.groupID,
+				withCredentials: true,
+				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+			}).then((response) => {
+				let responseData = response.data.data
+				var $pingBox = '<div class="pindou-box justified"><div class="user-info"><span class="user-name"></span><img/></div><div class="pindou-right justified"><div class="pindou-info"><span>还差</span><span class="lack-people"></span><span>拼成</span><p></p></div><div class="go-pindou" data-groupid=""><span>去拼豆</span></div></div></div>'
+				for (let i = 0; i < responseData.length; i++) {
+					var groupOnImg
+					if (responseData[i].iamge == '' || responseData[i].image == null) {
+						groupOnImg = '/static/img/share/no-image.png'
+					} else {
+						groupOnImg = responseData[i].image
+					}
+					var groupOnID = responseData[i].id
+					var groupOnUser = responseData[i].nickname
+					var needNum = responseData[i].needNum + '人'
+					var timeLeft = responseData[i].timeLeft
+					var that = this
+					$('.terms-div-contents').append($pingBox)
+					$(".terms-div-contents .pindou-box:eq("+ i +") .go-pindou").attr('data-groupid', groupOnID)
+					$(".terms-div-contents .pindou-box:eq("+ i +") img").attr('src', groupOnImg)
+					$(".terms-div-contents .pindou-box:eq("+ i +") .user-name").text(groupOnUser)
+					$(".terms-div-contents .pindou-box:eq("+ i +") .lack-people").text(needNum)
+					this.$options.methods.moreDataTimer(timeLeft, i);
+					(function (timeLeft) {
+						setInterval(function () {
+							timeLeft--
+							that.$options.methods.moreDataTimer(timeLeft, i)
+						}, 1000)
+					})(timeLeft)
+				}
+				console.log(responseData)
+			}).catch((ex) => {
+				console.log(ex)
+			})
 		}
 	}
 }
@@ -421,6 +503,12 @@ p, li{
 	line-height: 22px;
 	border-bottom: 1px solid #E6E7E8;
 }
+.more-pindou{
+	float: right;
+	font-size: 12px;
+	color: #999999;
+	font-weight: 400;
+}
 .people-count{
 	color: #EE6807;
 	margin-right: -3px;
@@ -489,11 +577,9 @@ p, li{
 .join-pindou-desc{
 	text-align: center;
 }
-.join-pindou-desc span:nth-child(even){
-	color: #EE6807;
-}
 .user-joined{
 	padding-bottom: 20px;
+	text-align: center;
 }
 .avatar img{
 	width: 42px;
@@ -579,5 +665,52 @@ p, li{
 	align-items: center;
 	justify-content: center;
 	background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+}
+
+.terms-div-wrapper {
+  position: fixed;
+  z-index:999;
+  top:0;
+  left:0;
+  height:100vh;
+  background-color:#FFFFFF;
+  width:100%;
+}
+.terms-div-header {
+  background-color:#FFE300;
+  display:table;
+  text-align:center;
+  width:100%;
+  height:60px;
+  color:#333333;
+  font-size: 18px;
+}
+.header-back-wrapper {
+  height:60px;
+  width:60px;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  right:0;
+  display:table;
+}
+.terms-div-contents {
+  height: calc(100vh - 70px);
+  padding: 0px 15px;
+}
+.header-back-arrow {
+  display:table-cell;
+  vertical-align: middle;
+}
+
+.header-back-arrow img {
+  width:20px;
+  height:20px;
+  margin-top:5px;
+}
+.header-title-wrapper {
+  display:table-cell;
+  vertical-align:middle;
 }
 </style>

@@ -95,22 +95,19 @@ export default {
 			this.payWay = 'alipay'
 		},
 		goToPay: function () {
-			axios({
-				method: 'GET',
-				url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
-				withCredentials: true,
-				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
-			}).then((response) => {
-				let responseData = response.data.data
-				this.timeLeft = responseData.timeLeft
-			}).catch((ex) => {
-				console.log(ex)
-			})
-			var that = this
-			setTimeout(function () {
-				that.payReturnUrl = 'http://wang.beanpop.cn:8081/share/paySuccess?groupon_record_id=' + this.payID + '&timeLeft=' + this.timeLeft
-				that.payType = 'groupon'
-			}, 1000)
+			// axios({
+			// 	method: 'GET',
+			// 	url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
+			// 	withCredentials: true,
+			// 	headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+			// }).then((response) => {
+			// 	let responseData = response.data.data
+			// 	this.timeLeft = responseData.timeLeft
+			// }).catch((ex) => {
+			// 	console.log(ex)
+			// })
+			this.payReturnUrl = 'http://wang.beanpop.cn:8081/share/paySuccess?groupon_record_id=' + this.payID
+			this.payType = 'groupon'
 			// if (this.payWay == 'wechat') {
 			// 	axios({
 			// 		method: 'POST',

@@ -27,9 +27,9 @@
 			</div>
 			<div class="pin-success-box">
 				<div class="user-joined justified">
-					<div class="pindou-owner">
+					<div class="pindou-partner">
 						<div class="avatar">
-							<img v-bind:src="ownerAvater"/>
+							<img v-bind:src="ownerAvatar"/>
 						</div>
 						<div class="owner">
 							<img src="/static/img/share/pindou-owner.png"/>
@@ -150,7 +150,7 @@ export default {
 			groupSize: '',
 			groupLeftTime: '',
 			pinzhu: '',
-			ownerAvater: '',
+			ownerAvatar: '',
 			pinSuccess: true,
 			pinFailed: true,
 			pinIng: true,
@@ -231,25 +231,31 @@ export default {
 			for (let i = 0; i < user.length; i++) {
 				let isOwner = user[i].isOwner
 				if (isOwner == 1) {
-					this.ownerAvater = user[i].image
+					this.ownerAvatar = user[i].image
 					this.pinzhu = user[i].nickname
-					if (this.ownerAvater == null || this.ownerAvater == '') {
-						this.ownerAvater = '/static/img/share/pindou-wait.png'
+					if (this.ownerAvatar == null || this.ownerAvatar == '') {
+						this.ownerAvatar = '/static/img/share/pindou-wait.png'
 					}
 				}
 			}
 
 			var groupNum = responseData.nowSize
 			var $partnerBox = '<div class="pindou-partner"><div class="avatar"><img/></div></div>'
-			for (let i = 1; i < groupNum; i++) {
-				console.log('====')
-				$('.user-joined').append($partnerBox)
-				let partnerAvater = user[i].image
-				if (partnerAvater == null) {
-					partnerAvater = '/static/img/share/pindou-wait.png'
+			setTimeout(() => {
+				for (let i = 1; i < groupNum; i++) {
+					$('.user-joined').append($partnerBox)
+					let partnerAvatar = user[i].image
+					if (partnerAvatar == null) {
+						partnerAvatar = '/static/img/share/pindou-wait.png'
+					}
+					$(".user-joined .avatar:eq("+ i +") img").attr('src', partnerAvatar)
 				}
-				$(".user-joined .avater:eq("+ i +") img").attr('src', partnerAvater)
-			}
+				for (let i = groupNum; i < this.groupSize; i++) {
+					$('.user-joined').append($partnerBox)
+					let partnerAvatar = '/static/img/share/pindou-wait.png'
+					$(".user-joined .avatar:eq("+ i +") img").attr('src', partnerAvatar)
+				}
+			}, 100)
 
 			var shop = responseData.shop
 			var $shopBox = '<div class="applicative-shop justified"><div class="applicative-shop-desc"><div class="applicative-shop-name-box justified"><div class="applicative-shop-name"></div><div class="applicative-shop-distance"></div></div><div class="applicative-shop-location"></div></div><div class="applicative-shop-icon"><img src="/static/img/share/position.png"/></div></div>'
@@ -322,7 +328,7 @@ export default {
 				method: 'POST',
 				url: 'http://dev-new-api.beanpop.cn/event/groupOn',
 				// params: {groupon_id: this.groupID},
-				params: {groupon_id: 100},
+				params: {groupon_id: 133},
 				withCredentials: true,
 				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then((response) => {

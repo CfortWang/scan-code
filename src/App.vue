@@ -512,8 +512,16 @@ header {
 	width: 40px;
 	border-radius: 50%;
 }
+.pindouing .pindou-box .user-info img{
+	margin-right: 5px;
+}
 .user-name{
 	font-size: 12px;
+	color: #333333;
+	width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .pindou-right{
 	align-items: center;
@@ -670,6 +678,7 @@ header {
 
 .avatar img{
 	width: 42px;
+	height: 42px;
 	border-radius: 50%;
 	z-index: 5;
 }
@@ -709,5 +718,34 @@ header {
 .applicative-shop-name{
 	color: #333333;
 	margin-bottom: 3px;
+}
+
+.user-joined{
+	display: inline-block;
+	text-align: center
+}
+.user-joined > .pindou-partner{
+	margin: 0px 2vw 2vw;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.owner{
+	font-size: 8px;
+	line-height: 12px;
+	text-align: center;
+	margin-top: -8px;
+	z-index: 20;
+	color: #FFFFFF;
+}
+.owner img{
+	width: 42px;
+	height: 12px;
+}
+.owner-text{
+	margin-top: -14px;
+}
+.terms-div-contents .user-info img{
+	margin-left: 5px;
 }
 </style>

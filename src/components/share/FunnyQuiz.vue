@@ -160,7 +160,6 @@
 // import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import $ from 'jquery'
-// import wx from 'weixin-js-sdk'
 
 export default {
 	name: 'funnyQuiz',
@@ -172,31 +171,6 @@ export default {
 		}
 	},
 	created: function () {
-		// wx.config({
-		// 	debug: true,
-		// 	appId: 'wx5dc2298841cf0098',
-		// 	timestamp: '',
-		// 	nonceStr: '',
-		// 	signature: '',
-		// 	jsApiList: [
-		// 		'onMenuShareTimeline',
-		// 		'onMenuShareAppMessage',
-		// 		'onMenuShareQQ',
-		// 		'onMenuShareWeibo'
-		// 	]
-		// })
-		// wx.ready(function () {
-		// 	wx.onMenuShareAppMessage({
-		// 		title: '老王保健开业啦', // 分享标题
-		// 		desc: '啦啦啦', // 分享描述
-		// 		link: 'dev-www.beanpop.cn', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-		// 		imgUrl: '/static/img/share/avatar.jpg', // 分享图标
-		// 		type: '', // 分享类型,music、video或link，不填默认为link
-		// 		success: function () {
-		// 			console.log('hahaha')
-		// 		}
-		// 	})
-		// })
 		axios({
 			method: 'GET',
 			url: 'http://dev-new-api.beanpop.cn/hotQuiz'
@@ -229,6 +203,7 @@ export default {
 					$(".quizing .quizing-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .option").text(answer)
 					$(".quizing .quizing-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .reward").text(odd)
 				}
+				let myQuizList = quizList[i].myQuizList
 			}
 
 			// get the quized data

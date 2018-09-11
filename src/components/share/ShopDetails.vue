@@ -75,7 +75,7 @@
 <script>
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-// import vueCookie from 'vue-cookie'
+import vueCookie from 'vue-cookie'
 import axios from 'axios'
 import $ from 'jquery'
 import Swiper from 'swiper'
@@ -85,6 +85,7 @@ const langData = require('../lang/share.json')
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'shopDetails',
+  shopID: '',
   messages: langData
 })
 
@@ -109,13 +110,19 @@ export default {
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		var getParams = this.$route.params
-		this.shopID = getParams.shopID
+		if (getParams.shopID) {
+			this.shopID = getParams.shopID
+		} else {
+			this.shopID = vueCookie.get('shop_id')
+		}
 		axios({
 			method: 'GET',
 			url: 'http://dev-new-api.beanpop.cn/event/shop/' + this.shopID
 			// url: 'http://dev-new-api.beanpop.cn/game/recentWinnerRecord'
 		}).then((response) => {
 			var responseData = response.data.data
+			vueCookie.set('shop_id', this.shopID, 1)
+			this.$i18n.shopID = vueCookie.get('shop_id')
 			console.log(responseData)
 			this.shopName = responseData.name
 			this.shopOpenTime = responseData.openTime
