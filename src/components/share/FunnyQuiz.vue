@@ -180,7 +180,7 @@ export default {
 
 			// get the quizing data
 			var quizList = responseData.quizList
-			var $quizDiv = '<div class="quizing-content"><div class="quizing-top"><img /></div><div class="quizing-bottom"><div class="question"></div><div class="answer-box"></div></div><div class="countdown clear-fix"><hr class="countdown-line" /><div class="countdown-time"><img src="/static/img/share/clock.png"/><span class="countdown-text"></span></div><hr class="countdown-line" /></div></div></div>'
+			var $quizDiv = '<div class="quizing-content"><div class="quizing-top"><img /></div><div class="quizing-bottom"><div class="question"></div><div class="answer-box"></div></div><div class="countdown clear-fix"><hr class="countdown-line" /><div class="countdown-time"><img src="/static/img/share/clock.png"/><span class="countdown-text"></span></div><hr class="countdown-line" /></div><div class="answer-div"></div></div></div>'
 			var $answerBtn = '<div class="answer-btn clear-fix"><span class="option"></span><span class="reward"></span></div>'
 			for (var i = 0; i < quizList.length; i++) {
 				$('.quizing').append($quizDiv)
@@ -204,6 +204,7 @@ export default {
 					$(".quizing .quizing-content:eq("+ i +") .answer-box .answer-btn:eq("+ j +") .reward").text(odd)
 				}
 				let myQuizList = quizList[i].myQuizList
+				var $myAnswerBox = '<div class="my-answer-box"><div class="answer-date"></div><div class="my-answer justified"><span class="answer"></span><span class="betting"></span><span class="odds"></span></div></div>'
 			}
 
 			// get the quized data
