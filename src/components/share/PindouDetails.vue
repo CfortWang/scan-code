@@ -3,33 +3,20 @@
 		<div class="terms-div-wrapper" v-if="moreData">
 			<div class="terms-div-header">
 				<div class="header-title-wrapper">更多拼豆豆</div>
-				<div class="header-back-wrapper" v-on:click="goBack">
-				<div class="header-back-arrow">
-					<img src="/static/img/icon/goback.png">
-				</div>
+				<div class="header-back-wrapper" v-on:click="goBack(clearMoreTimer)">
+					<div class="header-back-arrow">
+						<img src="/static/img/icon/goback.png">
+					</div>
 				</div>
 			</div>
 			<div class="terms-div-contents"></div>
 		</div>
-		<div class="swiper-container" id="top-swiper">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide swiper-div">
-					<img class="swiper-img-index" src="/static/img/share/pindou.png">
-				</div>
-				<div class="swiper-slide swiper-div">
-					<img class="swiper-img-index" src="/static/img/share/pindou.png">
-				</div>
-				<div class="swiper-slide swiper-div">
-					<img class="swiper-img-index" src="/static/img/share/pindou.png">
-				</div>
-				<div class="swiper-slide swiper-div">
-					<img class="swiper-img-index" src="/static/img/share/pindou.png">
-				</div>
-			</div>
-			<div class="swiper-pagination">
-
-			</div>
-		</div>
+		<swiper :options="swiperOption">
+			<swiper-slide class="swiper-div" v-for="item in bannerItems" v-bind:key="item.index">
+				<img v-bind:src="item.image" alt="">
+			</swiper-slide>
+			<div class="swiper-pagination"  slot="pagination"></div>
+		</swiper>
 		<div class="fixed-right-btn">打开App</div>
 		<div class="package">
 			<div class="package-top justified">
@@ -99,7 +86,7 @@
 				<div class="user-joined"></div>
 				<div class="join-pindou-btn"><span>参与拼豆豆</span></div>
 			</div>
-			<div class="close-join-pindou" v-on:click="closePindou">
+			<div class="close-join-pindou" v-on:click="closePindou(clearTimer)">
 				<img src="/static/img/share/close.png" alt="" />
 			</div>
 		</div>
@@ -126,9 +113,8 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
 import axios from 'axios'
-import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'
-import Swiper from 'swiper'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 const langData = require('../lang/share.json')
 
@@ -143,10 +129,12 @@ export default {
 	name: 'pindouDetails',
 	i18n: i18n,
 	components: {
-		VueCountdown
+		swiper,
+		swiperSlide
 	},
 	data () {
 		return {
+			bannerItems: [],
 			packageName: '',
 			packagePrice: '',
 			packageDesc: '',
@@ -159,12 +147,25 @@ export default {
 			shopAddressDetail: '',
 			shopPhoneNum: '',
 			groupID: '',
-			moreData: false
+			moreData: false,
+			clearTimer: '',
+			clearMoreTimer: [],
+			allTimer: [],
+			swiperOption: {
+				autoplay: true,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true
+				},
+				centeredSlides: true,
+				loop: true
+			}
 		}
 	},
 	created: function () {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		var getParams = this.$route.params
+		var that = this
 		if (getParams.groupID) {
 			this.groupID = getParams.groupID
 		} else {
@@ -178,7 +179,8 @@ export default {
 			var responseData = response.data.data
 			vueCookie.set('group_id', this.groupID, 1)
 			this.$i18n.groupID = vueCookie.get('group_id')
-			console.log(responseData)
+			// console.log(responseData)
+			this.bannerItems = responseData.banner
 			this.packageName = responseData.title
 			this.packagePrice = '￥' + responseData.price
 			this.newPackagePrice = '￥' + responseData.discountedPrice
@@ -240,12 +242,13 @@ export default {
 				$(".pindouing .pindou-box:eq("+ i +") img").attr('src', groupOnImg)
 				$(".pindouing .pindou-box:eq("+ i +") .user-name").text(groupOnUser)
 				$(".pindouing .pindou-box:eq("+ i +") .lack-people").text(needNum)
-				this.timer(timeLeft, i);
+				$(".pindouing .pindou-box:eq("+ i +") .pindou-info p").text(this.timer(timeLeft));
 				(function (timeLeft) {
-					setInterval(function () {
+					var timer1 = setInterval(function () {
 						timeLeft--
-						that.timer(timeLeft, i)
+						$(".pindouing .pindou-box:eq("+ i +") .pindou-info p").text(that.timer(timeLeft))
 					}, 1000)
+					that.allTimer.push(timer1)
 				})(timeLeft)
 			}
 
@@ -260,18 +263,24 @@ export default {
 					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 				}).then((response) => {
 					let responseData = response.data.data
-					console.log(responseData)
+					// console.log(responseData)
 					let ownerName = responseData.ownerName
 					let needNum = responseData.needNum
 					let timeLeft = responseData.timeLeft
+					$(".join-pindou-box .join-pindou-desc .orange:eq(1)").text(that.timer(timeLeft));
+					(function (timeLeft) {
+						that.clearTimer = setInterval(function () {
+							timeLeft--
+							$(".join-pindou-box .join-pindou-desc .orange:eq(1)").text(that.timer(timeLeft))
+						}, 1000)
+						that.allTimer.push(that.clearTimer)
+					})(timeLeft)
 					let user = responseData.user
 					var groupSize = responseData.groupSize
-					console.log(user.length)
 					var $ownerBox = '<div class="pindou-partner"><div class="avatar"><img/></div><div class="owner"><img src="/static/img/share/pindou-owner.png"/><div class="owner-text">拼主</div></div></div>'
 					var $partnerBox = '<div class="pindou-partner"><div class="avatar"><img/></div></div>'
 					$(".join-pindou-box .join-pindou-title").text("参与" + ownerName + "的拼豆豆单")
 					$(".join-pindou-box .join-pindou-desc .orange:eq(0)").text(needNum + "个")
-					$(".join-pindou-box .join-pindou-desc .orange:eq(1)").text(timeLeft)
 					$('.user-joined').append($ownerBox)
 					setTimeout(() => {
 						for (let i = 0; i < user.length; i++) {
@@ -296,10 +305,6 @@ export default {
 				})
 			})
 
-			for (let i = 0; i < 10; i++) {
-				// this.$options.methods.timer(i)
-			}
-			// this.$options.methods.send()
 			// get owner arawd
 			var $ownerGot = responseData.ownerGot
 			$('.award').append($ownerGot)
@@ -308,23 +313,12 @@ export default {
 			// var errorResponseData = ex.response.data
 			// console.log(errorResponseData)
 		})
-	},
-	mounted () {
-		let sp = new Swiper('#top-swiper', {
-			autoplay: true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			},
-			// pagination: '.swiper-pagination',
-			paginationClickable: true,
-			centeredSlides: true,
-			loop: true
+		$(window).on("unload", function () {
+			that.clearAllTimer(that.allTimer)
 		})
-
-		Vue.use({
-			sp
-		})
+		window.onpopstate = function () {
+			that.clearAllTimer(that.allTimer)
+		}
 	},
 	methods: {
 		goToPindou: function () {
@@ -333,9 +327,10 @@ export default {
 			$(".join-pindou-box, .mask2").show()
 			$(".initiate-box").hide()
 		},
-		closePindou: function () {
+		closePindou: function (event) {
 			$(".join-pindou-box, .mask2").hide()
 			$(".initiate-box").show()
+			clearInterval(event)
 			$(".user-joined").empty()
 		},
 		signPindou: function () {
@@ -367,24 +362,25 @@ export default {
 			var tel = 'tel:' + this.shopPhoneNum
 			window.location.href = tel
 		},
-		goBack: function () {
+		goBack: function (event) {
 			this.moreData = false
+			for (let i = 0; i < event.length; i++) {
+				clearInterval(event[i])
+			}
+			event.length = 0
 		},
-		timer: function (event, item) {
+		timer: function (event) {
 			var seconds = parseInt(event % 60) < 10 ? '0' + parseInt(event % 60) : parseInt(event % 60)
 			var minutes = parseInt((event / 60) % 60) < 10 ? '0' + parseInt((event / 60) % 60) : parseInt((event / 60) % 60)
 			var hours = parseInt((event / 3600) % 24) < 10 ? '0' + parseInt((event / 3600) % 24) : parseInt((event / 3600) % 24)
 			var days = Math.floor(event / (3600 * 24)) >= 1 ? Math.floor(event / (3600 * 24)) : ''
 			var leftDate = days + ':' + hours + ':' + minutes + ':' + seconds
-			$(".pindouing .pindou-box:eq("+ item +") .pindou-info p").text(leftDate)
+			return leftDate
 		},
-		moreDataTimer: function (event, item) {
-			var seconds = parseInt(event % 60) < 10 ? '0' + parseInt(event % 60) : parseInt(event % 60)
-			var minutes = parseInt((event / 60) % 60) < 10 ? '0' + parseInt((event / 60) % 60) : parseInt((event / 60) % 60)
-			var hours = parseInt((event / 3600) % 24) < 10 ? '0' + parseInt((event / 3600) % 24) : parseInt((event / 3600) % 24)
-			var days = Math.floor(event / (3600 * 24)) >= 1 ? Math.floor(event / (3600 * 24)) : ''
-			var leftDate = "剩余" + days + ':' + hours + ':' + minutes + ':' + seconds
-			$(".terms-div-contents .pindou-box:eq("+ item +") .pindou-info p").text(leftDate)
+		clearAllTimer: function (event) {
+			for (let i = 0; i < event.length; i++) {
+				clearInterval(event[i])
+			}
 		},
 		morePindou: function () {
 			this.moreData = true
@@ -413,15 +409,17 @@ export default {
 					$(".terms-div-contents .pindou-box:eq("+ i +") img").attr('src', groupOnImg)
 					$(".terms-div-contents .pindou-box:eq("+ i +") .user-name").text(groupOnUser)
 					$(".terms-div-contents .pindou-box:eq("+ i +") .lack-people").text(needNum)
-					this.$options.methods.moreDataTimer(timeLeft, i);
+					$(".terms-div-contents .pindou-box:eq("+ i +") .pindou-info p").text(this.$options.methods.timer(timeLeft));
 					(function (timeLeft) {
-						setInterval(function () {
+						var clear = setInterval(function () {
 							timeLeft--
-							that.$options.methods.moreDataTimer(timeLeft, i)
+							$(".terms-div-contents .pindou-box:eq("+ i +") .pindou-info p").text(that.$options.methods.timer(timeLeft))
 						}, 1000)
+						that.clearMoreTimer.push(clear)
+						that.allTimer.push(clear)
 					})(timeLeft)
 				}
-				console.log(responseData)
+				// console.log(responseData)
 			}).catch((ex) => {
 				console.log(ex)
 			})
@@ -431,7 +429,6 @@ export default {
 </script>
 
 <style scoped>
-@import "swiper/dist/css/swiper.css";
 li{
 	list-style: none;
 }

@@ -89,6 +89,7 @@ export default {
 		}).then((response) => {
 			// var responseMessage = response.data.message
 			var responseData = response.data.data
+			// console.log(responseData)
 			this.countryItems = responseData
 			this.selectedCountry = parseInt(this.countryItems[0].seq)
 		}).catch((ex) => {

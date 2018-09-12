@@ -104,7 +104,8 @@ export default {
 			shopPhoneNum: '',
 			ruleTitle: '',
 			rule: [],
-			shopID: ''
+			shopID: '',
+			groupID: ''
 		}
 	},
 	created: function () {
@@ -121,6 +122,7 @@ export default {
 			// url: 'http://dev-new-api.beanpop.cn/game/recentWinnerRecord'
 		}).then((response) => {
 			var responseData = response.data.data
+			var that = this
 			vueCookie.set('shop_id', this.shopID, 1)
 			this.$i18n.shopID = vueCookie.get('shop_id')
 			console.log(responseData)
@@ -135,21 +137,24 @@ export default {
 			// get the rule
 			var ruleArr = responseData.rule.content.split('<br>')
 			var $ruleDiv = '<div class="rules"></div>'
-			for (var i = 0; i < ruleArr.length; i++) {
+			for (let i = 0; i < ruleArr.length; i++) {
 				$('.rule-detail').append($ruleDiv)
 				$(".rule-detail .rules:eq(" + i + ")").text(ruleArr[i])
 			}
 
 			// get pdd package data
 			var pddData = responseData.GroupProduct
-			var $pddBox = '<div class="package-data"><div class="package-img"><img src=""/></div><div class="package-data-detail"><div class="package-name"></div><div class="package-price"><span class="package-new-price"></span><span class="package-old-price"><del></del></span></div><div class="team-scale"><span></span><div class="go-pindou">去拼豆</div></div></div></div>'
-			for (i = 0; i < pddData.length; i++) {
+			console.log(pddData)
+			var $pddBox = '<div class="package-data"><div class="package-img" data-id=""><img src=""/></div><div class="package-data-detail"><div class="package-name"></div><div class="package-price"><span class="package-new-price"></span><span class="package-old-price"><del></del></span></div><div class="team-scale"><span></span><div class="go-pindou">去拼豆</div></div></div></div>'
+			for (let i = 0; i < pddData.length; i++) {
 				$('.package-data-box').append($pddBox)
 				var discountedPrice = '￥' + pddData[i].discountedPrice
 				var groupSize = pddData[i].groupSize + '人成团'
 				var pddDataImage = pddData[i].image
 				var price = pddData[i].price
 				var title = pddData[i].title
+				let pinDetailID = pddData[i].id
+				$(".package-data-box .package-data:eq("+ i +") .package-img").attr('data-id', pinDetailID)
 				$(".package-data-box .package-data:eq("+ i +") img").attr('src', pddDataImage)
 				$(".package-data-box .package-data:eq("+ i +") .package-name").text(title)
 				$(".package-data-box .package-data:eq("+ i +") .package-new-price").text(discountedPrice)
@@ -160,7 +165,7 @@ export default {
 			// get shop coupon data
 			var couponData = responseData.ShopEvent
 			var $couponBox = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
-			for (i = 0; i < couponData.length; i++) {
+			for (let i = 0; i < couponData.length; i++) {
 				$('.shop-coupon-box').append($couponBox)
 				var startDate = couponData[i].startDate.replace(/-/, '/') + '至'
 				var endDate = couponData[i].endDate.replace(/-/, '/')
@@ -179,6 +184,15 @@ export default {
 			})
 			$('.mask2').click(function () {
 				$(".download-wrapper, .mask2").hide()
+			})
+			$(".package-data .package-img").click(function () {
+				that.groupID = $(this).attr('data-id')
+				that.$router.push({
+					name: 'PindouDetails',
+					params: {
+						groupID: that.groupID
+					}
+				})
 			})
 		}).catch((ex) => {
 			console.log(ex)
@@ -236,7 +250,6 @@ export default {
 </script>
 
 <style scoped>
-@import "swiper/dist/css/swiper.css";
 li{
 	list-style: none;
 }

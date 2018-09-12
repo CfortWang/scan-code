@@ -88,6 +88,7 @@ body {
     width: 16px;
     background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
     border-radius:8px;
+		outline: none;
 }
 .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
     width: 100%;
@@ -557,6 +558,7 @@ header {
 }
 .quizing-top img, .quized-top img{
 	width: 100%;
+	max-height: 320px;
   border-radius: 4px 4px 0 0;
 }
 .quizing-bottom, .quized-bottom{
@@ -598,6 +600,9 @@ header {
 	color: #DDDDDD;
 	background: #DDDDDD;
 }
+.countdown-time{
+	margin: 0px 5px;
+}
 .countdown-time img{
 	width: 14px;
 	margin:0 4px 0 5px;
@@ -606,6 +611,9 @@ header {
 	flex: 4;
 	margin-right: 5px;
 	color: #333333;
+}
+.countdown-status{
+	margin: 0px 20px;
 }
 .my-answer-box{
 	font-size: 14px;
@@ -655,6 +663,7 @@ header {
 .loser{
 	padding: 4px 10px;
 	background: #EEEEEE;
+	color: #666666;
 	border-radius: 4px;
 }
 .winner{
