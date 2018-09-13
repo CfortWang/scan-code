@@ -89,7 +89,7 @@ export default new Router({
     {
       path: '/shareRegister',
       name: 'ShareRegister',
-      component: (resolve) => require(['@/components/ShareRegister'], resolve)
+      component: (resolve) => require(['@/components/share/ShareRegister'], resolve)
       // component: ShareRegister
     },
     {
@@ -101,7 +101,7 @@ export default new Router({
     {
       path: '/recommend',
       name: 'Recommend',
-      component: (resolve) => require(['@/components/share/Recommend'], resolve)
+      component: (resolve) => require(['@/components/Recommend'], resolve)
       // component: Recommend
     },
     {
