@@ -4,6 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
+
 const webpack = require('webpack')
 
 function resolve (dir) {
@@ -35,13 +36,14 @@ module.exports = {
   },
   externals: {
     'vue': 'Vue',
-    'vue-router': 'VueRouter'
+    'vue-router': 'VueRouter',
+    'axios': 'axios',
+    'i18n': 'i18n'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue': 'vue/dist/vue.js',
-      // 'vue$': 'vue/dist/vue.esm.js',
+      'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'jquery': 'jquery',
       'jquery': resolve('/node_modules/jquery/src/jquery.js'),
