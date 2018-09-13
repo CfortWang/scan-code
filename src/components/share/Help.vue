@@ -42,8 +42,22 @@ export default {
 		}).catch((ex) => {
 			console.log(ex)
 		})
+		var args = this.getArgs()
+		this.phoneNum = args['phone_num']
 	},
 	methods: {
+		getArgs: function () {
+			var url = location.search
+			var args = {}
+			if (url.indexOf("?") != -1) {
+				var str = url.substr(1)
+				var strs = str.split("&")
+				for (let i = 0; i < strs.length; i++) {
+					args[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1])
+				}
+			}
+			return args
+		},
 		submit: function () {
 			axios({
 				method: 'POST',
