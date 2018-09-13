@@ -142,14 +142,12 @@
 </template>
 
 <script>
-import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
 import _global from '../App.vue'
 import $ from 'jquery'
 
 const langData = require('./lang/event.json')
 
-Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
   messages: langData
@@ -223,7 +221,7 @@ export default {
         dataType: 'json',
         async: false,
         type: 'GET',
-        timeout: 3000,
+        timeout: 1000,
         success: function (req) {
           _global.ipAddress = req.country.code
           // _global.ipAddress = req.country_code
@@ -274,9 +272,7 @@ export default {
         url: process.env.api_url + '/api/validations/q35-code',
         params: { code: qrCode }
       }).then((response) => {
-        // var responseMessage = response.data.message
         // var responseData = response.data.data
-        // console.log(responseMessage)
         // console.log(responseData)
 
         axios({ // get the old winner number

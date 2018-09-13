@@ -39,14 +39,10 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import axios from 'axios'
 import vueCookie from 'vue-cookie'
 
 const langData = require('./lang/confirmRecommend.json')
 
-Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
   messages: langData

@@ -127,34 +127,7 @@
         <!-- 非扫码进入不显示 -->
         <div class="shop-coupon-wrapper" v-if="shopCouponShow">
           <div class="shop-coupon-title">{{ $t("event.title1")}}</div>
-          <div class="shop-coupon-box">
-            <!-- <div class="shop-coupon">
-              <div class="coupon-img">
-                <img src="/static/img/share/pindou-img.jpg"/>
-              </div>
-              <div class="shop-coupon-detail justified">
-                <div class="coupon-desc">
-                  <div class="coupon-name">买一送一</div>
-                  <div class="store-name">袁老四的火锅店</div>
-                  <div class="term">2018/03/24至2018/05/24</div>
-                </div>
-                <div class="use-shop-coupon-btn">使用</div>
-              </div>
-            </div> -->
-            <!-- <div class="shop-coupon">
-              <div class="coupon-img">
-                <img src="/static/img/share/pindou-img.jpg"/>
-              </div>
-              <div class="shop-coupon-detail justified">
-                <div class="coupon-desc">
-                  <div class="coupon-name">买一送一</div>
-                  <div class="store-name">袁老四的火锅店</div>
-                  <div class="term">2018/03/24至2018/05/24</div>
-                </div>
-                <div class="use-shop-coupon-btn">使用</div>
-              </div>
-            </div> -->
-          </div>
+          <div class="shop-coupon-box"></div>
         </div>
 
         <div class="seedo-gifts-wrapper">
@@ -190,13 +163,11 @@
 </template>
 
 <script>
-import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
 import $ from 'jquery'
 
 const langData = require('./lang/complete.json')
 
-Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
   phone: '',
@@ -292,32 +263,10 @@ export default {
       }
     }
 
-    // var ua = navigator.userAgent.toLowerCase()
-    // if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-    //   this.reload = false
-    // } else {
-    //   this.reload = true
-    // }
-
-    // if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-    //   this.phoneKind = 'ios'
-    // } else if (/(Android)/i.test(navigator.userAgent)) {
-    //   this.phoneKind = 'android'
-    // }
-
-    // var ua = navigator.userAgent.toLowerCase()
-    // if ((ua.match(/MicroMessenger/i) == 'micromessenger') || (ua.match(/QQ/i) == 'qq')) {
-    //   this.notWechat = false
-    // } else {
-    //   this.notWechat = true
-    // }
-
     axios({ // Current Drawings Info
       url: process.env.api_url + '/api/drawings/progress'
     }).then((response) => {
-      // var responseMessage = response.data.message
       var responseData = response.data.data
-      // console.log(responseMessage)
       // console.log(responseData)
 
       var array = responseData.end_at.split(' ')
@@ -339,18 +288,14 @@ export default {
     axios({ // Get Country Info
       url: process.env.api_url + '/api/countries'
     }).then((response) => {
-      // var responseMessage = response.data.message
       var responseData = response.data.data
-      // console.log(responseMessage)
-      // console.log(responseData)
 
       this.countryItems = responseData.data
       this.selectedCountry = parseInt(this.countryItems[0].seq)
     }).catch((ex) => {
       console.log(ex)
-      // var errorResponseData = ex.response.data
-      // console.log(errorResponseData)
     })
+
     if (this.shopCoupon.length > 0) {
       this.shopCouponShow = true
     }
@@ -420,9 +365,7 @@ export default {
         url: process.env.api_url + '/api/validations/phone-num',
         params: { phone_num: this.phoneNumber, country: this.selectedCountry }
       }).then((response) => {
-        // var responseMessage = response.data.message
         // var responseData = response.data.data
-        // console.log(responseMessage)
         // console.log(responseData)
 
         var getParams = this.$route.params
@@ -470,44 +413,7 @@ export default {
               temp_user: this.tmpUser
             }
           }).then((response) => {
-            // var this_ = this
-            // if (this.notWechat) {
-            //   if (this.phoneKind == 'android') {
-            //     window.location.href = 'xidou://app'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-            //     }, 2000)
-            //   } else if (this.phoneKind == 'ios') {
-            //     window.location.href = 'seedo://'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-            //     }, 2000)
-            //   }
-            // } else {
-            //   this_.$router.push({name: 'AppDown', params: {code: 'default', phoneKind: this_.phoneKind, notWechat: this_.notWechat}})
-            // }
-
-            // if (this.notWechat) {
-            //   if (this.phoneKind == 'android') {
-            //     window.location.href = 'xidou://app'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-            //     }, 1500)
-            //   } else if (this.phoneKind == 'ios') {
-            //     window.location.href = 'seedo://'
-            //     window.setTimeout(function () {
-            //       this_.$router.push({name: 'AppDown', params: {code: 'default'}})
-            //     }, 1500)
-            //   } else {
-            //     this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
-            //   }
-            // } else {
-            //   this_.$router.push({name: 'WechatOpen', params: {code: 'default', phoneKind: this.phoneKind, notWechat: this.notWechat}})
-            // }
-
-            // var responseMessage = response.data.message
             // var responseData = response.data.data
-            // console.log(responseMessage)
             // console.log(responseData)
             var phoneNum = document.getElementById('phoneNum').value
             vueCookie.set('qr_phone_num', phoneNum, 1)

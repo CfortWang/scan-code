@@ -43,14 +43,12 @@
 </template>
 
 <script>
-import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
 import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'
 
 const langData = require('./lang/register.json')
 
-Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'zh',
   phone: '',
