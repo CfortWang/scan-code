@@ -757,4 +757,7 @@ header {
 .terms-div-contents .user-info img{
 	margin-left: 5px;
 }
+.help-answer p{
+	margin: 0px;
+}
 </style>

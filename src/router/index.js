@@ -98,6 +98,12 @@ export default new VueRouter({
       // component: Login
     },
     {
+      path: '/share/help',
+      name: 'Help',
+      component: (resolve) => require(['@/components/share/Help'], resolve)
+      // component: Login
+    },
+    {
       path: '/recommend',
       name: 'Recommend',
       component: (resolve) => require(['@/components/Recommend'], resolve)
