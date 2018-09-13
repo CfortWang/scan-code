@@ -1,22 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AppDown from '@/components/AppDown'
-import Recommend from '@/components/Recommend'
-import ConfirmRecommend from '@/components/ConfirmRecommend'
-import Event from '@/components/Event'
-import AD from '@/components/AD'
-import Complete from '@/components/Complete'
-import Register from '@/components/Register'
-import CompleteEvent from '@/components/CompleteEvent'
-// import WechatOpen from '@/components/WechatOpen'
-import FunnyQuiz from '@/components/share/FunnyQuiz'
-import SpellBean from '@/components/share/SpellBean'
-import ShopDetails from '@/components/share/ShopDetails'
-import PindouDetails from '@/components/share/PindouDetails'
-import PayDeposit from '@/components/share/PayDeposit'
-import PaySuccess from '@/components/share/PaySuccess'
-import ShareRegister from '@/components/share/ShareRegister'
-import Login from '@/components/share/Login'
+// import AppDown from '@/components/AppDown'
+// import Recommend from '@/components/Recommend'
+// import ConfirmRecommend from '@/components/ConfirmRecommend'
+// import Event from '@/components/Event'
+// import AD from '@/components/AD'
+// import Complete from '@/components/Complete'
+// import Register from '@/components/Register'
+// import CompleteEvent from '@/components/CompleteEvent'
+// // import WechatOpen from '@/components/WechatOpen'
+// import FunnyQuiz from '@/components/share/FunnyQuiz'
+// import SpellBean from '@/components/share/SpellBean'
+// import ShopDetails from '@/components/share/ShopDetails'
+// import PindouDetails from '@/components/share/PindouDetails'
+// import PayDeposit from '@/components/share/PayDeposit'
+// import PaySuccess from '@/components/share/PaySuccess'
+// import ShareRegister from '@/components/share/ShareRegister'
+// import Login from '@/components/share/Login'
+// import { resolve } from 'dns';
 
 Vue.use(Router)
 
@@ -27,7 +28,7 @@ export default new Router({
       path: '/',
       name: 'Root',
       redirect: '/app',
-      component: AppDown,
+      component: (resolve) => require(['@/components/AppDown'], resolve),
       afterEach: (to, from, next) => {
         setTimeout(() => {
           var _hmt = _hmt || []
@@ -46,57 +47,68 @@ export default new Router({
     {
       path: '/app',
       name: 'AppDown',
-      component: AppDown
+      component: (resolve) => require(['@/components/AppDown'], resolve)
+      // component: AppDown
     },
     {
       path: '/share/funnyQuiz',
       name: 'FunnyQuiz',
-      component: FunnyQuiz
+      component: (resolve) => require(['@/components/share/FunnyQuiz'], resolve)
+      // component: FunnyQuiz
     },
     {
       path: '/share/spellBean',
       name: 'SpellBean',
-      component: SpellBean
+      component: (resolve) => require(['@/components/share/SpellBean'], resolve)
+      // component: SpellBean
     },
     {
       path: '/share/shopDetails',
       name: 'ShopDetails',
-      component: ShopDetails
+      component: (resolve) => require(['@/components/share/ShopDetails'], resolve)
+      // component: ShopDetails
     },
     {
       path: '/share/pindouDetails',
       name: 'PindouDetails',
-      component: PindouDetails
+      component: (resolve) => require(['@/components/share/PindouDetails'], resolve)
+      // component: PindouDetails
     },
     {
       path: '/share/payDeposit',
       name: 'PayDeposit',
-      component: PayDeposit
+      component: (resolve) => require(['@/components/share/PayDeposit'], resolve)
+      // component: PayDeposit
     },
     {
       path: '/share/paySuccess',
       name: 'PaySuccess',
-      component: PaySuccess
+      component: (resolve) => require(['@/components/share/PaySuccess'], resolve)
+      // component: PaySuccess
     },
     {
       path: '/shareRegister',
       name: 'ShareRegister',
-      component: ShareRegister
+      component: (resolve) => require(['@/components/ShareRegister'], resolve)
+      // component: ShareRegister
     },
     {
       path: '/share/login',
       name: 'Login',
-      component: Login
+      component: (resolve) => require(['@/components/share/Login'], resolve)
+      // component: Login
     },
     {
       path: '/recommend',
       name: 'Recommend',
-      component: Recommend
+      component: (resolve) => require(['@/components/share/Recommend'], resolve)
+      // component: Recommend
     },
     {
       path: '/recommend/confirm',
       name: 'ConfirmRecommend',
-      component: ConfirmRecommend,
+      // component: ConfirmRecommend,
+      component: (resolve) => require(['@/components/ConfirmRecommend'], resolve),
       beforeEnter: (to, from, next) => {
         if (from.path.startsWith('/recommend') || from.path.startsWith('/register')) {
           next()
@@ -108,7 +120,8 @@ export default new Router({
     {
       path: '/event',
       name: 'Event',
-      component: Event
+      component: (resolve) => require(['@/components/Event'], resolve)
+      // component: Event
     },
     // {
     //   path: '/wechatopen',
@@ -118,7 +131,8 @@ export default new Router({
     {
       path: '/ad',
       name: 'AD',
-      component: AD,
+      // component: AD,
+      component: (resolve) => require(['@/components/AD'], resolve),
       beforeEnter: (to, from, next) => {
         if (from.path.startsWith('/event')) {
           next()
@@ -130,7 +144,8 @@ export default new Router({
     {
       path: '/complete',
       name: 'Complete',
-      component: Complete,
+      // component: Complete,
+      component: (resolve) => require(['@/components/Complete'], resolve),
       beforeEnter: (to, from, next) => {
         if (from.path.startsWith('/ad')) {
           next()
@@ -142,7 +157,8 @@ export default new Router({
     {
       path: '/register',
       name: 'Register',
-      component: Register,
+      // component: Register,
+      component: (resolve) => require(['@/components/Register'], resolve),
       beforeEnter: (to, from, next) => {
         if (from.path.startsWith('/complete') || from.path.startsWith('/recommend')) {
           next()
@@ -154,7 +170,8 @@ export default new Router({
     {
       path: '/complete/event',
       name: 'CompleteEvent',
-      component: CompleteEvent,
+      // component: CompleteEvent,
+      component: (resolve) => require(['@/components/CompleteEvent'], resolve),
       beforeEnter: (to, from, next) => {
         if (from.path.startsWith('/complete') || from.path.startsWith('/register')) {
           next()
