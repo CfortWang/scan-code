@@ -7,7 +7,6 @@ import Router from 'vue-router'
 // import AD from '@/components/AD'
 // import Complete from '@/components/Complete'
 // import Register from '@/components/Register'
-// import CompleteEvent from '@/components/CompleteEvent'
 // // import WechatOpen from '@/components/WechatOpen'
 // import FunnyQuiz from '@/components/share/FunnyQuiz'
 // import SpellBean from '@/components/share/SpellBean'
@@ -107,8 +106,8 @@ export default new Router({
     {
       path: '/recommend/confirm',
       name: 'ConfirmRecommend',
-      // component: ConfirmRecommend,
       component: (resolve) => require(['@/components/ConfirmRecommend'], resolve),
+      // component: ConfirmRecommend,
       beforeEnter: (to, from, next) => {
         if (from.path.startsWith('/recommend') || from.path.startsWith('/register')) {
           next()
@@ -123,16 +122,11 @@ export default new Router({
       component: (resolve) => require(['@/components/Event'], resolve)
       // component: Event
     },
-    // {
-    //   path: '/wechatopen',
-    //   name: 'WechatOpen',
-    //   component: WechatOpen
-    // },
     {
       path: '/ad',
       name: 'AD',
-      // component: AD,
       component: (resolve) => require(['@/components/AD'], resolve),
+      // component: AD,
       beforeEnter: (to, from, next) => {
         if (from.path.startsWith('/event')) {
           next()
@@ -166,19 +160,6 @@ export default new Router({
           next('/app')
         }
       }
-    },
-    {
-      path: '/complete/event',
-      name: 'CompleteEvent',
-      // component: CompleteEvent,
-      component: (resolve) => require(['@/components/CompleteEvent'], resolve)
-      // beforeEnter: (to, from, next) => {
-      //   if (from.path.startsWith('/complete') || from.path.startsWith('/register')) {
-      //     next()
-      //   } else {
-      //     next('/app')
-      //   }
-      // }
     }
   ]
 })
