@@ -190,11 +190,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
-import axios from 'axios'
-import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'
 
 const langData = require('./lang/complete.json')
@@ -210,7 +207,7 @@ export default {
   name: 'complete',
   i18n: i18n,
   components: {
-    VueCountdown
+    // VueCountdown
   },
   data () {
     var now = new Date()

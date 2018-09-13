@@ -55,13 +55,8 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import VueI18n from 'vue-i18n'
 // import vueCookie from 'vue-cookie'
-import axios from 'axios'
-import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'
-// import Swiper from 'swiper'
 
 export default {
 	name: 'paySuccess',

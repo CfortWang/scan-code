@@ -26,19 +26,12 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
 // import vueCookie from 'vue-cookie'
 import $ from 'jquery'
-import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
 
 const langData = require('../lang/share.json')
 
-// axios.defaults.withCredentials=true
-// Vue.prototype.$axios = axios
-
-Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'login',
   messages: langData

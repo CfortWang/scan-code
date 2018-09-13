@@ -73,16 +73,11 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
 import vueCookie from 'vue-cookie'
-import axios from 'axios'
 import $ from 'jquery'
-import Swiper from 'swiper'
 
 const langData = require('../lang/share.json')
 
-Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'shopDetails',
   shopID: '',
@@ -198,22 +193,6 @@ export default {
 			console.log(ex)
 			// var errorResponseData = ex.response.data
 			// console.log(errorResponseData)
-		})
-	},
-	mounted () {
-		let sp = new Swiper('#top-swiper', {
-			autoplay: true,
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true
-			},
-			// pagination: '.swiper-pagination',
-			paginationClickable: true,
-			centeredSlides: true,
-			loop: true
-		})
-		Vue.use({
-			sp
 		})
 	},
 	methods: {

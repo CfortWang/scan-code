@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+// import Vue from 'vue'
+// import Router from 'vue-router'
 // import AppDown from '@/components/AppDown'
 // import Recommend from '@/components/Recommend'
 // import ConfirmRecommend from '@/components/ConfirmRecommend'
@@ -17,9 +17,9 @@ import Router from 'vue-router'
 // import ShareRegister from '@/components/share/ShareRegister'
 // import Login from '@/components/share/Login'
 
-Vue.use(Router)
+// Vue.use(Router)
 
-export default new Router({
+export default new VueRouter({
   mode: 'history',
   routes: [
     {

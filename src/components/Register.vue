@@ -43,9 +43,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import axios from 'axios'
 import vueCookie from 'vue-cookie'
 import VueCountdown from '@xkeshi/vue-countdown'
 import $ from 'jquery'

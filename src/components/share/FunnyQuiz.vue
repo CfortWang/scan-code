@@ -27,10 +27,7 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import VueI18n from 'vue-i18n'
 // import vueCookie from 'vue-cookie'
-import axios from 'axios'
 import $ from 'jquery'
 
 export default {
@@ -324,7 +321,7 @@ p, li{
 	border-radius:4px;
 	box-shadow:0px 3px 7px 0px rgba(51,85,164,0.14);
 }
-.quizing-top img, .quized-top img{
+/* .quizing-top img, .quized-top img{
 	width: 100%;
 }
 .quizing-bottom, .quized-bottom{
@@ -417,7 +414,7 @@ p, li{
 }
 .winner p{
 	text-align: center;
-}
+} */
 .no-data{
 	text-align: center;
 	width: 100%;

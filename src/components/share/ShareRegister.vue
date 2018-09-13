@@ -36,11 +36,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
 // import vueCookie from 'vue-cookie'
 import $ from 'jquery'
-import axios from 'axios'
 import VueCountdown from '@xkeshi/vue-countdown'
 import bcrypt from 'bcryptjs'
 
