@@ -306,6 +306,9 @@ export default {
             $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
             $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
           }
+          $(".use-shop-coupon-btn").click(function () {
+            window.location.href = 'seedo://?action=history'
+          })
         }, 100)
       }
     }

@@ -78,8 +78,8 @@ export default {
     if (this.qrCode) {
       axios({ // WAS event result
         method: 'POST',
-        url: 'http://dev-new-api.beanpop.cn/lottery/event',
-        // url: process.env.api_url + '/api/entries/event',
+        // url: 'http://dev-new-api.beanpop.cn/lottery/event',
+        url: process.env.api_url + '/api/entries/event',
         params: {
           code: getParams.qrCode
         }
@@ -103,7 +103,6 @@ export default {
             downloadingShopEvent.src = responseData.shop.event_result[0].gift.shop_gift_image_file.url
             this.tmpUser = shopEventResult[0].temp_user
             this.shopEvent = shopEventResult[0].gift.shop_gift_image_file.url
-            console.log(this.tmpUser)
           }
         }
         if (marketResult.length !== 0) {
