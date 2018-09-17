@@ -252,62 +252,62 @@ export default {
           console.log(ex)
         })
       }
-      console.log(this.$i18n.phone)
-      var getParams = this.$route.params
-      this.tmpUser = getParams.tmpUser
-      this.shopADUrl = getParams.shopAD
-      this.shopEventUrl = getParams.shopEvent
-      this.marketUrl = getParams.market
-      this.bannerUrl = getParams.banner
-      this.bottomAdUrl = getParams.bottomAd
-      this.landingUrl = getParams.landingUrl
-      this.shopCoupon = getParams.shopCoupon
-
-      this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
-      this.greenItems = [getParams.greenBall[0]]
-
-      // 为小于10的球号加0
-      this.selectedBlue = []
-      this.selectedRed = []
-      for (var i = 0; i < this.greenItems.length; i++) {
-        if (this.greenItems[i] < 10) {
-          this.selectedBlue.push('0' + this.greenItems[i])
-        } else {
-          this.selectedBlue.push(this.greenItems[i])
-        }
-      }
-      for (i = 0; i < this.yellowItems.length; i++) {
-        if (this.yellowItems[i] < 10) {
-          this.selectedRed.push('0' + this.yellowItems[i])
-        } else {
-          this.selectedRed.push(this.yellowItems[i])
-        }
-      }
-
-      if (this.shopCoupon.length > 0) {
-        this.shopCouponShow = true
-      }
-      var that = this
-      setTimeout(function () {
-        let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
-        let counponLength = that.shopCoupon.length
-        // $('.shop-coupon-box').append($shopCoupon)
-        console.log(counponLength)
-        for (let i = 0; i < counponLength; i++) {
-          $('.shop-coupon-box').append($shopCoupon)
-          let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
-          let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
-          let couponImage = that.shopCoupon[i].coupon.shop_logo
-          let couponTitle = that.shopCoupon[i].coupon.name
-          let shopName = that.shopCoupon[i].coupon.shop_name
-          $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
-          $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
-          $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
-          $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
-          $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
-        }
-      }, 100)
     }
+    console.log(this.$i18n.phone)
+    var getParams = this.$route.params
+    this.tmpUser = getParams.tmpUser
+    this.shopADUrl = getParams.shopAD
+    this.shopEventUrl = getParams.shopEvent
+    this.marketUrl = getParams.market
+    this.bannerUrl = getParams.banner
+    this.bottomAdUrl = getParams.bottomAd
+    this.landingUrl = getParams.landingUrl
+    this.shopCoupon = getParams.shopCoupon
+
+    this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
+    this.greenItems = [getParams.greenBall[0]]
+
+    // 为小于10的球号加0
+    this.selectedBlue = []
+    this.selectedRed = []
+    for (var i = 0; i < this.greenItems.length; i++) {
+      if (this.greenItems[i] < 10) {
+        this.selectedBlue.push('0' + this.greenItems[i])
+      } else {
+        this.selectedBlue.push(this.greenItems[i])
+      }
+    }
+    for (i = 0; i < this.yellowItems.length; i++) {
+      if (this.yellowItems[i] < 10) {
+        this.selectedRed.push('0' + this.yellowItems[i])
+      } else {
+        this.selectedRed.push(this.yellowItems[i])
+      }
+    }
+
+    if (this.shopCoupon.length > 0) {
+      this.shopCouponShow = true
+    }
+    var that = this
+    setTimeout(function () {
+      let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
+      let counponLength = that.shopCoupon.length
+      // $('.shop-coupon-box').append($shopCoupon)
+      console.log(counponLength)
+      for (let i = 0; i < counponLength; i++) {
+        $('.shop-coupon-box').append($shopCoupon)
+        let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
+        let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
+        let couponImage = that.shopCoupon[i].coupon.shop_logo
+        let couponTitle = that.shopCoupon[i].coupon.name
+        let shopName = that.shopCoupon[i].coupon.shop_name
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
+        $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
+      }
+    }, 100)
   },
   methods: {
     countryChangeItem: function (event) {
