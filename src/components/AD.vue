@@ -78,7 +78,8 @@ export default {
     if (this.qrCode) {
       axios({ // WAS event result
         method: 'POST',
-        url: 'http://dev-new-api.beanpop.cn/lottery/event',
+        // url: 'http://dev-new-api.beanpop.cn/lottery/event',
+        url: process.env.api_url + '/api/entries/event',
         params: {
           code: getParams.qrCode
         }
@@ -90,8 +91,7 @@ export default {
         var shopADResult = responseData.shop.ad
         var marketResult = responseData.marketing_event_result
         var shopEventResult = responseData.shop.event_result
-        this.shopCoupon = responseData.shop.event_result[0].coupon
-        console.log(this.shopCoupon)
+        this.shopCoupon = responseData.shop.event_result
         if (shopADResult.length !== 0) {
           var downloadingShopAd = new Image()
           downloadingShopAd.src = responseData.shop.ad[0].shop_ad_image_file_url
@@ -114,6 +114,7 @@ export default {
           this.market = marketResult[0].img
           // }
         }
+        console.log(this.shopEvent)
       }).catch((ex) => {
         console.log(ex)
         // var errorResponseData = ex.response.data

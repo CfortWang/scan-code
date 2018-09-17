@@ -88,19 +88,7 @@
           <div class="shop-coupon-box"></div>
         </div>
 
-        <div class="complete-event-contents-wrapper" v-if="marketUrl !== ''">
-          <div class="company-event-wrapper">
-            <div class="event-title fs-09">
-              {{ $t("event.title2") }}
-            </div>
-            <div class="section-divider1"></div>
-            <div class="event-img-wrapper">
-              <img v-bind:src="marketUrl">
-            </div>
-          </div>
-        </div>
-
-        <!-- <div class="seedo-gifts-wrapper">
+        <div class="seedo-gifts-wrapper">
           <div class="seedo-gifts-title">喜豆大礼包</div>
           <div class="seedo-gifts-box">
             <div class="seedo-gifts">
@@ -114,7 +102,7 @@
               <div class="gifts-desc">成为拼主发起拼豆豆获更多奖励</div>
             </div>
           </div>
-        </div> -->
+        </div>
         <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}" v-if="showHeader">
           <div class="complete-info-wrapper">
             <div class="info-title float-wrapper">
@@ -149,9 +137,23 @@
         <div class="dashed-line"></div>
 
         <!-- bottom ad -->
-        <div class="complete-event-contents-wrapper">
+        <!-- <div class="complete-event-contents-wrapper">
           <div class="ad-wrapper">
             <img v-bind:src="bottomAdUrl" v-on:click="clickBottomAd(landingUrl)">
+          </div>
+        </div> -->
+        <div class="complete-event-contents-wrapper" v-if="shopADUrl !== ''">
+          <div class="company-event-wrapper">
+            <div class="event-img-wrapper">
+              <img v-bind:src="shopADUrl">
+            </div>
+          </div>
+        </div>
+        <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== ''">
+          <div class="company-event-wrapper">
+            <div class="event-img-wrapper">
+              <img v-bind:src="shopEventUrl">
+            </div>
           </div>
         </div>
       </div>
@@ -227,8 +229,10 @@ export default {
     this.device = getParams.device
     this.shopAdLanding = getParams.shopAdLanding
     var qrCode = getParams.qrCode
+    console.log(qrCode)
     if (!qrCode) {
       this.$i18n.locale = this.lang
+      this.shopCouponShow = false
     } else {
       if (this.device == 'ios' || this.device =='android') {
         console.log('app complete')
@@ -275,10 +279,36 @@ export default {
     this.bottomAdUrl = getParams.bottomAd
     this.landingUrl = getParams.landingUrl
     this.shopCoupon = getParams.shopCoupon
-    console.log(shopCoupon)
+    console.log(this.shopADUrl)
 
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
     this.greenItems = [getParams.greenBall[0]]
+
+    if (this.shopCoupon) {
+      if (this.shopCoupon.length > 0) {
+        this.shopCouponShow = true
+        var that = this
+        setTimeout(function () {
+          let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
+          let counponLength = that.shopCoupon.length
+          // $('.shop-coupon-box').append($shopCoupon)
+          console.log(counponLength)
+          for (let i = 0; i < counponLength; i++) {
+            $('.shop-coupon-box').append($shopCoupon)
+            let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
+            let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
+            let couponImage = that.shopCoupon[i].coupon.shop_logo
+            let couponTitle = that.shopCoupon[i].coupon.name
+            let shopName = that.shopCoupon[i].coupon.shop_name
+            $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
+            $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
+            $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
+            $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
+            $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
+          }
+        }, 100)
+      }
+    }
 
     // 为小于10的球号加0
     this.selectedBlue = []
@@ -297,30 +327,6 @@ export default {
         this.selectedRed.push(this.yellowItems[i])
       }
     }
-
-    if (this.shopCoupon.length > 0) {
-      this.shopCouponShow = true
-    }
-    var that = this
-    setTimeout(function () {
-      let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
-      let counponLength = that.shopCoupon.length
-      // $('.shop-coupon-box').append($shopCoupon)
-      console.log(counponLength)
-      for (let i = 0; i < counponLength; i++) {
-        $('.shop-coupon-box').append($shopCoupon)
-        let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
-        let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
-        let couponImage = that.shopCoupon[i].coupon.shop_logo
-        let couponTitle = that.shopCoupon[i].coupon.name
-        let shopName = that.shopCoupon[i].coupon.shop_name
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
-      }
-    }, 100)
   },
   methods: {
     countryChangeItem: function (event) {
@@ -933,7 +939,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   padding: 10px 0px;
   background: #fff;
   line-height: 38px;
-  /* display: none; */
+  display: none;
 }
 .verification{
   display: inline-block;
