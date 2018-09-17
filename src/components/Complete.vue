@@ -88,7 +88,19 @@
           <div class="shop-coupon-box"></div>
         </div>
 
-        <div class="seedo-gifts-wrapper">
+        <div class="complete-event-contents-wrapper" v-if="marketUrl !== ''">
+          <div class="company-event-wrapper">
+            <div class="event-title fs-09">
+              {{ $t("event.title2") }}
+            </div>
+            <div class="section-divider1"></div>
+            <div class="event-img-wrapper">
+              <img v-bind:src="marketUrl">
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="seedo-gifts-wrapper">
           <div class="seedo-gifts-title">喜豆大礼包</div>
           <div class="seedo-gifts-box">
             <div class="seedo-gifts">
@@ -102,7 +114,7 @@
               <div class="gifts-desc">成为拼主发起拼豆豆获更多奖励</div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}" v-if="showHeader">
           <div class="complete-info-wrapper">
             <div class="info-title float-wrapper">
