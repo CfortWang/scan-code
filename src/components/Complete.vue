@@ -90,13 +90,13 @@
 
         <div class="seedo-gifts-wrapper">
           <div class="seedo-gifts-title">喜豆大礼包</div>
-          <div class="seedo-gifts-box">
+          <div class="seedo-gifts-box" v-on:click="history">
             <div class="seedo-gifts">
               <div class="congratulate">恭喜您获得800喜豆点</div>
               <div class="gifts-desc">累积喜豆点可兑换现金及其他礼物哦</div>
             </div>
           </div>
-          <div class="seedo-gifts-box">
+          <div class="seedo-gifts-box" v-on:click="history">
             <div class="seedo-gifts">
               <div class="congratulate">恭喜您获得一次发起拼豆豆机会</div>
               <div class="gifts-desc">成为拼主发起拼豆豆获更多奖励</div>
@@ -158,11 +158,11 @@
         </div>
       </div>
       <div class="bottom-btn clear-fix" v-if="!showHeader">
-        <div class="play-again">
+        <div class="play-again" v-on:click="palyAgain">
           <img src="/static/img/complete/bet_finished_btn_replay.png" alt="">
           <span>再玩一次</span>
         </div>
-        <div class="go-back"><span>回到首页</span></div>
+        <div class="go-back" v-on:click="goBack"><span>回到首页</span></div>
       </div>
     </div>
   </div>
@@ -559,6 +559,15 @@ export default {
           return false
         }
       })
+    },
+    history: function () {
+      window.location.href = 'seedo://?action=history'
+    },
+    palyAgain: function () {
+      window.location.href = 'http://dev-m.beanpop.cn/event?lang=zh&device=ios'
+    },
+    goBack: function () {
+      window.location.href = 'seedo://?action=home'
     }
   }
 }

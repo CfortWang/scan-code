@@ -78,8 +78,8 @@ export default {
     if (this.qrCode) {
       axios({ // WAS event result
         method: 'POST',
-        // url: 'http://dev-new-api.beanpop.cn/lottery/event',
-        url: process.env.api_url + '/api/entries/event',
+        url: 'http://dev-new-api.beanpop.cn/lottery/event',
+        // url: process.env.api_url + '/api/entries/event',
         params: {
           code: getParams.qrCode
         }
