@@ -30,13 +30,18 @@
     "phone": {
       "title": "Check Register",
       "placeholder": "Phone Number",
+      "verification": "Verification Code",
+      "getVerification": "Get Code",
       "button": "Check and Entry"
     },
     "message": {
       "insertPhone": "Please insert your phone number.",
       "wrongRequest": "Wrong request.",
-      "noUser": "This phone number is not registeyellow in 喜豆. Do you want join the 喜豆?",
-      "noUser2": "没有注册的用户，是否前往注册？没有注册的用户"
+      "insertAuthCode": "Please insert auth code.",
+      "wrongAuthCodeSize": "Auth code size is wrong.(6 characters)",
+      "wrongAuthCode": "Wrong auth code",
+      "sendSuccess": "We send auth code. Please insert received auth code.",
+      "sendFail": "Send auth code failed."
     },
     "moreInfo": "Prize Info",
     "gameRule": "中奖规则及说明",
@@ -73,13 +78,18 @@
     "phone": {
       "title": "가입여부 확인",
       "placeholder": "핸드폰번호를 입력하세요.",
+      "verification": "인증코드",
+      "getVerification": "인증코드받기",
       "button": "확인 후 응모"
     },
     "message": {
       "insertPhone": "핸드폰 번호를 입력해주세요.",
       "wrongRequest": "잘못된 요청입니다.",
-      "noUser": "가입되지 않은 사용자 입니다. 회원 가입을 진행하시겠습니까?",
-      "noUser2": "没有注册的用户，是否前往注册？没有注册的用户"
+      "insertAuthCode": "인증코드를 입력해 주세요.",
+      "wrongAuthCodeSize": "인등코드형식이 올바르지 않습니다.",
+      "wrongAuthCode": "잘못된 인증코드 입니다.",
+      "sendSuccess": "인증코드를 전송했습니다. 받은 인증코드를 입력해주세요.",
+      "sendFail": "인증코드 전송에 실패했습니다. 관리자에게 문의해주세요."
     },
     "moreInfo": "당첨금 정보",
     "gameRule": "中奖规则及说明",
@@ -116,13 +126,18 @@
     "phone": {
       "title": "确认注册与否",
       "placeholder": "输入手机号,送你喜豆大礼包",
+      "verification": "请输入验证码",
+      "getVerification": "获取验证码",
       "button": "点击领取"
     },
     "message": {
       "insertPhone": "请输入手机号",
       "wrongRequest": "输入错误",
-      "noUser": "加入喜豆大军，完成竞猜30000元大奖就差一步",
-      "noUser2": "您已经这么幸运，为什么不继续呢？"
+      "insertAuthCode": "请输入验证码",
+      "wrongAuthCodeSize": "验证码形式不正确",
+      "wrongAuthCode": "错误的验证码",
+      "sendSuccess": "已发送，请输入验证码",
+      "sendFail": "验证码发送失败，请询问管理员"
     },
     "moreInfo": "中奖规则及说明",
     "gameRule": "中奖规则及说明",

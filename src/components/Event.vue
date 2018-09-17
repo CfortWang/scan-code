@@ -5,7 +5,6 @@
         <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
         <div v-if="openModal">
           <div class="modal-img">
-            <!-- <img v-bind:src="rulePicUrl"> -->
             <div class="rule-title">{{ $t("rule.title") }}</div>
             <div class="rule-rules">{{ $t("rule.rules") }}</div>
             <div class="rule-prize">{{ $t("rule.firstPrize") }}</div>
@@ -22,12 +21,9 @@
         </div>
       </div>
     </transition>
-    <div class="ready-box">
+    <div class="ready-box" v-if="showHeader">
       <div class="ready-img">
-        <img v-bind:src="readyImgArr" v-on:click="goEvent" usemap="#alert-map">
-        <!-- <map name="alert-map" v-on:click="goEvent">
-            <area shape="rect" coords="30,313,260,362" alt="know" class="maparea"/>
-        </map> -->
+        <img v-bind:src="readyImgArr" v-on:click="goEvent">
       </div>
     </div>
     <!-- <div class="ready-box">
@@ -37,12 +33,12 @@
         <button class="ready-btn" v-on:click="goEvent">{{ $t("ready.btn-right") }}</button>
       </div>
     </div> -->
-    <header>
+    <header v-if="showHeader">
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
       </div>
     </header>
-    <div class="mask blockScroll"></div>
+    <div class="mask blockScroll" v-if="showHeader"></div>
     <div class="contents-wrapper">
       <div class="event-round-wrapper">
         <div class="event-round-left-wrapper float-wrapper">
@@ -73,8 +69,6 @@
         </div>
         <div class="event-round-right-wrapper float-l" v-on:click="getMoreWinner">
           <div class="lastTenRound">{{ $t("lastTenRound") }}<img class="round-icon1" src="/static/img/event/close.png" alt=""><img class="round-icon2" src="/static/img/event/open.png" alt=""></div>
-          <!-- <div class="round-icon1"><img class="round-icon1" src="/static/img/event/close.png" alt=""></div>
-          <div class="round-icon2"><img class="round-icon2" src="/static/img/event/open.png" alt=""></div> -->
         </div>
       </div>
       <div class="moreData"></div>
@@ -202,179 +196,25 @@ export default {
       skipAD: null,
       banner: null,
       bottomAd: null,
+      shopAD: null,
+      shopAdLanding: null,
+      marketEvent: null,
+      enoughPoint: '',
       readyImgArr: [],
       readyImgUrl: '',
       landingUrl: '',
-      reload: true
+      reload: true,
+      showHeader: false,
+      device: null,
+      lang: ''
     }
   },
   created: function () {
     var qrCode = this.$route.query.code
     Vue.prototype.GLOBAL = _global
-    if (vueCookie.get('qr_language')) {
-      this.$i18n.locale = vueCookie.get('qr_language')
-      this.currentLanguage = vueCookie.get('qr_language')
-    } else {
-      $.ajax({
-        // url: 'https://geoip-db.com/json/',
-        url: 'https://geoip.nekudo.com/api/',
-        dataType: 'json',
-        async: false,
-        type: 'GET',
-        timeout: 1000,
-        success: function (req) {
-          _global.ipAddress = req.country.code
-          // _global.ipAddress = req.country_code
-        },
-        error: function () {
-          _global.ipAddress = 'ZH'
-        }
-      })
-      var getIP = this.GLOBAL.ipAddress
-      console.log(getIP)
-      if (getIP == 'GB' || getIP == 'FR' || getIP == 'AU' || getIP == 'CA' || getIP == 'BR' || getIP == 'JP' || getIP == 'RU' || getIP == 'US' || getIP == 'IT') {
-        this.$i18n.locale = 'en'
-        this.currentLanguage = 'en'
-        vueCookie.set('qr_language', 'en', 1)
-      } else if (getIP == 'KR') {
-        this.$i18n.locale = 'ko'
-        this.currentLanguage = 'ko'
-        vueCookie.set('qr_language', 'ko', 1)
-      } else {
-        this.$i18n.locale = 'zh'
-        this.currentLanguage = 'zh'
-        vueCookie.set('qr_language', 'zh', 1)
-      }
-    }
+    this.device = this.$route.query.device
+    this.lang = this.$route.query.lang
 
-    if (this.currentLanguage === 'zh') {
-      this.readyImgArr = [
-      '/static/img/event/tanchuang.png'
-      ]
-    } else if (this.currentLanguage === 'ko') {
-      this.readyImgArr = [
-      '/static/img/event/tanchuang.png'
-      ]
-    } else {
-      this.readyImgArr = [
-      '/static/img/event/tanchuang.png'
-      ]
-    }
-    // shuffle(this.readyImgArr)
-    // this.readyImgUrl = this.readyImgArr.slice(0, 1)
-    // console.log(this.readyImgUrl)
-
-    if (!this.$route.query.code) {
-      this.$router.push({name: 'AppDown', params: {code: 'default'}})
-    } else {
-      axios({ // check validation qr code
-        method: 'POST',
-        url: process.env.api_url + '/api/validations/q35-code',
-        params: { code: qrCode }
-      }).then((response) => {
-        // var responseData = response.data.data
-        // console.log(responseData)
-
-        axios({ // get the old winner number
-          method: 'GET',
-          url: process.env.api_url + '/api/drawings/complete'
-        }).then((response) => {
-          // var responseMessage = response.data.message
-          var responseData = response.data.data
-          // console.log(responseData)
-          for (var j = 0; j < 10; j++) {
-            var ballNums = []
-            var ball = 'ballNums' + j
-            for (var k = 1; k <= 7; k++) {
-              var round = responseData[j].drawing_num
-              var ballNum = 'num_' + k
-              ballNums[k - 1] = responseData[j][ballNum]
-              if (ballNums[k - 1] < 10) {
-                ballNums[k - 1] = '0' + ballNums[k - 1]
-              }
-            }
-            this.pastWinnerNum[j] = ballNums
-            this.round[j] = round
-            this[ball] = this.pastWinnerNum[j]
-          }
-          // console.log(this.pastWinnerNum)
-
-          var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
-          var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
-          for (let i = 1; i <= 9; i++) {
-            var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
-            var t = i - 1
-            $('.moreData').append($div1)
-            $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
-            for (var m = 1; m <= 7; m++) {
-              var ballnum = 'ballNums' + i
-              var mm = m-1
-              var ballnums = ""+this[ballnum][mm]+""
-              $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
-              $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
-            }
-          }
-        }).catch((ex) => {
-          console.log(ex)
-        })
-
-        axios({ // get the newest prizePool point
-          method: 'GET',
-          url: process.env.api_url + '/api/drawings/progress'
-        }).then((response) => {
-          // var responseMessage = response.data.message
-          var responseData = response.data.data
-          this.nowRound = responseData.drawing_num
-          this.prizePool = responseData.prev_drawing_point + responseData.point
-        }).catch((ex) => {
-          console.log(ex)
-        })
-
-        axios({ // get skip AD
-          method: 'GET',
-          url: process.env.api_url + '/api/ad/game',
-          params: { lang: this.currentLanguage }
-        }).then((response) => {
-          // var responseMessage = response.data.message
-          var responseData = response.data.data
-          // console.log(responseMessage)
-          console.log(responseData)
-          // var banner = responseData.complete_banner.product.image_url
-          // var bottomAd = responseData.complete_banner.bottom.image_url
-          // console.log(banner)
-          // console.log(bottomAd)
-          this.landingUrl = responseData.complete_banner.bottom.landing_url
-          var downloadingImage = new Image()
-          downloadingImage.src = responseData.game_ad
-          this.skipAD = responseData.game_ad
-          var downloadingBanner = new Image()
-          downloadingBanner.src = responseData.complete_banner.product.image_url
-          this.banner = responseData.complete_banner.product.image_url
-          var downloadingBottomAd = new Image()
-          downloadingBottomAd.src = responseData.complete_banner.bottom.image_url
-          this.bottomAd = responseData.complete_banner.bottom.image_url
-        }).catch((ex) => {
-          console.log(ex)
-          // var errorResponseData = ex.response.data
-          // console.log(errorResponseData)
-        })
-      }).catch((ex) => {
-        console.log(ex)
-        // var errorResponseData = ex.response.data
-        var errorStatus = ex.response.status
-        // console.log(errorResponseData)
-        if (errorStatus === 400) {
-          this.$router.push({name: 'AppDown', params: {code: errorStatus, reload: this.reload}})
-          return false
-        } else if (errorStatus === 410) {
-          this.$router.push({name: 'AppDown', params: {code: errorStatus, reload: this.reload}})
-          return false
-        } else {
-          this.$router.push({name: 'AppDown', params: {code: 'default', reload: this.reload}})
-          return false
-        }
-      })
-    }
     this.yellowItems = []
     this.greenItems = []
 
@@ -389,6 +229,240 @@ export default {
         this.yellowItems.push({number: numberValue, active: isActive, ballKey: 'r-' + numberValue})
       }
     }
+
+    axios({ // get the newest prizePool point
+      method: 'GET',
+      url: process.env.api_url + '/api/drawings/progress'
+    }).then((response) => {
+      // var responseMessage = response.data.message
+      var responseData = response.data.data
+      this.nowRound = responseData.drawing_num
+      this.prizePool = responseData.prev_drawing_point + responseData.point
+    }).catch((ex) => {
+      console.log(ex)
+    })
+
+    // use point
+    if (!this.$route.query.code) {
+      this.$i18n.locale = this.lang
+      axios({ // get the old winner number
+        method: 'GET',
+        url: process.env.api_url + '/api/drawings/complete'
+      }).then((response) => {
+        // var responseMessage = response.data.message
+        var responseData = response.data.data
+        // console.log(responseData)
+        for (var j = 0; j < 10; j++) {
+          var ballNums = []
+          var ball = 'ballNums' + j
+          for (var k = 1; k <= 7; k++) {
+            var round = responseData[j].drawing_num
+            var ballNum = 'num_' + k
+            ballNums[k - 1] = responseData[j][ballNum]
+            if (ballNums[k - 1] < 10) {
+              ballNums[k - 1] = '0' + ballNums[k - 1]
+            }
+          }
+          this.pastWinnerNum[j] = ballNums
+          this.round[j] = round
+          this[ball] = this.pastWinnerNum[j]
+        }
+        // console.log(this.pastWinnerNum)
+
+        var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
+        var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
+        for (let i = 1; i <= 9; i++) {
+          var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
+          var t = i - 1
+          $('.moreData').append($div1)
+          $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
+          for (var m = 1; m <= 7; m++) {
+            var ballnum = 'ballNums' + i
+            var mm = m-1
+            var ballnums = ""+this[ballnum][mm]+""
+            $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
+            $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
+          }
+        }
+      }).catch((ex) => {
+        console.log(ex)
+      })
+      axios({
+        method: 'GET',
+        url: 'http://dev-new-api.beanpop.cn/lottery/before',
+        withCredentials: true
+      }).then((response) => {
+        let allow = response.data.data.allow
+        if (allow) {
+          console.log('rich man')
+          this.enoughPoint = true
+        } else {
+          console.log('poor man')
+          this.enoughPoint = false
+        }
+      }).catch((ex) => {
+        console.log(ex)
+      })
+    } else {
+      // use qr code
+      if (this.device == 'ios' || this.device =='android') {
+        // in app
+        console.log('scan qrCode in app')
+        this.$i18n.locale = this.lang
+        this.showHeader = false
+      } else {
+        // in h5
+        this.showHeader = true
+        if (vueCookie.get('qr_language')) {
+          this.$i18n.locale = vueCookie.get('qr_language')
+          this.currentLanguage = vueCookie.get('qr_language')
+        } else {
+          $.ajax({
+            // url: 'https://geoip-db.com/json/',
+            url: 'https://geoip.nekudo.com/api/',
+            dataType: 'json',
+            async: false,
+            type: 'GET',
+            timeout: 1000,
+            success: function (req) {
+              _global.ipAddress = req.country.code
+              // _global.ipAddress = req.country_code
+            },
+            error: function () {
+              _global.ipAddress = 'ZH'
+            }
+          })
+          var getIP = this.GLOBAL.ipAddress
+          console.log(getIP)
+          if (getIP == 'GB' || getIP == 'FR' || getIP == 'AU' || getIP == 'CA' || getIP == 'BR' || getIP == 'JP' || getIP == 'RU' || getIP == 'US' || getIP == 'IT') {
+            this.$i18n.locale = 'en'
+            this.currentLanguage = 'en'
+            vueCookie.set('qr_language', 'en', 1)
+          } else if (getIP == 'KR') {
+            this.$i18n.locale = 'ko'
+            this.currentLanguage = 'ko'
+            vueCookie.set('qr_language', 'ko', 1)
+          } else {
+            this.$i18n.locale = 'zh'
+            this.currentLanguage = 'zh'
+            vueCookie.set('qr_language', 'zh', 1)
+          }
+        }
+
+        if (this.currentLanguage === 'zh') {
+          this.readyImgArr = [
+          '/static/img/event/tanchuang.png'
+          ]
+        } else if (this.currentLanguage === 'ko') {
+          this.readyImgArr = [
+          '/static/img/event/tanchuang.png'
+          ]
+        } else {
+          this.readyImgArr = [
+          '/static/img/event/tanchuang.png'
+          ]
+        }
+      }
+
+      if (!this.$route.query.code) {
+        this.$router.push({name: 'AppDown', params: {code: 'default'}})
+      } else {
+        axios({ // check validation qr code
+          method: 'POST',
+          url: process.env.api_url + '/api/validations/q35-code',
+          params: { code: qrCode }
+        }).then((response) => {
+          // var responseData = response.data.data
+          // console.log(response)
+
+          axios({ // get the old winner number
+            method: 'GET',
+            url: process.env.api_url + '/api/drawings/complete'
+          }).then((response) => {
+            // var responseMessage = response.data.message
+            var responseData = response.data.data
+            // console.log(responseData)
+            for (var j = 0; j < 10; j++) {
+              var ballNums = []
+              var ball = 'ballNums' + j
+              for (var k = 1; k <= 7; k++) {
+                var round = responseData[j].drawing_num
+                var ballNum = 'num_' + k
+                ballNums[k - 1] = responseData[j][ballNum]
+                if (ballNums[k - 1] < 10) {
+                  ballNums[k - 1] = '0' + ballNums[k - 1]
+                }
+              }
+              this.pastWinnerNum[j] = ballNums
+              this.round[j] = round
+              this[ball] = this.pastWinnerNum[j]
+            }
+            // console.log(this.pastWinnerNum)
+
+            var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
+            var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
+            for (let i = 1; i <= 9; i++) {
+              var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
+              var t = i - 1
+              $('.moreData').append($div1)
+              $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
+              for (var m = 1; m <= 7; m++) {
+                var ballnum = 'ballNums' + i
+                var mm = m-1
+                var ballnums = ""+this[ballnum][mm]+""
+                $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
+                $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
+              }
+            }
+          }).catch((ex) => {
+            console.log(ex)
+          })
+        }).catch((ex) => {
+          console.log(ex)
+          // var errorResponseData = ex.response.data
+          var errorStatus = ex.response.status
+          // console.log(errorResponseData)
+          if (errorStatus === 400) {
+            this.$router.push({name: 'AppDown', params: {code: errorStatus, reload: this.reload}})
+            return false
+          } else if (errorStatus === 410) {
+            this.$router.push({name: 'AppDown', params: {code: errorStatus, reload: this.reload}})
+            return false
+          } else {
+            this.$router.push({name: 'AppDown', params: {code: 'default', reload: this.reload}})
+            return false
+          }
+        })
+      }
+    }
+  },
+  mounted () {
+    axios({ // get skip AD
+      method: 'GET',
+      url: process.env.api_url + '/api/ad/game',
+      params: { lang: this.currentLanguage }
+    }).then((response) => {
+      var responseData = response.data.data
+      console.log(responseData)
+      // var banner = responseData.complete_banner.product.image_url
+      // var bottomAd = responseData.complete_banner.bottom.image_url
+      // console.log(banner)
+      // console.log(bottomAd)
+      this.landingUrl = responseData.complete_banner.bottom.landing_url
+      var downloadingImage = new Image()
+      downloadingImage.src = responseData.game_ad
+      this.skipAD = responseData.game_ad
+      var downloadingBanner = new Image()
+      downloadingBanner.src = responseData.complete_banner.product.image_url
+      this.banner = responseData.complete_banner.product.image_url
+      var downloadingBottomAd = new Image()
+      downloadingBottomAd.src = responseData.complete_banner.bottom.image_url
+      this.bottomAd = responseData.complete_banner.bottom.image_url
+    }).catch((ex) => {
+      console.log(ex)
+      // var errorResponseData = ex.response.data
+      // console.log(errorResponseData)
+    })
   },
   methods: {
     changeItem: function (event) {
@@ -626,20 +700,78 @@ export default {
         alert(this.$i18n.t('notEnoughBall'))
         return false
       }
-      var qrCode = this.$route.query.code
-      this.$router.push({
-        name: 'AD',
-        params: {
-          yellowBall: activeYellow,
-          greenBall: activeGreen,
-          type: 'code',
-          qrCode: qrCode,
-          skipAD: this.skipAD,
-          banner: this.banner,
-          bottomAd: this.bottomAd,
-          landingUrl: this.landingUrl
+      if (!this.$route.query.code) {
+        console.log(this.enoughPoint)
+        if (this.enoughPoint) {
+          let num1 = activeYellow[0]
+          let num2 = activeYellow[1]
+          let num3 = activeYellow[2]
+          let num4 = activeYellow[3]
+          let num5 = activeYellow[4]
+          let num6 = activeYellow[5]
+          var num7 = activeGreen[0]
+          axios({
+            method: 'POST',
+            url: 'http://dev-new-api.beanpop.cn/lottery',
+            withCredentials: true,
+            params: {
+              num_1: num1,
+              num_2: num2,
+              num_3: num3,
+              num_4: num4,
+              num_5: num5,
+              num_6: num6,
+              num_7: num7,
+            }
+          }).then((response) => {
+            let responseData = response.data.data
+            console.log(responseData)
+            this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
+            this.shopAdLanding = responseData.shop.ad[0].landing_url
+            this.marketEvent = responseData.marketing_event_result[0].img
+            var qrCode = this.$route.query.code
+            this.$router.push({
+              name: 'AD',
+              params: {
+                yellowBall: activeYellow,
+                greenBall: activeGreen,
+                type: 'code',
+                qrCode: qrCode,
+                skipAD: this.skipAD,
+                banner: this.banner,
+                bottomAd: this.bottomAd,
+                landingUrl: this.landingUrl,
+                lang: this.lang,
+                shopAD: this.shopAD,
+                shopAdLanding: this.shopAdLanding,
+                marketEvent: this.marketEvent,
+                device: this.device
+              }
+            })
+          }).catch((ex) => {
+            console.log(ex)
+          })
+        } else {
+          console.log("喜豆点不足")
         }
-      })
+      } else {
+        var qrCode = this.$route.query.code
+          this.$router.push({
+            name: 'AD',
+            params: {
+              yellowBall: activeYellow,
+              greenBall: activeGreen,
+              type: 'code',
+              qrCode: qrCode,
+              skipAD: this.skipAD,
+              banner: this.banner,
+              bottomAd: this.bottomAd,
+              landingUrl: this.landingUrl,
+              showHeader: this.showHeader,
+              device: this.device
+            }
+          })
+      }
     }
   }
 }

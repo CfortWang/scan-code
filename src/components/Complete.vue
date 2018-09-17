@@ -12,32 +12,10 @@
         </div>
       </div>
       <div class="terms-div-contents">
-        <iframe src="https://www.beanpop.cn/rule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
+        <iframe src="https://wap.beanpop.cn/rule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
       </div>
     </div>
-    <transition>
-      <div class="modal-wrapper">
-          <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
-          <div v-if="openModal">
-              <div class="modal-img">
-                  <!-- <img v-bind:src="rulePicUrl"> -->
-                  <div class="rule-title">{{ $t("rule.title") }}</div>
-                  <div class="rule-rules">{{ $t("rule.rules") }}</div>
-                  <div class="rule-prize">{{ $t("rule.firstPrize") }}</div>
-                  <div class="rule-prize">{{ $t("rule.secondPrize") }}</div>
-                  <div class="rule-prize">{{ $t("rule.thirdPrize") }}</div>
-                  <div class="rule-prize">{{ $t("rule.fourthPrize") }}</div>
-                  <div class="rule-prize">{{ $t("rule.fifthPrize") }}</div>
-                  <div class="rule-prize">{{ $t("rule.sixthPrize") }}</div>
-                  <div class="rule-example">{{ $t("rule.example") }}</div>
-              </div>
-              <div class="modal-close">
-                  <img src="/static/img/complete/delete_new.png" v-on:click="hide">
-              </div>
-          </div>
-      </div>
-    </transition>
-    <header>
+    <header v-if="showHeader">
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
       </div>
@@ -104,26 +82,6 @@
         </div>
       </div>
       <div class="complete-event-bottom-wrapper">
-        <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}">
-          <div class="complete-info-wrapper">
-            <div class="info-title float-wrapper">
-              {{ $t("info.title") }}
-            </div>
-          </div>
-          <div class="login-box">
-            <div class="login-input-wrapper">
-              <select class="country-selete" v-on:change="countryChangeItem($event)">
-                <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
-              </select>
-              <input type="number" id="phoneNum" class="phone-number-input" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
-            </div>
-            <div class="login-btn">
-              <span v-on:click="entryButton">{{ $t("phone.button")}}</span>
-            </div>
-          </div>
-          <div class="dashed-line"></div>
-        </div>
-
         <!-- 非扫码进入不显示 -->
         <div class="shop-coupon-wrapper" v-if="shopCouponShow">
           <div class="shop-coupon-title">{{ $t("event.title1")}}</div>
@@ -145,10 +103,37 @@
             </div>
           </div>
         </div>
+        <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}" v-if="showHeader">
+          <div class="complete-info-wrapper">
+            <div class="info-title float-wrapper">
+              {{ $t("info.title") }}
+            </div>
+          </div>
+          <div class="login-box">
+            <div class="login-input-wrapper">
+                <select class="country-selete" v-on:change="countryChangeItem($event)">
+                  <option v-for="item in countryItems" v-bind:key="item.index" v-bind:value="item.seq">+{{item.calling_code}}</option>
+                </select>
+                <input type="number" id="phoneNum" class="phone-number-input" v-bind:placeholder="$t('phone.placeholder')" v-model="phoneNumber">
+            </div>
+            <div class="verification-box clear-fix">
+              <input type="text" id="verification" class="verification" v-bind:placeholder="$t('phone.verification')" v-model="verificationCode"/>
+              <span class="count-down">01:00</span>
+              <button id="get-verification" class="get-verification" v-on:click="getVerification">{{ $t("phone.getVerification") }}</button>
+            </div>
+            <div class="login-btn">
+              <span v-on:click="entryButton">{{ $t("phone.button")}}</span>
+            </div>
+            <div class="reg-btn">
+              <span v-on:click="doRegister">{{ $t("phone.button")}}</span>
+            </div>
+          </div>
+          <!-- <div class="dashed-line"></div> -->
+        </div>
         <div class="hasLogined" v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">
           礼包已放入手机号 : {{currentPhoneNum}}
         </div>
-        <div class="go-to-download">登录或下载APP即可使用</div>
+        <div class="go-to-download" v-bind:class="{showLoginedBox: hasCookie, notShowLoginedBox: noCookie}">登录或下载APP即可使用</div>
         <div class="dashed-line"></div>
 
         <!-- bottom ad -->
@@ -157,6 +142,13 @@
             <img v-bind:src="bottomAdUrl" v-on:click="clickBottomAd(landingUrl)">
           </div>
         </div>
+      </div>
+      <div class="bottom-btn clear-fix" v-if="!showHeader">
+        <div class="play-again">
+          <img src="/static/img/complete/bet_finished_btn_replay.png" alt="">
+          <span>再玩一次</span>
+        </div>
+        <div class="go-back"><span>回到首页</span></div>
       </div>
     </div>
   </div>
@@ -195,6 +187,7 @@ export default {
       countryItems: [],
       phoneNumber: '',
       selectedCountry: 1,
+      verificationCode: '',
       shopADUrl: null,
       shopEventUrl: null,
       marketUrl: null,
@@ -208,117 +201,113 @@ export default {
       noCookie: true,
       rulesOpen: false,
       shopCouponShow: false,
-      shopCoupon: []
+      shopCoupon: [],
+      device: '',
+      shopAdLanding: '',
+      lang: '',
+      showHeader: false,
+      round: ''
     }
   },
   created: function () {
-    if (vueCookie.get('qr_language')) {
-      this.$i18n.locale = vueCookie.get('qr_language')
-      this.currentLanguage = vueCookie.get('qr_language')
-    } else {
-      this.$i18n.locale = 'zh'
-      this.currentLanguage = 'zh'
-    }
-
-    if (vueCookie.get('qr_phone_num')) {
-      this.$i18n.phone = vueCookie.get('qr_phone_num')
-      this.currentPhoneNum = vueCookie.get('qr_phone_num')
-      this.hasCookie = true
-      this.noCookie = false
-    } else {
-      this.hasCookie = false
-      this.noCookie = true
-    }
-    console.log(this.$i18n.phone)
     var getParams = this.$route.params
-    this.tmpUser = getParams.tmpUser
-    this.shopADUrl = getParams.shopAD
-    this.shopEventUrl = getParams.shopEvent
-    this.marketUrl = getParams.market
-    this.bannerUrl = getParams.banner
-    this.bottomAdUrl = getParams.bottomAd
-    this.landingUrl = getParams.landingUrl
-    this.shopCoupon = getParams.shopCoupon
-    // console.log(this.shopCoupon.length)
-    // this.yellowItems = ['yellow-' + getParams.yellowBall[0], 'yellow-' + getParams.yellowBall[1], 'yellow-' + getParams.yellowBall[2], 'yellow-' + getParams.yellowBall[3], 'yellow-' + getParams.yellowBall[4], 'yellow-' + getParams.yellowBall[5]]
-    // this.greenItems = ['green-' + getParams.greenBall[0]]
-    this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
-    this.greenItems = [getParams.greenBall[0]]
-
-    // 为小于10的球号加0
-    this.selectedBlue = []
-    this.selectedRed = []
-    for (var i = 0; i < this.greenItems.length; i++) {
-      if (this.greenItems[i] < 10) {
-        this.selectedBlue.push('0' + this.greenItems[i])
+    this.lang = getParams.lang
+    this.device = getParams.device
+    this.shopAdLanding = getParams.shopAdLanding
+    var qrCode = getParams.qrCode
+    if (!qrCode) {
+      this.$i18n.locale = this.lang
+    } else {
+      if (this.device == 'ios' || this.device =='android') {
+        console.log('app complete')
+        this.showHeader = false
       } else {
-        this.selectedBlue.push(this.greenItems[i])
+        this.showHeader = true
+        if (vueCookie.get('qr_language')) {
+          this.$i18n.locale = vueCookie.get('qr_language')
+          this.currentLanguage = vueCookie.get('qr_language')
+        } else {
+          this.$i18n.locale = 'zh'
+          this.currentLanguage = 'zh'
+        }
+
+        if (vueCookie.get('qr_phone_num')) {
+          this.$i18n.phone = vueCookie.get('qr_phone_num')
+          this.currentPhoneNum = vueCookie.get('qr_phone_num')
+          this.hasCookie = true
+          this.noCookie = false
+        } else {
+          this.hasCookie = false
+          this.noCookie = true
+        }
+
+        axios({ // Get Country Info
+          url: process.env.api_url + '/api/countries'
+        }).then((response) => {
+          var responseData = response.data.data
+
+          this.countryItems = responseData.data
+          this.selectedCountry = parseInt(this.countryItems[0].seq)
+        }).catch((ex) => {
+          console.log(ex)
+        })
       }
+      console.log(this.$i18n.phone)
+      var getParams = this.$route.params
+      this.tmpUser = getParams.tmpUser
+      this.shopADUrl = getParams.shopAD
+      this.shopEventUrl = getParams.shopEvent
+      this.marketUrl = getParams.market
+      this.bannerUrl = getParams.banner
+      this.bottomAdUrl = getParams.bottomAd
+      this.landingUrl = getParams.landingUrl
+      this.shopCoupon = getParams.shopCoupon
+
+      this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
+      this.greenItems = [getParams.greenBall[0]]
+
+      // 为小于10的球号加0
+      this.selectedBlue = []
+      this.selectedRed = []
+      for (var i = 0; i < this.greenItems.length; i++) {
+        if (this.greenItems[i] < 10) {
+          this.selectedBlue.push('0' + this.greenItems[i])
+        } else {
+          this.selectedBlue.push(this.greenItems[i])
+        }
+      }
+      for (i = 0; i < this.yellowItems.length; i++) {
+        if (this.yellowItems[i] < 10) {
+          this.selectedRed.push('0' + this.yellowItems[i])
+        } else {
+          this.selectedRed.push(this.yellowItems[i])
+        }
+      }
+
+      if (this.shopCoupon.length > 0) {
+        this.shopCouponShow = true
+      }
+      var that = this
+      setTimeout(function () {
+        let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
+        let counponLength = that.shopCoupon.length
+        // $('.shop-coupon-box').append($shopCoupon)
+        console.log(counponLength)
+        for (let i = 0; i < counponLength; i++) {
+          $('.shop-coupon-box').append($shopCoupon)
+          let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
+          let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
+          let couponImage = that.shopCoupon[i].coupon.shop_logo
+          let couponTitle = that.shopCoupon[i].coupon.name
+          let shopName = that.shopCoupon[i].coupon.shop_name
+          $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
+          $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
+          $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
+          $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
+          $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
+        }
+      }, 100)
     }
-    for (i = 0; i < this.yellowItems.length; i++) {
-      if (this.yellowItems[i] < 10) {
-        this.selectedRed.push('0' + this.yellowItems[i])
-      } else {
-        this.selectedRed.push(this.yellowItems[i])
-      }
-    }
-
-    axios({ // Current Drawings Info
-      url: process.env.api_url + '/api/drawings/progress'
-    }).then((response) => {
-      var responseData = response.data.data
-      // console.log(responseData)
-
-      var array = responseData.end_at.split(' ')
-      var date = array[0].split('-')
-      var time = array[1].split(':')
-      var currentTime = new Date()
-      var endTimeLocal = new Date(Date.UTC(date[0], date[1] - 1, date[2], time[0], time[1], time[2]))
-
-      if (endTimeLocal > currentTime) {
-        this.endTime = endTimeLocal - currentTime
-      }
-      this.result = responseData
-    }).catch((ex) => {
-      console.log(ex)
-      // var errorResponseData = ex.response.data
-      // console.log(errorResponseData)
-    })
-
-    axios({ // Get Country Info
-      url: process.env.api_url + '/api/countries'
-    }).then((response) => {
-      var responseData = response.data.data
-
-      this.countryItems = responseData.data
-      this.selectedCountry = parseInt(this.countryItems[0].seq)
-    }).catch((ex) => {
-      console.log(ex)
-    })
-
-    if (this.shopCoupon.length > 0) {
-      this.shopCouponShow = true
-    }
-    var that = this
-    setTimeout(function () {
-      let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
-      let counponLength = that.shopCoupon.length
-      // $('.shop-coupon-box').append($shopCoupon)
-      console.log(counponLength)
-      for (let i = 0; i < counponLength; i++) {
-        $('.shop-coupon-box').append($shopCoupon)
-        let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
-        let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
-        let couponImage = that.shopCoupon[i].coupon.shop_logo
-        let couponTitle = that.shopCoupon[i].coupon.name
-        let shopName = that.shopCoupon[i].coupon.shop_name
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
-        $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
-      }
-    }, 100)
   },
   methods: {
     countryChangeItem: function (event) {
@@ -367,20 +356,9 @@ export default {
       }).then((response) => {
         // var responseData = response.data.data
         // console.log(responseData)
-
-        var getParams = this.$route.params
-        this.$router.push({
-          name: 'Register',
-          params: {
-            yellowBall: getParams.yellowBall,
-            greenBall: getParams.greenBall,
-            type: 'event',
-            qrCode: getParams.qrCode,
-            countryCode: this.selectedCountry,
-            phoneNumber: this.phoneNumber,
-            tempUser: this.tmpUser
-          }
-        })
+        document.getElementsByClassName('verification-box')[0].style.display = 'block'
+        document.getElementsByClassName('login-btn')[0].style.display = 'none'
+        document.getElementsByClassName('reg-btn')[0].style.display = 'block'
       }).catch((ex) => {
         console.log(ex)
         var errorResponseData = ex.response.data
@@ -433,6 +411,135 @@ export default {
     },
     noPage: function () {
       alert(this.$i18n.t('info.click'))
+    },
+    timer: function (event) {
+      var seconds = parseInt(event % 60) < 10 ? '0' + parseInt(event % 60) : parseInt(event % 60)
+      var minutes = parseInt((event / 60) % 60) < 10 ? '0' + parseInt((event / 60) % 60) : parseInt((event / 60) % 60)
+      var leftDate = minutes + ':' + seconds
+      $(".count-down").text(leftDate)
+    },
+    getVerification: function () {
+      axios({ // get auth code
+        method: 'POST',
+        url: process.env.api_url + '/api/certifications/phone-num/sign-up',
+        params: { phone_num: this.phoneNumber, country: this.selectedCountry }
+      }).then((response) => {
+        // var responseData = response.data.data
+        // console.log(responseData)
+        var timeLeft = 59
+        this.$options.methods.timer(timeLeft)
+        document.getElementById("get-verification").disabled = true
+        var that = this
+        var t = setInterval(() => {
+          that.$options.methods.timer(timeLeft)
+          timeLeft--
+          if (timeLeft < 0) {
+            clearInterval(t)
+            document.getElementById("get-verification").disabled = false
+          }
+        }, 1000)
+      }).catch((ex) => {
+        console.log(ex)
+        alert(this.$i18n.t('message.sendFail'))
+        // var errorResponseData = ex.response.data
+        // console.log(errorResponseData)
+      })
+    },
+    doRegister: function () {
+      if (this.verificationCode === '') {
+        alert(this.$i18n.t('message.insertAuthCode'))
+        return false
+      }
+      if (this.verificationCode.length !== 6) {
+        alert(this.$i18n.t('message.wrongAuthCodeSize'))
+        return false
+      }
+
+      axios({ // sign up
+        method: 'POST',
+        url: process.env.api_url + '/api/register/code',
+        params: {
+          country: this.selectedCountry,
+          phone_num: this.phoneNumber,
+          code: this.verificationCode
+        }
+      }).then((response) => {
+        // var responseData = response.data.data
+        // console.log(responseData)
+        var getParams = this.$route.params
+        console.log(getParams)
+        if (getParams.type === 'event' || getParams.type === 'code') {
+          var qrCode = getParams.qrCode
+          var num1 = getParams.yellowBall[0]
+          var num2 = getParams.yellowBall[1]
+          var num3 = getParams.yellowBall[2]
+          var num4 = getParams.yellowBall[3]
+          var num5 = getParams.yellowBall[4]
+          var num6 = getParams.yellowBall[5]
+          var num7 = getParams.greenBall[0]
+          var tmpUser = getParams.tempUser
+
+          axios({
+            method: 'POST',
+            url: process.env.api_url + '/api/entries/phone-num',
+            params: {
+              code: qrCode,
+              num_1: num1,
+              num_2: num2,
+              num_3: num3,
+              num_4: num4,
+              num_5: num5,
+              num_6: num6,
+              num_7: num7,
+              country: this.selectedCountry,
+              phone_num: this.phoneNumber,
+              temp_user: tmpUser
+            }
+          }).then((response) => {
+            // var responseData = response.data.data
+            // console.log(responseData)
+
+            // save the phone number has been registed success
+            // 添加cookie
+            // var phoneNum = document.getElementById('phoneNum').value
+            // vueCookie.set('qr_phone_num', phoneNum, 1)
+            // this.$i18n.phone = vueCookie.get('qr_phone_num')
+            // this.currentPhoneNum = vueCookie.get('qr_phone_num')
+
+            this.$router.push({name: 'AppDown', params: {code: 'default'}})
+          }).catch((ex) => {
+            console.log(ex)
+            // var errorResponseData = ex.response.data
+            // console.log(errorResponseData)
+          })
+        } else if (getParams.type === 'recommend') {
+          this.$router.push({name: 'AppDown', params: {code: 'recommend'}})
+        }
+      }).catch((ex) => {
+        console.log(ex)
+        var responseStatus = ex.response.status
+        var errorResponseData = ex.response.data
+        // console.log(responseStatus)
+        // console.log(errorResponseData)
+        if (responseStatus === 404) {
+          if (errorResponseData.status === 100) {
+            alert(this.$i18n.t('message.wrongRecommendCode'))
+            return false
+          } else if (errorResponseData.status === 200) {
+            alert(this.$i18n.t('message.wrongAuthCode'))
+            return false
+          } else {
+            console.log(ex)
+            return false
+          }
+        } else if (responseStatus === 400) {
+          alert(this.$i18n.t('message.wrongAuthCode'))
+          return false
+        } else {
+          console.log(ex)
+          return false
+        }
+      })
     }
   }
 }
@@ -806,6 +913,36 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   width:72%;
 }
 
+.verification-box{
+  border: 1px solid #CCCCCC;
+  border-radius: 3px;
+  margin: 10px 0px 15px;
+  padding: 10px 0px;
+  background: #fff;
+  line-height: 38px;
+  /* display: none; */
+}
+.verification{
+  display: inline-block;
+  width: 40%;
+  border: none;
+  height: 35px;
+  padding-left: 10px;
+  font-size: 1em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  color: #666666;
+}
+.get-verification{
+  display: inline-block;
+  float: right;
+  padding:0px 10px;
+  background-color: #a0b7ee;
+  height: 38px;
+  outline: none;
+  border: none;
+}
 .complete-info-wrapper {
   text-align:center;
 }
@@ -817,7 +954,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-size: 18px;
 }
 
-.login-btn {
+.login-btn, .reg-btn{
   height:55px;
   text-align: center;
   line-height: 55px;
@@ -828,7 +965,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight:600;
   color:rgba(91,57,25,1);
 }
-
+.reg-btn{
+  display: none;
+}
 .ball-wrapper.yellow, .ball-wrapper.green{
     font-weight: normal;
 }
@@ -980,5 +1119,30 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   .login-input-wrapper select{
     padding: 0px 0px 0px 6px;
   }
+}
+
+.bottom-btn{
+  padding: 10px 20px;
+}
+.bottom-btn > div{
+  width: 47%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  height:45px;
+  border-radius:4px;
+  text-align: center;
+  line-height: 45px;
+}
+.play-again{
+  background:rgba(238,104,7,1);
+  float: left;
+}
+.go-back{
+  background:rgba(105,133,198,1);
+  float: right;
+}
+.play-again img{
+  vertical-align: baseline;
 }
 </style>

@@ -38,28 +38,42 @@ export default {
       shopEvent: '',
       shopAD: '',
       landingUrl: '',
+      qrCode: '',
+      lang: '',
+      showHeader: false,
+      shopAdlanding : '',
+      showHeader: false,
       shopCoupon: []
     }
   },
   created: function () {
-    if (vueCookie.get('qr_language')) {
-      this.$i18n.locale = vueCookie.get('qr_language')
-    } else {
-      this.$i18n.locale = 'zh'
-      if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Seoul') {
-        this.$i18n.locale = 'ko'
-      } else if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Shanghai') {
-        this.$i18n.locale = 'zh'
-      } else {
-        this.$i18n.locale = 'en'
-      }
-    }
-
     var getParams = this.$route.params
+    this.qrCode = getParams.qrCode
     this.adURL = getParams.skipAD
     this.bannerUrl = getParams.banner
     this.bottomAdUrl = getParams.bottomAd
     this.landingUrl = getParams.landingUrl
+    this.lang = getParams.lang
+    this.showHeader = getParams.showHeader
+    this.device = getParams.device
+    this.shopAdLanding = getParams.shopAdLanding
+
+    if (this.lang) {
+      this.$i18n.locale = this.lang
+    } else {
+      if (vueCookie.get('qr_language')) {
+        this.$i18n.locale = vueCookie.get('qr_language')
+      } else {
+        this.$i18n.locale = 'zh'
+        if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Seoul') {
+          this.$i18n.locale = 'ko'
+        } else if (Intl.DateTimeFormat().resolvedOptions().timeZone === 'Asia/Shanghai') {
+          this.$i18n.locale = 'zh'
+        } else {
+          this.$i18n.locale = 'en'
+        }
+      }
+    }
 
     axios({ // WAS event result
       method: 'POST',
@@ -120,7 +134,9 @@ export default {
               shopAD: this.shopAD,
               tmpUser: this.tmpUser,
               landingUrl: this.landingUrl,
-              shopCoupon: this.shopCoupon
+              shopCoupon: this.shopCoupon,
+              device: this.device,
+              lang: this.lang
             }
           })
         }
