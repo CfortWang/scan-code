@@ -309,13 +309,12 @@ export default {
       }
 
       if (this.device == 'android') {
-        let lang = JSON.parse(xidou.getHttpHeader()).lang
-        let os = JSON.parse(xidou.getHttpHeader()).os
-        let time = JSON.parse(xidou.getHttpHeader()).time
-        let version = JSON.parse(xidou.getHttpHeader()).version
-        let token = JSON.parse(xidou.getHttpHeader()).token
-        console.log("time=" + time + "token=" + token)
-        console.log(xidou.getHttpHeader())
+        let header = xidou.getHttpHeader()
+        let lang = JSON.parse(header).lang
+        let os = JSON.parse(header).os
+        let time = JSON.parse(header).time
+        let version = JSON.parse(header).version
+        let token = JSON.parse(header).token
 
         axios({
           method: 'GET',
@@ -336,7 +335,6 @@ export default {
         }).catch((ex) => {
           console.log(ex)
         })
-        console.log(xidou.getHttpHeader())
       }
     } else {
       // use qr code
