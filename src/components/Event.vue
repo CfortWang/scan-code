@@ -317,15 +317,7 @@ export default {
           var status = response.data.code
           var responseMessage = response.data.message
           console.log(status)
-          if (status === 400) {
-            xidou.toast(responseMessage)
-            xidou.startPage(0)
-            return false
-          } else if (status === 410) {
-            xidou.toast(responseMessage)
-            xidou.startPage(0)
-            return false
-          } else {
+          if (status !== 200) {
             xidou.toast(responseMessage)
             xidou.startPage(0)
             return false
@@ -778,7 +770,7 @@ export default {
               console.log(ex)
             })
           } else {
-            console.log("喜豆点不足")
+            xidou.toast("喜豆点不足")
           }
         }
 
