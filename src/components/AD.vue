@@ -43,7 +43,7 @@ export default {
       showHeader: false,
       shopAdlanding : '',
       showHeader: false,
-      shopCoupon: []
+      shopCoupon: [],
     }
   },
   created: function () {

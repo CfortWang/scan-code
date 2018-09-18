@@ -220,7 +220,8 @@ export default {
       shopAdLanding: '',
       lang: '',
       showHeader: false,
-      round: ''
+      round: '',
+      deviceUrl: ''
     }
   },
   created: function () {
@@ -237,6 +238,12 @@ export default {
       if (this.device == 'ios' || this.device =='android') {
         console.log('app complete')
         this.showHeader = false
+        if (this.device == 'ios') {
+          this.deviceUrl = 'seedo://'
+        }
+        if (this.device == 'android') {
+          this.deviceUrl = 'xidou://app'
+        }
       } else {
         this.showHeader = true
         if (vueCookie.get('qr_language')) {
@@ -564,13 +571,13 @@ export default {
       })
     },
     history: function () {
-      window.location.href = 'seedo://?action=history'
+      window.location.href = this.deviceUrl + '?action=history'
     },
     palyAgain: function () {
-      window.location.href = 'http://dev-m.beanpop.cn/event?lang=zh&device=ios'
+      window.location.href = 'http://dev-m.beanpop.cn/event?lang=' + this.lang + '&device=' + this.device
     },
     goBack: function () {
-      window.location.href = 'seedo://?action=home'
+      window.location.href = this.deviceUrl + '?action=home'
     }
   }
 }
