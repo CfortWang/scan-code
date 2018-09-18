@@ -316,12 +316,13 @@ export default {
         }).then((response) => {
           var status = response.data.code
           var responseMessage = response.data.message
-          xidou.toast(responseMessage)
           console.log(status)
           if (status != 200) {
             xidou.toast(responseMessage)
             xidou.startPage(0)
             return false
+          } else {
+            xidou.toast(responseMessage)
           }
         }).catch((ex) => {
           console.log(ex)
