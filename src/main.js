@@ -24,6 +24,7 @@ Vue.prototype.openApp = function (event) {
     }, 3000)
   }
 }
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

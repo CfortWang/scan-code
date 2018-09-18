@@ -246,6 +246,7 @@ export default {
     if (!this.$route.query.code) {
       // judge point is enough
       if (this.device == 'ios') {
+        window.webkit.messageHandlers.setTitle.postMessage('喜豆大抽奖')
         this.$i18n.locale = this.lang
         axios({
           method: 'GET',
@@ -264,6 +265,7 @@ export default {
       }
 
       if (this.device == 'android') {
+        xidou.setTitle("喜豆大抽奖")
         this.$i18n.locale = this.lang
         let header = xidou.getHttpHeader()
         let lang = JSON.parse(header).lang
@@ -304,15 +306,19 @@ export default {
           params: { code: qrCode }
         }).then((response) => {
           var status = response.data.code
+          var responseMessage = response.data.message
           console.log(status)
           if (status === 400) {
-            xidou.toast("代码无法使用")
+            // xidou.toast("代码无法使用")
+            window.webkit.messageHandlers.showToast.postMessage(responseMessage)
             return false
           } else if (status === 410) {
-            xidou.toast("代码无法使用")
+            // xidou.toast("代码无法使用")
+            window.webkit.messageHandlers.showToast.postMessage(responseMessage)
             return false
           } else {
-            xidou.toast("代码无法使用")
+            // xidou.toast("代码无法使用")
+            window.webkit.messageHandlers.showToast.postMessage(responseMessage)
             return false
           }
         }).catch((ex) => {
