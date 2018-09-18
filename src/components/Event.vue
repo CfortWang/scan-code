@@ -242,67 +242,75 @@ export default {
       console.log(ex)
     })
 
+    axios({ // get the old winner number
+      method: 'GET',
+      url: process.env.api_url + '/api/drawings/complete'
+    }).then((response) => {
+      // var responseMessage = response.data.message
+      var responseData = response.data.data
+      // console.log(responseData)
+      for (var j = 0; j < 10; j++) {
+        var ballNums = []
+        var ball = 'ballNums' + j
+        for (var k = 1; k <= 7; k++) {
+          var round = responseData[j].drawing_num
+          var ballNum = 'num_' + k
+          ballNums[k - 1] = responseData[j][ballNum]
+          if (ballNums[k - 1] < 10) {
+            ballNums[k - 1] = '0' + ballNums[k - 1]
+          }
+        }
+        this.pastWinnerNum[j] = ballNums
+        this.round[j] = round
+        this[ball] = this.pastWinnerNum[j]
+      }
+      // console.log(this.pastWinnerNum)
+
+      var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
+      var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
+      for (let i = 1; i <= 9; i++) {
+        var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
+        var t = i - 1
+        $('.moreData').append($div1)
+        $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
+        for (var m = 1; m <= 7; m++) {
+          var ballnum = 'ballNums' + i
+          var mm = m-1
+          var ballnums = ""+this[ballnum][mm]+""
+          $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
+          $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
+        }
+      }
+    }).catch((ex) => {
+      console.log(ex)
+    })
+
     // use point
     if (!this.$route.query.code) {
       this.$i18n.locale = this.lang
-      axios({ // get the old winner number
-        method: 'GET',
-        url: process.env.api_url + '/api/drawings/complete'
-      }).then((response) => {
-        // var responseMessage = response.data.message
-        var responseData = response.data.data
-        // console.log(responseData)
-        for (var j = 0; j < 10; j++) {
-          var ballNums = []
-          var ball = 'ballNums' + j
-          for (var k = 1; k <= 7; k++) {
-            var round = responseData[j].drawing_num
-            var ballNum = 'num_' + k
-            ballNums[k - 1] = responseData[j][ballNum]
-            if (ballNums[k - 1] < 10) {
-              ballNums[k - 1] = '0' + ballNums[k - 1]
-            }
+      // judge point is enough
+      if (this.device == 'ios') {
+        axios({
+          method: 'GET',
+          url: 'http://dev-new-api.beanpop.cn/lottery/before',
+          withCredentials: true
+        }).then((response) => {
+          let allow = response.data.data.allow
+          if (allow) {
+            console.log('rich man')
+            this.enoughPoint = true
+          } else {
+            console.log('poor man')
+            this.enoughPoint = false
           }
-          this.pastWinnerNum[j] = ballNums
-          this.round[j] = round
-          this[ball] = this.pastWinnerNum[j]
-        }
-        // console.log(this.pastWinnerNum)
+        }).catch((ex) => {
+          console.log(ex)
+        })
+      }
 
-        var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
-        var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
-        for (let i = 1; i <= 9; i++) {
-          var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
-          var t = i - 1
-          $('.moreData').append($div1)
-          $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
-          for (var m = 1; m <= 7; m++) {
-            var ballnum = 'ballNums' + i
-            var mm = m-1
-            var ballnums = ""+this[ballnum][mm]+""
-            $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
-            $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
-          }
-        }
-      }).catch((ex) => {
-        console.log(ex)
-      })
-      axios({
-        method: 'GET',
-        url: 'http://dev-new-api.beanpop.cn/lottery/before',
-        withCredentials: true
-      }).then((response) => {
-        let allow = response.data.data.allow
-        if (allow) {
-          console.log('rich man')
-          this.enoughPoint = true
-        } else {
-          console.log('poor man')
-          this.enoughPoint = false
-        }
-      }).catch((ex) => {
-        console.log(ex)
-      })
+      if (this.device == 'android') {
+        console.log(xidou.getHttpHeader())
+      }
     } else {
       // use qr code
       if (this.device == 'ios' || this.device =='android') {
@@ -374,49 +382,6 @@ export default {
         }).then((response) => {
           // var responseData = response.data.data
           // console.log(response)
-
-          axios({ // get the old winner number
-            method: 'GET',
-            url: process.env.api_url + '/api/drawings/complete'
-          }).then((response) => {
-            // var responseMessage = response.data.message
-            var responseData = response.data.data
-            // console.log(responseData)
-            for (var j = 0; j < 10; j++) {
-              var ballNums = []
-              var ball = 'ballNums' + j
-              for (var k = 1; k <= 7; k++) {
-                var round = responseData[j].drawing_num
-                var ballNum = 'num_' + k
-                ballNums[k - 1] = responseData[j][ballNum]
-                if (ballNums[k - 1] < 10) {
-                  ballNums[k - 1] = '0' + ballNums[k - 1]
-                }
-              }
-              this.pastWinnerNum[j] = ballNums
-              this.round[j] = round
-              this[ball] = this.pastWinnerNum[j]
-            }
-            // console.log(this.pastWinnerNum)
-
-            var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
-            var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
-            for (let i = 1; i <= 9; i++) {
-              var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
-              var t = i - 1
-              $('.moreData').append($div1)
-              $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
-              for (var m = 1; m <= 7; m++) {
-                var ballnum = 'ballNums' + i
-                var mm = m-1
-                var ballnums = ""+this[ballnum][mm]+""
-                $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
-                $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
-              }
-            }
-          }).catch((ex) => {
-            console.log(ex)
-          })
         }).catch((ex) => {
           console.log(ex)
           // var errorResponseData = ex.response.data
