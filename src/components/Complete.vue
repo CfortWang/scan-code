@@ -15,6 +15,36 @@
         <iframe src="https://wap.beanpop.cn/rule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
       </div>
     </div>
+
+    <div class="game-rule-box" v-if="qqqq">
+      <div class="game-rule">
+        <div class="rule-title">游戏规则：</div>
+        <div class="rule-content">
+          <div class="rule-number">1</div>
+          <div class="rule-text-box">
+            <div class="rule-text">喜豆抽奖每次下注消耗20个喜豆点。</div>
+            <span class="red-text">6个红球</span>+<span class="blue-text">1个蓝球</span>=1注
+          </div>
+        </div>
+        <div class="rule-content">
+          <div class="rule-number">2</div>
+          <div class="rule-text-box">
+            <div class="rule-text">投注区分为红色球号码区和蓝色球号码区，红色球号码区由1-33共三十三个号码组成，蓝色球号码区由1-16共十六个号码组成。</div>
+          </div>
+        </div>
+        <div class="lottery-desc">开奖说明：开奖时间及开奖结果以双色球为准。</div>
+        <div class="award-set">奖项设置:</div>
+        <div class="award-detail">
+          <img src="https://wap.beanpop.cn/img/game_award.png">
+        </div>
+        <div class="award-desc">奖品说明：中奖奖品为喜豆点，中奖后24小时内到账。</div>
+        <div class="remark">注：游戏最终解释权归深圳喜豆文化发展有限公司所有。</div>
+      </div>
+      <div class="closeRule" v-on:click="closeRule">
+        <img src="/static/img/complete/delete_new.png" alt="">
+      </div>
+    </div>
+
     <header v-if="showHeader">
       <div class="header-title-wrapper fs-14">
         {{ $t("title") }}
@@ -225,7 +255,8 @@ export default {
       lang: '',
       showHeader: false,
       round: '',
-      deviceUrl: ''
+      deviceUrl: '',
+      qqqq: false
     }
   },
   created: function () {
@@ -359,7 +390,15 @@ export default {
       this.rulesOpen = true
     },
     appRulesClick: function () {
-      window.location.href = 'https://wap.beanpop.cn/rule'
+      // window.location.href = 'https://wap.beanpop.cn/rule'
+      // document.getElementsByClassName('game-rule-box')[0].style.display = 'block'
+      this.qqqq = true
+      document.getElementsByClassName('mask')[0].style.display = 'block'
+    },
+    closeRule: function () {
+      this.qqqq = false
+      // document.getElementsByClassName('game-rule-box')[0].style.display = 'none'
+      document.getElementsByClassName('mask')[0].style.display = 'none'
     },
     backKey: function () {
       this.rulesOpen = false
@@ -1190,5 +1229,79 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .play-again img{
   vertical-align: baseline;
+}
+
+.game-rule-box{
+  width: 84%;
+  z-index: 9999;
+  position: absolute;
+  top:5%;
+  left:8%;
+}
+.game-rule{
+  padding: 15px;
+  font-size: 14px;
+  font-family: "PingFangSC-Regular";
+  color: #333333;
+  background: #FFF;
+  border-radius: 15px;
+}
+.rule-title, .lottery-desc{
+  padding-left: 5px;
+  margin-bottom: 12px;
+}
+.rule-content{
+  padding-left: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+.rule-number{
+  font-size: 11px;
+  color: white;
+  background: #333333;
+  height: 13px;
+  width: 13px;
+  text-align: center;
+  line-height: 13px;
+  border-radius: 50%;
+  margin-right: 8px;
+  margin-top: 3px;
+}
+.rule-text-box{
+  flex: 1;
+  color: #666666;
+}
+.red-text{
+  color: #FF5F57;
+}
+.blue-text{
+  color: #3A85E5;
+}
+.award-set{
+  padding-left: 5px;
+  margin-bottom: 7px;
+}
+.award-detail{
+  margin-bottom: 30px;
+}
+.award-detail img{
+  width: 100%;
+}
+.award-desc{
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.remark{
+  font-size: 10px;
+  text-align: center;
+  color: #999999;
+}
+.closeRule{
+  text-align: center;
+  margin-top: 20px;
+}
+.closeRule img{
+  width: 30px;
 }
 </style>
