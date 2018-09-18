@@ -308,7 +308,8 @@ export default {
         }).catch((ex) => {
           console.log(ex)
           // var errorResponseData = ex.response.data
-          var errorStatus = ex.response.status
+          var errorStatus = ex.responseData.code
+          console.log(errorStatus)
           // console.log(errorResponseData)
           if (errorStatus === 400) {
             xidou.toast("代码无法使用")
