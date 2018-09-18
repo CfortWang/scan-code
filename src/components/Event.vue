@@ -713,17 +713,17 @@ export default {
       }
 
       // 喜豆点进入提交
+      var num1 = activeYellow[0]
+      var num2 = activeYellow[1]
+      var num3 = activeYellow[2]
+      var num4 = activeYellow[3]
+      var num5 = activeYellow[4]
+      var num6 = activeYellow[5]
+      var num7 = activeGreen[0]
       if (!this.$route.query.code) {
         // iOS喜豆点进入提交
         if (this.device == 'ios') {
           if (this.enoughPoint) {
-            let num1 = activeYellow[0]
-            let num2 = activeYellow[1]
-            let num3 = activeYellow[2]
-            let num4 = activeYellow[3]
-            let num5 = activeYellow[4]
-            let num6 = activeYellow[5]
-            var num7 = activeGreen[0]
             axios({
               method: 'POST',
               url: 'http://dev-new-api.beanpop.cn/lottery',
@@ -773,14 +773,6 @@ export default {
         // Android喜豆点进入提交
         if (this.device == 'android') {
           if (this.enoughPoint) {
-            let num1 = activeYellow[0]
-            let num2 = activeYellow[1]
-            let num3 = activeYellow[2]
-            let num4 = activeYellow[3]
-            let num5 = activeYellow[4]
-            let num6 = activeYellow[5]
-            var num7 = activeGreen[0]
-
             let header = xidou.getHttpHeader()
             let lang = JSON.parse(header).lang
             let os = JSON.parse(header).os
