@@ -360,7 +360,6 @@ export default {
     },
     appRulesClick: function () {
       window.location.href = 'https://wap.beanpop.cn/rule'
-      xidou.setTitle('中奖规则说明')
     },
     backKey: function () {
       this.rulesOpen = false
