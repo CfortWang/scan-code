@@ -287,7 +287,7 @@ export default {
     this.bottomAdUrl = getParams.bottomAd
     this.landingUrl = getParams.landingUrl
     this.shopCoupon = getParams.shopCoupon
-    console.log(this.shopADUrl)
+    console.log(this.shopCoupon)
 
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
     this.greenItems = [getParams.greenBall[0]]
