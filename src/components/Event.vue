@@ -206,7 +206,8 @@ export default {
       reload: true,
       showHeader: false,
       device: null,
-      lang: ''
+      lang: '',
+      deviceUrl: ''
     }
   },
   created: function () {
@@ -244,9 +245,9 @@ export default {
 
     // use point
     if (!this.$route.query.code) {
+        xidou.setTitle("喜豆大抽奖")
       // judge point is enough
       if (this.device == 'ios') {
-        window.webkit.messageHandlers.setTitle.postMessage('喜豆大抽奖')
         this.$i18n.locale = this.lang
         axios({
           method: 'GET',
@@ -258,6 +259,7 @@ export default {
             this.enoughPoint = true
           } else {
             this.enoughPoint = false
+            xidou.toast("喜豆点不足")
           }
         }).catch((ex) => {
           console.log(ex)
@@ -265,7 +267,6 @@ export default {
       }
 
       if (this.device == 'android') {
-        xidou.setTitle("喜豆大抽奖")
         this.$i18n.locale = this.lang
         let header = xidou.getHttpHeader()
         let lang = JSON.parse(header).lang
@@ -295,9 +296,16 @@ export default {
       // use qr code
       if (this.device == 'ios' || this.device =='android') {
         // in app
+        xidou.setTitle("喜豆大抽奖")
         console.log('scan qrCode in app')
         this.$i18n.locale = this.lang
         this.showHeader = false
+        if (this.device == 'ios') {
+          this.deviceUrl = 'seedo://'
+        }
+        if (this.device == 'android') {
+          this.deviceUrl = 'xidou://app'
+        }
         axios({ // check validation qr code when scan code with app
           // method: 'POST',
           // url: process.env.api_url + '/api/validations/q35-code',
@@ -311,15 +319,15 @@ export default {
           console.log(status)
           if (status === 400) {
             xidou.toast(responseMessage)
-            window.location.href = this.device + '/home?action=home'
+            window.location.href = this.deviceUrl + '/home?action=home'
             return false
           } else if (status === 410) {
             xidou.toast(responseMessage)
-            window.location.href = this.device + '/home?action=home'
+            window.location.href = this.deviceUrl + '/home?action=home'
             return false
           } else {
             xidou.toast(responseMessage)
-            window.location.href = this.device + '/home?action=home'
+            window.location.href = this.deviceUrl + '/home?action=home'
             return false
           }
         }).catch((ex) => {
