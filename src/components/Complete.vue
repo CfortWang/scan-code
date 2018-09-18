@@ -572,13 +572,13 @@ export default {
       })
     },
     history: function () {
-      window.location.href = this.deviceUrl + '?action=history'
+      window.location.href = this.deviceUrl + '/history?action=history'
     },
     palyAgain: function () {
       window.location.href = 'http://dev-m.beanpop.cn/event?lang=' + this.lang + '&device=' + this.device
     },
     goBack: function () {
-      window.location.href = this.deviceUrl + '?action=home'
+      window.location.href = this.deviceUrl + '/home?action=home'
     }
   }
 }

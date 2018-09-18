@@ -113,7 +113,6 @@ export default {
           this.market = marketResult[0].img
           // }
         }
-        console.log(this.shopEvent)
       }).catch((ex) => {
         console.log(ex)
         // var errorResponseData = ex.response.data

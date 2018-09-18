@@ -242,54 +242,11 @@ export default {
       console.log(ex)
     })
 
-    axios({ // get the old winner number
-      method: 'GET',
-      url: process.env.api_url + '/api/drawings/complete'
-    }).then((response) => {
-      // var responseMessage = response.data.message
-      var responseData = response.data.data
-      // console.log(responseData)
-      for (var j = 0; j < 10; j++) {
-        var ballNums = []
-        var ball = 'ballNums' + j
-        for (var k = 1; k <= 7; k++) {
-          var round = responseData[j].drawing_num
-          var ballNum = 'num_' + k
-          ballNums[k - 1] = responseData[j][ballNum]
-          if (ballNums[k - 1] < 10) {
-            ballNums[k - 1] = '0' + ballNums[k - 1]
-          }
-        }
-        this.pastWinnerNum[j] = ballNums
-        this.round[j] = round
-        this[ball] = this.pastWinnerNum[j]
-      }
-      // console.log(this.pastWinnerNum)
-
-      var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
-      var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
-      for (let i = 1; i <= 9; i++) {
-        var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
-        var t = i - 1
-        $('.moreData').append($div1)
-        $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
-        for (var m = 1; m <= 7; m++) {
-          var ballnum = 'ballNums' + i
-          var mm = m-1
-          var ballnums = ""+this[ballnum][mm]+""
-          $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
-          $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
-        }
-      }
-    }).catch((ex) => {
-      console.log(ex)
-    })
-
     // use point
     if (!this.$route.query.code) {
-      this.$i18n.locale = this.lang
       // judge point is enough
       if (this.device == 'ios') {
+        this.$i18n.locale = this.lang
         axios({
           method: 'GET',
           url: 'http://dev-new-api.beanpop.cn/lottery/before',
@@ -297,10 +254,8 @@ export default {
         }).then((response) => {
           let allow = response.data.data.allow
           if (allow) {
-            console.log('rich man')
             this.enoughPoint = true
           } else {
-            console.log('poor man')
             this.enoughPoint = false
           }
         }).catch((ex) => {
@@ -309,6 +264,7 @@ export default {
       }
 
       if (this.device == 'android') {
+        this.$i18n.locale = this.lang
         let header = xidou.getHttpHeader()
         let lang = JSON.parse(header).lang
         let os = JSON.parse(header).os
@@ -324,12 +280,9 @@ export default {
         }).then((response) => {
           let allow = response.data.data.allow
           if (allow) {
-            console.log('rich man')
-            xidou.toast("====================")
             this.enoughPoint = true
           } else {
-            console.log('poor man')
-            xidou.toast("++++++++++++++++++++")
+            xidou.toast("喜豆点不足")
             this.enoughPoint = false
           }
         }).catch((ex) => {
@@ -343,6 +296,30 @@ export default {
         console.log('scan qrCode in app')
         this.$i18n.locale = this.lang
         this.showHeader = false
+        axios({ // check validation qr code when scan code with app
+          method: 'POST',
+          // url: process.env.api_url + '/api/validations/q35-code',
+          url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
+          params: { code: qrCode }
+        }).then((response) => {
+          var responseData = response.data.data
+          console.log(response)
+        }).catch((ex) => {
+          console.log(ex)
+          // var errorResponseData = ex.response.data
+          var errorStatus = ex.response.status
+          // console.log(errorResponseData)
+          if (errorStatus === 400) {
+            xidou.toast("代码无法使用")
+            return false
+          } else if (errorStatus === 410) {
+            xidou.toast("代码无法使用")
+            return false
+          } else {
+            xidou.toast("代码无法使用")
+            return false
+          }
+        })
       } else {
         // in h5
         this.showHeader = true
@@ -452,6 +429,49 @@ export default {
       console.log(ex)
       // var errorResponseData = ex.response.data
       // console.log(errorResponseData)
+    })
+
+    axios({ // get the old winner number
+      method: 'GET',
+      url: process.env.api_url + '/api/drawings/complete'
+    }).then((response) => {
+      // var responseMessage = response.data.message
+      var responseData = response.data.data
+      // console.log(responseData)
+      for (var j = 0; j < 10; j++) {
+        var ballNums = []
+        var ball = 'ballNums' + j
+        for (var k = 1; k <= 7; k++) {
+          var round = responseData[j].drawing_num
+          var ballNum = 'num_' + k
+          ballNums[k - 1] = responseData[j][ballNum]
+          if (ballNums[k - 1] < 10) {
+            ballNums[k - 1] = '0' + ballNums[k - 1]
+          }
+        }
+        this.pastWinnerNum[j] = ballNums
+        this.round[j] = round
+        this[ball] = this.pastWinnerNum[j]
+      }
+      // console.log(this.pastWinnerNum)
+
+      var $div1 = '<div class="event-round-wrapper"><div class="event-round-left-wrapper float-wrapper"><div class="event-round"></div><div class="event-intro-ball-wrapper float-wrapper justified"></div></div></div>'
+      var $div5 = '<div class="ball-wrapper ball-size float-l"><div class="ball-size-item"></div></div>'
+      for (let i = 1; i <= 9; i++) {
+        var roundText = ""+this.round[i]+"" + ""+this.$t('round')+""
+        var t = i - 1
+        $('.moreData').append($div1)
+        $(".moreData .event-round-wrapper:eq("+t+") .event-round").text(roundText)
+        for (var m = 1; m <= 7; m++) {
+          var ballnum = 'ballNums' + i
+          var mm = m-1
+          var ballnums = ""+this[ballnum][mm]+""
+          $(".moreData .event-intro-ball-wrapper:eq(" + t + ")").append($div5)
+          $(".moreData .event-round-wrapper:eq("+t+") .ball-wrapper:eq("+mm+") .ball-size-item").text(ballnums)
+        }
+      }
+    }).catch((ex) => {
+      console.log(ex)
     })
   },
   methods: {
@@ -690,21 +710,137 @@ export default {
         alert(this.$i18n.t('notEnoughBall'))
         return false
       }
+
+      // 喜豆点进入提交
       if (!this.$route.query.code) {
-        console.log(this.enoughPoint)
-        if (this.enoughPoint) {
-          let num1 = activeYellow[0]
-          let num2 = activeYellow[1]
-          let num3 = activeYellow[2]
-          let num4 = activeYellow[3]
-          let num5 = activeYellow[4]
-          let num6 = activeYellow[5]
-          var num7 = activeGreen[0]
+        // iOS喜豆点进入提交
+        if (this.device == 'ios') {
+          if (this.enoughPoint) {
+            let num1 = activeYellow[0]
+            let num2 = activeYellow[1]
+            let num3 = activeYellow[2]
+            let num4 = activeYellow[3]
+            let num5 = activeYellow[4]
+            let num6 = activeYellow[5]
+            var num7 = activeGreen[0]
+            axios({
+              method: 'POST',
+              url: 'http://dev-new-api.beanpop.cn/lottery',
+              withCredentials: true,
+              params: {
+                num_1: num1,
+                num_2: num2,
+                num_3: num3,
+                num_4: num4,
+                num_5: num5,
+                num_6: num6,
+                num_7: num7,
+              }
+            }).then((response) => {
+              let responseData = response.data.data
+              console.log(responseData)
+              this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
+              this.shopAdLanding = responseData.shop.ad[0].landing_url
+              this.marketEvent = responseData.marketing_event_result[0].img
+              var qrCode = this.$route.query.code
+              this.$router.push({
+                name: 'AD',
+                params: {
+                  yellowBall: activeYellow,
+                  greenBall: activeGreen,
+                  type: 'code',
+                  qrCode: qrCode,
+                  skipAD: this.skipAD,
+                  banner: this.banner,
+                  bottomAd: this.bottomAd,
+                  landingUrl: this.landingUrl,
+                  lang: this.lang,
+                  shopAD: this.shopAD,
+                  shopAdLanding: this.shopAdLanding,
+                  marketEvent: this.marketEvent,
+                  device: this.device
+                }
+              })
+            }).catch((ex) => {
+              console.log(ex)
+            })
+          } else {
+            console.log("喜豆点不足")
+          }
+        }
+
+        // Android喜豆点进入提交
+        if (this.device == 'android') {
+          if (this.enoughPoint) {
+            let num1 = activeYellow[0]
+            let num2 = activeYellow[1]
+            let num3 = activeYellow[2]
+            let num4 = activeYellow[3]
+            let num5 = activeYellow[4]
+            let num6 = activeYellow[5]
+            var num7 = activeGreen[0]
+
+            let header = xidou.getHttpHeader()
+            let lang = JSON.parse(header).lang
+            let os = JSON.parse(header).os
+            let time = JSON.parse(header).time
+            let version = JSON.parse(header).version
+            let token = JSON.parse(header).token
+            axios({
+              method: 'POST',
+              url: 'http://dev-new-api.beanpop.cn/lottery',
+              withCredentials: true,
+              params: {
+                num_1: num1,
+                num_2: num2,
+                num_3: num3,
+                num_4: num4,
+                num_5: num5,
+                num_6: num6,
+                num_7: num7,
+              },
+              headers: {"lang": lang, "os": os, "time": time, "token": token, "version": version}
+            }).then((response) => {
+              let responseData = response.data.data
+              console.log(responseData)
+              this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
+              this.shopAdLanding = responseData.shop.ad[0].landing_url
+              this.marketEvent = responseData.marketing_event_result[0].img
+              var qrCode = this.$route.query.code
+              this.$router.push({
+                name: 'AD',
+                params: {
+                  yellowBall: activeYellow,
+                  greenBall: activeGreen,
+                  type: 'code',
+                  qrCode: qrCode,
+                  skipAD: this.skipAD,
+                  banner: this.banner,
+                  bottomAd: this.bottomAd,
+                  landingUrl: this.landingUrl,
+                  lang: this.lang,
+                  shopAD: this.shopAD,
+                  shopAdLanding: this.shopAdLanding,
+                  marketEvent: this.marketEvent,
+                  device: this.device
+                }
+              })
+            }).catch((ex) => {
+              console.log(ex)
+            })
+          } else {
+            xidou.toast("喜豆点不足")
+          }
+        }
+      } else { // 扫码进入提交
+        // iOS扫码提交
+        if (this.device == 'ios') {
           axios({
             method: 'POST',
             url: 'http://dev-new-api.beanpop.cn/lottery',
             withCredentials: true,
             params: {
+              code: this.$route.query.code,
               num_1: num1,
               num_2: num2,
               num_3: num3,
@@ -716,9 +852,9 @@ export default {
           }).then((response) => {
             let responseData = response.data.data
             console.log(responseData)
-            this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
-            this.shopAdLanding = responseData.shop.ad[0].landing_url
-            this.marketEvent = responseData.marketing_event_result[0].img
+            // this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
+            // this.shopAdLanding = responseData.shop.ad[0].landing_url
+            // this.marketEvent = responseData.marketing_event_result[0].img
             var qrCode = this.$route.query.code
             this.$router.push({
               name: 'AD',
@@ -741,10 +877,62 @@ export default {
           }).catch((ex) => {
             console.log(ex)
           })
-        } else {
-          console.log("喜豆点不足")
         }
-      } else {
+
+        // android扫码提交
+        if (this.device == 'android') {
+          let header = xidou.getHttpHeader()
+          let lang = JSON.parse(header).lang
+          let os = JSON.parse(header).os
+          let time = JSON.parse(header).time
+          let version = JSON.parse(header).version
+          let token = JSON.parse(header).token
+          axios({
+            method: 'POST',
+            url: 'http://dev-new-api.beanpop.cn/lottery',
+            withCredentials: true,
+            params: {
+              code: this.$route.query.code,
+              num_1: num1,
+              num_2: num2,
+              num_3: num3,
+              num_4: num4,
+              num_5: num5,
+              num_6: num6,
+              num_7: num7,
+            },
+            headers: {"lang": lang, "os": os, "time": time, "token": token, "version": version}
+          }).then((response) => {
+            let responseData = response.data.data
+            console.log(responseData)
+            // this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
+            // this.shopAdLanding = responseData.shop.ad[0].landing_url
+            // this.marketEvent = responseData.marketing_event_result[0].img
+            // var qrCode = this.$route.query.code
+            this.$router.push({
+              name: 'AD',
+              params: {
+                yellowBall: activeYellow,
+                greenBall: activeGreen,
+                type: 'code',
+                qrCode: qrCode,
+                skipAD: this.skipAD,
+                banner: this.banner,
+                bottomAd: this.bottomAd,
+                landingUrl: this.landingUrl,
+                lang: this.lang,
+                shopAD: this.shopAD,
+                shopAdLanding: this.shopAdLanding,
+                marketEvent: this.marketEvent,
+                device: this.device
+              }
+            })
+          }).catch((ex) => {
+            console.log(ex)
+          })
+        }
+
+        // h5扫码
         var qrCode = this.$route.query.code
           this.$router.push({
             name: 'AD',
