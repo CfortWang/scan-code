@@ -303,22 +303,23 @@ export default {
           // url: process.env.api_url + '/api/validations/q35-code',
           method: 'GET',
           url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
-          params: { code: qrCode }
+          params: { code: qrCode },
+          headers: {'lang': this.lang}
         }).then((response) => {
           var status = response.data.code
           var responseMessage = response.data.message
           console.log(status)
           if (status === 400) {
-            // xidou.toast("代码无法使用")
-            window.webkit.messageHandlers.showToast.postMessage(responseMessage)
+            xidou.toast(responseMessage)
+            window.location.href = this.device + '/home?action=home'
             return false
           } else if (status === 410) {
-            // xidou.toast("代码无法使用")
-            window.webkit.messageHandlers.showToast.postMessage(responseMessage)
+            xidou.toast(responseMessage)
+            window.location.href = this.device + '/home?action=home'
             return false
           } else {
-            // xidou.toast("代码无法使用")
-            window.webkit.messageHandlers.showToast.postMessage(responseMessage)
+            xidou.toast(responseMessage)
+            window.location.href = this.device + '/home?action=home'
             return false
           }
         }).catch((ex) => {
