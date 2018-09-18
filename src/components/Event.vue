@@ -206,7 +206,8 @@ export default {
       reload: true,
       showHeader: false,
       device: null,
-      lang: ''
+      lang: '',
+      pageUrl: ''
     }
   },
   created: function () {
@@ -214,6 +215,8 @@ export default {
     Vue.prototype.GLOBAL = _global
     this.device = this.$route.query.device
     this.lang = this.$route.query.lang
+    this.pageUrl = window.location.href
+    console.log(this.pageUrl)
 
     this.yellowItems = []
     this.greenItems = []
