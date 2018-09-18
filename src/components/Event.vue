@@ -309,7 +309,31 @@ export default {
       }
 
       if (this.device == 'android') {
-        console.log(xidou.getHttpHeader())
+        let lang = xidou.getHttpHeader().lang
+        let os = xidou.getHttpHeader().os
+        let time = xidou.getHttpHeader().time
+        let version = xidou.getHttpHeader().version
+        let token = xidou.getHttpHeader().token
+
+        axios({
+          method: 'GET',
+          url: 'http://dev-new-api.beanpop.cn/lottery/before',
+          withCredentials: true,
+          headers: {"lang": lang, "os": os, "time": time, "token": token, "version": version}
+        }).then((response) => {
+          let allow = response.data.data.allow
+          if (allow) {
+            console.log('rich man')
+            xidou.toast("====================")
+            this.enoughPoint = true
+          } else {
+            console.log('poor man')
+            xidou.toast("++++++++++++++++++++")
+            this.enoughPoint = false
+          }
+        }).catch((ex) => {
+          console.log(ex)
+        })
       }
     } else {
       // use qr code
