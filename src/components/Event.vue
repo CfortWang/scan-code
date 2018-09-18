@@ -297,8 +297,9 @@ export default {
         this.$i18n.locale = this.lang
         this.showHeader = false
         axios({ // check validation qr code when scan code with app
-          method: 'POST',
+          // method: 'POST',
           // url: process.env.api_url + '/api/validations/q35-code',
+          method: 'GET',
           url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
           params: { code: qrCode }
         }).then((response) => {
