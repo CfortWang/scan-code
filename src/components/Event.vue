@@ -307,25 +307,40 @@ export default {
           this.deviceUrl = 'xidou://app'
         }
         axios({ // check validation qr code when scan code with app
-          // method: 'POST',
-          // url: process.env.api_url + '/api/validations/q35-code',
-          method: 'GET',
-          url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
+          method: 'POST',
+          url: process.env.api_url + '/api/validations/q35-code',
+          // method: 'GET',
+          // url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
           params: { code: qrCode },
           headers: {'lang': this.lang}
         }).then((response) => {
-          var status = response.data.code
-          var responseMessage = response.data.message
-          console.log(status)
-          if (status != 200) {
-            xidou.toast(responseMessage)
-            xidou.startPage(0)
-            return false
-          } else {
-            xidou.toast(responseMessage)
-          }
+          // var status = response.data.data
+          console.log(response)
+          // var status = response.data.code
+          // var responseMessage = response.data.message
+          // console.log(status)
+          // if (status != 200) {
+          //   xidou.toast(responseMessage)
+          //   xidou.startPage(0)
+          //   return false
+          // } else {
+          //   xidou.toast(responseMessage)
+          // }
         }).catch((ex) => {
           console.log(ex)
+          // var errorResponseData = ex.response.data
+          var errorStatus = ex.response.status
+          // console.log(errorResponseData)
+          if (errorStatus === 400) {
+            this.$router.push({name: 'AppDown', params: {code: errorStatus, reload: this.reload}})
+            return false
+          } else if (errorStatus === 410) {
+            this.$router.push({name: 'AppDown', params: {code: errorStatus, reload: this.reload}})
+            return false
+          } else {
+            this.$router.push({name: 'AppDown', params: {code: 'default', reload: this.reload}})
+            return false
+          }
         })
       } else {
         // in h5
