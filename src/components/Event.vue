@@ -335,6 +335,7 @@ export default {
         }).catch((ex) => {
           console.log(ex)
         })
+        console.log(xidou.getHttpHeader())
       }
     } else {
       // use qr code
