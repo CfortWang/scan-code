@@ -318,11 +318,11 @@ export default {
           var responseMessage = response.data.message
           xidou.toast(responseMessage)
           console.log(status)
-          // if (status != 200) {
-          //   xidou.toast(responseMessage)
-          //   xidou.startPage(0)
-          //   return false
-          // }
+          if (status != 200) {
+            xidou.toast(responseMessage)
+            xidou.startPage(0)
+            return false
+          }
         }).catch((ex) => {
           console.log(ex)
         })
