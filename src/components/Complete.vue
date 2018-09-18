@@ -244,6 +244,7 @@ export default {
         if (this.device == 'android') {
           this.deviceUrl = 'xidou://app'
         }
+        console.log(this.deviceUrl)
       } else {
         this.showHeader = true
         if (vueCookie.get('qr_language')) {
