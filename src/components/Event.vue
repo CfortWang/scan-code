@@ -303,24 +303,20 @@ export default {
           url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
           params: { code: qrCode }
         }).then((response) => {
-          var responseData = response.data.data
-          console.log(response)
-        }).catch((ex) => {
-          console.log(ex)
-          // var errorResponseData = ex.response.data
-          var errorStatus = ex.responseData.code
-          console.log(errorStatus)
-          // console.log(errorResponseData)
-          if (errorStatus === 400) {
+          var status = response.data.code
+          console.log(status)
+          if (status === 400) {
             xidou.toast("代码无法使用")
             return false
-          } else if (errorStatus === 410) {
+          } else if (status === 410) {
             xidou.toast("代码无法使用")
             return false
           } else {
             xidou.toast("代码无法使用")
             return false
           }
+        }).catch((ex) => {
+          console.log(ex)
         })
       } else {
         // in h5
