@@ -309,11 +309,11 @@ export default {
       }
 
       if (this.device == 'android') {
-        let lang = xidou.getHttpHeader().lang
-        let os = xidou.getHttpHeader().os
-        let time = xidou.getHttpHeader().time
-        let version = xidou.getHttpHeader().version
-        let token = xidou.getHttpHeader().token
+        let lang = JSON.parse(xidou.getHttpHeader()).lang
+        let os = JSON.parse(xidou.getHttpHeader()).os
+        let time = JSON.parse(xidou.getHttpHeader()).time
+        let version = JSON.parse(xidou.getHttpHeader()).version
+        let token = JSON.parse(xidou.getHttpHeader()).token
 
         axios({
           method: 'GET',
