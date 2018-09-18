@@ -23,7 +23,11 @@
     <div class="mask blockScroll"></div>
     <div class="contents-wrapper">
       <div class="complete-event-top-wrapper">
-        <div class="win-rule" v-on:click="rulesClick">
+        <div class="win-rule" v-on:click="rulesClick" v-if="showHeader">
+          <img src="/static/img/complete/rule.png" alt="">
+          <span>{{ $t("moreInfo") }}</span>
+        </div>
+        <div class="win-rule" v-on:click="appRulesClick" v-if="!showHeader">
           <img src="/static/img/complete/rule.png" alt="">
           <span>{{ $t("moreInfo") }}</span>
         </div>
@@ -315,7 +319,7 @@ export default {
             $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
           }
           $(".use-shop-coupon-btn").click(function () {
-            window.location.href = 'seedo://?action=history'
+            xidou.startPage(1)
           })
         }, 100)
       }
@@ -353,6 +357,10 @@ export default {
     },
     rulesClick: function () {
       this.rulesOpen = true
+    },
+    appRulesClick: function () {
+      window.location.href = 'https://wap.beanpop.cn/rule'
+      xidou.setTitle('中奖规则说明')
     },
     backKey: function () {
       this.rulesOpen = false
@@ -572,13 +580,13 @@ export default {
       })
     },
     history: function () {
-      window.location.href = this.deviceUrl + '/history?action=history'
+      xidou.startPage(1)
     },
     palyAgain: function () {
       window.location.href = 'http://dev-m.beanpop.cn/event?lang=' + this.lang + '&device=' + this.device
     },
     goBack: function () {
-      window.location.href = this.deviceUrl + '/home?action=home'
+      xidou.startPage(0)
     }
   }
 }

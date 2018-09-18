@@ -15,13 +15,13 @@ Vue.prototype.openApp = function (event) {
     window.location.href = 'xidou://app'
     setTimeout(function () {
       window.location.href = 'https://www.beanpop.cn/downloads'
-    }, 3000)
+    }, 1300)
   }
   if (event == 'ios') {
     window.location.href = 'seedo://'
     setTimeout(function () {
       window.location.href = 'https://www.beanpop.cn/downloads'
-    }, 3000)
+    }, 1300)
   }
 }
 

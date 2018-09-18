@@ -319,15 +319,15 @@ export default {
           console.log(status)
           if (status === 400) {
             xidou.toast(responseMessage)
-            window.location.href = this.deviceUrl + '/home?action=home'
+            xidou.startPage(0)
             return false
           } else if (status === 410) {
             xidou.toast(responseMessage)
-            window.location.href = this.deviceUrl + '/home?action=home'
+            xidou.startPage(0)
             return false
           } else {
             xidou.toast(responseMessage)
-            window.location.href = this.deviceUrl + '/home?action=home'
+            xidou.startPage(0)
             return false
           }
         }).catch((ex) => {
