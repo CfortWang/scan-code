@@ -314,6 +314,7 @@ export default {
         let time = JSON.parse(xidou.getHttpHeader()).time
         let version = JSON.parse(xidou.getHttpHeader()).version
         let token = JSON.parse(xidou.getHttpHeader()).token
+        console.log(xidou.getHttpHeader())
 
         axios({
           method: 'GET',
