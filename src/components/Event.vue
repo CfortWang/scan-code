@@ -1,7 +1,7 @@
 <template>
   <div class="ticket-event">
     <transition>
-      <div class="modal-wrapper">
+      <div class="modal-wrapper" v-if="showHeader">
         <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
         <div v-if="openModal">
           <div class="modal-img">

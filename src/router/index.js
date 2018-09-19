@@ -1,24 +1,3 @@
-// import Vue from 'vue'
-// import Router from 'vue-router'
-// import AppDown from '@/components/AppDown'
-// import Recommend from '@/components/Recommend'
-// import ConfirmRecommend from '@/components/ConfirmRecommend'
-// import Event from '@/components/Event'
-// import AD from '@/components/AD'
-// import Complete from '@/components/Complete'
-// import Register from '@/components/Register'
-// // import WechatOpen from '@/components/WechatOpen'
-// import FunnyQuiz from '@/components/share/FunnyQuiz'
-// import SpellBean from '@/components/share/SpellBean'
-// import ShopDetails from '@/components/share/ShopDetails'
-// import PindouDetails from '@/components/share/PindouDetails'
-// import PayDeposit from '@/components/share/PayDeposit'
-// import PaySuccess from '@/components/share/PaySuccess'
-// import ShareRegister from '@/components/share/ShareRegister'
-// import Login from '@/components/share/Login'
-
-// Vue.use(Router)
-
 export default new VueRouter({
   mode: 'history',
   routes: [
@@ -153,19 +132,19 @@ export default new VueRouter({
           next('/app')
         }
       }
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      // component: Register,
-      component: (resolve) => require(['@/components/Register'], resolve),
-      beforeEnter: (to, from, next) => {
-        if (from.path.startsWith('/complete') || from.path.startsWith('/recommend')) {
-          next()
-        } else {
-          next('/app')
-        }
-      }
     }
+    // {
+    //   path: '/register',
+    //   name: 'Register',
+    //   // component: Register,
+    //   component: (resolve) => require(['@/components/Register'], resolve),
+    //   beforeEnter: (to, from, next) => {
+    //     if (from.path.startsWith('/complete') || from.path.startsWith('/recommend')) {
+    //       next()
+    //     } else {
+    //       next('/app')
+    //     }
+    //   }
+    // }
   ]
 })

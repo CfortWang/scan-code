@@ -1,6 +1,6 @@
 <template>
 	<div class="help">
-		<form class="help-top">				
+		<form class="help-top">
 			<div class="help-title">意见反馈</div>
 			<textarea class="suggestion" name="" rows="" cols="" v-model="content"></textarea>
 			<div class="submit-btn" v-on:click="submit">提交</div>

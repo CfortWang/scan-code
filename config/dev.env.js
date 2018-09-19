@@ -4,6 +4,7 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
+  // NODE_ENV: '"production"',
   // api_url: '"https://bpapi.beanpop.cn"',
   api_url: '"http://dev-bpapi.beanpop.cn"',
   // api_url: '"http://dev-new-api.beanpop.cn"',
