@@ -1207,10 +1207,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .bottom-btn{
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 20px;
 }
 .bottom-btn > div{
-  width: 47%;
+  width: 41%;
   font-size: 16px;
   font-weight: 600;
   color: #FFFFFF;
@@ -1222,10 +1226,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .play-again{
   background:rgba(238,104,7,1);
   float: left;
+  margin-left: 20px;
 }
 .go-back{
   background:rgba(105,133,198,1);
   float: right;
+  margin-right: 20px;
 }
 .play-again img{
   vertical-align: baseline;

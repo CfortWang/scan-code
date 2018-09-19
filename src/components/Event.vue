@@ -784,15 +784,6 @@ export default {
         }
       })
 
-      if (yellowCount < 6) {
-        alert(this.$i18n.t('notEnoughBall'))
-        return false
-      }
-      if (greenCount < 1) {
-        alert(this.$i18n.t('notEnoughBall'))
-        return false
-      }
-
       // 喜豆点进入提交
       var num1 = activeYellow[0]
       var num2 = activeYellow[1]
@@ -803,7 +794,17 @@ export default {
       var num7 = activeGreen[0]
       if (!this.$route.query.code) {
         // iOS喜豆点进入提交
+        // 判断选球是否正确
+        if (yellowCount < 6) {
+          xidou.toast(this.$i18n.t('notEnoughBall'))
+          return false
+        }
+        if (greenCount < 1) {
+          xidou.toast(this.$i18n.t('notEnoughBall'))
+          return false
+        }
         if (this.device == 'ios') {
+          // 判读喜豆点是否足够
           if (this.enoughPoint) {
             axios({
               method: 'POST',
@@ -909,6 +910,15 @@ export default {
       } else { // 扫码进入提交
         // iOS扫码提交
         if (this.device == 'ios') {
+          // 判断选球是否正确
+          if (yellowCount < 6) {
+            xidou.toast(this.$i18n.t('notEnoughBall'))
+            return false
+          }
+          if (greenCount < 1) {
+            xidou.toast(this.$i18n.t('notEnoughBall'))
+            return false
+          }
           axios({
             method: 'POST',
             url: 'http://dev-new-api.beanpop.cn/lottery',
@@ -955,6 +965,15 @@ export default {
 
         // android扫码提交
         if (this.device == 'android') {
+          // 判断选球是否正确
+          if (yellowCount < 6) {
+            xidou.toast(this.$i18n.t('notEnoughBall'))
+            return false
+          }
+          if (greenCount < 1) {
+            xidou.toast(this.$i18n.t('notEnoughBall'))
+            return false
+          }
           let header = xidou.getHttpHeader()
           let lang = JSON.parse(header).lang
           let os = JSON.parse(header).os
@@ -1006,23 +1025,31 @@ export default {
           })
         }
 
+        if (yellowCount < 6) {
+          alert(this.$i18n.t('notEnoughBall'))
+          return false
+        }
+        if (greenCount < 1) {
+          alert(this.$i18n.t('notEnoughBall'))
+          return false
+        }
         // h5扫码
         var qrCode = this.$route.query.code
-          this.$router.push({
-            name: 'AD',
-            params: {
-              yellowBall: activeYellow,
-              greenBall: activeGreen,
-              type: 'code',
-              qrCode: qrCode,
-              skipAD: this.skipAD,
-              banner: this.banner,
-              bottomAd: this.bottomAd,
-              landingUrl: this.landingUrl,
-              showHeader: this.showHeader,
-              device: this.device
-            }
-          })
+        this.$router.push({
+          name: 'AD',
+          params: {
+            yellowBall: activeYellow,
+            greenBall: activeGreen,
+            type: 'code',
+            qrCode: qrCode,
+            skipAD: this.skipAD,
+            banner: this.banner,
+            bottomAd: this.bottomAd,
+            landingUrl: this.landingUrl,
+            showHeader: this.showHeader,
+            device: this.device
+          }
+        })
       }
     }
   }
@@ -1158,7 +1185,7 @@ export default {
 }
 
 .select-ball-title{
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 14px;
   color: #000;
 }
@@ -1177,7 +1204,7 @@ export default {
 }
 
 .red-ball-wrapper, .blue-ball-wrapper{
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .ready-top{
@@ -1388,13 +1415,13 @@ export default {
 
 .event-balls-wrapper {
   padding:1vw;
-  padding-bottom:20px;
+  padding-bottom:10px;
 }
 
 .dividing-line{
   width: 90%;
   margin-left: 5%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border-bottom: 1px solid #DDD;
 }
 
