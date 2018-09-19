@@ -85,7 +85,7 @@ export default {
         }
       }).then((response) => {
         // var responseMessage = response.data.message
-        var responseData = response.data.data
+        var responseData = response.data
         // console.log(responseMessage)
         console.log(responseData)
         var shopADResult = responseData.shop.ad
