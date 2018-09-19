@@ -217,6 +217,7 @@ header {
   border-radius:200px;
   color:#FFFFFF;
   font-weight:bold;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .ball-wrapper.green.ballOff {
