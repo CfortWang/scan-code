@@ -328,19 +328,19 @@ export default {
           var errorStatus = ex.response.status
           // console.log(errorResponseData)
           if (errorStatus === 400) {
-            xidou.toast("代码无法使用")
+            xidou.toast("代码无法使用1")
             setTimeout(function () {
               xidou.startPage(0)
             }, 10000)
             // return false
           } else if (errorStatus === 410) {
-            xidou.toast("代码无法使用")
+            xidou.toast("代码无法使用2")
             setTimeout(function () {
               xidou.startPage(0)
             }, 10000)
             // return false
           } else {
-            xidou.toast("代码无法使用")
+            xidou.toast("代码无法使用3")
             setTimeout(function () {
               xidou.startPage(0)
             }, 10000)
