@@ -609,7 +609,14 @@ export default {
         if (isActive) {
           this.yellowItems[currentNumber].active = false
         } else {
-          alert(this.$i18n.t('finishYellowBall'))
+          if (!this.$route.query.code) {
+            xidou.toast(this.$i18n.t('finishYellowBall'))
+          } else {
+            if (this.device == 'android' || this.device == 'ios') {
+              xidou.toast(this.$i18n.t('finishYellowBall'))
+            }
+            alert(this.$i18n.t('finishYellowBall'))
+          }
         }
       }
 
@@ -655,7 +662,14 @@ export default {
         if (isActive) {
           this.greenItems[currentNumber].active = false
         } else {
-          alert(this.$i18n.t('finishGreenBall'))
+          if (!this.$route.query.code) {
+            xidou.toast(this.$i18n.t('finishGreenBall'))
+          } else {
+            if (this.device == 'android' || this.device == 'ios') {
+              xidou.toast(this.$i18n.t('finishGreenBall'))
+            }
+            alert(this.$i18n.t('finishGreenBall'))
+          }
         }
       }
       this.selected7 = ''
