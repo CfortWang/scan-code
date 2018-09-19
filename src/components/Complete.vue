@@ -182,14 +182,14 @@
             <img v-bind:src="bottomAdUrl" v-on:click="clickBottomAd(landingUrl)">
           </div>
         </div> -->
-        <div class="complete-event-contents-wrapper" v-if="shopADUrl !== ''">
+        <div class="complete-event-contents-wrapper bottom-ad" v-if="shopADUrl !== ''">
           <div class="company-event-wrapper">
             <div class="event-img-wrapper">
               <img v-bind:src="shopADUrl">
             </div>
           </div>
         </div>
-        <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== ''">
+        <div class="complete-event-contents-wrapper bottom-ad" v-if="shopEventUrl !== ''">
           <div class="company-event-wrapper">
             <div class="event-img-wrapper">
               <img v-bind:src="shopEventUrl">
@@ -712,6 +712,9 @@ export default {
 .complete-event-contents-wrapper{
   padding: 20px 15px;
   text-align: center;
+}
+.bottom-ad{
+  margin-bottom: 30px;
 }
 .event-title {
   text-align:left;
