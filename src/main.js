@@ -4,12 +4,12 @@ import 'swiper/dist/css/swiper.css'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import moment from 'moment'
+import moment from 'moment'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 
 Vue.config.productionTip = false
-// Vue.prototype.moment = moment
+Vue.prototype.moment = moment
 Vue.prototype.openApp = function (event) {
   if (event == 'android') {
     window.location.href = 'xidou://app'
