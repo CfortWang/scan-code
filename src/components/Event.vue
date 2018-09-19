@@ -331,19 +331,19 @@ export default {
             xidou.toast("代码无法使用")
             setTimeout(function () {
               xidou.startPage(0)
-            }, 3000)
+            }, 10000)
             // return false
           } else if (errorStatus === 410) {
             xidou.toast("代码无法使用")
             setTimeout(function () {
               xidou.startPage(0)
-            }, 3000)
+            }, 10000)
             // return false
           } else {
             xidou.toast("代码无法使用")
             setTimeout(function () {
               xidou.startPage(0)
-            }, 3000)
+            }, 10000)
             // return false
           }
         })
