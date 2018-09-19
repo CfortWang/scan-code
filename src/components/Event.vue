@@ -306,26 +306,52 @@ export default {
         if (this.device == 'android') {
           this.deviceUrl = 'xidou://app'
         }
+        // wood验证码有效接口
+        // axios({
+        //   method: 'GET',
+        //   url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
+        //   params: { code: qrCode },
+        //   headers: {'lang': this.lang}
+        // }).then((response) => {
+        //   var status = response.data.code
+        //   var responseMessage = response.data.message
+        //   console.log(status)
+        //   if (status != 200) {
+        //     xidou.toast(responseMessage)
+        //     xidou.startPage(0)
+        //     return false
+        //   } else {
+        //     xidou.toast(responseMessage)
+        //   }
+        // }).catch((ex) => {
+        //   console.log(ex)
+        // })
         axios({ // check validation qr code when scan code with app
-          // method: 'POST',
+          method: 'POST',
           // url: process.env.api_url + '/api/validations/q35-code',
-          method: 'GET',
-          url: 'http://dev-new-api.beanpop.cn/lottery/isCode',
-          params: { code: qrCode },
-          headers: {'lang': this.lang}
+          url: 'https://bpapi.beanpop.cn/api/validations/q35-code',
+          params: { code: qrCode }
         }).then((response) => {
-          var status = response.data.code
-          var responseMessage = response.data.message
-          console.log(status)
-          if (status != 200) {
-            xidou.toast(responseMessage)
+          // var responseData = response.data.data
+          // console.log(response)
+        }).catch((ex) => {
+          console.log(ex)
+          // var errorResponseData = ex.response.data
+          var errorStatus = ex.response.status
+          // console.log(errorResponseData)
+          if (errorStatus === 400) {
+            xidou.toast("代码无法使用")
+            xidou.startPage(0)
+            return false
+          } else if (errorStatus === 410) {
+            xidou.toast("代码无法使用")
             xidou.startPage(0)
             return false
           } else {
-            xidou.toast(responseMessage)
+            xidou.toast("代码无法使用")
+            xidou.startPage(0)
+            return false
           }
-        }).catch((ex) => {
-          console.log(ex)
         })
       } else {
         // in h5
