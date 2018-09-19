@@ -18,6 +18,9 @@
 
     <div class="game-rule-box" v-if="qqqq">
       <div class="game-rule">
+        <div class="closeRule" v-on:click="closeRule">
+          <img src="/static/img/complete/delete_new.png" alt="">
+        </div>
         <div class="rule-title">游戏规则：</div>
         <div class="rule-content">
           <div class="rule-number">1</div>
@@ -39,9 +42,6 @@
         </div>
         <div class="award-desc">奖品说明：中奖奖品为喜豆点，中奖后24小时内到账。</div>
         <div class="remark">注：游戏最终解释权归深圳喜豆文化发展有限公司所有。</div>
-      </div>
-      <div class="closeRule" v-on:click="closeRule">
-        <img src="/static/img/complete/delete_new.png" alt="">
       </div>
     </div>
 
@@ -1320,10 +1320,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   color: #999999;
 }
 .closeRule{
-  text-align: center;
-  margin-top: 20px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 .closeRule img{
-  width: 30px;
+  width: 22px;
 }
 </style>
