@@ -231,18 +231,6 @@ export default {
       }
     }
 
-    axios({ // get the newest prizePool point
-      method: 'GET',
-      url: process.env.api_url + '/api/drawings/progress'
-    }).then((response) => {
-      // var responseMessage = response.data.message
-      var responseData = response.data.data
-      this.nowRound = responseData.drawing_num
-      this.prizePool = responseData.prev_drawing_point + responseData.point
-    }).catch((ex) => {
-      console.log(ex)
-    })
-
     // use point
     if (!this.$route.query.code) {
         xidou.setTitle("喜豆大抽奖")
@@ -437,6 +425,18 @@ export default {
     }
   },
   mounted () {
+    axios({ // get the newest prizePool point
+      method: 'GET',
+      url: process.env.api_url + '/api/drawings/progress'
+    }).then((response) => {
+      // var responseMessage = response.data.message
+      var responseData = response.data.data
+      this.nowRound = responseData.drawing_num
+      this.prizePool = responseData.prev_drawing_point + responseData.point
+    }).catch((ex) => {
+      console.log(ex)
+    })
+
     axios({ // get the old winner number
       method: 'GET',
       url: process.env.api_url + '/api/drawings/complete'
