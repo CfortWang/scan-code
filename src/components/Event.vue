@@ -325,15 +325,15 @@ export default {
         }).catch((ex) => {
           console.log(ex)
           // var errorResponseData = ex.response.data
-          var errorStatus = ex.response.status
+          var wrongStatus = ex.response.status
           // console.log(errorResponseData)
-          if (errorStatus === 400) {
+          if (wrongStatus === 400) {
             xidou.toast("代码无法使用1")
             setTimeout(function () {
               xidou.startPage(0)
             }, 10000)
             // return false
-          } else if (errorStatus === 410) {
+          } else if (wrongStatus === 410) {
             xidou.toast("代码无法使用2")
             setTimeout(function () {
               xidou.startPage(0)
