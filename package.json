@@ -20,6 +20,7 @@
     "countup.js": "^1.9.3",
     "install": "^0.10.4",
     "jquery": "^3.3.1",
+    "moment": "^2.22.2",
     "npm": "^5.7.1",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",
