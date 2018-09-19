@@ -123,7 +123,13 @@
         </div>
 
         <div class="seedo-gifts-wrapper">
-          <div class="seedo-gifts-title">喜豆大礼包</div>
+          <div class="seedo-gifts-box" v-on:click="history">
+            <img src="/static/img/complete/gift.png" alt="">
+          </div>
+          <div class="seedo-gifts-box" v-on:click="history">
+            <img src="/static/img/complete/gift.png" alt="">
+          </div>
+          <!-- <div class="seedo-gifts-title">喜豆大礼包</div>
           <div class="seedo-gifts-box" v-on:click="history">
             <div class="seedo-gifts">
               <div class="congratulate">恭喜您获得800喜豆点</div>
@@ -135,7 +141,7 @@
               <div class="congratulate">恭喜您获得一次发起拼豆豆机会</div>
               <div class="gifts-desc">成为拼主发起拼豆豆获更多奖励</div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="login-wrapper"  v-bind:class="{showLoginBox: noCookie, notShowLoginBox: hasCookie}" v-if="showHeader">
           <div class="complete-info-wrapper">
@@ -1150,8 +1156,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .seedo-gifts-title{
   margin-bottom: 20px;
 }
-.seedo-gifts-box{
+/* .seedo-gifts-box{
   margin: 10px 0px 10px;
+} */
+.seedo-gifts-box img{
+  width: 100%;
 }
 .seedo-gifts{
   width: 91vw;
