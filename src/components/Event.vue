@@ -349,6 +349,7 @@ export default {
         })
       } else {
         // in h5
+        xidou.toast("h5扫码")
         this.showHeader = true
         if (vueCookie.get('qr_language')) {
           this.$i18n.locale = vueCookie.get('qr_language')
