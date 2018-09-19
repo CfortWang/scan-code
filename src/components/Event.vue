@@ -437,33 +437,6 @@ export default {
     }
   },
   mounted () {
-    axios({ // get skip AD
-      method: 'GET',
-      url: process.env.api_url + '/api/ad/game',
-      params: { lang: this.currentLanguage }
-    }).then((response) => {
-      var responseData = response.data.data
-      console.log(responseData)
-      // var banner = responseData.complete_banner.product.image_url
-      // var bottomAd = responseData.complete_banner.bottom.image_url
-      // console.log(banner)
-      // console.log(bottomAd)
-      this.landingUrl = responseData.complete_banner.bottom.landing_url
-      var downloadingImage = new Image()
-      downloadingImage.src = responseData.game_ad
-      this.skipAD = responseData.game_ad
-      var downloadingBanner = new Image()
-      downloadingBanner.src = responseData.complete_banner.product.image_url
-      this.banner = responseData.complete_banner.product.image_url
-      var downloadingBottomAd = new Image()
-      downloadingBottomAd.src = responseData.complete_banner.bottom.image_url
-      this.bottomAd = responseData.complete_banner.bottom.image_url
-    }).catch((ex) => {
-      console.log(ex)
-      // var errorResponseData = ex.response.data
-      // console.log(errorResponseData)
-    })
-
     axios({ // get the old winner number
       method: 'GET',
       url: process.env.api_url + '/api/drawings/complete'
@@ -505,6 +478,82 @@ export default {
       }
     }).catch((ex) => {
       console.log(ex)
+    })
+
+    if (!this.$route.query.code) {
+      // judge point is enough
+      if (this.device == 'ios') {
+        this.$i18n.locale = this.lang
+        axios({
+          method: 'GET',
+          url: 'http://dev-new-api.beanpop.cn/lottery/before',
+          withCredentials: true
+        }).then((response) => {
+          let allow = response.data.data.allow
+          if (allow) {
+            this.enoughPoint = true
+          } else {
+            this.enoughPoint = false
+            xidou.toast("喜豆点不足")
+          }
+        }).catch((ex) => {
+          console.log(ex)
+        })
+      }
+
+      if (this.device == 'android') {
+        this.$i18n.locale = this.lang
+        let header = xidou.getHttpHeader()
+        let lang = JSON.parse(header).lang
+        let os = JSON.parse(header).os
+        let time = JSON.parse(header).time
+        let version = JSON.parse(header).version
+        let token = JSON.parse(header).token
+
+        axios({
+          method: 'GET',
+          url: 'http://dev-new-api.beanpop.cn/lottery/before',
+          withCredentials: true,
+          headers: {"lang": lang, "os": os, "time": time, "token": token, "version": version}
+        }).then((response) => {
+          let allow = response.data.data.allow
+          if (allow) {
+            this.enoughPoint = true
+          } else {
+            xidou.toast("喜豆点不足")
+            this.enoughPoint = false
+          }
+        }).catch((ex) => {
+          console.log(ex)
+        })
+      }
+    }
+
+    axios({ // get skip AD
+      method: 'GET',
+      url: process.env.api_url + '/api/ad/game',
+      params: { lang: this.currentLanguage }
+    }).then((response) => {
+      var responseData = response.data.data
+      console.log(responseData)
+      // var banner = responseData.complete_banner.product.image_url
+      // var bottomAd = responseData.complete_banner.bottom.image_url
+      // console.log(banner)
+      // console.log(bottomAd)
+      this.landingUrl = responseData.complete_banner.bottom.landing_url
+      var downloadingImage = new Image()
+      downloadingImage.src = responseData.game_ad
+      this.skipAD = responseData.game_ad
+      var downloadingBanner = new Image()
+      downloadingBanner.src = responseData.complete_banner.product.image_url
+      this.banner = responseData.complete_banner.product.image_url
+      var downloadingBottomAd = new Image()
+      downloadingBottomAd.src = responseData.complete_banner.bottom.image_url
+      this.bottomAd = responseData.complete_banner.bottom.image_url
+    }).catch((ex) => {
+      console.log(ex)
+      // var errorResponseData = ex.response.data
+      // console.log(errorResponseData)
     })
   },
   methods: {
@@ -854,7 +903,7 @@ export default {
               console.log(ex)
             })
           } else {
-            xidou.toast("喜豆点不足")
+            xidou.toast("喜豆点不足" + this.enoughPoint)
           }
         }
       } else { // 扫码进入提交
