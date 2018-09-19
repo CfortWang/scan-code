@@ -39,7 +39,7 @@
 // import vueCookie from 'vue-cookie'
 import $ from 'jquery'
 import VueCountdown from '@xkeshi/vue-countdown'
-import bcrypt from 'bcryptjs'
+// import bcrypt from 'bcryptjs'
 
 const langData = require('../lang/share.json')
 
@@ -200,8 +200,8 @@ export default {
 				this.$options.methods.showMessage()
 				return false
 			}
-			var salt = bcrypt.genSaltSync(10)
-			this.password = bcrypt.hashSync(this.password1, salt)
+			// var salt = bcrypt.genSaltSync(10)
+			// this.password = bcrypt.hashSync(this.password1, salt)
 			axios({ // sign up
 				method: 'POST',
 				// url: process.env.api_url + '/api/register/code',
