@@ -182,20 +182,21 @@
             <img v-bind:src="bottomAdUrl" v-on:click="clickBottomAd(landingUrl)">
           </div>
         </div> -->
-        <div class="complete-event-contents-wrapper bottom-ad" v-if="shopADUrl !== ''">
+        <div class="complete-event-contents-wrapper" v-if="shopADUrl !== ''">
           <div class="company-event-wrapper">
             <div class="event-img-wrapper">
               <img v-bind:src="shopADUrl">
             </div>
           </div>
         </div>
-        <div class="complete-event-contents-wrapper bottom-ad" v-if="shopEventUrl !== ''">
+        <div class="complete-event-contents-wrapper" v-if="shopEventUrl !== ''">
           <div class="company-event-wrapper">
             <div class="event-img-wrapper">
               <img v-bind:src="shopEventUrl">
             </div>
           </div>
         </div>
+        <div class="bottom-ad" v-if="!showHeader"></div>
       </div>
       <div class="bottom-btn clear-fix" v-if="!showHeader">
         <div class="play-again" v-on:click="palyAgain">
@@ -713,9 +714,6 @@ export default {
   padding: 20px 15px;
   text-align: center;
 }
-.bottom-ad{
-  margin-bottom: 30px;
-}
 .event-title {
   text-align:left;
   /* padding-bottom:10px; */
@@ -725,6 +723,11 @@ export default {
 
 .event-img-wrapper img {
   width:100%;
+}
+
+.bottom-ad{
+  width: 100%;
+  height: 50px;
 }
 
 .ball-title-date {
