@@ -338,13 +338,13 @@ export default {
             setTimeout(function () {
               xidou.startPage(0)
             }, 3000)
-            return false
+            // return false
           } else {
             xidou.toast("代码无法使用")
             setTimeout(function () {
               xidou.startPage(0)
             }, 3000)
-            return false
+            // return false
           }
         })
       } else {
