@@ -35,7 +35,7 @@
         <div class="lottery-desc">开奖说明：开奖时间及开奖结果以双色球为准。</div>
         <div class="award-set">奖项设置:</div>
         <div class="award-detail">
-          <img src="https://wap.beanpop.cn/img/game_award.png">
+          <img src="/static/img/complete/award-rule.png">
         </div>
         <div class="award-desc">奖品说明：中奖奖品为喜豆点，中奖后24小时内到账。</div>
         <div class="remark">注：游戏最终解释权归深圳喜豆文化发展有限公司所有。</div>
@@ -117,20 +117,20 @@
       </div>
       <div class="complete-event-bottom-wrapper">
         <!-- 非扫码进入不显示 -->
-        <div class="shop-coupon-wrapper" v-if="shopCouponShow">
-          <div class="shop-coupon-title">{{ $t("event.title1")}}</div>
-          <div class="shop-coupon-box"></div>
+        <div class="shop-gift-wrapper" v-if="shopCouponShow">
+          <div class="shop-gift-title">{{ $t("event.title1")}}</div>
+          <div class="shop-gift-box"></div>
         </div>
 
         <div class="seedo-gifts-wrapper">
+          <div class="seedo-gifts-title">喜豆大礼包</div>
           <div class="seedo-gifts-box" v-on:click="history">
             <img src="/static/img/complete/gift.png" alt="">
           </div>
           <div class="seedo-gifts-box" v-on:click="history">
             <img src="/static/img/complete/gift.png" alt="">
           </div>
-          <!-- <div class="seedo-gifts-title">喜豆大礼包</div>
-          <div class="seedo-gifts-box" v-on:click="history">
+          <!-- <div class="seedo-gifts-box" v-on:click="history">
             <div class="seedo-gifts">
               <div class="congratulate">恭喜您获得800喜豆点</div>
               <div class="gifts-desc">累积喜豆点可兑换现金及其他礼物哦</div>
@@ -339,22 +339,22 @@ export default {
         this.shopCouponShow = true
         var that = this
         setTimeout(function () {
-          let $shopCoupon = '<div class="shop-coupon"><div class="coupon-img"><img/></div><div class="shop-coupon-detail justified"><div class="coupon-desc"><div class="coupon-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-coupon-btn">使用</div></div></div>'
+          let $shopCoupon = '<div class="shop-gift"><div class="gift-img"><img/></div><div class="shop-gift-detail"><div class="gift-desc"><div class="gift-name"></div><div class="store-name"></div><div class="term"><span class="start-date"></span><span class="end-date"></span></div></div><div class="use-shop-gift-btn">使用</div></div></div>'
           let counponLength = that.shopCoupon.length
           // $('.shop-coupon-box').append($shopCoupon)
           console.log(counponLength)
           for (let i = 0; i < counponLength; i++) {
-            $('.shop-coupon-box').append($shopCoupon)
+            $('.shop-gift-box').append($shopCoupon)
             let startDate = that.shopCoupon[i].coupon.create_date.split(' ')[0] + '至'
             let endDate = that.shopCoupon[i].coupon.expire_date.date.split(' ')[0]
-            let couponImage = that.shopCoupon[i].coupon.shop_logo
-            let couponTitle = that.shopCoupon[i].coupon.name
+            let giftImage = that.shopCoupon[i].coupon.shop_logo
+            let giftTitle = that.shopCoupon[i].coupon.name
             let shopName = that.shopCoupon[i].coupon.shop_name
-            $(".shop-coupon-box .shop-coupon:eq("+ i +") img").attr('src', couponImage)
-            $(".shop-coupon-box .shop-coupon:eq("+ i +") .coupon-name").text(couponTitle)
-            $(".shop-coupon-box .shop-coupon:eq("+ i +") .store-name").text(shopName)
-            $(".shop-coupon-box .shop-coupon:eq("+ i +") .start-date").text(startDate)
-            $(".shop-coupon-box .shop-coupon:eq("+ i +") .end-date").text(endDate)
+            $(".shop-gift-box .shop-gift:eq("+ i +") img").attr('src', giftImage)
+            $(".shop-gift-box .shop-gift:eq("+ i +") .gift-name").text(giftTitle)
+            $(".shop-gift-box .shop-gift:eq("+ i +") .store-name").text(shopName)
+            $(".shop-gift-box .shop-gift:eq("+ i +") .start-date").text(startDate)
+            $(".shop-gift-box .shop-gift:eq("+ i +") .end-date").text(endDate)
           }
           $(".use-shop-coupon-btn").click(function () {
             xidou.startPage(1)
@@ -945,6 +945,7 @@ export default {
 .login-wrapper {
   padding: 0px 30px;
   margin-bottom: 18px;
+  margin-top: 10px;
 }
 .dashed-line{
   width: 100%;
@@ -1097,43 +1098,43 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   text-align: center;
   line-height: 12px;
 }
-.shop-coupon-wrapper{
+.shop-gift-wrapper{
   margin-bottom: 20px;
   padding: 0px 15px;
 }
-.shop-coupon-title, .seedo-gifts-title{
+.shop-gift-title, .seedo-gifts-title{
   text-align: center;
   font-size: 16px;
   font-weight: 600;
   color: #FFFFFF;
 }
-.shop-coupon-box{
+.shop-gift-box{
 	width: 100%;
   border-bottom: 1px solid #57A0FF;
   border-top: 1px solid #57A0FF;
 }
 
-.shop-coupon{
+/* .shop-gift{
 	display: flex;
 	background: #FFFFFF;
 	padding: 15px;
 	margin: 10px 0px;
 }
-.coupon-img{
+.gift-img{
 	width: 77px;
 	height: 77px;
 }
-.coupon-img img{
+.gift-img img{
 	width: 100%;
 	border-radius: 2px;
 }
-.shop-coupon-detail{
+.shop-gift-detail{
 	flex: 1;
 	padding-left: 15px;
 	align-items: center;
 }
 
-.coupon-name{
+.gift-name{
 	font-family: "PingFangSC-Semibold";
 	font-size: 14px;
 	color: #333333;
@@ -1146,7 +1147,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .store-name{
 	margin: 10px 0 20px;
 }
-.use-shop-coupon-btn{
+.use-shop-gift-btn{
 	float: right;
 	width: 75px;
 	height: 30px;
@@ -1155,12 +1156,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
 	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
 	border-radius:15px;
-}
+} */
 .seedo-gifts-wrapper{
   padding: 0px 15px;
 }
 .seedo-gifts-title{
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 /* .seedo-gifts-box{
   margin: 10px 0px 10px;

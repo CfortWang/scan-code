@@ -422,6 +422,7 @@ header {
 	padding: 15px;
 	margin: 10px 15px 0px;
 }
+
 .coupon-img{
 	width: 60px;
 	height: 60px;
@@ -759,5 +760,50 @@ header {
 }
 .help-answer p{
 	margin: 0px;
+}
+
+.shop-gift{
+	display: flex;
+	background: #FFFFFF;
+	padding: 8px;
+	margin: 10px 0px;
+}
+.gift-img{
+	width: 170px;
+	height: 120px;
+}
+.gift-img img{
+	width: 100%;
+	height: 100%;
+}
+.shop-gift-detail{
+	flex: 1;
+	padding-left: 15px;
+	padding-top: 10px;
+	align-items: center;
+}
+
+.gift-name{
+	font-family: "PingFangSC-Semibold";
+	font-size: 14px;
+	color: #333333;
+}
+.store-name, .term{
+	color: #666666;
+	font-size: 10px;
+	line-height: 14px;
+}
+.store-name{
+	margin: 8px 0px;
+}
+.use-shop-gift-btn{
+	float: left;
+	width: 75px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background:linear-gradient(90deg,rgba(255,222,0,1),rgba(255,230,0,1));
+	box-shadow:0px 2px 4px 0px rgba(255,226,0,0.3);
+	border-radius:15px;
 }
 </style>

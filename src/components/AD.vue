@@ -78,8 +78,8 @@ export default {
     if (this.qrCode) {
       axios({ // WAS event result
         method: 'POST',
-        url: 'http://dev-new-api.beanpop.cn/lottery/event',
-        // url: process.env.api_url + '/api/entries/event',
+        // url: 'http://dev-new-api.beanpop.cn/lottery/event',
+        url: process.env.api_url + '/api/entries/event',
         params: {
           code: getParams.qrCode
         }
@@ -183,7 +183,8 @@ export default {
   position: absolute;
   left: 50%;
   top: 50%;
-  height: 100vh;
+  /* height: 100vh; */
+  width: 100vw;
   -webkit-transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
