@@ -329,15 +329,21 @@ export default {
           // console.log(errorResponseData)
           if (errorStatus === 400) {
             xidou.toast("代码无法使用")
-            xidou.startPage(0)
-            return false
+            setTimeout(function () {
+              xidou.startPage(0)
+            }, 3000)
+            // return false
           } else if (errorStatus === 410) {
             xidou.toast("代码无法使用")
-            xidou.startPage(0)
+            setTimeout(function () {
+              xidou.startPage(0)
+            }, 3000)
             return false
           } else {
             xidou.toast("代码无法使用")
-            xidou.startPage(0)
+            setTimeout(function () {
+              xidou.startPage(0)
+            }, 3000)
             return false
           }
         })
