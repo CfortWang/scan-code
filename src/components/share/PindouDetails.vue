@@ -111,7 +111,7 @@
 <script>
 import vueCookie from 'vue-cookie'
 import $ from 'jquery'
-// import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 const langData = require('../lang/share.json')
 
@@ -125,8 +125,8 @@ export default {
 	name: 'pindouDetails',
 	i18n: i18n,
 	components: {
-		// swiper,
-		// swiperSlide
+		swiper,
+		swiperSlide
 	},
 	data () {
 		return {
