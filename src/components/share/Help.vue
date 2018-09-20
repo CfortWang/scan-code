@@ -59,7 +59,6 @@ export default {
 			return args
 		},
 		submit: function () {
-			console.log(aa)
 			axios({
 				method: 'POST',
 				url: 'http://dev-new-api.beanpop.cn/feedback',
