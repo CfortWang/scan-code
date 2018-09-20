@@ -75,7 +75,7 @@ export default {
       }
     }
 
-    if (this.qrCode) {
+    if (this.qrCode != null || this.qrCode != '') {
       axios({ // WAS event result
         method: 'POST',
         url: 'http://dev-new-api.beanpop.cn/lottery/event',

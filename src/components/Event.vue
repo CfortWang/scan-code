@@ -325,15 +325,15 @@ export default {
         }).catch((ex) => {
           console.log(ex)
           // var errorResponseData = ex.response.data
-          var wrongStatus = ex.response.status
+          var errorStatus = ex.response.status
           // console.log(errorResponseData)
-          if (wrongStatus === 400) {
+          if (errorStatus === 400) {
             xidou.toast("代码无法使用1")
             setTimeout(function () {
               xidou.startPage(0)
             }, 10000)
             // return false
-          } else if (wrongStatus === 410) {
+          } else if (errorStatus === 410) {
             xidou.toast("代码无法使用2")
             setTimeout(function () {
               xidou.startPage(0)
@@ -349,41 +349,50 @@ export default {
         })
       } else {
         // in h5
-        xidou.toast("h5扫码")
+        // xidou.toast("h5扫码")
         this.showHeader = true
         if (vueCookie.get('qr_language')) {
           this.$i18n.locale = vueCookie.get('qr_language')
           this.currentLanguage = vueCookie.get('qr_language')
         } else {
-          $.ajax({
-            // url: 'https://geoip-db.com/json/',
-            url: 'https://geoip.nekudo.com/api/',
-            dataType: 'json',
-            async: false,
-            type: 'GET',
-            timeout: 1000,
-            success: function (req) {
-              _global.ipAddress = req.country.code
-              // _global.ipAddress = req.country_code
-            },
-            error: function () {
-              _global.ipAddress = 'ZH'
-            }
-          })
-          var getIP = this.GLOBAL.ipAddress
-          console.log(getIP)
-          if (getIP == 'GB' || getIP == 'FR' || getIP == 'AU' || getIP == 'CA' || getIP == 'BR' || getIP == 'JP' || getIP == 'RU' || getIP == 'US' || getIP == 'IT') {
-            this.$i18n.locale = 'en'
-            this.currentLanguage = 'en'
-            vueCookie.set('qr_language', 'en', 1)
-          } else if (getIP == 'KR') {
+          // 根据IP获取国家代码
+          // $.ajax({
+          //   // url: 'https://geoip-db.com/json/',
+          //   url: 'https://geoip.nekudo.com/api/',
+          //   dataType: 'json',
+          //   async: false,
+          //   type: 'GET',
+          //   timeout: 1000,
+          //   success: function (req) {
+          //     _global.ipAddress = req.country.code
+          //     // _global.ipAddress = req.country_code
+          //   },
+          //   error: function () {
+          //     _global.ipAddress = 'ZH'
+          //   }
+          // })
+          // var getIP = this.GLOBAL.ipAddress
+
+          var getIP = 'zh-cn'
+          let nvaType = navigator.appName
+          if (nvaType == 'Netscape') {
+            getIP = navigator.language
+          } else {
+            getIP = navigator.userLanguage
+          }
+          getIP = getIP.substr(0, 2)
+          if (getIP == 'zh') {
+            this.$i18n.locale = 'zh'
+            this.currentLanguage = 'zh'
+            vueCookie.set('qr_language', 'zh', 1)
+          } else if (getIP == 'kr') {
             this.$i18n.locale = 'ko'
             this.currentLanguage = 'ko'
             vueCookie.set('qr_language', 'ko', 1)
           } else {
-            this.$i18n.locale = 'zh'
-            this.currentLanguage = 'zh'
-            vueCookie.set('qr_language', 'zh', 1)
+            this.$i18n.locale = 'en'
+            this.currentLanguage = 'en'
+            vueCookie.set('qr_language', 'en', 1)
           }
         }
 
