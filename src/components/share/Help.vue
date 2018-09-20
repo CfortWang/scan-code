@@ -2,7 +2,7 @@
 	<div class="help">
 		<form class="help-top">
 			<div class="help-title">意见反馈</div>
-			<textarea class="suggestion" name="" rows="" cols="" v-model="content"></textarea>
+			<textarea id="suggestion" class="suggestion" name="" rows="" cols="" v-model="content"></textarea>
 			<div class="submit-btn" v-on:click="submit">提交</div>
 		</form>
 		<div class="question-and-answer">
@@ -71,8 +71,8 @@ export default {
 			}).then((response) => {
 				let responseMessage = response.data.message
 				console.log(response)
+				document.getElementById('suggestion').value = ''
 				xidou.toast(responseMessage)
-				document.getElementsByClassName('suggestion').value = ""
 			}).catch((ex) => {
 				console.log(ex.response)
 				xidou.toast(ex.response)
