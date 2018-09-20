@@ -59,6 +59,7 @@ export default {
 			return args
 		},
 		submit: function () {
+			console.log(aa)
 			axios({
 				method: 'POST',
 				url: 'http://dev-new-api.beanpop.cn/feedback',
@@ -72,6 +73,7 @@ export default {
 				let responseMessage = response.data.message
 				console.log(response)
 				xidou.toast(responseMessage)
+				document.getElementsByClassName('suggestion').value = ""
 			}).catch((ex) => {
 				console.log(ex.response)
 				xidou.toast(ex.response)
