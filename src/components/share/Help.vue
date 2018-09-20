@@ -69,8 +69,9 @@ export default {
 				withCredentials: true,
 				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 			}).then((response) => {
+				let responseMessage = response.data.message
 				console.log(response)
-				xidou.toast(response.message)
+				xidou.toast(responseMessage)
 			}).catch((ex) => {
 				console.log(ex.response)
 				xidou.toast(ex.response)
