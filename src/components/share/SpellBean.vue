@@ -201,10 +201,10 @@ export default {
 			this.groupStatus = responseData.groupStatus
 			this.shopID = responseData.buyerID
 			this.groupID = responseData.groupOnId
-			if (this.groupStatus == 1) {
+			if (this.groupStatus == 2) {
 				this.groupStatusDesc = '拼团成功'
 				this.pinSuccess = true
-			} else if (this.groupStatus == 2) {
+			} else if (this.groupStatus == 1) {
 				this.groupStatusDesc = '拼豆中...'
 				this.pinSuccess = false
 				this.pinIng = true
