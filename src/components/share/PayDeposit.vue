@@ -105,14 +105,26 @@ export default {
 			// })
 			this.payReturnUrl = 'http://wang.beanpop.cn:8081/share/paySuccess?groupon_record_id=' + this.payID
 			this.payType = 'groupon'
-			// if (this.payWay == 'wechat') {
-			// 	axios({
-			// 		method: 'POST',
-			// 		url: '',
-			// 		params: {},
-			// 		headers: ''
-			// 	})
-			// }
+			if (this.payWay == 'wechat') {
+				axios({
+					method: 'POST',
+					url: 'http://dev-new-api.beanpop.cn/pay/weixinPay',
+					params: {type: this.payType, id: this.payID, return_url: this.payReturnUrl},
+					withCredentials: true,
+					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
+				}).then((response) => {
+					console.log(response)
+					// if (response.status == 200) {
+					// 	$('body').append(response.data)
+					// 	$("form").attr("target", "_blank")
+					// 	console.log(this.payReturnUrl)
+					// } else {
+					// 	console.log('error~')
+					// }
+				}).catch((ex) => {
+					console.log(ex)
+				})
+			}
 
 			if (this.payWay == 'alipay') {
 				axios({
