@@ -42,7 +42,7 @@
 		</div>
 		<div class="sure-pay-btn" v-on:click="goToPay"><span>确认支付</span></div>
 		<input type="text" v-model="wood">
-		<button v-on:click="wood">QAQ点我</button>
+		<button v-on:click="wd">QAQ点我</button>
 	</div>
 </template>
 
@@ -81,7 +81,7 @@ export default {
 		this.payWay = 'wechat'
 	},
 	methods: {
-		wood: function () {
+		wd: function () {
 			console.log(this.wood)
 			window.location.href = this.wood
 		},
