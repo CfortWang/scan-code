@@ -103,7 +103,7 @@ export default {
 			// }).catch((ex) => {
 			// 	console.log(ex)
 			// })
-			this.payReturnUrl = 'http://wang.beanpop.cn:8081/share/paySuccess?groupon_record_id=' + this.payID
+			this.payReturnUrl = 'http://dev-m.beanpop.cn/share/paySuccess?groupon_record_id=' + this.payID
 			this.payType = 'groupon'
 			if (this.payWay == 'wechat') {
 				axios({
