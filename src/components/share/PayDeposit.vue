@@ -109,7 +109,7 @@ export default {
 				axios({
 					method: 'POST',
 					url: 'http://dev-new-api.beanpop.cn/pay/weixinPay',
-					params: {type: this.payType, id: this.payID, return_url: this.payReturnUrl},
+					params: {type: this.payType, id: this.payID, return_url: this.payReturnUrl, referer: "http://dev-m.beanpop.cn"},
 					withCredentials: true,
 					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 				}).then((response) => {
