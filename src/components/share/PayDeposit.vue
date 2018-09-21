@@ -120,9 +120,9 @@ export default {
 					withCredentials: true,
 					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded', 'referer': "http://dev-m.beanpop.cn"}
 				}).then((response) => {
-					console.log(response)
+					console.log(response.data.data)
 					if (response.status == 200) {
-						$('body').append(response.data)
+						$('body').append(response.data.data)
 						$("form").attr("target", "_blank")
 						console.log(this.payReturnUrl)
 					} else {
