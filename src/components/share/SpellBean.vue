@@ -169,6 +169,7 @@ export default {
 		}
 	},
 	created: function () {
+		var myGroupOnID = this.$route.query.groupid
 		if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 			this.phoneKind = 'ios'
 		} else if (/(Android)/i.test(navigator.userAgent)) {
@@ -177,7 +178,7 @@ export default {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		axios({
 			method: 'GET',
-			url: 'http://dev-new-api.beanpop.cn/myGroupOn/1',
+			url: 'http://dev-new-api.beanpop.cn/myGroupOn/' + myGroupOnID,
 			// url: '/api/myGroupOn/1',
 			withCredentials: true,
 			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
@@ -323,8 +324,8 @@ export default {
 			axios({
 				method: 'POST',
 				url: 'http://dev-new-api.beanpop.cn/event/groupOn',
-				// params: {groupon_id: this.groupID},
-				params: {groupon_id: 133},
+				params: {groupon_id: this.groupID},
+				// params: {groupon_id: 133},
 				withCredentials: true,
 				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then((response) => {
