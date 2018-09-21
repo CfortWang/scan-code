@@ -28,7 +28,13 @@ export default {
 		return {
 			questionList: [],
 			phoneNum: '',
-			content: ''
+			content: '',
+			device: '',
+			lang: '',
+			token: '',
+			os: '',
+			time: '',
+			version: ''
 		}
 	},
 	created: function () {
@@ -44,6 +50,21 @@ export default {
 		})
 		var args = this.getArgs()
 		this.phoneNum = args['phone_num']
+		this.device = args['device']
+		if (this.device == 'android') {
+			let android = xidou.getHttpHeader()
+			this.lang = JSON.parse(android).lang
+			this.token = JSON.parse(android).token
+			this.os = JSON.parse(android).os
+			this.time = JSON.parse(android).time
+			this.version = JSON.parse(android).version
+		} else {
+			this.lang = 'zh'
+			this.os = 'web'
+			this.token = ''
+			this.time = ''
+			this.version = '1.0.0'
+		}
 	},
 	methods: {
 		getArgs: function () {
@@ -67,11 +88,11 @@ export default {
 					phone_number: this.phoneNum
 				},
 				withCredentials: true,
-				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
+				headers: {'lang': this.lang, 'token': this.token, 'os': this.os, 'version': this.version, 'time': this.time}
 			}).then((response) => {
 				let responseMessage = response.data.message
 				console.log(response)
-				document.getElementById('suggestion').value = ''
+				this.content = ''
 				xidou.toast(responseMessage)
 			}).catch((ex) => {
 				console.log(ex.response)
