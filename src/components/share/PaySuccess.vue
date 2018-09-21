@@ -80,7 +80,8 @@ export default {
 		this.payID = args['groupon_record_id']
 		axios({
 			method: 'GET',
-			url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
+			// url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
+			url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=248',
 			withCredentials: true,
 			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 		}).then((response) => {
