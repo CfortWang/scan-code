@@ -214,6 +214,8 @@ export default {
   },
   created: function () {
     var qrCode = this.$route.query.code
+    console.log(qrCode)
+    console.log(!qrCode)
     Vue.prototype.GLOBAL = _global
     this.device = this.$route.query.device
     this.lang = this.$route.query.lang
