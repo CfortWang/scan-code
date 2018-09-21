@@ -53,7 +53,7 @@
 					<div class="group-info" v-if="pinIng">
 						<span class="orange">{{pinzhu}}</span>
 						<span class="grey">发起的拼豆豆还差</span>
-						<span class="orange">3人</span>
+						<span class="orange">{{needNum}}人</span>
 						<span class="grey">，即可获得优惠 </span>
 					</div>
 				</div>
@@ -149,6 +149,7 @@ export default {
 			pinSuccess: true,
 			pinFailed: true,
 			pinIng: true,
+			needNum: '',
 			shopName: '',
 			groupOnPrice: '',
 			oldPrice: '',
@@ -201,6 +202,7 @@ export default {
 			this.groupStatus = responseData.groupStatus
 			this.shopID = responseData.buyerID
 			this.groupID = responseData.groupOnId
+			this.needNum = responseData.needNum
 			if (this.groupStatus == 2) {
 				this.groupStatusDesc = '拼团成功'
 				this.pinSuccess = true
