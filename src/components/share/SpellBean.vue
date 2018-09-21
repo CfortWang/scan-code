@@ -346,8 +346,8 @@ export default {
 			axios({
 				method: 'POST',
 				url: 'http://dev-new-api.beanpop.cn/event/groupOn',
-				// params: {groupon_id: this.groupID},
-				params: {groupon_id: 135},
+				params: {groupon_id: this.groupID},
+				// params: {groupon_id: 135},
 				withCredentials: true,
 				headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then((response) => {

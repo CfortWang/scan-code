@@ -277,6 +277,7 @@ export default {
     this.roundNow = getParams.roundNow
     var qrCode = getParams.qrCode
     console.log(qrCode)
+    console.log(this.lang)
     if (!qrCode) {
       this.$i18n.locale = this.lang
       this.shopCouponShow = false

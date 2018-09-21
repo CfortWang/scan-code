@@ -143,7 +143,7 @@ export default {
               yellowBall: getParams.yellowBall,
               greenBall: getParams.greenBall,
               type: getParams.type,
-              qrCode: getParams.qrCode,
+              qrCode: this.qrCode,
               banner: this.bannerUrl,
               bottomAd: this.bottomAdUrl,
               market: this.market,
