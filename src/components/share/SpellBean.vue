@@ -170,6 +170,7 @@ export default {
 	},
 	created: function () {
 		var myGroupOnID = this.$route.query.groupid
+		console.log(myGroupOnID)
 		if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 			this.phoneKind = 'ios'
 		} else if (/(Android)/i.test(navigator.userAgent)) {
