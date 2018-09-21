@@ -121,13 +121,13 @@ export default {
 					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded', 'referer': "http://dev-m.beanpop.cn"}
 				}).then((response) => {
 					console.log(response)
-					// if (response.status == 200) {
-					// 	$('body').append(response.data)
-					// 	$("form").attr("target", "_blank")
-					// 	console.log(this.payReturnUrl)
-					// } else {
-					// 	console.log('error~')
-					// }
+					if (response.status == 200) {
+						$('body').append(response.data)
+						$("form").attr("target", "_blank")
+						console.log(this.payReturnUrl)
+					} else {
+						console.log('error~')
+					}
 				}).catch((ex) => {
 					console.log(ex)
 				})
