@@ -111,7 +111,7 @@ export default {
 					url: 'http://dev-new-api.beanpop.cn/pay/weixinPay',
 					params: {type: this.payType, id: this.payID, return_url: this.payReturnUrl},
 					withCredentials: true,
-					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded', 'referer': "http://dev-m.beanpop.cn"}
+					headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': '', 'Content-Type': 'application/x-www-form-urlencoded', 'referer': this.payReturnUrl}
 				}).then((response) => {
 					console.log(response.data.data)
 					if (response.status == 200) {
