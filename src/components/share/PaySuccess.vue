@@ -1,7 +1,7 @@
 <template>
 	<div class="content">
 		<header class="header">
-			<div class="goback-pay"><img src="/static/img/share/goback.png"/></div>
+			<!-- <div class="goback-pay"><img src="/static/img/share/goback.png"/></div> -->
 			<div class="pay-header-title">参与拼豆豆</div>
 		</header>
 		<div v-if="payStatus&&!groupFinish">
@@ -62,7 +62,6 @@ export default {
 	name: 'paySuccess',
 	// i18n: i18n,
 	components: {
-		VueCountdown
 	},
 	data () {
 		return {
@@ -80,8 +79,7 @@ export default {
 		this.payID = args['groupon_record_id']
 		axios({
 			method: 'GET',
-			// url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
-			url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=248',
+			url: 'http://dev-new-api.beanpop.cn/event/success' + '?groupon_record_id=' + this.payID,
 			withCredentials: true,
 			headers: {'lang': 'zh', 'token': '', 'os': 'web', 'version': '1.0.0', 'time': ''}
 		}).then((response) => {
