@@ -162,10 +162,15 @@ export default {
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		var getParams = this.$route.params
 		var that = this
-		if (getParams.groupID) {
-			this.groupID = getParams.groupID
+		var pddId = this.$route.query.groupid
+		if (pddId != null || pddId != '') {
+			this.groupID = pddId
 		} else {
-			this.groupID = vueCookie.get('group_id')
+			if (getParams.groupID) {
+				this.groupID = getParams.groupID
+			} else {
+				this.groupID = vueCookie.get('group_id')
+			}
 		}
 		axios({
 			method: 'GET',
