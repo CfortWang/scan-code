@@ -41,8 +41,6 @@
 			</div>
 		</div>
 		<div class="sure-pay-btn" v-on:click="goToPay"><span>确认支付</span></div>
-		<input type="text" v-model="wood">
-		<button v-on:click="wd">QAQ点我</button>
 	</div>
 </template>
 
@@ -66,8 +64,7 @@ export default {
 			payReturnUrl: '',
 			payType: '',
 			alipayReturn: '',
-			timeLeft: '',
-			wood: ''
+			timeLeft: ''
 		}
 	},
 	created: function () {
@@ -81,10 +78,6 @@ export default {
 		this.payWay = 'wechat'
 	},
 	methods: {
-		wd: function () {
-			console.log(this.wood)
-			window.location.href = this.wood
-		},
 		goBack: function () {
 			this.$router.push({name: 'SpellBean'})
 		},
