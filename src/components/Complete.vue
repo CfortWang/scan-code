@@ -81,7 +81,7 @@
         <div class="lottery-date">
           <div class="lottery-date-line"></div>
             <div class="lottery-date-text">
-              <span>距离开奖2天9小时</span>
+              <span>距离开奖{{leftTime}}</span>
               <span></span>
               <span></span>
             </div>
@@ -112,7 +112,7 @@
         </div>
         <div class="terms">
           <span></span>
-          <span>20180908期</span>
+          <span>{{roundNow}}期</span>
         </div>
       </div>
       <div class="complete-event-bottom-wrapper">
@@ -263,7 +263,9 @@ export default {
       showHeader: false,
       round: '',
       deviceUrl: '',
-      qqqq: false
+      qqqq: false,
+      leftTime: '',
+      roundNow: ''
     }
   },
   created: function () {
@@ -271,6 +273,8 @@ export default {
     this.lang = getParams.lang
     this.device = getParams.device
     this.shopAdLanding = getParams.shopAdLanding
+    this.leftTime = getParams.timeLeft
+    this.roundNow = getParams.roundNow
     var qrCode = getParams.qrCode
     console.log(qrCode)
     if (!qrCode) {

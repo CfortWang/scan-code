@@ -44,6 +44,8 @@ export default {
       shopAdlanding : '',
       showHeader: false,
       shopCoupon: [],
+      timeLeft: '',
+      roundNow: ''
     }
   },
   created: function () {
@@ -56,7 +58,10 @@ export default {
     this.lang = getParams.lang
     this.showHeader = getParams.showHeader
     this.device = getParams.device
+    this.timeLeft = getParams.timeLeft
+    this.roundNow = getParams.roundNow
     this.shopAdLanding = getParams.shopAdLanding
+    console.log(this.timeLeft + this.roundNow)
 
     if (this.lang) {
       this.$i18n.locale = this.lang
@@ -148,7 +153,9 @@ export default {
               landingUrl: this.landingUrl,
               shopCoupon: this.shopCoupon,
               device: this.device,
-              lang: this.lang
+              lang: this.lang,
+              timeLeft: this.timeLeft,
+              roundNow: this.roundNow
             }
           })
         }
@@ -163,7 +170,9 @@ export default {
           yellowBall: getParams.yellowBall,
           greenBall: getParams.greenBall,
           type: getParams.type,
-          qrCode: getParams.qrCode
+          qrCode: getParams.qrCode,
+          timeLeft: this.timeLeft,
+          roundNow: this.roundNow
         }
       })
     }

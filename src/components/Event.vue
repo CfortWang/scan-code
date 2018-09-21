@@ -177,6 +177,8 @@ export default {
       round: [],
       nowRound: '',
       prizePool: '',
+      timeLeft: '',
+      roundNow: '',
       ballNums0: [],
       ballNums1: [],
       ballNums2: [],
@@ -447,8 +449,19 @@ export default {
     }).then((response) => {
       // var responseMessage = response.data.message
       var responseData = response.data.data
+      let now = new Date().toISOString().slice(0, 10) + ' ' + new Date().toISOString().slice(11, -1)
+      let nowTime = new Date(now).getTime()
+      let endTime = new Date(responseData.end_at.replace(/-/g, '/')).getTime()
+      let timeleft = (endTime - nowTime) / 1000
+      let hoursLeft = parseInt((timeleft / 3600) % 24) > 0 ? parseInt((timeleft / 3600) % 24) + '小时' : ''
+      let daysLeft = Math.floor(timeleft / (3600 * 24)) > 0 ? Math.floor(timeleft / (3600 * 24)) + '天' : ''
+      this.roundNow = responseData.created_at.split(' ')[0].replace(/-/g, '')
+      this.timeLeft = daysLeft + hoursLeft
       this.nowRound = responseData.drawing_num
       this.prizePool = responseData.prev_drawing_point + responseData.point
+      
+      console.log(responseData)
+      console.log(this.prizePool)
     }).catch((ex) => {
       console.log(ex)
     })
@@ -871,7 +884,9 @@ export default {
                   shopAD: this.shopAD,
                   shopAdLanding: this.shopAdLanding,
                   marketEvent: this.marketEvent,
-                  device: this.device
+                  device: this.device,
+                  timeLeft: this.timeLeft,
+                  roundNow: this.roundNow
                 }
               })
             }).catch((ex) => {
@@ -927,7 +942,9 @@ export default {
                   shopAD: this.shopAD,
                   shopAdLanding: this.shopAdLanding,
                   marketEvent: this.marketEvent,
-                  device: this.device
+                  device: this.device,
+                  timeLeft: this.timeLeft,
+                  roundNow: this.roundNow
                 }
               })
             }).catch((ex) => {
@@ -985,7 +1002,9 @@ export default {
                 shopAD: this.shopAD,
                 shopAdLanding: this.shopAdLanding,
                 marketEvent: this.marketEvent,
-                device: this.device
+                device: this.device,
+                timeLeft: this.timeLeft,
+                roundNow: this.roundNow
               }
             })
           }).catch((ex) => {
@@ -1047,7 +1066,9 @@ export default {
                 shopAD: this.shopAD,
                 shopAdLanding: this.shopAdLanding,
                 marketEvent: this.marketEvent,
-                device: this.device
+                device: this.device,
+                timeLeft: this.timeLeft,
+                roundNow: this.roundNow
               }
             })
           }).catch((ex) => {
@@ -1077,7 +1098,9 @@ export default {
             bottomAd: this.bottomAd,
             landingUrl: this.landingUrl,
             showHeader: this.showHeader,
-            device: this.device
+            device: this.device,
+            timeLeft: this.timeLeft,
+            roundNow: this.roundNow
           }
         })
       }
