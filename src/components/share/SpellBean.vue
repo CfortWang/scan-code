@@ -22,7 +22,7 @@
 				<span>{{groupStatusDesc}}</span>
 			</div>
 			<div class="finish-time" v-if="pinIng">
-				<span>22:33:44.0</span>
+				<span class="finish-count-down"></span>
 				<span class="orange">后结束</span>
 			</div>
 			<div class="pin-success-box">
@@ -60,8 +60,8 @@
 			</div>
 		</div>
 		<div class="pindou-details">
-			<div class="pindou-details-top" v-on:click="goShopDetail">{{shopName}}</div>
-			<div class="pindou-details-middle" v-on:click="goPindouDetail">
+			<div class="pindou-details-top" v-on:click="goShopDetail(clearTimer)">{{shopName}}</div>
+			<div class="pindou-details-middle" v-on:click="goPindouDetail(clearTimer)">
 				<div class="middle-left">
 					<img v-bind:src="shopImage" alt="" />
 				</div>
@@ -109,7 +109,7 @@
 			</div>
 		</div>
 		<div class="applicative-contain"></div>
-		<div class="goto-pindou" v-on:click="goPindou"><span>去拼豆</span></div>
+		<div class="goto-pindou" v-on:click="goPindou(clearTimer)"><span>去拼豆</span></div>
 	</div>
 </template>
 
@@ -144,7 +144,6 @@ export default {
 			groupName: '',
 			shopImage: '',
 			groupSize: '',
-			groupLeftTime: '',
 			pinzhu: '',
 			ownerAvatar: '',
 			pinSuccess: true,
@@ -165,7 +164,8 @@ export default {
 			payID: '',
 			payPackageName: '',
 			payShopName: '',
-			payRule: ''
+			payRule: '',
+			clearTimer: ''
 		}
 	},
 	created: function () {
@@ -176,6 +176,7 @@ export default {
 		} else if (/(Android)/i.test(navigator.userAgent)) {
 			this.phoneKind = 'android'
 		}
+		var that = this
 		$('body').css({'background-color': '#F4F4F4', 'font-family': 'PingFangSC-Regular', 'font-size': '16px'})
 		axios({
 			method: 'GET',
@@ -212,7 +213,14 @@ export default {
 				this.pinSuccess = false
 				this.pinIng = false
 			}
-			this.groupLeftTime = responseData.timeLeft
+			var groupLeftTime = responseData.timeLeft
+			$(".finish-count-down").text(that.timer(groupLeftTime));
+			(function (groupLeftTime) {
+				that.clearTimer = setInterval(function () {
+					groupLeftTime--
+					$(".finish-count-down").text(that.timer(groupLeftTime));
+				}, 1000)
+			})(groupLeftTime)
 			this.groupSize = responseData.groupSize
 
 			var tips = responseData.tips
@@ -315,13 +323,24 @@ export default {
 		backKey: function () {
 			this.rulesOpen = false
 		},
-		goShopDetail: function () {
+		goShopDetail: function (event) {
+			clearInterval(event)
 			this.$router.push({name: 'ShopDetails', params: {shopID: this.shopID}})
 		},
-		goPindouDetail: function () {
+		goPindouDetail: function (event) {
+			clearInterval(event)
 			this.$router.push({name: 'PindouDetails', params: {groupID: this.groupID}})
 		},
-		goPindou: function () {
+		timer: function (event) {
+			var seconds = parseInt(event % 60) < 10 ? '0' + parseInt(event % 60) : parseInt(event % 60)
+			var minutes = parseInt((event / 60) % 60) < 10 ? '0' + parseInt((event / 60) % 60) : parseInt((event / 60) % 60)
+			var hours = parseInt((event / 3600) % 24) < 10 ? '0' + parseInt((event / 3600) % 24) : parseInt((event / 3600) % 24)
+			var days = Math.floor(event / (3600 * 24)) >= 1 ? Math.floor(event / (3600 * 24)) + ':' : ''
+			var leftDate = days + hours + ':' + minutes + ':' + seconds
+			return leftDate
+		},
+		goPindou: function (event) {
+			clearInterval(event)
 			axios({
 				method: 'POST',
 				url: 'http://dev-new-api.beanpop.cn/event/groupOn',
