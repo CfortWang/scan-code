@@ -51,7 +51,6 @@ export default {
   created: function () {
     var getParams = this.$route.params
     this.qrCode = getParams.qrCode
-    alert(this.qrCode)
     this.adURL = getParams.skipAD
     this.bannerUrl = getParams.banner
     this.bottomAdUrl = getParams.bottomAd
@@ -126,11 +125,9 @@ export default {
         // console.log(errorResponseData)
       })
     } else {
-      alert("====================")
+      xidou.toast("no code")
       console.log('no code')
-      console.log(getParams)
       this.market = getParams.marketEvent
-      alert("===" + this.market)
       this.shopAD = getParams.shopAD
       this.shopAdlanding = getParams.shopAdlanding
     }
