@@ -125,10 +125,7 @@
         <div class="seedo-gifts-wrapper">
           <div class="seedo-gifts-title">喜豆大礼包</div>
           <div class="seedo-gifts-box" v-on:click="history">
-            <img src="/static/img/complete/gift.png" alt="">
-          </div>
-          <div class="seedo-gifts-box" v-on:click="history">
-            <img src="/static/img/complete/gift.png" alt="">
+            <img v-bind:src="marketUrl" alt="">
           </div>
           <!-- <div class="seedo-gifts-box" v-on:click="history">
             <div class="seedo-gifts">
@@ -335,6 +332,7 @@ export default {
     this.landingUrl = getParams.landingUrl
     this.shopCoupon = getParams.shopCoupon
     console.log(this.shopCoupon)
+    console.log(this.marketUrl)
 
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
     this.greenItems = [getParams.greenBall[0]]

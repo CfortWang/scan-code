@@ -106,7 +106,7 @@ export default {
           if (shopEventResult[0].result === 'win') {
             var downloadingShopEvent = new Image()
             downloadingShopEvent.src = responseData.shop.event_result[0].gift.shop_gift_image_file.url
-            this.tmpUser = shopEventResult[0].temp_user
+            // this.tmpUser = shopEventResult[0].temp_user
             this.shopEvent = shopEventResult[0].gift.shop_gift_image_file.url
           }
         }
@@ -114,7 +114,7 @@ export default {
           // if (marketResult[0].result === 'win') {
           var downloadingMarket = new Image()
           downloadingMarket.src = responseData.marketing_event_result[0].img
-          this.tmpUser = marketResult[0].temp_user
+          // this.tmpUser = marketResult[0].temp_user
           this.market = marketResult[0].img
           // }
         }
