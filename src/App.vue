@@ -795,6 +795,9 @@ header {
 	font-size: 10px;
 	line-height: 14px;
 }
+.shop-gift .store-name, .term{
+	margin-bottom: 8px;
+}
 .store-name{
 	margin: 8px 0px;
 }
