@@ -126,8 +126,9 @@ export default {
       })
     } else {
       console.log('no code')
+      console.log(getParams)
       this.market = getParams.marketEvent
-      alert(this.market)
+      alert("===" + this.market)
       this.shopAD = getParams.shopAD
       this.shopAdlanding = getParams.shopAdlanding
     }
