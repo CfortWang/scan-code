@@ -267,6 +267,7 @@ export default {
   },
   created: function () {
     var getParams = this.$route.params
+    alert(getParams)
     this.lang = getParams.lang
     this.device = getParams.device
     this.shopAdLanding = getParams.shopAdLanding
