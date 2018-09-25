@@ -125,6 +125,7 @@ export default {
         // console.log(errorResponseData)
       })
     } else {
+      alert("====================")
       console.log('no code')
       console.log(getParams)
       this.market = getParams.marketEvent
