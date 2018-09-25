@@ -124,7 +124,8 @@ export default {
         // var errorResponseData = ex.response.data
         // console.log(errorResponseData)
       })
-    } else {
+    }
+    if (this.qrCode == null || this.qrCode == '') {
       xidou.toast("no code")
       console.log('no code')
       this.market = getParams.marketEvent

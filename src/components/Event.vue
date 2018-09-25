@@ -865,7 +865,6 @@ export default {
                 num_7: num7,
               }
             }).then((response) => {
-              console.log(response)
               let responseData = response.data.data
               console.log(responseData)
               this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
@@ -924,7 +923,6 @@ export default {
               },
               headers: {"lang": lang, "os": os, "time": time, "token": token, "version": version}
             }).then((response) => {
-              console.log(response)
               let responseData = response.data.data
               console.log(responseData)
               this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
