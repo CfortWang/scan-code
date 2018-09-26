@@ -208,8 +208,7 @@ export default {
       reload: true,
       showHeader: false,
       device: null,
-      lang: '',
-      deviceUrl: ''
+      lang: ''
     }
   },
   created: function () {
@@ -292,12 +291,6 @@ export default {
         console.log('scan qrCode in app')
         this.$i18n.locale = this.lang
         this.showHeader = false
-        if (this.device == 'ios') {
-          this.deviceUrl = 'seedo://'
-        }
-        if (this.device == 'android') {
-          this.deviceUrl = 'xidou://app'
-        }
         // wood验证码有效接口
         // axios({
         //   method: 'GET',

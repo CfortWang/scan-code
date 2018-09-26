@@ -61,7 +61,7 @@ export default {
     this.timeLeft = getParams.timeLeft
     this.roundNow = getParams.roundNow
     this.shopAdLanding = getParams.shopAdLanding
-    console.log(this.timeLeft + this.roundNow)
+    console.log(this.lang)
 
     if (this.lang) {
       this.$i18n.locale = this.lang
@@ -132,37 +132,38 @@ export default {
       this.shopAD = getParams.shopAD
       this.shopAdlanding = getParams.shopAdlanding
     }
+    console.log(this.lang + '----------------')
     var setTimer = 1
-      var countDown = setInterval(() => {
-        this.countdownText = setTimer
-        setTimer = setTimer - 1
-        if (setTimer === -1) {
-          this.endCountDown = true
-          clearInterval(countDown)
-          var getParams = this.$route.params
-          this.$router.push({
-            name: 'Complete',
-            params: {
-              yellowBall: getParams.yellowBall,
-              greenBall: getParams.greenBall,
-              type: getParams.type,
-              qrCode: this.qrCode,
-              banner: this.bannerUrl,
-              bottomAd: this.bottomAdUrl,
-              market: this.market,
-              shopEvent: this.shopEvent,
-              shopAD: this.shopAD,
-              tmpUser: this.tmpUser,
-              landingUrl: this.landingUrl,
-              shopCoupon: this.shopCoupon,
-              device: this.device,
-              lang: this.lang,
-              timeLeft: this.timeLeft,
-              roundNow: this.roundNow
-            }
-          })
-        }
-      }, 1000)
+    var countDown = setInterval(() => {
+      this.countdownText = setTimer
+      setTimer = setTimer - 1
+      if (setTimer === -1) {
+        this.endCountDown = true
+        clearInterval(countDown)
+        var getParams = this.$route.params
+        this.$router.push({
+          name: 'Complete',
+          params: {
+            yellowBall: getParams.yellowBall,
+            greenBall: getParams.greenBall,
+            type: getParams.type,
+            qrCode: this.qrCode,
+            banner: this.bannerUrl,
+            bottomAd: this.bottomAdUrl,
+            market: this.market,
+            shopEvent: this.shopEvent,
+            shopAD: this.shopAD,
+            tmpUser: this.tmpUser,
+            landingUrl: this.landingUrl,
+            shopCoupon: this.shopCoupon,
+            device: this.device,
+            lang: this.lang,
+            timeLeft: this.timeLeft,
+            roundNow: this.roundNow
+          }
+        })
+      }
+    }, 1000)
   },
   methods: {
     skipAD: function () {

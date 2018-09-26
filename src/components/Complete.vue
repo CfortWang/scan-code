@@ -259,7 +259,6 @@ export default {
       lang: '',
       showHeader: false,
       round: '',
-      deviceUrl: '',
       qqqq: false,
       leftTime: '',
       roundNow: ''
@@ -283,13 +282,8 @@ export default {
       if (this.device == 'ios' || this.device =='android') {
         console.log('app complete')
         this.showHeader = false
-        if (this.device == 'ios') {
-          this.deviceUrl = 'seedo://'
-        }
-        if (this.device == 'android') {
-          this.deviceUrl = 'xidou://app'
-        }
-        console.log(this.deviceUrl)
+        this.$i18n.locale = this.lang
+        console.log('complete' + this.lang)
       } else {
         this.showHeader = true
         if (vueCookie.get('qr_language')) {
