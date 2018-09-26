@@ -1072,33 +1072,35 @@ export default {
           })
         }
 
-        if (yellowCount < 6) {
-          alert(this.$i18n.t('notEnoughBall'))
-          return false
-        }
-        if (greenCount < 1) {
-          alert(this.$i18n.t('notEnoughBall'))
-          return false
-        }
-        // h5扫码
-        var qrCode = this.$route.query.code
-        this.$router.push({
-          name: 'AD',
-          params: {
-            yellowBall: activeYellow,
-            greenBall: activeGreen,
-            type: 'code',
-            qrCode: qrCode,
-            skipAD: this.skipAD,
-            banner: this.banner,
-            bottomAd: this.bottomAd,
-            landingUrl: this.landingUrl,
-            showHeader: this.showHeader,
-            device: this.device,
-            timeLeft: this.timeLeft,
-            roundNow: this.roundNow
+        if (this.device == '' || this.device == null) {
+          if (yellowCount < 6) {
+            alert(this.$i18n.t('notEnoughBall'))
+            return false
           }
-        })
+          if (greenCount < 1) {
+            alert(this.$i18n.t('notEnoughBall'))
+            return false
+          }
+          // h5扫码
+          var qrCode = this.$route.query.code
+          this.$router.push({
+            name: 'AD',
+            params: {
+              yellowBall: activeYellow,
+              greenBall: activeGreen,
+              type: 'code',
+              qrCode: qrCode,
+              skipAD: this.skipAD,
+              banner: this.banner,
+              bottomAd: this.bottomAd,
+              landingUrl: this.landingUrl,
+              showHeader: this.showHeader,
+              device: this.device,
+              timeLeft: this.timeLeft,
+              roundNow: this.roundNow
+            }
+          })
+        }
       }
     }
   }

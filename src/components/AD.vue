@@ -50,6 +50,7 @@ export default {
   },
   created: function () {
     var getParams = this.$route.params
+    console.log(getParams)
     this.qrCode = getParams.qrCode
     this.adURL = getParams.skipAD
     this.bannerUrl = getParams.banner
