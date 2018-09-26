@@ -266,24 +266,19 @@ export default {
   },
   created: function () {
     var getParams = this.$route.params
-    alert(getParams.market)
     this.lang = getParams.lang
     this.device = getParams.device
     this.shopAdLanding = getParams.shopAdLanding
     this.leftTime = getParams.timeLeft
     this.roundNow = getParams.roundNow
     var qrCode = getParams.qrCode
-    console.log(qrCode)
-    console.log(this.lang)
     if (!qrCode) {
       this.$i18n.locale = this.lang
       this.shopCouponShow = false
     } else {
       if (this.device == 'ios' || this.device =='android') {
-        console.log('app complete')
         this.showHeader = false
         this.$i18n.locale = this.lang
-        console.log('complete' + this.lang)
       } else {
         this.showHeader = true
         if (vueCookie.get('qr_language')) {
@@ -332,7 +327,7 @@ export default {
     this.yellowItems = [getParams.yellowBall[0], getParams.yellowBall[1], getParams.yellowBall[2], getParams.yellowBall[3], getParams.yellowBall[4], getParams.yellowBall[5]]
     this.greenItems = [getParams.greenBall[0]]
 
-    if (this.shopCoupon) {
+    if (this.shopCoupon[0]) {
       if (this.shopCoupon.length > 0) {
         this.shopCouponShow = true
         var that = this
@@ -548,7 +543,6 @@ export default {
         // var responseData = response.data.data
         // console.log(responseData)
         var getParams = this.$route.params
-        console.log(getParams)
         if (getParams.type === 'event' || getParams.type === 'code') {
           var qrCode = getParams.qrCode
           var num1 = getParams.yellowBall[0]
