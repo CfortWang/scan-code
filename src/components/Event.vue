@@ -981,7 +981,6 @@ export default {
             // this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
             // this.shopAdLanding = responseData.shop.ad[0].landing_url
             // this.marketEvent = responseData.marketing_event_result[0].img
-            console.log(this.lang + '3')
             var qrCode = this.$route.query.code
             this.$router.push({
               name: 'AD',
@@ -1046,7 +1045,7 @@ export default {
             // this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
             // this.shopAdLanding = responseData.shop.ad[0].landing_url
             // this.marketEvent = responseData.marketing_event_result[0].img
-            // var qrCode = this.$route.query.code
+            var qrCode = this.$route.query.code
             this.$router.push({
               name: 'AD',
               params: {
