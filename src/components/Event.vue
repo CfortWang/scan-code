@@ -213,11 +213,10 @@ export default {
   },
   created: function () {
     var qrCode = this.$route.query.code
-    console.log(qrCode)
-    console.log(!qrCode)
     Vue.prototype.GLOBAL = _global
     this.device = this.$route.query.device
     this.lang = this.$route.query.lang
+    console.log(this.lang + '1')
 
     this.yellowItems = []
     this.greenItems = []
@@ -961,6 +960,7 @@ export default {
             xidou.toast(this.$i18n.t('notEnoughBall'))
             return false
           }
+          console.log(this.lang + '2')
           axios({
             method: 'POST',
             url: 'http://dev-new-api.beanpop.cn/lottery',
@@ -981,6 +981,7 @@ export default {
             // this.shopAD = responseData.shop.ad[0].shop_ad_image_file_url
             // this.shopAdLanding = responseData.shop.ad[0].landing_url
             // this.marketEvent = responseData.marketing_event_result[0].img
+            console.log(this.lang + '3')
             var qrCode = this.$route.query.code
             this.$router.push({
               name: 'AD',
