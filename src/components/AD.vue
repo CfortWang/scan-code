@@ -50,7 +50,6 @@ export default {
   },
   created: function () {
     var getParams = this.$route.params
-    console.log(getParams)
     this.qrCode = getParams.qrCode
     this.adURL = getParams.skipAD
     this.bannerUrl = getParams.banner
@@ -62,7 +61,6 @@ export default {
     this.timeLeft = getParams.timeLeft
     this.roundNow = getParams.roundNow
     this.shopAdLanding = getParams.shopAdLanding
-    console.log(this.lang)
 
     if (this.lang) {
       this.$i18n.locale = this.lang
@@ -128,12 +126,10 @@ export default {
     }
     if (this.qrCode == null || this.qrCode == '') {
       xidou.toast("no code")
-      console.log('no code')
       this.market = getParams.marketEvent
       this.shopAD = getParams.shopAD
       this.shopAdlanding = getParams.shopAdlanding
     }
-    console.log(this.lang + '----------------')
     var setTimer = 1
     var countDown = setInterval(() => {
       this.countdownText = setTimer
