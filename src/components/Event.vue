@@ -1,7 +1,7 @@
 <template>
   <div class="ticket-event">
     <transition>
-      <div class="modal-wrapper" v-if="showHeader">
+      <!-- <div class="modal-wrapper" v-if="showHeader">
         <img class="logo" src="/static/img/complete/rule-logo.png" alt="">
         <div v-if="openModal">
           <div class="modal-img">
@@ -18,6 +18,21 @@
           <div class="modal-close" v-on:click="hide">
               <img src="/static/img/complete/delete_new.png">
           </div>
+        </div>
+      </div> -->
+      <div class="terms-div-wrapper" v-if="rulesOpen">
+        <div class="terms-div-header">
+          <div class="header-title-wrapper">
+            {{ $t("gameRule") }}
+          </div>
+          <div class="header-back-wrapper" v-on:click="backKey">
+            <div class="header-back-arrow">
+              <img src="/static/img/icon/goback.png">
+            </div>
+          </div>
+        </div>
+        <div class="terms-div-contents">
+          <iframe src="https://wap.beanpop.cn/rule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
         </div>
       </div>
     </transition>
@@ -76,6 +91,7 @@
         <div class="select-ball-title">
           <span class="ball-kind">{{ $t("ball.redBall") }}</span>
           <span class="plz-select">{{ $t("ball.selectRedBall") }}</span>
+          <span class="ball-rule" v-on:click="rulesClick">{{$t("ball.rule")}}</span>
         </div>
         <div class="red-ball-wrapper clear-fix">
           <button class="ball-wrapper responsive-size float-l yellow" v-for="item in yellowItems" v-bind:key="item.ballKey" v-bind:class="{ballOff: !item.active}" v-on:click="yellowBallClicked(item.number)">
@@ -208,7 +224,8 @@ export default {
       reload: true,
       showHeader: false,
       device: null,
-      lang: ''
+      lang: '',
+      rulesOpen: false
     }
   },
   created: function () {
@@ -592,6 +609,12 @@ export default {
     hide: function () {
       document.getElementsByClassName('modal-wrapper')[0].style.display = 'none'
       document.getElementsByClassName('mask')[0].style.display = 'none'
+    },
+    rulesClick: function () {
+      this.rulesOpen = true
+    },
+    backKey: function () {
+      this.rulesOpen = false
     },
     goEvent: function () {
       document.getElementsByClassName('ready-box')[0].style.display = 'none'
@@ -1246,6 +1269,10 @@ export default {
   color: #999;
   padding-left: 8px;
 }
+.ball-rule{
+  float: right;
+  margin-right: 20px;
+}
 
 .clear-fix:after {
   content: "";
@@ -1304,57 +1331,47 @@ export default {
   cursor: pointer;
   z-index: 999;
 }
-/* .ready{
-  color: #000;
-  width: 90%;
-  height: 30%;
-  margin-top: 50%;
-  margin-left: 5%;
-  border-radius: 5px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+.terms-div-wrapper {
+  position: absolute;
+  z-index:999;
+  top:0;
+  left:0;
+  height:100vh;
+  background-color:#FFFFFF;
+  width:100%;
 }
-.ready-title{
-  width: 90%;
-  margin-left: 5%;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: #6985C6;
-  text-align: left;
-  border-bottom: 1px solid #CCCCCC;
+.terms-div-header {
+  background-color:#FFE300;
+  display:table;
+  text-align:center;
+  width:100%;
+  height:60px;
+  color:#333333;
+  font-size: 18px;
 }
-.ready-body{
-  font-size: 0.8rem;
-  padding: 15px 0px;
+.header-back-wrapper {
+  height:60px;
+  width:60px;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  right:0;
+  display:table;
 }
-.ready-body p{
-  margin-bottom: 10px;
+.terms-div-contents {
+  height: calc(100vh - 70px);
 }
-.ready-body img{
-  width: 100%;
-  display: inherit;
-}
-.ready-logo{
-  float: right;
-  margin-right: 6%;
-  margin-top: 29%;
-  width: 30%;
-}
-.ready-button{
-  font-size: 1.3rem;
-  border-radius: 5px;
+.header-back-arrow {
+  display:table-cell;
+  vertical-align: middle;
 }
 
-.btn-right{
-  background-color: #fff;
-  border: none;
-  border-top: 1px solid #ccc;
-  width: 100%;
-  height: 50px;
-  font-size: inherit;
-} */
+.header-back-arrow img {
+  width:20px;
+  height:20px;
+  margin-top:5px;
+}
 
 .modal-wrapper {
   height: calc(100% - 60px);
