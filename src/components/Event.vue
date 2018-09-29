@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div class="terms-div-contents">
+        <div class="terms-div-contents" v-bind:class="{fullHeight: !showHeader}">
           <iframe src="https://wap.beanpop.cn/rule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
         </div>
       </div>
@@ -307,6 +307,8 @@ export default {
         console.log('scan qrCode in app')
         this.$i18n.locale = this.lang
         this.showHeader = false
+        document.getElementsByClassName("terms-div-contents")[0].style.color = "red"
+        
         // wood验证码有效接口
         // axios({
         //   method: 'GET',
@@ -1361,6 +1363,9 @@ export default {
 }
 .terms-div-contents {
   height: calc(100vh - 70px);
+}
+.fullHeight{
+  height: calc(100vh);
 }
 .header-back-arrow {
   display:table-cell;
