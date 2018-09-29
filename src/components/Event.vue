@@ -20,7 +20,7 @@
           </div>
         </div>
       </div> -->
-      <div class="terms-div-wrapper" v-if="rulesOpen">
+      <!-- <div class="terms-div-wrapper" v-if="rulesOpen">
         <div class="terms-div-header" v-if="showHeader">
           <div class="header-title-wrapper">
             {{ $t("gameRule") }}
@@ -33,6 +33,35 @@
         </div>
         <div class="terms-div-contents" v-bind:class="{fullHeight: !showHeader}">
           <iframe src="https://wap.beanpop.cn/rule"  width='100%' height='100%' frameborder='0' name="_blank" id="_blank"></iframe>
+        </div>
+      </div> -->
+
+      <div class="game-rule-box" v-if="rulesOpen">
+        <div class="game-rule">
+          <div class="closeRule" v-on:click="closeRule">
+            <img src="/static/img/complete/delete_new.png" alt="">
+          </div>
+          <div class="rule-title">游戏规则：</div>
+          <div class="rule-content">
+            <div class="rule-number">1</div>
+            <div class="rule-text-box">
+              <div class="rule-text">喜豆抽奖每次下注消耗20个喜豆点。</div>
+              <span class="red-text">6个红球</span>+<span class="blue-text">1个蓝球</span>=1注
+            </div>
+          </div>
+          <div class="rule-content">
+            <div class="rule-number">2</div>
+            <div class="rule-text-box">
+              <div class="rule-text">投注区分为红色球号码区和蓝色球号码区，红色球号码区由1-33共三十三个号码组成，蓝色球号码区由1-16共十六个号码组成。</div>
+            </div>
+          </div>
+          <div class="lottery-desc">开奖说明：开奖时间及开奖结果以双色球为准。</div>
+          <div class="award-set">奖项设置:</div>
+          <div class="award-detail">
+            <img src="/static/img/complete/award-rule.png">
+          </div>
+          <div class="award-desc">奖品说明：中奖奖品为喜豆点，中奖后24小时内到账。</div>
+          <div class="remark">注：游戏最终解释权归深圳喜豆文化发展有限公司所有。</div>
         </div>
       </div>
     </transition>
@@ -54,6 +83,7 @@
       </div>
     </header>
     <div class="mask blockScroll" v-if="showHeader"></div>
+    <div class="mask2 blockScroll"></div>
     <div class="contents-wrapper">
       <div class="event-round-wrapper">
         <div class="event-round-left-wrapper float-wrapper">
@@ -91,7 +121,7 @@
         <div class="select-ball-title">
           <span class="ball-kind">{{ $t("ball.redBall") }}</span>
           <span class="plz-select">{{ $t("ball.selectRedBall") }}</span>
-          <span class="ball-rule" v-on:click="rulesClick">{{$t("ball.rule")}}</span>
+          <span class="ball-rule" v-on:click="appRulesClick">{{$t("ball.rule")}}</span>
         </div>
         <div class="red-ball-wrapper clear-fix">
           <button class="ball-wrapper responsive-size float-l yellow" v-for="item in yellowItems" v-bind:key="item.ballKey" v-bind:class="{ballOff: !item.active}" v-on:click="yellowBallClicked(item.number)">
@@ -612,11 +642,13 @@ export default {
       document.getElementsByClassName('modal-wrapper')[0].style.display = 'none'
       document.getElementsByClassName('mask')[0].style.display = 'none'
     },
-    rulesClick: function () {
+    appRulesClick: function () {
       this.rulesOpen = true
+      document.getElementsByClassName('mask2')[0].style.display = 'block'
     },
-    backKey: function () {
+    closeRule: function () {
       this.rulesOpen = false
+      document.getElementsByClassName('mask2')[0].style.display = 'none'
     },
     goEvent: function () {
       document.getElementsByClassName('ready-box')[0].style.display = 'none'
@@ -1333,49 +1365,79 @@ export default {
   cursor: pointer;
   z-index: 999;
 }
-.terms-div-wrapper {
+.game-rule-box{
+  width: 84%;
+  z-index: 9999;
   position: absolute;
-  z-index:999;
-  top:0;
-  left:0;
-  height:100vh;
-  background-color:#FFFFFF;
-  width:100%;
+  top:5%;
+  left:8%;
 }
-.terms-div-header {
-  background-color:#FFE300;
-  display:table;
-  text-align:center;
-  width:100%;
-  height:60px;
-  color:#333333;
-  font-size: 18px;
+.game-rule{
+  padding: 15px;
+  font-size: 14px;
+  font-family: "PingFangSC-Regular";
+  color: #333333;
+  background: #FFF;
+  border-radius: 15px;
 }
-.header-back-wrapper {
-  height:60px;
-  width:60px;
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  right:0;
-  display:table;
+.rule-title, .lottery-desc{
+  padding-left: 5px;
+  margin-bottom: 12px;
 }
-.terms-div-contents {
-  height: calc(100vh - 70px);
+.rule-content{
+  padding-left: 10px;
+  margin-bottom: 10px;
+  display: flex;
 }
-.fullHeight{
-  height: calc(100vh);
+.rule-number{
+  font-size: 11px;
+  color: white;
+  background: #333333;
+  height: 13px;
+  width: 13px;
+  text-align: center;
+  line-height: 13px;
+  border-radius: 50%;
+  margin-right: 8px;
+  margin-top: 3px;
 }
-.header-back-arrow {
-  display:table-cell;
-  vertical-align: middle;
+.rule-text-box{
+  flex: 1;
+  color: #666666;
 }
-
-.header-back-arrow img {
-  width:20px;
-  height:20px;
-  margin-top:5px;
+.red-text{
+  color: #FF5F57;
+}
+.blue-text{
+  color: #3A85E5;
+}
+.award-set{
+  padding-left: 5px;
+  margin-bottom: 7px;
+}
+.award-detail{
+  margin-bottom: 30px;
+}
+.award-detail img{
+  width: 100%;
+}
+.award-desc{
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.remark{
+  font-size: 10px;
+  text-align: center;
+  color: #999999;
+}
+.closeRule{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.closeRule img{
+  width: 22px;
 }
 
 .modal-wrapper {
@@ -1440,7 +1502,7 @@ export default {
   height: 8%;
   margin-top: 10%;
 }
-.mask{
+.mask, .mask2{
   width: 100%;
   height: 100%;
   background-color: #000;
@@ -1452,6 +1514,9 @@ export default {
   top: 0px;
   display: block;
   z-index: 888;
+}
+.mask2{
+  display: none;
 }
 
 .ball-wrapper.gray {
