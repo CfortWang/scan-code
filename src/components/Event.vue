@@ -21,7 +21,7 @@
         </div>
       </div> -->
       <div class="terms-div-wrapper" v-if="rulesOpen">
-        <div class="terms-div-header">
+        <div class="terms-div-header" v-if="showHeader">
           <div class="header-title-wrapper">
             {{ $t("gameRule") }}
           </div>
